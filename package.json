@@ -46,7 +46,13 @@
     "dependencies": {},
     "devDependencies": {
       "babel-plugin-transform-export-extensions": "^6.5.0",
-      "plugin-babel": "systemjs-plugin-babel@^0.0.2"
+      "babel-plugin-transform-object-rest-spread": "^6.6.5",
+      "babel-preset-react": "^6.5.0",
+      "bootstrap": "github:twbs/bootstrap@^3.3.6",
+      "css": "github:systemjs/plugin-css@^0.1.20",
+      "plugin-babel": "systemjs-plugin-babel@^0.0.2",
+      "react-bootstrap": "^0.28.3",
+      "systemjs-hot-reloader": "github:capaj/systemjs-hot-reloader@^0.5.6"
     },
     "peerDependencies": {
       "buffer": "github:jspm/nodelibs-buffer@^0.2.0-alpha",
@@ -56,24 +62,81 @@
       "net": "github:jspm/nodelibs-net@^0.2.0-alpha",
       "path": "github:jspm/nodelibs-path@^0.2.0-alpha",
       "process": "github:jspm/nodelibs-process@^0.2.0-alpha",
+      "react": "^0.14.7",
+      "react-dom": "^0.14.7",
       "stream": "github:jspm/nodelibs-stream@^0.2.0-alpha",
       "tty": "github:jspm/nodelibs-tty@^0.2.0-alpha",
       "util": "github:jspm/nodelibs-util@^0.2.0-alpha"
     },
     "overrides": {
-      "npm:babel-runtime@5.8.35": {
-        "main": false,
-        "dependencies": {},
-        "optionalDependencies": {
-          "core-js": "^1.2.0"
+      "github:components/jquery@2.2.1": {
+        "main": "jquery"
+      },
+      "github:twbs/bootstrap@3.3.6": {
+        "shim": {
+          "js/bootstrap": {
+            "deps": [
+              "jquery"
+            ],
+            "exports": "$"
+          }
+        },
+        "dependencies": {
+          "jquery": "github:components/jquery"
+        },
+        "files": [
+          "dist",
+          "fonts",
+          "js",
+          "css",
+          "less",
+          "grunt",
+          "LICENSE"
+        ],
+        "systemjs": {
+          "main": "dist/js/bootstrap.js",
+          "modules": {
+            "dist/js/bootstrap.js": {
+              "deps": [
+                "jquery"
+              ],
+              "exports": "$"
+            }
+          }
         }
+      },
+      "npm:fbjs@0.6.1": {
+        "dependencies": {}
       },
       "npm:inherits@2.0.1": {
         "ignore": [
           "test.js"
         ]
+      },
+      "npm:react@0.14.7": {
+        "dependencies": {
+          "fbjs": "^0.6.1"
+        },
+        "format": "cjs",
+        "meta": {
+          "*": {
+            "globals": {
+              "process": "process"
+            }
+          }
+        },
+        "map": {
+          "fbjs/lib/ExecutionEnvironment.js": {
+            "production": "@empty"
+          },
+          "./lib/ReactDefaultPerf.js": {
+            "production": "@empty"
+          },
+          "./lib/ReactTestUtils.js": {
+            "production": "@empty"
+          }
+        }
       }
     }
   }
-}
-
+}

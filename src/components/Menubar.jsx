@@ -1,33 +1,64 @@
 import React from "react";
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem, Glyphicon} from "react-bootstrap";
 
+import BlankGlyphicon from "./BlankGlyphicon.jsx";
+
+import actionTypes   from "../actions/types.js";
+import actionCreator from "../actions/creator.js";
+
 export default class extends React.Component {
     constructor(props) {
         super(props);
     }
 
+    handleSelect(event, eventKey) {
+        console.log(actionCreator[eventKey]());
+    }
+
     render() {
+        const style = {
+            visibility: "hidden"
+        };
+
         return (
             <Navbar fluid inverse staticTop>
                 <Navbar.Header>
                     <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>
-                    <Nav>
-                        <NavDropdown eventKey={1} title="File">
-                            <MenuItem eventKey={1.1}>Open File...</MenuItem>
-                            <MenuItem eventKey={1.2}>Save</MenuItem>
+                    <Nav onSelect={::this.handleSelect}>
+                        <NavDropdown title="File" id="menubar-file">
+                            <MenuItem eventKey={actionTypes.OPEN_FILE}>
+                                Open File...
+                            </MenuItem>
+                            <MenuItem eventKey={actionTypes.SAVE}>
+                                Save
+                            </MenuItem>
                             <MenuItem divider />
-                            <MenuItem eventKey={1.3}>Close</MenuItem>
+                            <MenuItem eventKey={actionTypes.CLOSE}>
+                                Close
+                            </MenuItem>
                         </NavDropdown>
-                        <NavDropdown eventKey={2} title="View">
-                            <MenuItem eventKey={2.1}>Source</MenuItem>
-                            <MenuItem eventKey={2.2}>Table</MenuItem>
-                            <MenuItem eventKey={2.3}>Graphical</MenuItem>
+                        <NavDropdown title="View" id="menubar-view">
+                            <MenuItem eventKey={actionTypes.SOURCE_VIEW}>
+                                <Glyphicon glyph="ok" /> Source
+                            </MenuItem>
+                            <MenuItem eventKey={actionTypes.TABLE_VIEW}>
+                                <BlankGlyphicon /> Table
+                            </MenuItem>
+                            <MenuItem eventKey={actionTypes.GRAPHICAL_VIEW}>
+                                <BlankGlyphicon /> Graphical
+                            </MenuItem>
                             <MenuItem divider />
-                            <MenuItem eventKey={2.4}><Glyphicon glyph="ok" /> Always show menubar</MenuItem>
-                            <MenuItem eventKey={2.5}><Glyphicon glyph="remove" /> Always show left sidebar</MenuItem>
-                            <MenuItem eventKey={2.6}><Glyphicon glyph="ok" /> Always show right sidebar</MenuItem>
+                            <MenuItem eventKey={actionTypes.TOGGLE_PERMANENT_MENUBAR}>
+                                <Glyphicon glyph="ok" /> Permanent menubar
+                            </MenuItem>
+                            <MenuItem eventKey={actionTypes.TOGGLE_PERMANENT_LEFT_SIDEBAR}>
+                                <BlankGlyphicon /> Permanent left sidebar
+                            </MenuItem>
+                            <MenuItem eventKey={actionTypes.TOGGLE_PERMANENT_RIGHT_SIDEBAR}>
+                                <Glyphicon glyph="ok" /> Permanent right sidebar
+                            </MenuItem>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>

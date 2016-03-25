@@ -46,6 +46,7 @@
     "dependencies": {},
     "devDependencies": {
       "babel-plugin-transform-export-extensions": "^6.5.0",
+      "babel-plugin-transform-function-bind": "^6.5.2",
       "babel-plugin-transform-object-rest-spread": "^6.6.5",
       "babel-preset-react": "^6.5.0",
       "bootstrap": "github:twbs/bootstrap@^3.3.6",
@@ -103,6 +104,13 @@
               "exports": "$"
             }
           }
+        }
+      },
+      "npm:babel-runtime@5.8.38": {
+        "main": false,
+        "dependencies": {},
+        "optionalDependencies": {
+          "core-js": "^1.2.0"
         }
       },
       "npm:fbjs@0.6.1": {

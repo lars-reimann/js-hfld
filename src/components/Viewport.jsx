@@ -1,5 +1,9 @@
 import React from "react";
 
+import GraphicalView from "./GraphicalView.jsx";
+import SourceView    from "./SourceView.jsx";
+import TableView     from "./TableView.jsx";
+
 export default class extends React.Component {
     constructor(props) {
         super(props);
@@ -7,7 +11,7 @@ export default class extends React.Component {
 
     render() {
         return (
-            <p>Viewport</p>
+            <SourceView />
         );
     }
 }

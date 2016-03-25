@@ -18,7 +18,8 @@ SystemJS.config({
                     "babelOptions": {
                         "plugins": [
                             "babel-plugin-transform-object-rest-spread",
-                            "babel-plugin-transform-export-extensions"
+                            "babel-plugin-transform-export-extensions",
+                            "babel-plugin-transform-function-bind"
                         ],
                         "presets": [
                             "babel-preset-react"
@@ -38,6 +39,7 @@ SystemJS.config({
     ],
     map: {
         "babel-plugin-transform-export-extensions": "npm:babel-plugin-transform-export-extensions@6.5.0",
+        "babel-plugin-transform-function-bind": "npm:babel-plugin-transform-function-bind@6.5.2",
         "babel-plugin-transform-object-rest-spread": "npm:babel-plugin-transform-object-rest-spread@6.6.5",
         "babel-preset-react": "npm:babel-preset-react@6.5.0",
         "bootstrap": "github:twbs/bootstrap@3.3.6",
@@ -118,6 +120,11 @@ SystemJS.config({
                 "babel-runtime": "npm:babel-runtime@5.8.38"
             }
         },
+        "npm:babel-plugin-syntax-function-bind@6.5.0": {
+            "map": {
+                "babel-runtime": "npm:babel-runtime@5.8.38"
+            }
+        },
         "npm:babel-plugin-syntax-jsx@6.5.0": {
             "map": {
                 "babel-runtime": "npm:babel-runtime@5.8.38"
@@ -137,6 +144,12 @@ SystemJS.config({
         "npm:babel-plugin-transform-flow-strip-types@6.7.0": {
             "map": {
                 "babel-plugin-syntax-flow": "npm:babel-plugin-syntax-flow@6.5.0",
+                "babel-runtime": "npm:babel-runtime@5.8.38"
+            }
+        },
+        "npm:babel-plugin-transform-function-bind@6.5.2": {
+            "map": {
+                "babel-plugin-syntax-function-bind": "npm:babel-plugin-syntax-function-bind@6.5.0",
                 "babel-runtime": "npm:babel-runtime@5.8.38"
             }
         },

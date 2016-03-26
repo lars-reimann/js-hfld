@@ -38,6 +38,7 @@ SystemJS.config({
         "github:*/*.json"
     ],
     map: {
+        "@ignavia/earl": "npm:@ignavia/earl@1.2.2",
         "assert": "github:jspm/nodelibs-assert@0.2.0-alpha",
         "babel-plugin-transform-export-extensions": "npm:babel-plugin-transform-export-extensions@6.5.0",
         "babel-plugin-transform-function-bind": "npm:babel-plugin-transform-function-bind@6.5.2",
@@ -53,6 +54,7 @@ SystemJS.config({
         "fs": "github:jspm/nodelibs-fs@0.2.0-alpha",
         "http": "github:jspm/nodelibs-http@0.2.0-alpha",
         "https": "github:jspm/nodelibs-https@0.2.0-alpha",
+        "lodash": "npm:lodash@4.6.1",
         "net": "github:jspm/nodelibs-net@0.2.0-alpha",
         "path": "github:jspm/nodelibs-path@0.2.0-alpha",
         "plugin-babel": "npm:systemjs-plugin-babel@0.0.2",
@@ -114,6 +116,12 @@ SystemJS.config({
         "github:twbs/bootstrap@3.3.6": {
             "map": {
                 "jquery": "github:components/jquery@2.2.1"
+            }
+        },
+        "npm:@ignavia/earl@1.2.2": {
+            "map": {
+                "@ignavia/util": "npm:@ignavia/util@1.1.7",
+                "babel-regenerator-runtime": "npm:babel-regenerator-runtime@6.5.0"
             }
         },
         "npm:ansi-styles@2.2.0": {

@@ -9,28 +9,19 @@ import RightSidebar from "./RightSidebar.jsx";
 export default class extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            alwaysShowMenuBar: true,
-            alwaysShowLeftSideBar: true,
-            alwaysShowRightSidebar: true,
-            menubarVisible: true, // this and the next two are probable redundant and can be computed
-            leftSidebarVisible: true,
-            rightSidebarVisible: true
-        };
     }
 
     render() {
         return (
             <div>
-                <Menubar />
+                <Menubar app={this.props.app} />
                 <Grid fluid>
                     <Row>
                         <Col xs={1}>
                             <LeftSidebar />
                         </Col>
                         <Col xs={9}>
-                            <Viewport />
+                            <Viewport app={this.props.app}/>
                         </Col>
                         <Col xs={2}>
                             <RightSidebar />

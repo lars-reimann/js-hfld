@@ -10,8 +10,15 @@ export default class extends React.Component {
     }
 
     render() {
-        return (
-            <SourceView />
-        );
+        switch(this.props.app.get("viewport")) {
+        case "source":
+            return <SourceView />;
+        case "table":
+            return <TableView />;
+        case "graphical":
+            return <GraphicalView />;
+        default:
+            return <p>No type selected.</p>;
+        }
     }
 }

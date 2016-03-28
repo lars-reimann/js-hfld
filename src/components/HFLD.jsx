@@ -1,6 +1,8 @@
 import React            from "react";
 import {Grid, Row, Col} from "react-bootstrap";
 
+import {ScaleDialog, RotateDialog} from "./dialogs/dialogs.js";
+
 import Menubar      from "./Menubar.jsx";
 import LeftSidebar  from "./LeftSidebar.jsx";
 import Viewport     from "./Viewport.jsx";
@@ -28,6 +30,8 @@ export default class extends React.Component {
                         </Col>
                     </Row>
                 </Grid>
+                <ScaleDialog app={this.props.app} />
+                <RotateDialog app={this.props.app} />
             </div>
         );
     }

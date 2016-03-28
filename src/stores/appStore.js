@@ -7,6 +7,8 @@ class AppStore extends MapStore {
         super(dispatcher);
 
         this._state = this._state
+            .set("showScaleDialog", false)
+            .set("showRotateDialog", false)
             .set("viewport", "graphical")
             .set("permanentMenubar", true)
             .set("permanentLeftSidebar", false)
@@ -19,6 +21,14 @@ class AppStore extends MapStore {
 
     reduce(state, action) {
         switch (action.type) {
+        case "SHOW_SCALE_DIALOG":
+            return state.set("showScaleDialog", action.show);
+        case "SUBMIT_SCALE_DIALOG":
+            return state.set("showScaleDialog", false);
+        case "SHOW_ROTATE_DIALOG":
+            return state.set("showRotateDialog", action.show);
+        case "SUBMIT_ROTATE_DIALOG":
+            return state.set("showRotateDialog", false);
         case "CHANGE_VIEWPORT":
             return state.set("viewport", action.viewport);
         case "TOGGLE_PERMANENT_MENUBAR":

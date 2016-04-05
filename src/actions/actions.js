@@ -10,6 +10,10 @@ function dialogActionCreator(type) {
     return show => ({ type, show });
 }
 
+function submitOpenDialog(content) {
+    return { type: "SUBMIT_OPEN_DIALOG", content };
+}
+
 function submitScaleDialog(factor) {
     return { type: "SUBMIT_SCALE_DIALOG", factor };
 }
@@ -24,6 +28,7 @@ function changeViewport(viewport) {
 
 export default _({
     "SHOW_OPEN_DIALOG":               dialogActionCreator("SHOW_OPEN_DIALOG"),
+    "SUBMIT_OPEN_DIALOG":             submitOpenDialog,
     "SHOW_SAVE_DIALOG":               dialogActionCreator("SHOW_SAVE_DIALOG"),
     "SHOW_CLOSE_DIALOG":              dialogActionCreator("SHOW_CLOSE_DIALOG"),
     "SHOW_SCALE_DIALOG":              dialogActionCreator("SHOW_SCALE_DIALOG"),

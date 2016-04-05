@@ -3,10 +3,4 @@ import {Glyphicon} from "react-bootstrap";
 
 import BlankGlyphicon from "./BlankGlyphicon.jsx";
 
-export default function (props) {
-    if (props.active) {
-        return <Glyphicon glyph="ok" />;
-    } else {
-        return <BlankGlyphicon />;
-    }
-};
+export default props => props.active ? <Glyphicon glyph="ok" /> : <BlankGlyphicon />;

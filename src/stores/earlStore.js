@@ -17,8 +17,8 @@ class EarlStore extends Store {
 
     }
 
-    __onDispatch(payload) {
-        switch (payload.actionType) {
+    __onDispatch(action) {
+        switch (action.actionType) {
         case "OPEN": console.log("OPEN");
         }
     }

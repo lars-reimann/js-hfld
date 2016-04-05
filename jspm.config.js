@@ -54,13 +54,13 @@ SystemJS.config({
         "fs": "github:jspm/nodelibs-fs@0.2.0-alpha",
         "http": "github:jspm/nodelibs-http@0.2.0-alpha",
         "https": "github:jspm/nodelibs-https@0.2.0-alpha",
-        "lodash": "npm:lodash@4.6.1",
+        "lodash": "npm:lodash@4.8.2",
         "net": "github:jspm/nodelibs-net@0.2.0-alpha",
         "path": "github:jspm/nodelibs-path@0.2.0-alpha",
         "plugin-babel": "npm:systemjs-plugin-babel@0.0.2",
         "process": "github:jspm/nodelibs-process@0.2.0-alpha",
-        "react": "npm:react@0.14.7",
-        "react-bootstrap": "npm:react-bootstrap@0.28.3",
+        "react": "npm:react@0.14.8",
+        "react-bootstrap": "npm:react-bootstrap@0.28.5",
         "react-dom": "npm:react-dom@0.14.7",
         "stream": "github:jspm/nodelibs-stream@0.2.0-alpha",
         "string_decoder": "github:jspm/nodelibs-string_decoder@0.2.0-alpha",
@@ -90,7 +90,7 @@ SystemJS.config({
         },
         "github:jspm/nodelibs-http@0.2.0-alpha": {
             "map": {
-                "http-browserify": "npm:stream-http@2.2.0"
+                "http-browserify": "npm:stream-http@2.2.1"
             }
         },
         "github:jspm/nodelibs-stream@0.2.0-alpha": {
@@ -120,21 +120,21 @@ SystemJS.config({
         },
         "npm:@ignavia/earl@1.2.2": {
             "map": {
-                "@ignavia/util": "npm:@ignavia/util@1.1.7",
+                "@ignavia/util": "npm:@ignavia/util@1.2.4",
                 "babel-regenerator-runtime": "npm:babel-regenerator-runtime@6.5.0"
             }
         },
-        "npm:ansi-styles@2.2.0": {
+        "npm:@ignavia/util@1.2.4": {
             "map": {
-                "color-convert": "npm:color-convert@1.0.0"
+                "lodash": "npm:lodash@4.8.2"
             }
         },
         "npm:babel-code-frame@6.7.4": {
             "map": {
                 "babel-runtime": "npm:babel-runtime@5.8.38",
-                "chalk": "npm:chalk@1.1.1",
+                "chalk": "npm:chalk@1.1.3",
                 "esutils": "npm:esutils@2.0.2",
-                "js-tokens": "npm:js-tokens@1.0.2",
+                "js-tokens": "npm:js-tokens@1.0.3",
                 "repeating": "npm:repeating@1.1.3"
             }
         },
@@ -274,9 +274,9 @@ SystemJS.config({
                 "isarray": "npm:isarray@1.0.0"
             }
         },
-        "npm:chalk@1.1.1": {
+        "npm:chalk@1.1.3": {
             "map": {
-                "ansi-styles": "npm:ansi-styles@2.2.0",
+                "ansi-styles": "npm:ansi-styles@2.2.1",
                 "escape-string-regexp": "npm:escape-string-regexp@1.0.5",
                 "has-ansi": "npm:has-ansi@2.0.0",
                 "strip-ansi": "npm:strip-ansi@3.0.1",
@@ -344,7 +344,7 @@ SystemJS.config({
         },
         "npm:loose-envify@1.1.0": {
             "map": {
-                "js-tokens": "npm:js-tokens@1.0.2"
+                "js-tokens": "npm:js-tokens@1.0.3"
             }
         },
         "npm:node-fetch@1.4.1": {
@@ -358,7 +358,7 @@ SystemJS.config({
                 "asap": "npm:asap@2.0.3"
             }
         },
-        "npm:react-bootstrap@0.28.3": {
+        "npm:react-bootstrap@0.28.5": {
             "map": {
                 "babel-runtime": "npm:babel-runtime@5.8.38",
                 "classnames": "npm:classnames@2.2.3",
@@ -366,13 +366,13 @@ SystemJS.config({
                 "invariant": "npm:invariant@2.2.1",
                 "keycode": "npm:keycode@2.1.1",
                 "lodash-compat": "npm:lodash-compat@3.10.2",
-                "react-overlays": "npm:react-overlays@0.6.0",
+                "react-overlays": "npm:react-overlays@0.6.2",
                 "react-prop-types": "npm:react-prop-types@0.3.0",
-                "uncontrollable": "npm:uncontrollable@3.2.1",
+                "uncontrollable": "npm:uncontrollable@3.2.3",
                 "warning": "npm:warning@2.1.0"
             }
         },
-        "npm:react-overlays@0.6.0": {
+        "npm:react-overlays@0.6.2": {
             "map": {
                 "classnames": "npm:classnames@2.2.3",
                 "dom-helpers": "npm:dom-helpers@2.4.0",
@@ -390,7 +390,7 @@ SystemJS.config({
                 "warning": "npm:warning@2.1.0"
             }
         },
-        "npm:react@0.14.7": {
+        "npm:react@0.14.8": {
             "map": {
                 "fbjs": "npm:fbjs@0.6.1"
             }
@@ -416,7 +416,7 @@ SystemJS.config({
                 "readable-stream": "npm:readable-stream@2.0.6"
             }
         },
-        "npm:stream-http@2.2.0": {
+        "npm:stream-http@2.2.1": {
             "map": {
                 "builtin-status-codes": "npm:builtin-status-codes@2.0.0",
                 "inherits": "npm:inherits@2.0.1",
@@ -429,7 +429,7 @@ SystemJS.config({
                 "ansi-regex": "npm:ansi-regex@2.0.0"
             }
         },
-        "npm:uncontrollable@3.2.1": {
+        "npm:uncontrollable@3.2.3": {
             "map": {
                 "invariant": "npm:invariant@2.2.1"
             }

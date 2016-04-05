@@ -14,7 +14,10 @@ class RDFStore extends Store {
     }
 
     __onDispatch(action) {
-        console.log("dispatch: rdf store");
+        switch (action.type) {
+        case "SUBMIT_OPEN_DIALOG":
+            console.log(action.content); // TODO parse string with n3
+        }
     }
 }
 

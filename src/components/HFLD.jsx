@@ -14,21 +14,34 @@ export default class extends React.Component {
         super(props);
     }
 
+    leftSidebarIsHidden() {
+        return !this.props.app.get("permanentLeftSidebar");
+    }
+
+    rightSidebarIsHidden() {
+        return !this.props.app.get("permanentRightSidebar") &&
+                this.props.app.get("viewport") !== "graphical";
+    }
+
     render() {
         return (
             <div>
                 <Menubar app={this.props.app} />
                 <Grid fluid>
                     <Row>
-                        <Col xs={1}>
-                            <LeftSidebar />
-                        </Col>
-                        <Col xs={9}>
+                        { this.leftSidebarIsHidden() ? null :
+                            <Col xs={1}>
+                                <LeftSidebar />
+                            </Col>
+                        }
+                        <Col xs={9 + (this.leftSidebarIsHidden() ? 1 : 0) + (this.rightSidebarIsHidden() ? 2 : 0)}>
                             <Viewport {...this.props}/>
                         </Col>
-                        <Col xs={2}>
-                            <RightSidebar />
-                        </Col>
+                        { this.rightSidebarIsHidden() ? null :
+                            <Col xs={2}>
+                                <RightSidebar />
+                            </Col>
+                        }
                     </Row>
                 </Grid>
                 <OpenDialog app={this.props.app} />

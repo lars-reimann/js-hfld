@@ -12,6 +12,7 @@ export default class extends React.Component {
     render() {
         return (
             <div>
+                <h2>Source:</h2>
                 {this.writer.serialize(this.props.rdf.graph)}
             </div>
         );

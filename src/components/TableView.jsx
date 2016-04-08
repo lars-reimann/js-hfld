@@ -1,13 +1,7 @@
 import React from "react";
 
-export default class extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+import RDFTable from "./RDFTable.jsx";
 
-    render() {
-        return (
-            <p>TableView</p>
-        );
-    }
-}
+// TODO make it scrollable
+
+export default props => <RDFTable {...props} />;

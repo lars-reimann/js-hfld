@@ -40,7 +40,7 @@ SystemJS.config({
     ],
     map: {
         "@ignavia/earl": "npm:@ignavia/earl@1.2.2",
-        "@ignavia/rdf": "npm:@ignavia/rdf@1.1.4",
+        "@ignavia/rdf": "npm:@ignavia/rdf@1.2.0",
         "@ignavia/util": "npm:@ignavia/util@1.2.4",
         "assert": "github:jspm/nodelibs-assert@0.2.0-alpha",
         "babel-plugin-transform-async-to-generator": "npm:babel-plugin-transform-async-to-generator@6.7.4",
@@ -59,7 +59,7 @@ SystemJS.config({
         "http": "github:jspm/nodelibs-http@0.2.0-alpha",
         "https": "github:jspm/nodelibs-https@0.2.0-alpha",
         "immutable": "npm:immutable@3.7.6",
-        "lodash": "npm:lodash@4.8.2",
+        "lodash": "npm:lodash@4.9.0",
         "net": "github:jspm/nodelibs-net@0.2.0-alpha",
         "path": "github:jspm/nodelibs-path@0.2.0-alpha",
         "plugin-babel": "npm:systemjs-plugin-babel@0.0.2",
@@ -129,7 +129,7 @@ SystemJS.config({
                 "babel-regenerator-runtime": "npm:babel-regenerator-runtime@6.5.0"
             }
         },
-        "npm:@ignavia/rdf@1.1.4": {
+        "npm:@ignavia/rdf@1.2.0": {
             "map": {
                 "@ignavia/util": "npm:@ignavia/util@1.2.4",
                 "n3": "npm:n3@0.4.5"
@@ -137,7 +137,7 @@ SystemJS.config({
         },
         "npm:@ignavia/util@1.2.4": {
             "map": {
-                "lodash": "npm:lodash@4.8.2"
+                "lodash": "npm:lodash@4.9.0"
             }
         },
         "npm:babel-code-frame@6.7.5": {
@@ -162,7 +162,7 @@ SystemJS.config({
                 "babel-helper-get-function-arity": "npm:babel-helper-get-function-arity@6.6.5",
                 "babel-runtime": "npm:babel-runtime@5.8.38",
                 "babel-template": "npm:babel-template@6.7.0",
-                "babel-traverse": "npm:babel-traverse@6.7.5",
+                "babel-traverse": "npm:babel-traverse@6.7.6",
                 "babel-types": "npm:babel-types@6.7.2"
             }
         },
@@ -177,7 +177,7 @@ SystemJS.config({
                 "babel-helper-function-name": "npm:babel-helper-function-name@6.6.0",
                 "babel-runtime": "npm:babel-runtime@5.8.38",
                 "babel-template": "npm:babel-template@6.7.0",
-                "babel-traverse": "npm:babel-traverse@6.7.5",
+                "babel-traverse": "npm:babel-traverse@6.7.6",
                 "babel-types": "npm:babel-types@6.7.2"
             }
         },
@@ -283,13 +283,13 @@ SystemJS.config({
         "npm:babel-template@6.7.0": {
             "map": {
                 "babel-runtime": "npm:babel-runtime@5.8.38",
-                "babel-traverse": "npm:babel-traverse@6.7.5",
+                "babel-traverse": "npm:babel-traverse@6.7.6",
                 "babel-types": "npm:babel-types@6.7.2",
                 "babylon": "npm:babylon@6.7.0",
                 "lodash": "npm:lodash@3.10.1"
             }
         },
-        "npm:babel-traverse@6.7.5": {
+        "npm:babel-traverse@6.7.6": {
             "map": {
                 "babel-code-frame": "npm:babel-code-frame@6.7.5",
                 "babel-messages": "npm:babel-messages@6.7.2",
@@ -306,7 +306,7 @@ SystemJS.config({
         "npm:babel-types@6.7.2": {
             "map": {
                 "babel-runtime": "npm:babel-runtime@5.8.38",
-                "babel-traverse": "npm:babel-traverse@6.7.5",
+                "babel-traverse": "npm:babel-traverse@6.7.6",
                 "esutils": "npm:esutils@2.0.2",
                 "lodash": "npm:lodash@3.10.1",
                 "to-fast-properties": "npm:to-fast-properties@1.0.2"

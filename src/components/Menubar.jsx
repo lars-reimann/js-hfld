@@ -82,6 +82,15 @@ export default class extends React.Component {
                             <MenuItem eventKey="TOGGLE_PERMANENT_RIGHT_SIDEBAR">
                                 <ToggleGlyphicon active={this.props.app.get("permanentRightSidebar")} /> Permanent Right Sidebar
                             </MenuItem>
+                            { this.props.app.get("viewport") !== "table" ? null :
+                                <MenuItem divider />
+                            }
+                            { this.props.app.get("viewport") !== "table" ? null :
+                                <MenuItem eventKey="TOGGLE_SHRINK_NODE_VALUES_IN_TABLE">
+                                    <ToggleGlyphicon active={this.props.app.get("shrinkNodeValuesInTable")} /> Shrink Node Values
+                                </MenuItem>
+                            }
+
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>

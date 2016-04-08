@@ -14,7 +14,7 @@ export default class extends React.Component {
         case "source":
             return <SourceView rdf={this.props.rdf} />;
         case "table":
-            return <TableView rdf={this.props.rdf} />;
+            return <TableView app={this.props.app} rdf={this.props.rdf} />;
         case "graphical":
             return <GraphicalView />;
         default:

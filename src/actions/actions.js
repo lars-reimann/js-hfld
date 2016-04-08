@@ -53,19 +53,20 @@ function enqueueAlert(type, message) {
 }
 
 export default {
-    "SHOW_OPEN_DIALOG":               dialogAction("SHOW_OPEN_DIALOG"),
-    "SUBMIT_OPEN_DIALOG":             submitOpenDialog,
-    "SHOW_SAVE_DIALOG":               dialogAction("SHOW_SAVE_DIALOG"),
-    "SHOW_CLOSE_DIALOG":              dialogAction("SHOW_CLOSE_DIALOG"),
-    "SHOW_SCALE_DIALOG":              dialogAction("SHOW_SCALE_DIALOG"),
-    "SUBMIT_SCALE_DIALOG":            submitScaleDialog,
-    "SHOW_ROTATE_DIALOG":             dialogAction("SHOW_ROTATE_DIALOG"),
-    "SUBMIT_ROTATE_DIALOG":           submitRotateDialog,
-    "CHANGE_VIEWPORT":                changeViewport,
-    "TOGGLE_PERMANENT_MENUBAR":       simpleAction("TOGGLE_PERMANENT_MENUBAR"),
-    "TOGGLE_PERMANENT_LEFT_SIDEBAR":  simpleAction("TOGGLE_PERMANENT_LEFT_SIDEBAR"),
-    "TOGGLE_PERMANENT_RIGHT_SIDEBAR": simpleAction("TOGGLE_PERMANENT_RIGHT_SIDEBAR"),
-    "ENQUEUE_ALERT":                  enqueueAlert,
-    "DEQUEUE_ALERT":                  simpleAction("DEQUEUE_ALERT"),
-    "PARSE_TURTLE":                   parseTurtle
+    "SHOW_OPEN_DIALOG":                   dialogAction("SHOW_OPEN_DIALOG"),
+    "SUBMIT_OPEN_DIALOG":                 submitOpenDialog,
+    "SHOW_SAVE_DIALOG":                   dialogAction("SHOW_SAVE_DIALOG"),
+    "SHOW_CLOSE_DIALOG":                  dialogAction("SHOW_CLOSE_DIALOG"),
+    "SHOW_SCALE_DIALOG":                  dialogAction("SHOW_SCALE_DIALOG"),
+    "SUBMIT_SCALE_DIALOG":                submitScaleDialog,
+    "SHOW_ROTATE_DIALOG":                 dialogAction("SHOW_ROTATE_DIALOG"),
+    "SUBMIT_ROTATE_DIALOG":               submitRotateDialog,
+    "CHANGE_VIEWPORT":                    changeViewport,
+    "TOGGLE_PERMANENT_MENUBAR":           simpleAction("TOGGLE_PERMANENT_MENUBAR"),
+    "TOGGLE_PERMANENT_LEFT_SIDEBAR":      simpleAction("TOGGLE_PERMANENT_LEFT_SIDEBAR"),
+    "TOGGLE_PERMANENT_RIGHT_SIDEBAR":     simpleAction("TOGGLE_PERMANENT_RIGHT_SIDEBAR"),
+    "TOGGLE_SHRINK_NODE_VALUES_IN_TABLE": dialogAction("TOGGLE_SHRINK_NODE_VALUES_IN_TABLE"),
+    "ENQUEUE_ALERT":                      enqueueAlert,
+    "DEQUEUE_ALERT":                      simpleAction("DEQUEUE_ALERT"),
+    "PARSE_TURTLE":                       parseTurtle
 };

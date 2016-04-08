@@ -15,6 +15,7 @@ class AppStore extends MapStore {
             .set("permanentMenubar", true)
             .set("permanentLeftSidebar", false)
             .set("permanentRightSidebar", false)
+            .set("shrinkNodeValuesInTable", true)
             .set("alerts", new List());
     }
 
@@ -44,6 +45,8 @@ class AppStore extends MapStore {
             return this.toggle(state, "permanentLeftSidebar");
         case "TOGGLE_PERMANENT_RIGHT_SIDEBAR":
             return this.toggle(state, "permanentRightSidebar");
+        case "TOGGLE_SHRINK_NODE_VALUES_IN_TABLE":
+            return this.toggle(state, "shrinkNodeValuesInTable");
         case "ENQUEUE_ALERT":
             return state.set("alerts", state.get("alerts").push(action.alert));
         case "DEQUEUE_ALERT":

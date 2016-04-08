@@ -7,6 +7,7 @@ import Menubar      from "./Menubar.jsx";
 import LeftSidebar  from "./LeftSidebar.jsx";
 import Viewport     from "./Viewport.jsx";
 import RightSidebar from "./RightSidebar.jsx";
+import AlertQueue   from "./AlertQueue.jsx";
 
 export default class extends React.Component {
     constructor(props) {
@@ -33,6 +34,7 @@ export default class extends React.Component {
                 <OpenDialog app={this.props.app} />
                 <ScaleDialog app={this.props.app} />
                 <RotateDialog app={this.props.app} />
+                <AlertQueue app={this.props.app} />
             </div>
         );
     }

@@ -39,6 +39,8 @@ SystemJS.config({
     ],
     map: {
         "@ignavia/earl": "npm:@ignavia/earl@1.2.2",
+        "@ignavia/rdf": "npm:@ignavia/rdf@1.1.4",
+        "@ignavia/util": "npm:@ignavia/util@1.2.4",
         "assert": "github:jspm/nodelibs-assert@0.2.0-alpha",
         "babel-plugin-transform-export-extensions": "npm:babel-plugin-transform-export-extensions@6.5.0",
         "babel-plugin-transform-function-bind": "npm:babel-plugin-transform-function-bind@6.5.2",
@@ -54,14 +56,15 @@ SystemJS.config({
         "fs": "github:jspm/nodelibs-fs@0.2.0-alpha",
         "http": "github:jspm/nodelibs-http@0.2.0-alpha",
         "https": "github:jspm/nodelibs-https@0.2.0-alpha",
+        "immutable": "npm:immutable@3.7.6",
         "lodash": "npm:lodash@4.8.2",
         "net": "github:jspm/nodelibs-net@0.2.0-alpha",
         "path": "github:jspm/nodelibs-path@0.2.0-alpha",
         "plugin-babel": "npm:systemjs-plugin-babel@0.0.2",
         "process": "github:jspm/nodelibs-process@0.2.0-alpha",
-        "react": "npm:react@0.14.8",
+        "react": "npm:react@15.0.0",
         "react-bootstrap": "npm:react-bootstrap@0.28.5",
-        "react-dom": "npm:react-dom@0.14.7",
+        "react-dom": "npm:react-dom@0.14.8",
         "stream": "github:jspm/nodelibs-stream@0.2.0-alpha",
         "string_decoder": "github:jspm/nodelibs-string_decoder@0.2.0-alpha",
         "systemjs-hot-reloader": "github:capaj/systemjs-hot-reloader@0.5.6",
@@ -124,12 +127,18 @@ SystemJS.config({
                 "babel-regenerator-runtime": "npm:babel-regenerator-runtime@6.5.0"
             }
         },
+        "npm:@ignavia/rdf@1.1.4": {
+            "map": {
+                "@ignavia/util": "npm:@ignavia/util@1.2.4",
+                "n3": "npm:n3@0.4.5"
+            }
+        },
         "npm:@ignavia/util@1.2.4": {
             "map": {
                 "lodash": "npm:lodash@4.8.2"
             }
         },
-        "npm:babel-code-frame@6.7.4": {
+        "npm:babel-code-frame@6.7.5": {
             "map": {
                 "babel-runtime": "npm:babel-runtime@5.8.38",
                 "chalk": "npm:chalk@1.1.3",
@@ -138,7 +147,7 @@ SystemJS.config({
                 "repeating": "npm:repeating@1.1.3"
             }
         },
-        "npm:babel-helper-builder-react-jsx@6.6.5": {
+        "npm:babel-helper-builder-react-jsx@6.7.5": {
             "map": {
                 "babel-runtime": "npm:babel-runtime@5.8.38",
                 "babel-types": "npm:babel-types@6.7.2",
@@ -211,9 +220,9 @@ SystemJS.config({
                 "babel-runtime": "npm:babel-runtime@5.8.38"
             }
         },
-        "npm:babel-plugin-transform-react-jsx@6.7.4": {
+        "npm:babel-plugin-transform-react-jsx@6.7.5": {
             "map": {
-                "babel-helper-builder-react-jsx": "npm:babel-helper-builder-react-jsx@6.6.5",
+                "babel-helper-builder-react-jsx": "npm:babel-helper-builder-react-jsx@6.7.5",
                 "babel-plugin-syntax-jsx": "npm:babel-plugin-syntax-jsx@6.5.0",
                 "babel-runtime": "npm:babel-runtime@5.8.38"
             }
@@ -224,7 +233,7 @@ SystemJS.config({
                 "babel-plugin-syntax-jsx": "npm:babel-plugin-syntax-jsx@6.5.0",
                 "babel-plugin-transform-flow-strip-types": "npm:babel-plugin-transform-flow-strip-types@6.7.0",
                 "babel-plugin-transform-react-display-name": "npm:babel-plugin-transform-react-display-name@6.5.0",
-                "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@6.7.4",
+                "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@6.7.5",
                 "babel-plugin-transform-react-jsx-source": "npm:babel-plugin-transform-react-jsx-source@6.5.0"
             }
         },
@@ -233,9 +242,9 @@ SystemJS.config({
                 "core-js": "npm:core-js@1.2.6"
             }
         },
-        "npm:babel-traverse@6.7.4": {
+        "npm:babel-traverse@6.7.5": {
             "map": {
-                "babel-code-frame": "npm:babel-code-frame@6.7.4",
+                "babel-code-frame": "npm:babel-code-frame@6.7.5",
                 "babel-messages": "npm:babel-messages@6.7.2",
                 "babel-runtime": "npm:babel-runtime@5.8.38",
                 "babel-types": "npm:babel-types@6.7.2",
@@ -250,7 +259,7 @@ SystemJS.config({
         "npm:babel-types@6.7.2": {
             "map": {
                 "babel-runtime": "npm:babel-runtime@5.8.38",
-                "babel-traverse": "npm:babel-traverse@6.7.4",
+                "babel-traverse": "npm:babel-traverse@6.7.5",
                 "esutils": "npm:esutils@2.0.2",
                 "lodash": "npm:lodash@3.10.1",
                 "to-fast-properties": "npm:to-fast-properties@1.0.2"
@@ -314,6 +323,16 @@ SystemJS.config({
                 "ua-parser-js": "npm:ua-parser-js@0.7.10"
             }
         },
+        "npm:fbjs@0.8.0": {
+            "map": {
+                "babel-plugin-syntax-flow": "npm:babel-plugin-syntax-flow@6.5.0",
+                "core-js": "npm:core-js@1.2.6",
+                "isomorphic-fetch": "npm:isomorphic-fetch@2.2.1",
+                "loose-envify": "npm:loose-envify@1.1.0",
+                "promise": "npm:promise@7.1.1",
+                "ua-parser-js": "npm:ua-parser-js@0.7.10"
+            }
+        },
         "npm:flux@2.1.1": {
             "map": {
                 "fbemitter": "npm:fbemitter@2.0.2",
@@ -338,7 +357,7 @@ SystemJS.config({
         },
         "npm:isomorphic-fetch@2.2.1": {
             "map": {
-                "node-fetch": "npm:node-fetch@1.4.1",
+                "node-fetch": "npm:node-fetch@1.5.0",
                 "whatwg-fetch": "npm:whatwg-fetch@0.9.0"
             }
         },
@@ -347,7 +366,7 @@ SystemJS.config({
                 "js-tokens": "npm:js-tokens@1.0.3"
             }
         },
-        "npm:node-fetch@1.4.1": {
+        "npm:node-fetch@1.5.0": {
             "map": {
                 "encoding": "npm:encoding@0.1.12",
                 "is-stream": "npm:is-stream@1.0.1"
@@ -366,13 +385,13 @@ SystemJS.config({
                 "invariant": "npm:invariant@2.2.1",
                 "keycode": "npm:keycode@2.1.1",
                 "lodash-compat": "npm:lodash-compat@3.10.2",
-                "react-overlays": "npm:react-overlays@0.6.2",
+                "react-overlays": "npm:react-overlays@0.6.3",
                 "react-prop-types": "npm:react-prop-types@0.3.0",
                 "uncontrollable": "npm:uncontrollable@3.2.3",
                 "warning": "npm:warning@2.1.0"
             }
         },
-        "npm:react-overlays@0.6.2": {
+        "npm:react-overlays@0.6.3": {
             "map": {
                 "classnames": "npm:classnames@2.2.3",
                 "dom-helpers": "npm:dom-helpers@2.4.0",
@@ -390,9 +409,11 @@ SystemJS.config({
                 "warning": "npm:warning@2.1.0"
             }
         },
-        "npm:react@0.14.8": {
+        "npm:react@15.0.0": {
             "map": {
-                "fbjs": "npm:fbjs@0.6.1"
+                "fbjs": "npm:fbjs@0.8.0",
+                "loose-envify": "npm:loose-envify@1.1.0",
+                "object-assign": "npm:object-assign@4.0.1"
             }
         },
         "npm:readable-stream@2.0.6": {

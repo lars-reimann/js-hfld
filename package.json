@@ -43,9 +43,13 @@
   "format": "cjs",
   "jspm": {
     "name": "@ignavia/hfld",
-    "dependencies": {},
+    "dependencies": {
+      "immutable": "^3.7.6"
+    },
     "devDependencies": {
       "@ignavia/earl": "^1.2.2",
+      "@ignavia/rdf": "^1.1.2",
+      "@ignavia/util": "^1.2.4",
       "babel-plugin-transform-export-extensions": "^6.5.0",
       "babel-plugin-transform-function-bind": "^6.5.2",
       "babel-plugin-transform-object-rest-spread": "^6.6.5",
@@ -70,7 +74,7 @@
       "net": "github:jspm/nodelibs-net@^0.2.0-alpha",
       "path": "github:jspm/nodelibs-path@^0.2.0-alpha",
       "process": "github:jspm/nodelibs-process@^0.2.0-alpha",
-      "react": "*",
+      "react": "^15.0.0",
       "react-dom": "^0.14.7",
       "stream": "github:jspm/nodelibs-stream@^0.2.0-alpha",
       "string_decoder": "github:jspm/nodelibs-string_decoder@^0.2.0-alpha",
@@ -132,38 +136,11 @@
           "_stream_transform": "readable-stream/transform"
         }
       },
-      "npm:fbjs@0.6.1": {
-        "dependencies": {}
-      },
       "npm:inherits@2.0.1": {
         "ignore": [
           "test.js"
         ]
-      },
-      "npm:react@0.14.8": {
-        "dependencies": {
-          "fbjs": "^0.6.1"
-        },
-        "format": "cjs",
-        "meta": {
-          "*": {
-            "globals": {
-              "process": "process"
-            }
-          }
-        },
-        "map": {
-          "fbjs/lib/ExecutionEnvironment.js": {
-            "production": "@empty"
-          },
-          "./lib/ReactDefaultPerf.js": {
-            "production": "@empty"
-          },
-          "./lib/ReactTestUtils.js": {
-            "production": "@empty"
-          }
-        }
       }
     }
   }
-}
+}

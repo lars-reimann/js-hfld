@@ -1,5 +1,7 @@
 import {Store} from "flux/utils";
 
+import * as earl from "@ignavia/earl";
+
 import dispatcher from "../dispatcher/dispatcher.js";
 
 // import earl stuff

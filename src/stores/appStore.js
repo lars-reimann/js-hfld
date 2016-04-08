@@ -1,5 +1,7 @@
 import {MapStore} from "flux/utils";
+import {List}     from "immutable";
 
+import actions    from "../actions/actions.js";
 import dispatcher from "../dispatcher/dispatcher.js";
 
 class AppStore extends MapStore {
@@ -13,7 +15,8 @@ class AppStore extends MapStore {
             .set("viewport", "graphical")
             .set("permanentMenubar", true)
             .set("permanentLeftSidebar", false)
-            .set("permanentRightSidebar", false);
+            .set("permanentRightSidebar", false)
+            .set("alerts", new List());
     }
 
     toggle(state, key) {
@@ -42,6 +45,10 @@ class AppStore extends MapStore {
             return this.toggle(state, "permanentLeftSidebar");
         case "TOGGLE_PERMANENT_RIGHT_SIDEBAR":
             return this.toggle(state, "permanentRightSidebar");
+        case "ENQUEUE_ALERT":
+            return state.set("alerts", state.get("alerts").push(action.alert));
+        case "DEQUEUE_ALERT":
+            return state.set("alerts", state.get("alerts").shift());
         default:
             return state;
         }

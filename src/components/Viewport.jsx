@@ -12,9 +12,9 @@ export default class extends React.Component {
     render() {
         switch(this.props.app.get("viewport")) {
         case "source":
-            return <SourceView />;
+            return <SourceView rdf={this.props.rdf} />;
         case "table":
-            return <TableView />;
+            return <TableView rdf={this.props.rdf} />;
         case "graphical":
             return <GraphicalView />;
         default:

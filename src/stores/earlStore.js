@@ -15,10 +15,6 @@ class EarlStore extends Store {
         console.log("getState: earl");
     }
 
-    __emitChange() {
-
-    }
-
     __onDispatch(action) {
         switch (action.actionType) {
         case "OPEN": console.log("OPEN");

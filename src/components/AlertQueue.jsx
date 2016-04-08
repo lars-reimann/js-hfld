@@ -9,7 +9,6 @@ const style = {
 };
 
 export default function (props) {
-            console.log(props.app.get("alerts").size);
     if (props.app.get("alerts").size > 0) {
         const first = props.app.get("alerts").first();
         return (

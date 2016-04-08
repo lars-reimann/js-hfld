@@ -21,23 +21,7 @@
     "test": "mocha --compilers js:babel-register"
   },
   "dependencies": {},
-  "devDependencies": {
-    "babel-plugin-transform-export-extensions": "^6.5.0",
-    "babel-preset-es2015": "^6.6.0",
-    "chai": "^3.5.0"
-  },
-  "babel": {
-    "env": {
-      "development": {
-        "presets": [
-          "es2015"
-        ],
-        "plugins": [
-          "transform-export-extensions"
-        ]
-      }
-    }
-  },
+  "devDependencies": {},
   "jspmPackage": true,
   "registry": "npm",
   "format": "cjs",
@@ -50,6 +34,7 @@
       "@ignavia/earl": "^1.2.2",
       "@ignavia/rdf": "^1.1.2",
       "@ignavia/util": "^1.2.4",
+      "babel-plugin-transform-async-to-generator": "^6.7.4",
       "babel-plugin-transform-export-extensions": "^6.5.0",
       "babel-plugin-transform-function-bind": "^6.5.2",
       "babel-plugin-transform-object-rest-spread": "^6.6.5",

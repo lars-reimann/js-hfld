@@ -10,7 +10,8 @@ SystemJS.config({
                 "*js": {
                     "babelOptions": {
                         "plugins": [
-                            "babel-plugin-transform-export-extensions"
+                            "babel-plugin-transform-export-extensions",
+                            "babel-plugin-transform-async-to-generator"
                         ]
                     }
                 },
@@ -42,6 +43,7 @@ SystemJS.config({
         "@ignavia/rdf": "npm:@ignavia/rdf@1.1.4",
         "@ignavia/util": "npm:@ignavia/util@1.2.4",
         "assert": "github:jspm/nodelibs-assert@0.2.0-alpha",
+        "babel-plugin-transform-async-to-generator": "npm:babel-plugin-transform-async-to-generator@6.7.4",
         "babel-plugin-transform-export-extensions": "npm:babel-plugin-transform-export-extensions@6.5.0",
         "babel-plugin-transform-function-bind": "npm:babel-plugin-transform-function-bind@6.5.2",
         "babel-plugin-transform-object-rest-spread": "npm:babel-plugin-transform-object-rest-spread@6.6.5",
@@ -155,7 +157,36 @@ SystemJS.config({
                 "lodash": "npm:lodash@3.10.1"
             }
         },
+        "npm:babel-helper-function-name@6.6.0": {
+            "map": {
+                "babel-helper-get-function-arity": "npm:babel-helper-get-function-arity@6.6.5",
+                "babel-runtime": "npm:babel-runtime@5.8.38",
+                "babel-template": "npm:babel-template@6.7.0",
+                "babel-traverse": "npm:babel-traverse@6.7.5",
+                "babel-types": "npm:babel-types@6.7.2"
+            }
+        },
+        "npm:babel-helper-get-function-arity@6.6.5": {
+            "map": {
+                "babel-runtime": "npm:babel-runtime@5.8.38",
+                "babel-types": "npm:babel-types@6.7.2"
+            }
+        },
+        "npm:babel-helper-remap-async-to-generator@6.7.0": {
+            "map": {
+                "babel-helper-function-name": "npm:babel-helper-function-name@6.6.0",
+                "babel-runtime": "npm:babel-runtime@5.8.38",
+                "babel-template": "npm:babel-template@6.7.0",
+                "babel-traverse": "npm:babel-traverse@6.7.5",
+                "babel-types": "npm:babel-types@6.7.2"
+            }
+        },
         "npm:babel-messages@6.7.2": {
+            "map": {
+                "babel-runtime": "npm:babel-runtime@5.8.38"
+            }
+        },
+        "npm:babel-plugin-syntax-async-functions@6.5.0": {
             "map": {
                 "babel-runtime": "npm:babel-runtime@5.8.38"
             }
@@ -182,6 +213,13 @@ SystemJS.config({
         },
         "npm:babel-plugin-syntax-object-rest-spread@6.5.0": {
             "map": {
+                "babel-runtime": "npm:babel-runtime@5.8.38"
+            }
+        },
+        "npm:babel-plugin-transform-async-to-generator@6.7.4": {
+            "map": {
+                "babel-helper-remap-async-to-generator": "npm:babel-helper-remap-async-to-generator@6.7.0",
+                "babel-plugin-syntax-async-functions": "npm:babel-plugin-syntax-async-functions@6.5.0",
                 "babel-runtime": "npm:babel-runtime@5.8.38"
             }
         },
@@ -240,6 +278,15 @@ SystemJS.config({
         "npm:babel-runtime@5.8.38": {
             "map": {
                 "core-js": "npm:core-js@1.2.6"
+            }
+        },
+        "npm:babel-template@6.7.0": {
+            "map": {
+                "babel-runtime": "npm:babel-runtime@5.8.38",
+                "babel-traverse": "npm:babel-traverse@6.7.5",
+                "babel-types": "npm:babel-types@6.7.2",
+                "babylon": "npm:babylon@6.7.0",
+                "lodash": "npm:lodash@3.10.1"
             }
         },
         "npm:babel-traverse@6.7.5": {

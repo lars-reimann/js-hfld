@@ -24,7 +24,7 @@ export default class extends React.Component {
                             <LeftSidebar />
                         </Col>
                         <Col xs={9}>
-                            <Viewport app={this.props.app}/>
+                            <Viewport {...this.props}/>
                         </Col>
                         <Col xs={2}>
                             <RightSidebar />

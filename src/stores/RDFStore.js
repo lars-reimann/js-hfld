@@ -10,18 +10,24 @@ class RDFStore extends Store {
         super(dispatcher);
 
         this.parser = new rdf.TurtleReader();
+
+        this.initState();
+    }
+
+    initState() {
+        this.state = {
+            graph:   new rdf.Graph(),
+            profile: new rdf.Profile()
+        };
     }
 
     getState() {
-        return {
-            graph:   new rdf.Graph(),
-            profile: new rdf.Profile()
-        }
+        return this.state;
     }
 
     async parse(s) {
         try {
-            this.setState(await this.parser.parse(s));
+            this.state = await this.parser.parse(s);
         } catch (err) {
             actions.ENQUEUE_ALERT("danger", err.message);
         }
@@ -30,7 +36,7 @@ class RDFStore extends Store {
     __onDispatch(action) {
         switch (action.type) {
         case "SUBMIT_OPEN_DIALOG":
-            this.parse(action.content);
+            return this.parse(action.content).then(() => this.__emitChange());
         }
     }
 }

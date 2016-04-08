@@ -11,11 +11,11 @@ class MappingStore extends Store {
     }
 
     getState() {
-        console.log("getState: mapping store");
+        //console.log("getState: mapping store");
     }
 
     __onDispatch(action) {
-        console.log("dispatch: mapping store");
+        //console.log("dispatch: mapping store");
     }
 }
 

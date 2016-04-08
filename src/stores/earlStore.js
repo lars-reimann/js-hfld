@@ -12,13 +12,13 @@ class EarlStore extends Store {
     }
 
     getState() {
-        console.log("getState: earl");
+        //console.log("getState: earl");
     }
 
     __onDispatch(action) {
-        switch (action.actionType) {
-        case "OPEN": console.log("OPEN");
-        }
+        //switch (action.actionType) {
+        //case "OPEN": console.log("OPEN");
+        //}
     }
 }
 

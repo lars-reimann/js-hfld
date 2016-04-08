@@ -1,7 +1,6 @@
 import {MapStore} from "flux/utils";
 import {List}     from "immutable";
 
-import actions    from "../actions/actions.js";
 import dispatcher from "../dispatcher/dispatcher.js";
 
 class AppStore extends MapStore {

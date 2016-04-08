@@ -2,7 +2,6 @@ import {Store} from "flux/utils";
 
 import * as rdf from "@ignavia/rdf";
 
-import actions    from "../actions/actions.js";
 import dispatcher from "../dispatcher/dispatcher.js";
 
 class RDFStore extends Store {
@@ -25,18 +24,12 @@ class RDFStore extends Store {
         return this.state;
     }
 
-    async parse(s) {
-        try {
-            this.state = await this.parser.parse(s);
-        } catch (err) {
-            actions.ENQUEUE_ALERT("danger", err.message);
-        }
-    }
-
     __onDispatch(action) {
         switch (action.type) {
-        case "SUBMIT_OPEN_DIALOG":
-            return this.parse(action.content).then(() => this.__emitChange());
+        case "PARSE_TURTLE":
+            this.state = action.result;
+            this.__emitChange();
+            break;
         }
     }
 }

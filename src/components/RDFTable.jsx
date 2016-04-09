@@ -4,7 +4,6 @@ import {Table} from "react-bootstrap";
 
 import actions from "../actions/actions.js";
 
-import RDFTableRow from "./RDFTableRow.jsx";
 import SortingGlyphicon from "./SortingGlyphicon.jsx";
 
 export default class extends React.Component {
@@ -40,16 +39,17 @@ export default class extends React.Component {
 
         const rows = _([...this.props.rdf.graph])
             .orderBy([triple => this.shrink(triple[column]).toLowerCase()], [order])
-            .map(triple => <RDFTableRow key={triple.id} triple={triple} profile={this.props.rdf.profile} app={this.props.app} />)
+            .map(triple => (
+                <tr key={triple.id}>
+                    <td>{this.shrink(triple.subject)}</td>
+                    <td>{this.shrink(triple.predicate)}</td>
+                    <td>{this.shrink(triple.object)}</td>
+                </tr>))
             .value();
-
-        const style = {
-            cursor: "pointer"
-        };
 
         return (
             <Table striped bordered responsive hover condensed>
-                <thead style={style}>
+                <thead style={{cursor: "pointer"}}>
                     <tr>
                         <th onClick={::this.handleClick("subject")}>
                             Subject {column === "subject" ? <SortingGlyphicon order={order} /> : null}

@@ -52,6 +52,10 @@ function enqueueAlert(type, message) {
     dispatcher.dispatch({ type: "ENQUEUE_ALERT", alert: new Alert(type, message) });
 }
 
+function setTableSorting(sorting) {
+    dispatcher.dispatch({ type: "SET_TABLE_SORTING", sorting});
+}
+
 export default {
     "SHOW_OPEN_DIALOG":                   dialogAction("SHOW_OPEN_DIALOG"),
     "SUBMIT_OPEN_DIALOG":                 submitOpenDialog,
@@ -68,5 +72,6 @@ export default {
     "TOGGLE_SHRINK_NODE_VALUES_IN_TABLE": dialogAction("TOGGLE_SHRINK_NODE_VALUES_IN_TABLE"),
     "ENQUEUE_ALERT":                      enqueueAlert,
     "DEQUEUE_ALERT":                      simpleAction("DEQUEUE_ALERT"),
-    "PARSE_TURTLE":                       parseTurtle
+    "PARSE_TURTLE":                       parseTurtle,
+    "SET_TABLE_SORTING":                  setTableSorting
 };

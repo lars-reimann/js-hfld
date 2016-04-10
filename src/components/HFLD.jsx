@@ -44,10 +44,10 @@ export default class extends React.Component {
                         }
                     </Row>
                 </Grid>
-                <OpenDialog app={this.props.app} />
-                <ScaleDialog app={this.props.app} />
+                <OpenDialog   app={this.props.app} />
+                <ScaleDialog  app={this.props.app} />
                 <RotateDialog app={this.props.app} />
-                <AlertQueue app={this.props.app} />
+                <AlertQueue   app={this.props.app} />
             </div>
         );
     }

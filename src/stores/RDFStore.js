@@ -4,12 +4,9 @@ import * as rdf from "@ignavia/rdf";
 
 import dispatcher from "../dispatcher/dispatcher.js";
 
-class RDFStore extends Store {
+class rdfStore extends Store {
     constructor(dispatcher) {
         super(dispatcher);
-
-        this.parser = new rdf.TurtleReader();
-
         this.initState();
     }
 
@@ -34,4 +31,4 @@ class RDFStore extends Store {
     }
 }
 
-export default new RDFStore(dispatcher);
+export default new rdfStore(dispatcher);

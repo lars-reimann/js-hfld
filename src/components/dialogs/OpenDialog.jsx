@@ -30,29 +30,14 @@ export default class extends React.Component {
         });
     }
 
-    directIsValid() {
-        return validators.nonEmpty(this.state.direct);
-    }
-
     handleURLChange() {
         this.setState({
             url: this.refs.url.getValue()
         })
     }
 
-    urlIsValid() {
-        return validators.nonEmpty(this.state.url);
-    }
-
-    inputIsValid() {
-        switch (this.state.activeTab) {
-        case "direct":
-            return this.directIsValid();
-        case "file":
-            return true;
-        case "url":
-            return this.urlIsValid();
-        }
+    isValid() {
+        return true;
     }
 
     ok() {
@@ -93,8 +78,6 @@ export default class extends React.Component {
                             ref="direct"
                             value={this.state.direct}
                             onChange={::this.handleDirectChange}
-                            bsStyle={getValidationStyle(this.directIsValid())}
-                            hasFeedback
                          />
                     </Tab>
                     <Tab eventKey="file" title="File Upload" style={style} disabled>
@@ -107,14 +90,12 @@ export default class extends React.Component {
                             ref="url"
                             value={this.state.url}
                             onChange={::this.handleURLChange}
-                            bsStyle={getValidationStyle(this.urlIsValid())}
-                            hasFeedback
                          />
                     </Tab>
                 </Tabs>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={::this.ok} disabled={!this.inputIsValid()}>OK</Button>
+                <Button onClick={::this.ok} disabled={!this.isValid()}>OK</Button>
                 <Button onClick={::this.cancel}>Cancel</Button>
             </Modal.Footer>
             </Modal>

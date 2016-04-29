@@ -1,7 +1,7 @@
 import React            from "react";
 import {Grid, Row, Col} from "react-bootstrap";
 
-import {OpenDialog, ScaleDialog, RotateDialog} from "./dialogs/dialogs.js";
+import {OpenDialog, TranslateDialog, ScaleDialog, RotateDialog} from "./dialogs/dialogs.js";
 
 import Menubar      from "./Menubar.jsx";
 import LeftSidebar  from "./LeftSidebar.jsx";
@@ -44,10 +44,11 @@ export default class extends React.Component {
                         }
                     </Row>
                 </Grid>
-                <OpenDialog   app={this.props.app} />
-                <ScaleDialog  app={this.props.app} />
-                <RotateDialog app={this.props.app} />
-                <AlertQueue   app={this.props.app} />
+                <OpenDialog      app={this.props.app} />
+                <TranslateDialog app={this.props.app} />
+                <ScaleDialog     app={this.props.app} />
+                <RotateDialog    app={this.props.app} />
+                <AlertQueue      app={this.props.app} />
             </div>
         );
     }

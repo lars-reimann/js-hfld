@@ -12,7 +12,9 @@ export default class extends React.Component {
 
     initState() {
         this.state = {
-            factor: ""
+            factor:  "",
+            centerX: "0",
+            centerY: "0"
         };
     }
 
@@ -22,14 +24,40 @@ export default class extends React.Component {
         });
     }
 
+    handleCenterXChange() {
+        this.setState({
+            centerX: this.refs.centerX.getValue()
+        });
+    }
+
+    handleCenterYChange() {
+        this.setState({
+            centerY: this.refs.centerY.getValue()
+        });
+    }
+
     factorIsValid() {
         return validators.isNumber(this.state.factor);
     }
 
+    centerXIsValid() {
+        return validators.isNumber(this.state.centerX);
+    }
+
+    centerYIsValid() {
+        return validators.isNumber(this.state.centerY);
+    }
+
+    isValid() {
+        return this.factorIsValid() && this.centerXIsValid() && this.centerYIsValid();
+    }
+
     ok() {
-        const factor = this.state.factor;
+        const factor  = Number(this.state.factor);
+        const centerX = Number(this.state.centerX);
+        const centerY = Number(this.state.centerY);
         this.initState();
-        actions.SUBMIT_SCALE_DIALOG(factor);
+        actions.SUBMIT_SCALE_DIALOG(factor, centerX, centerY);
     }
 
     cancel() {
@@ -55,10 +83,30 @@ export default class extends React.Component {
                             bsStyle={getValidationStyle(this.factorIsValid())}
                             hasFeedback
                         />
+                        <Input
+                            type="number"
+                            label="Center x-coordinate"
+                            value={this.state.centerX}
+                            placeholder="Enter a number..."
+                            ref="centerX"
+                            onChange={::this.handleCenterXChange}
+                            bsStyle={getValidationStyle(this.centerXIsValid())}
+                            hasFeedback
+                        />
+                        <Input
+                            type="number"
+                            label="Center y-coordinate"
+                            value={this.state.centerY}
+                            placeholder="Enter a number..."
+                            ref="centerY"
+                            onChange={::this.handleCenterYChange}
+                            bsStyle={getValidationStyle(this.centerYIsValid())}
+                            hasFeedback
+                        />
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={::this.ok} disabled={!this.factorIsValid()}>OK</Button>
+                    <Button onClick={::this.ok} disabled={!this.isValid()}>OK</Button>
                     <Button onClick={::this.cancel}>Cancel</Button>
                 </Modal.Footer>
             </Modal>

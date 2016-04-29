@@ -13,7 +13,7 @@ export default class extends React.Component {
         return (
             <div>
                 <h2>Source:</h2>
-                <pre><code>{this.writer.serialize(this.props.rdf.graph)}</code></pre>
+                <pre><code>{this.writer.serialize(this.props.rdf.graph, this.props.rdf.profile)}</code></pre>
             </div>
         );
     }

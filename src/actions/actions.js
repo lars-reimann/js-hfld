@@ -61,6 +61,7 @@ export default {
     "SUBMIT_OPEN_DIALOG":                 submitOpenDialog,
     "SHOW_SAVE_DIALOG":                   dialogAction("SHOW_SAVE_DIALOG"),
     "SHOW_CLOSE_DIALOG":                  dialogAction("SHOW_CLOSE_DIALOG"),
+    "SHOW_TRANSLATE_DIALOG":              dialogAction("SHOW_TRANSLATE_DIALOG"),
     "SHOW_SCALE_DIALOG":                  dialogAction("SHOW_SCALE_DIALOG"),
     "SUBMIT_SCALE_DIALOG":                submitScaleDialog,
     "SHOW_ROTATE_DIALOG":                 dialogAction("SHOW_ROTATE_DIALOG"),

@@ -16,6 +16,7 @@ export default class extends React.Component {
         case "SHOW_OPEN_DIALOG":
         case "SHOW_SAVE_DIALOG":
         case "SHOW_CLOSE_DIALOG":
+        case "SHOW_TRANSLATE_DIALOG":
         case "SHOW_SCALE_DIALOG":
         case "SHOW_ROTATE_DIALOG":
             return actions[eventKey](true);
@@ -55,6 +56,19 @@ export default class extends React.Component {
                             </MenuItem>
                         </NavDropdown>
                         <NavDropdown title="Layout" id="menubar-layout">
+                            <MenuItem eventKey="SHOW_RANDOM_LAYOUT">
+                                Random Layout...
+                            </MenuItem>
+                            <MenuItem eventKey="SHOW_EADES_LAYOUT">
+                                Eades Layout...
+                            </MenuItem>
+                            <MenuItem eventKey="SHOW_FRUCHTERMANN_LAYOUT">
+                                Fruchtermann Layout...
+                            </MenuItem>
+                            <MenuItem divider />
+                            <MenuItem eventKey="SHOW_TRANSLATE_DIALOG">
+                                Translate...
+                            </MenuItem>
                             <MenuItem eventKey="SHOW_SCALE_DIALOG">
                                 Scale...
                             </MenuItem>

@@ -21,7 +21,8 @@ class GraphStore extends Store {
             earlToRDF: {
                 nodes: new Tolkien1To1Map(),
                 edges: new Tolkien1To1Map()
-            }
+            },
+            layout:    new Map()
         };
     }
 
@@ -51,7 +52,7 @@ class GraphStore extends Store {
         const sourceId    = imported.get(subjectHash);
         const targetId    = imported.get(objectHash);
         if (sourceId && targetId) {
-            const edge        = new earl.Edge(sourceId, targetId);
+            const edge = new earl.Edge(sourceId, targetId);
             this.state.earl.addEdges(edge);
             this.state.earlToRDF.edges.add(edge.id, predicate.id);
         }
@@ -73,7 +74,6 @@ class GraphStore extends Store {
             case "PARSE_TURTLE":
                 dispatcher.waitFor([rdfToken]);
                 this.importRDFGraph();
-                console.log(this.state);
                 break;
         }
     }

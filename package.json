@@ -28,7 +28,8 @@
   "jspm": {
     "name": "@ignavia/hfld",
     "dependencies": {
-      "immutable": "^3.7.6"
+      "immutable": "^3.7.6",
+      "react-bootstrap": "^0.29.4"
     },
     "devDependencies": {
       "@ignavia/earl": "^1.2.2",
@@ -44,7 +45,6 @@
       "flux": "^2.1.1",
       "lodash": "^4.6.1",
       "plugin-babel": "systemjs-plugin-babel@^0.0.2",
-      "react-bootstrap": "^0.28.3",
       "systemjs-hot-reloader": "github:capaj/systemjs-hot-reloader@^0.5.6"
     },
     "peerDependencies": {
@@ -71,7 +71,7 @@
       "zlib": "github:jspm/nodelibs-zlib@^0.2.0-alpha"
     },
     "overrides": {
-      "github:components/jquery@2.2.1": {
+      "github:components/jquery@2.2.4": {
         "main": "jquery"
       },
       "github:twbs/bootstrap@3.3.6": {
@@ -123,28 +123,10 @@
           "_stream_transform": "readable-stream/transform"
         }
       },
-      "npm:esprima@2.7.2": {
-        "jspmNodeConversion": false
-      },
       "npm:inherits@2.0.1": {
         "ignore": [
           "test.js"
         ]
-      },
-      "npm:readable-stream@1.0.34": {
-        "map": {
-          "stream": "stream-browserify/index"
-        },
-        "systemjs": {
-          "main": "readable.js"
-        },
-        "dependencies": {
-          "core-util-is": "~1.0.0",
-          "isarray": "0.0.1",
-          "string_decoder": "~0.10.0",
-          "inherits": "~2.0.1",
-          "stream-browserify": "~1.0.0"
-        }
       }
     }
   }

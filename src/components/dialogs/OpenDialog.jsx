@@ -40,7 +40,7 @@ export default class extends React.Component {
         return true;
     }
 
-    ok() {
+    ok() { // TODO pass the selected tab and the content (needed for async)
         let s;
         switch (this.state.activeTab) {
         case "direct":

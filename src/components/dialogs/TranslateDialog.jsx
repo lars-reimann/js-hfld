@@ -1,5 +1,5 @@
 import React from "react";
-import {Modal, Input, Button} from "react-bootstrap";
+import {Modal, FormGroup, Input,FormControl, ControlLabel, Button} from "react-bootstrap";
 
 import actions                          from "../../actions/actions.js";
 import {validators, getValidationStyle} from "../../utils/utils.js";
@@ -17,15 +17,9 @@ export default class extends React.Component {
         };
     }
 
-    handleXChange() {
+    handleChange(field, e) {
         this.setState({
-            x: this.refs.x.getValue()
-        });
-    }
-
-    handleYChange() {
-        this.setState({
-            y: this.refs.y.getValue()
+            [field]: e.target.value
         });
     }
 
@@ -55,37 +49,37 @@ export default class extends React.Component {
 
     render() {
         return (
-            <Modal show={this.props.app.get("showTranslateDialog")} onHide={::this.cancel}>
+            <Modal show={this.props.app.get("showTranslateDialog")} onHide={() => this.cancel()}>
                 <Modal.Header closeButton>
                     <Modal.Title>Translate Dialog</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form>
-                        <Input
-                            type="number"
-                            label="x-coordinate"
-                            value={this.state.x}
-                            placeholder="Enter a number..."
-                            ref="x"
-                            onChange={::this.handleXChange}
-                            bsStyle={getValidationStyle(this.xIsValid())}
-                            hasFeedback
-                        />
-                        <Input
-                            type="number"
-                            label="y-coordinate"
-                            value={this.state.y}
-                            placeholder="Enter a number..."
-                            ref="y"
-                            onChange={::this.handleYChange}
-                            bsStyle={getValidationStyle(this.yIsValid())}
-                            hasFeedback
-                        />
+                        <FormGroup controlId="x" validationState={getValidationStyle(this.xIsValid())}>
+                            <ControlLabel>x-coordinate:</ControlLabel>
+                            <FormControl
+                                type="number"
+                                value={this.state.x}
+                                placeholder="Enter a number..."
+                                onChange={e => this.handleChange("x", e)}
+                            />
+                            <FormControl.Feedback />
+                        </FormGroup>
+                        <FormGroup controlId="y" validationState={getValidationStyle(this.yIsValid())}>
+                            <ControlLabel>y-coordinate:</ControlLabel>
+                            <FormControl
+                                type="number"
+                                value={this.state.y}
+                                placeholder="Enter a number..."
+                                onChange={e => this.handleChange("y", e)}
+                            />
+                            <FormControl.Feedback />
+                        </FormGroup>
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={::this.ok} disabled={!this.isValid()}>OK</Button>
-                    <Button onClick={::this.cancel}>Cancel</Button>
+                    <Button onClick={() => this.ok()} disabled={!this.isValid()}>OK</Button>
+                    <Button onClick={() => this.cancel()}>Cancel</Button>
                 </Modal.Footer>
             </Modal>
         );

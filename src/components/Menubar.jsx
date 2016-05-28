@@ -11,7 +11,7 @@ export default class extends React.Component {
         super(props);
     }
 
-    handleSelect(event, eventKey) {
+    handleSelect(eventKey, event) {
         switch (eventKey) {
         case "SHOW_OPEN_DIALOG":
         case "SHOW_SAVE_DIALOG":

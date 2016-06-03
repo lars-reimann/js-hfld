@@ -1,7 +1,7 @@
 import React            from "react";
 import {Grid, Row, Col} from "react-bootstrap";
 
-import {OpenDialog, TranslateDialog, ScaleDialog, RotateDialog} from "./dialogs/dialogs.js";
+import * as dialogs from "./dialogs/dialogs.js";
 
 import AlertQueue from "./alerts/AlertQueue.jsx";
 
@@ -44,10 +44,13 @@ export default class extends React.Component {
                         }
                     </Row>
                 </Grid>
-                <OpenDialog app={this.props.app} />
-                <TranslateDialog app={this.props.app} />
-                <ScaleDialog app={this.props.app} />
-                <RotateDialog app={this.props.app} />
+                <dialogs.EadesLayoutDialog        visible={this.props.dialogs.showEadesLayoutDialog} />
+                <dialogs.FruchtermannLayoutDialog visible={this.props.dialogs.showFruchtermannLayout} />
+                <dialogs.OpenDialog               visible={this.props.dialogs.showOpenDialog} />
+                <dialogs.RandomLayoutDialog       visible={this.props.dialogs.showRandomLayoutDialog} />
+                <dialogs.RotateDialog             visible={this.props.dialogs.showRotateDialog} />
+                <dialogs.ScaleDialog              visible={this.props.dialogs.showScaleDialog} />
+                <dialogs.TranslateDialog          visible={this.props.dialogs.showTranslateDialog} />
                 <AlertQueue alertMessages={[]} onDismiss={actions.dismissAlert}/>
             </div>
         );

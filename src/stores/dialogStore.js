@@ -27,7 +27,7 @@ class DialogStore extends MapStore {
             showEadesLayoutDialog:        false,
             showFruchtermannLayoutDialog: false,
             showOpenDialog:               false,
-            showRandomLayoutDialog:       false,
+            showRandomLayoutDialog:       true,
             showRotateDialog:             false,
             showScaleDialog:              false,
             showTranslateDialog:          false,

@@ -36,12 +36,10 @@ export default class extends React.Component {
         case "url":
             s = "";
         }
-        this.initState();
         actions.SUBMIT_OPEN_DIALOG(s);
     }
 
     cancel() {
-        this.initState();
         actions.SHOW_OPEN_DIALOG(false);
     }
 
@@ -60,7 +58,7 @@ export default class extends React.Component {
                     <Tab eventKey="direct" title="Direct Input" style={style}>
                          <FormGroup controlId="direct">
                             <FormControl
-                                type="textarea"
+                                componentClass="textarea"
                                 value={this.state.direct}
                                 placeholder="Enter turtle data..."
                                 onChange={e => this.handleChange(e)}

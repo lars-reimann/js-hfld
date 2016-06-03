@@ -31,13 +31,10 @@ export default class extends React.Component {
     /**
      * Handles user input.
      *
-     * @param {String} field
-     * The field that was changed.
-     *
      * @param {Event} e
      * The fired event.
      */
-    handleChange(field, e) {
+    handleChange(e) {
         this.setState({
             [e.target.id]: e.target.value
         });
@@ -101,7 +98,7 @@ export default class extends React.Component {
      */
     isValid() {
         return this.springForceCoefIsValid()     &&
-               this.repulsiveForceCoefIdValid()  &&
+               this.repulsiveForceCoefIsValid()  &&
                this.idealDistanceIsValid()       &&
                this.forceToDistanceCoefIsValid() &&
                this.nStepsIsValid();
@@ -147,7 +144,7 @@ export default class extends React.Component {
                         <FormGroup controlId="springForceCoef" validationState={getValidationStyle(this.springForceCoefIsValid())}>
                             <ControlLabel>
                                 <OverlayTrigger placement="right" overlay={
-                                    <Tooltip>The spring force between two adjacent nodes scales linearly with this parameter.</Tooltip>}>
+                                    <Tooltip id="springForceCoef-tooltip">The spring force between two adjacent nodes scales linearly with this parameter.</Tooltip>}>
                                     Spring Force Coefficient:
                                 </OverlayTrigger>
                             </ControlLabel>
@@ -162,7 +159,7 @@ export default class extends React.Component {
                         <FormGroup controlId="repulsiveForceCoef" validationState={getValidationStyle(this.repulsiveForceCoefIsValid())}>
                             <ControlLabel>
                                 <OverlayTrigger placement="right" overlay={
-                                    <Tooltip>The repulsive force between two non-adjacent nodes scales linearly with this parameter.</Tooltip>}>
+                                    <Tooltip id="repulsiveForceCoef-tooltip">The repulsive force between two non-adjacent nodes scales linearly with this parameter.</Tooltip>}>
                                     Repulsive Force Coefficient:
                                 </OverlayTrigger>
                             </ControlLabel>
@@ -177,7 +174,7 @@ export default class extends React.Component {
                         <FormGroup controlId="idealDistance" validationState={getValidationStyle(this.idealDistanceIsValid())}>
                             <ControlLabel>
                                 <OverlayTrigger placement="right" overlay={
-                                    <Tooltip>If the distance between two adjacent nodes equals this value, the force is 0.</Tooltip>}>
+                                    <Tooltip id="idealDistance-tooltip">If the distance between two adjacent nodes equals this value, the force is 0.</Tooltip>}>
                                     Ideal Distance:
                                 </OverlayTrigger>
                             </ControlLabel>
@@ -192,7 +189,7 @@ export default class extends React.Component {
                         <FormGroup controlId="forceToDistanceCoef" validationState={getValidationStyle(this.forceToDistanceCoefIsValid())}>
                             <ControlLabel>
                                 <OverlayTrigger placement="right" overlay={
-                                    <Tooltip>The conversion from a force to a translation scales linearly with this value.</Tooltip>}>
+                                    <Tooltip id="forceToDistance-tooltip">The conversion from a force to a translation scales linearly with this value.</Tooltip>}>
                                     Force-to-distance Coefficient:
                                 </OverlayTrigger>
                             </ControlLabel>

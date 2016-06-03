@@ -31,13 +31,10 @@ export default class extends React.Component {
     /**
      * Handles user input.
      *
-     * @param {String} field
-     * The field that was changed.
-     *
      * @param {Event} e
      * The fired event.
      */
-    handleChange(field, e) {
+    handleChange(e) {
         this.setState({
             [e.target.id]: e.target.value
         });

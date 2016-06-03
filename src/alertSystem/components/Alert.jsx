@@ -2,33 +2,40 @@ import React from "react";
 
 import {Alert} from "react-bootstrap";
 
-import actions from "../actions/actions.js";
+/**
+ * Computes how long the dialog should be visible. This is based in the
+ * message length.
+ *
+ * @param {String} message
+ * The message to display.
+ *
+ * @return {Number}
+ * After how many milliseconds the alert should be dismissed.
+ */
+function getDuration(message) {
+    return 2000 + message.length * 50;
+}
 
-export default class extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    /**
-     * Computes how long the dialog should be visible. This is based in the
-     * message length.
-     *
-     * @return {Number}
-     * After how many milliseconds the alert should be dismissed.
-     */
-    getDuration() {
-        return 2000 + this.props.message.length * 50;
-    }
-
-    handleDismiss() {
-        actions.DEQUEUE_ALERT();
-    }
-
-    render() {
-        return (
-            <Alert bsStyle={this.props.type} onDismiss={::this.handleDismiss} dismissAfter={this.getDuration()}>
-                <p>{this.props.message}</p>
-            </Alert>
-        );
-    }
+/**
+ * Renders the component.
+ *
+ * @param {Object} props
+ * The props to use.
+ *
+ * @param {String} type
+ * The type of the alert. This is one of "info", "success", "warning" or
+ * "error".
+ *
+ * @param {String} message
+ * The message to display.
+ *
+ * @param {Function} onDismiss
+ * The function to call to dismiss an alert.
+ */
+export default function ({type, message, onDismiss}) {
+    return (
+        <Alert bsStyle={type} onDismiss={onDismiss} dismissAfter={getDuration(message)}>
+            <p>{message}</p>
+        </Alert>
+    );
 }

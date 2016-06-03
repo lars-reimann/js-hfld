@@ -1,9 +1,7 @@
-export default {
-    isNumber(s) {
-        return !Number.isNaN(Number.parseFloat(s));
-    },
+export function isNumber(s) {
+    return !Number.isNaN(Number.parseFloat(s));
+}
 
-    nonEmpty(s) {
-        return s !== "";
-    }
-};
+export function nonEmpty(s) {
+    return s !== "";
+}

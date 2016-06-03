@@ -1,4 +1,4 @@
-export validators from "./validators.js";
+export * as validators from "./validators.js";
 
 export function getValidationStyle(b) {
     return b ? "success" : "error";

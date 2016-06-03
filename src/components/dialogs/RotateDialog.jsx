@@ -27,9 +27,9 @@ export default class extends React.Component {
      */
     getInitialState() {
         return {
-            angle:  "1",
+            angle:  "0",
             centerX: "0",
-            centerY: "0"
+            centerY: "0",
         };
     }
 

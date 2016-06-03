@@ -29,7 +29,7 @@ export default class extends React.Component {
         return {
             factor:  "1",
             centerX: "0",
-            centerY: "0"
+            centerY: "0",
         };
     }
 

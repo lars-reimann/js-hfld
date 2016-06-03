@@ -1,113 +1,181 @@
-import React from "react";
-import {Modal, Input, Button} from "react-bootstrap";
+import React                                                 from "react";
+import {Modal, FormGroup, ControlLabel, FormControl, Button} from "react-bootstrap";
 
-import actions                          from "../../actions/actions.js";
+import * as actions                     from "../../actions/actions.js";
 import {validators, getValidationStyle} from "../../utils/utils.js";
 
+/**
+ * The dialog shown to the user when he wants to scale the layout.
+ */
 export default class extends React.Component {
+
+    /**
+     * @param {Object} props
+     * The props to use.
+     *
+     * @param {Boolean} props.visible
+     * Whether to show the dialog.
+     */
     constructor(props) {
         super(props);
-        this.initState();
     }
 
-    initState() {
-        this.state = {
-            factor:  "",
-            centerX: "0",
-            centerY: "0"
+    /**
+     * Initializes the state.
+     */
+    getInitialState() {
+        return {
+            minX: "0",
+            minY: "0",
+            maxX: "1",
+            maxY: "1",
         };
     }
 
-    handleFactorChange() {
+    /**
+     * Handles user input.
+     *
+     * @param {String} field
+     * The field that was changed.
+     *
+     * @param {Event} e
+     * The fired event.
+     */
+    handleChange(field, e) {
         this.setState({
-            factor: this.refs.factor.getValue()
+            [e.target.id]: e.target.value
         });
     }
 
-    handleCenterXChange() {
-        this.setState({
-            centerX: this.refs.centerX.getValue()
-        });
+    /**
+     * Checks if the entered minimum x-coordinate is valid.
+     *
+     * @return {Boolean}
+     * Whether the minimum x-coordinate is valid.
+     */
+    minXIsValid() {
+        return validators.isNumber(this.state.minX);
     }
 
-    handleCenterYChange() {
-        this.setState({
-            centerY: this.refs.centerY.getValue()
-        });
+    /**
+     * Checks if the entered minimum y-coordinate is valid.
+     *
+     * @return {Boolean}
+     * Whether the minimum y-coordinate is valid.
+     */
+    minYIsValid() {
+        return validators.isNumber(this.state.minY);
     }
 
-    factorIsValid() {
-        return validators.isNumber(this.state.factor);
+    /**
+     * Checks if the entered maximum x-coordinate is valid.
+     *
+     * @return {Boolean}
+     * Whether the maximum x-coordinate is valid.
+     */
+    maxXIsValid() {
+        return validators.isNumber(this.state.maxX);
     }
 
-    centerXIsValid() {
-        return validators.isNumber(this.state.centerX);
+    /**
+     * Checks if the entered maximum y-coordinate is valid.
+     *
+     * @return {Boolean}
+     * Whether the maximum y-coordinate is valid.
+     */
+    maxYIsValid() {
+        return validators.isNumber(this.state.maxY);
     }
 
-    centerYIsValid() {
-        return validators.isNumber(this.state.centerY);
-    }
-
+    /**
+     * Checks if all entered values are valid.
+     *
+     * @return {Boolean}
+     * Whether all values are valid.
+     */
     isValid() {
-        return this.factorIsValid() && this.centerXIsValid() && this.centerYIsValid();
+        return this.minXIsValid() &&
+               this.minYIsValid() &&
+               this.maxXIsValid() &&
+               this.maxYIsValid();
     }
 
+    /**
+     * Submits the dialog.
+     */
     ok() {
-        const factor  = Number(this.state.factor);
-        const centerX = Number(this.state.centerX);
-        const centerY = Number(this.state.centerY);
-        this.initState();
-        actions.SUBMIT_SCALE_DIALOG(factor, centerX, centerY);
+        const minX = Number(this.state.minX);
+        const minY = Number(this.state.minY);
+        const maxX = Number(this.state.maxX);
+        const maxY = Number(this.state.maxY);
+        actions.randomLayout({ minX, minY, maxX, maxY });
+        actions.setDialogVisibility("randomLayout");
     }
 
+    /**
+     * Closes the dialog.
+     */
     cancel() {
-        this.initState();
-        actions.SHOW_SCALE_DIALOG(false);
+        actions.setDialogVisibility("randomLayout", false);
     }
 
+    /**
+     * Renders this component.
+     */
     render() {
         return (
-            <Modal show={this.props.app.get("showScaleDialog")} onHide={::this.cancel}>
+            <Modal show={this.props.visible} onHide={() => this.cancel()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Scale Dialog</Modal.Title>
+                    <Modal.Title>Random Layout Dialog</Modal.Title>
+                    <p>The top-left corner of the screen is (0, 0) and the bottom-right corner is (1, 1).</p>
                 </Modal.Header>
                 <Modal.Body>
                     <form>
-                        <Input
-                            type="number"
-                            label="Factor"
-                            value={this.state.factor}
-                            placeholder="Enter a number..."
-                            ref="factor"
-                            onChange={::this.handleFactorChange}
-                            bsStyle={getValidationStyle(this.factorIsValid())}
-                            hasFeedback
-                        />
-                        <Input
-                            type="number"
-                            label="Center x-coordinate"
-                            value={this.state.centerX}
-                            placeholder="Enter a number..."
-                            ref="centerX"
-                            onChange={::this.handleCenterXChange}
-                            bsStyle={getValidationStyle(this.centerXIsValid())}
-                            hasFeedback
-                        />
-                        <Input
-                            type="number"
-                            label="Center y-coordinate"
-                            value={this.state.centerY}
-                            placeholder="Enter a number..."
-                            ref="centerY"
-                            onChange={::this.handleCenterYChange}
-                            bsStyle={getValidationStyle(this.centerYIsValid())}
-                            hasFeedback
-                        />
+                        <FormGroup controlId="minX" validationState={getValidationStyle(this.minXIsValid())}>
+                            <ControlLabel>Minimum x-coordinate:</ControlLabel>
+                            <FormControl
+                                type="number"
+                                value={this.state.minX}
+                                placeholder="Enter a number..."
+                                onChange={e => this.handleChange(e)}
+                            />
+                            <FormControl.Feedback />
+                        </FormGroup>
+                        <FormGroup controlId="minY" validationState={getValidationStyle(this.minYIsValid())}>
+                            <ControlLabel>Minimum y-coordinate:</ControlLabel>
+                            <FormControl
+                                type="number"
+                                value={this.state.minY}
+                                placeholder="Enter a number..."
+                                onChange={e => this.handleChange(e)}
+                            />
+                            <FormControl.Feedback />
+                        </FormGroup>
+                        <FormGroup controlId="maxX" validationState={getValidationStyle(this.maxXIsValid())}>
+                            <ControlLabel>Maximum x-coordinate:</ControlLabel>
+                            <FormControl
+                                type="number"
+                                value={this.state.maxX}
+                                placeholder="Enter a number..."
+                                onChange={e => this.handleChange(e)}
+                            />
+                            <FormControl.Feedback />
+                        </FormGroup>
+                        <FormGroup controlId="maxY" validationState={getValidationStyle(this.maxYIsValid())}>
+                            <ControlLabel>Maximum y-coordinate:</ControlLabel>
+                            <FormControl
+                                type="number"
+                                value={this.state.maxY}
+                                placeholder="Enter a number..."
+                                onChange={e => this.handleChange(e)}
+                            />
+                            <FormControl.Feedback />
+                        </FormGroup>
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={::this.ok} disabled={!this.isValid()}>OK</Button>
-                    <Button onClick={::this.cancel}>Cancel</Button>
+                    <Button onClick={() => this.ok()} disabled={!this.isValid()}>OK</Button>
+                    <Button onClick={() => this.cancel()}>Cancel</Button>
                 </Modal.Footer>
             </Modal>
         );

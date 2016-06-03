@@ -28,7 +28,7 @@ export default class extends React.Component {
     getInitialState() {
         return {
             x: "0",
-            y: "0"
+            y: "0",
         };
     }
 

@@ -17,6 +17,8 @@ export function setDialogVisibility(dialog, show) {
     });
 }
 
+// TODO: remove  v---------------------------v
+
 export function submitOpenDialog(content) {
     dispatcher.dispatch({ type: "SUBMIT_OPEN_DIALOG", content });
     parseTurtle(content);

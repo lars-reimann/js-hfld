@@ -1,7 +1,7 @@
 import {ReduceStore} from "flux/utils";
 import Immutable     from "immutable";
 
-import dispatcher from "../dispatcher/alertDispatcher.js";
+import dispatcher from "../dispatcher/dispatcher.js";
 
 /**
  * Stores the state of the dialogs.

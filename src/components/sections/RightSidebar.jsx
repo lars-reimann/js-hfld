@@ -8,7 +8,7 @@ export default class extends React.Component {
 
     render() {
         return (
-            <Tabs defaultActiveKey={1}>
+            <Tabs defaultActiveKey={1} id="right-sidebar-info">
                 <Tab eventKey={1} title="Literals">
                     Literals...
                 </Tab>

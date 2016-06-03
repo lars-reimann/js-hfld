@@ -22,20 +22,6 @@ class AppStore extends MapStore {
 
     reduce(state, action) {
         switch (action.type) {
-        case "SHOW_OPEN_DIALOG":
-            return state.set("showOpenDialog", action.show);
-        case "SUBMIT_OPEN_DIALOG":
-            return state.set("showOpenDialog", false);
-        case "SHOW_TRANSLATE_DIALOG":
-            return state.set("showTranslateDialog", action.show);
-        case "SHOW_SCALE_DIALOG":
-            return state.set("showScaleDialog", action.show);
-        case "SUBMIT_SCALE_DIALOG":
-            return state.set("showScaleDialog", false);
-        case "SHOW_ROTATE_DIALOG":
-            return state.set("showRotateDialog", action.show);
-        case "SUBMIT_ROTATE_DIALOG":
-            return state.set("showRotateDialog", false);
         case "CHANGE_VIEWPORT":
             return state.set("viewport", action.viewport);
         case "TOGGLE_PERMANENT_MENUBAR":

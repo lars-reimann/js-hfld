@@ -1,6 +1,6 @@
 import {IDGenerator} from "@ignavia/util";
 
-import dispatcher from "../dispatcher/alertDispatcher.js";
+import dispatcher from "../dispatcher/dispatcher.js";
 
 /**
  * An alert message to display.

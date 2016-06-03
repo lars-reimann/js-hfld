@@ -24,14 +24,24 @@ class DialogStore extends MapStore {
      */
     getInitialState() {
         return Immutable.Map({
-            showOpenDialog:               false,
             showEadesLayoutDialog:        false,
             showFruchtermannLayoutDialog: false,
+            showOpenDialog:               false,
             showRandomLayoutDialog:       false,
             showRotateDialog:             false,
             showScaleDialog:              false,
             showTranslateDialog:          false,
         });
+    }
+
+    /**
+     * Returns an object with the dialog state.
+     *
+     * @return {Object}
+     * The state of the dialogs.
+     */
+    getState() {
+        return super.getState().toObject();
     }
 
     /**
@@ -48,12 +58,12 @@ class DialogStore extends MapStore {
      */
     setDialogVisibility(state, {dialog, show}) {
         switch (dialog) {
-        case "open":
-            return state.set("showOpenDialog", show);
         case "eadesLayout":
             return state.set("showEadesLayoutDialog", show);
         case "fruchtermannLayout":
             return state.set("showFruchtermannLayoutDialog", show);
+        case "open":
+            return state.set("showOpenDialog", show);
         case "randomLayout":
             return state.set("showRandomLayoutDialog", show);
         case "rotate":
@@ -62,6 +72,8 @@ class DialogStore extends MapStore {
             return state.set("showScaleDialog", show);
         case "translate":
             return state.set("showTranslateDialogs", show);
+        default:
+            return state;
         }
     }
 

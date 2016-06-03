@@ -8,10 +8,6 @@ class AppStore extends MapStore {
         super(dispatcher);
 
         this._state = this._state
-            .set("showOpenDialog", false)
-            .set("showTranslateDialog", false)
-            .set("showScaleDialog", false)
-            .set("showRotateDialog", false)
             .set("viewport", "graphical")
             .set("permanentMenubar", true)
             .set("permanentLeftSidebar", false)

@@ -17,12 +17,8 @@ const style = {
  * @param {Object} props
  * The props to use.
  *
- * @param {String} type
- * The type of the alert. This is one of "info", "success", "warning" or
- * "error".
- *
- * @param {String} message
- * The message to display.
+ * @param {Array} props.alertMessages
+ * The alert messages to display.
  *
  * @param {Function} props.onDismiss
  * The function to call to dismiss an alert.

@@ -1,55 +1,105 @@
-import React from "react";
-import {Modal, FormGroup, Input,FormControl, ControlLabel, Button} from "react-bootstrap";
+import React                                                 from "react";
+import {Modal, FormGroup, ControlLabel, FormControl, Button} from "react-bootstrap";
 
-import actions                          from "../../actions/actions.js";
+import {Vec2} from "@ignavia/ella";
+
+import * as actions                     from "../../actions/actions.js";
 import {validators, getValidationStyle} from "../../utils/utils.js";
 
+/**
+ * The dialog shown to the user when he wants to move the layout.
+ */
 export default class extends React.Component {
+
+    /**
+     * @param {Object} props
+     * The props to use.
+     *
+     * @param {Boolean} props.visible
+     * Whether to show this dialog.
+     */
     constructor(props) {
         super(props);
-        this.initState();
     }
 
-    initState() {
-        this.state = {
-            centerX: "",
-            centerY: ""
+    /**
+     * Initializes the state.
+     */
+    getInitialState() {
+        return {
+            x: "0",
+            y: "0"
         };
     }
 
+    /**
+     * Handles user input.
+     *
+     * @param {String} field
+     * The field that was changed.
+     *
+     * @param {Event} e
+     * The fired event.
+     */
     handleChange(field, e) {
         this.setState({
             [field]: e.target.value
         });
     }
 
+    /**
+     * Checks if the entered x-coordinate is valid.
+     *
+     * @return {Boolean}
+     * Whether the x-coordinate is valid.
+     */
     xIsValid() {
         return validators.isNumber(this.state.x);
     }
 
+    /**
+     * Checks if the entered y-coordinate is valid.
+     *
+     * @return {Boolean}
+     * Whether the y-coordinate is valid.
+     */
     yIsValid() {
         return validators.isNumber(this.state.y);
     }
 
+    /**
+     * Checks if all entered values are valid.
+     *
+     * @return {Boolean}
+     * Whether all values are valid.
+     */
     isValid() {
         return this.xIsValid() && this.yIsValid();
     }
 
+    /**
+     * Submits the dialog.
+     */
     ok() {
         const x = Number(this.state.x);
         const y = Number(this.state.y);
-        this.initState();
-        actions.SUBMIT_TRANSLATE_DIALOG(x, y);
+        actions.translateLayout(new Vec2(x, y));
+        actions.setDialogVisibility("translate", false);
     }
 
+    /**
+     * Closes the dialog.
+     */
     cancel() {
-        this.initState();
-        actions.SHOW_TRANSLATE_DIALOG(false);
+        actions.setDialogVisibility("translate", false);
     }
 
+    /**
+     * Renders this component.
+     */
     render() {
         return (
-            <Modal show={this.props.app.get("showTranslateDialog")} onHide={() => this.cancel()}>
+            <Modal show={this.props.visible} onHide={() => this.cancel()}>
                 <Modal.Header closeButton>
                     <Modal.Title>Translate Dialog</Modal.Title>
                 </Modal.Header>

@@ -23,8 +23,8 @@ export function randomLayout(conf) {
  * @param {Vec2} center
  * The point to rotate around.
  */
-export function rotate(angle, center) {
-    dispatcher.dispatch({ type: "ROTATE", angle });
+export function rotateLayout(angle, center) {
+    dispatcher.dispatch({ type: "ROTATE", angle, center });
 }
 
 /**
@@ -36,7 +36,7 @@ export function rotate(angle, center) {
  * @param {Vec2} center
  * Where to start the scaling.
  */
-export function scale(factor, center) {
+export function scaleLayout(factor, center) {
     dispatcher.dispatch({ type: "SCALE", factor, center });
 }
 
@@ -46,6 +46,6 @@ export function scale(factor, center) {
  * @param {Vec2} vec
  * The vector to add to the current positions.
  */
-export function translate(vec) {
+export function translateLayout(vec) {
     dispatcher.dispatch({ type: "TRANSLATE", vec });
 }

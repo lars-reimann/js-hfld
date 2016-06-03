@@ -13,7 +13,7 @@ class AppStore extends MapStore {
             .set("permanentLeftSidebar", false)
             .set("permanentRightSidebar", false)
             .set("shrinkNodeValuesInTable", true)
-            .set("tableSorting", {column: "subject", order: "asc"})
+            .set("tableSorting", {column: "subject", order: "asc"});
     }
 
     toggle(state, key) {

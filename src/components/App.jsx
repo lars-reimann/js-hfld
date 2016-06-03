@@ -45,7 +45,7 @@ export default class extends React.Component {
                     </Row>
                 </Grid>
                 <dialogs.EadesLayoutDialog        visible={this.props.dialogs.showEadesLayoutDialog} />
-                <dialogs.FruchtermannLayoutDialog visible={this.props.dialogs.showFruchtermannLayout} />
+                <dialogs.FruchtermannLayoutDialog visible={this.props.dialogs.showFruchtermannLayoutDialog} />
                 <dialogs.OpenDialog               visible={this.props.dialogs.showOpenDialog} />
                 <dialogs.RandomLayoutDialog       visible={this.props.dialogs.showRandomLayoutDialog} />
                 <dialogs.RotateDialog             visible={this.props.dialogs.showRotateDialog} />

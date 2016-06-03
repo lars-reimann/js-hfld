@@ -120,14 +120,14 @@ export default class extends React.Component {
             forceToDistanceCoef,
             nSteps
         });
-        actions.setDialogVisibility("eadesLayout");
+        actions.setDialogVisibility("fruchtermannLayout", false);
     }
 
     /**
      * Closes the dialog.
      */
     cancel() {
-        actions.setDialogVisibility("eadesLayout", false);
+        actions.setDialogVisibility("fruchtermannLayout", false);
     }
 
     /**
@@ -137,15 +137,15 @@ export default class extends React.Component {
         return (
             <Modal show={this.props.visible} onHide={() => this.cancel()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Eades Layout Dialog</Modal.Title>
+                    <Modal.Title>Fruchtermann-Layout Dialog</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form>
                         <FormGroup controlId="springForceCoef" validationState={getValidationStyle(this.springForceCoefIsValid())}>
                             <ControlLabel>
                                 <OverlayTrigger placement="right" overlay={
-                                    <Tooltip>The spring force between two adjacent nodes scales linearly with this parameter.</Tooltip>}>
-                                    Spring Force Coefficient:
+                                    <Tooltip id="springForceCoef-tooltip">The spring force between two adjacent nodes scales linearly with this parameter.</Tooltip>}>
+                                    <span>Spring Force Coefficient:</span>
                                 </OverlayTrigger>
                             </ControlLabel>
                             <FormControl
@@ -159,8 +159,8 @@ export default class extends React.Component {
                         <FormGroup controlId="repulsiveForceCoef" validationState={getValidationStyle(this.repulsiveForceCoefIsValid())}>
                             <ControlLabel>
                                 <OverlayTrigger placement="right" overlay={
-                                    <Tooltip>The repulsive force between two non-adjacent nodes scales linearly with this parameter.</Tooltip>}>
-                                    Repulsive Force Coefficient:
+                                    <Tooltip id="repulsiveForceCoef-tooltip">The repulsive force between two non-adjacent nodes scales linearly with this parameter.</Tooltip>}>
+                                    <span>Repulsive Force Coefficient:</span>
                                 </OverlayTrigger>
                             </ControlLabel>
                             <FormControl
@@ -174,8 +174,8 @@ export default class extends React.Component {
                         <FormGroup controlId="idealDistance" validationState={getValidationStyle(this.idealDistanceIsValid())}>
                             <ControlLabel>
                                 <OverlayTrigger placement="right" overlay={
-                                    <Tooltip>If the distance between two adjacent nodes equals this value, the force is 0.</Tooltip>}>
-                                    Ideal Distance:
+                                    <Tooltip id="idealDistance-tooltip">If the distance between two adjacent nodes equals this value, the force is 0.</Tooltip>}>
+                                    <span>Ideal Distance:</span>
                                 </OverlayTrigger>
                             </ControlLabel>
                             <FormControl
@@ -189,8 +189,8 @@ export default class extends React.Component {
                         <FormGroup controlId="forceToDistanceCoef" validationState={getValidationStyle(this.forceToDistanceCoefIsValid())}>
                             <ControlLabel>
                                 <OverlayTrigger placement="right" overlay={
-                                    <Tooltip>The conversion from a force to a translation scales linearly with this value.</Tooltip>}>
-                                    Force-to-distance Coefficient:
+                                    <Tooltip id="forceToDistance-tooltip">The conversion from a force to a translation scales linearly with this value.</Tooltip>}>
+                                    <span>Force-to-distance Coefficient:</span>
                                 </OverlayTrigger>
                             </ControlLabel>
                             <FormControl
@@ -221,5 +221,3 @@ export default class extends React.Component {
         );
     }
 }
-
-// TODO

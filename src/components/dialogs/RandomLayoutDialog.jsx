@@ -19,6 +19,11 @@ export default class extends React.Component {
     constructor(props) {
         super(props);
 
+        /**
+         * The initial state.
+         *
+         * @type {Object}
+         */
         this.state = {
             minX: "0",
             minY: "0",
@@ -101,7 +106,7 @@ export default class extends React.Component {
         const maxX = Number(this.state.maxX);
         const maxY = Number(this.state.maxY);
         actions.randomLayout({ minX, minY, maxX, maxY });
-        actions.setDialogVisibility("randomLayout");
+        actions.setDialogVisibility("randomLayout", false);
     }
 
     /**

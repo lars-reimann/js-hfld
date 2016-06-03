@@ -88,14 +88,14 @@ export default class extends React.Component {
         const centerX = Number(this.state.centerX);
         const centerY = Number(this.state.centerY);
         actions.rotateLayout(angle, new Vec2(centerX, centerY));
-        actions.setDialogVisibility("scale", false);
+        actions.setDialogVisibility("rotate", false);
     }
 
     /**
      * Closes the dialog.
      */
     cancel() {
-        actions.setDialogVisibility("scale", false);
+        actions.setDialogVisibility("rotate", false);
     }
 
     /**
@@ -105,7 +105,8 @@ export default class extends React.Component {
         return (
             <Modal show={this.props.visible} onHide={() => this.cancel()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Scale Dialog</Modal.Title>
+                    <Modal.Title>Rotate Dialog</Modal.Title>
+                    <p>The top-left corner of the screen is (0, 0) and the bottom-right corner is (1, 1).</p>
                 </Modal.Header>
                 <Modal.Body>
                     <form>

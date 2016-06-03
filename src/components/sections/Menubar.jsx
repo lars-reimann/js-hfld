@@ -1,7 +1,7 @@
 import React from "react";
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem, Glyphicon} from "react-bootstrap";
 
-import actions from "../../actions/actions.js";
+import * as actions from "../../actions/actions.js";
 
 import {BlankGlyphicon, ToggleGlyphicon} from "../glyphicons/glyphicons.js";
 
@@ -10,15 +10,26 @@ export default class extends React.Component {
         super(props);
     }
 
-    handleSelect(eventKey, event) {
+    handleSelect(eventKey) {
         switch (eventKey) {
         case "SHOW_OPEN_DIALOG":
+            return actions.setDialogVisibility("open", true);
         case "SHOW_SAVE_DIALOG":
+            return actions.setDialogVisibility("save", true);
         case "SHOW_CLOSE_DIALOG":
+            return actions.setDialogVisibility("close", true);
+        case "SHOW_RANDOM_LAYOUT_DIALOG":
+            return actions.setDialogVisibility("randomLayout", true);
+        case "SHOW_EADES_LAYOUT_DIALOG":
+            return actions.setDialogVisibility("eadesLayout", true);
+        case "SHOW_FRUCHTERMANN_LAYOUT_DIALOG":
+            return actions.setDialogVisibility("fruchtermannLayout", true);
         case "SHOW_TRANSLATE_DIALOG":
+            return actions.setDialogVisibility("translate", true);
         case "SHOW_SCALE_DIALOG":
+            return actions.setDialogVisibility("scale", true);
         case "SHOW_ROTATE_DIALOG":
-            return actions[eventKey](true);
+            return actions.setDialogVisibility("rotate", true);
         case "SOURCE_VIEW":
             return actions.CHANGE_VIEWPORT("source");
         case "TABLE_VIEW":
@@ -41,7 +52,7 @@ export default class extends React.Component {
                     <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>
-                    <Nav onSelect={::this.handleSelect}>
+                    <Nav onSelect={(key) => this.handleSelect(key)}>
                         <NavDropdown title="File" id="menubar-file">
                             <MenuItem eventKey="SHOW_OPEN_DIALOG">
                                 Open...
@@ -55,13 +66,13 @@ export default class extends React.Component {
                             </MenuItem>
                         </NavDropdown>
                         <NavDropdown title="Layout" id="menubar-layout">
-                            <MenuItem eventKey="SHOW_RANDOM_LAYOUT">
+                            <MenuItem eventKey="SHOW_RANDOM_LAYOUT_DIALOG">
                                 Random Layout...
                             </MenuItem>
-                            <MenuItem eventKey="SHOW_EADES_LAYOUT">
+                            <MenuItem eventKey="SHOW_EADES_LAYOUT_DIALOG">
                                 Eades Layout...
                             </MenuItem>
-                            <MenuItem eventKey="SHOW_FRUCHTERMANN_LAYOUT">
+                            <MenuItem eventKey="SHOW_FRUCHTERMANN_LAYOUT_DIALOG">
                                 Fruchtermann Layout...
                             </MenuItem>
                             <MenuItem divider />

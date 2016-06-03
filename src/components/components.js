@@ -11,3 +11,4 @@ export SourceView     from "./SourceView.jsx";
 export TableView      from "./TableView.jsx";
 export Viewport       from "./Viewport.jsx";
 export *              from "./dialogs/dialogs.js";
+export *              from "./glyphicons/glyphicons.js";

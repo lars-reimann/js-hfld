@@ -3,11 +3,13 @@ import {Grid, Row, Col} from "react-bootstrap";
 
 import {OpenDialog, TranslateDialog, ScaleDialog, RotateDialog} from "./dialogs/dialogs.js";
 
+import AlertQueueWrapper from "../alertSystem/containers/AlertQueueWrapper.jsx";
+
 import Menubar      from "./Menubar.jsx";
 import LeftSidebar  from "./LeftSidebar.jsx";
 import Viewport     from "./Viewport.jsx";
 import RightSidebar from "./RightSidebar.jsx";
-import AlertQueue   from "./AlertQueue.jsx";
+
 
 export default class extends React.Component {
     constructor(props) {
@@ -48,7 +50,7 @@ export default class extends React.Component {
                 <TranslateDialog app={this.props.app} />
                 <ScaleDialog     app={this.props.app} />
                 <RotateDialog    app={this.props.app} />
-                <AlertQueue      app={this.props.app} />
+                <AlertQueueWrapper />
             </div>
         );
     }

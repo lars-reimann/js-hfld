@@ -18,7 +18,6 @@ class AppStore extends MapStore {
             .set("permanentRightSidebar", false)
             .set("shrinkNodeValuesInTable", true)
             .set("tableSorting", {column: "subject", order: "asc"})
-            .set("alerts", new List());
     }
 
     toggle(state, key) {
@@ -51,10 +50,6 @@ class AppStore extends MapStore {
             return this.toggle(state, "permanentRightSidebar");
         case "TOGGLE_SHRINK_NODE_VALUES_IN_TABLE":
             return this.toggle(state, "shrinkNodeValuesInTable");
-        case "ENQUEUE_ALERT":
-            return state.set("alerts", state.get("alerts").push(action.alert));
-        case "DEQUEUE_ALERT":
-            return state.set("alerts", state.get("alerts").shift());
         case "SET_TABLE_SORTING":
             return state.set("tableSorting", action.sorting);
         default:

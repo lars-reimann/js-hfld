@@ -1,20 +1,101 @@
 import dispatcher from "../dispatcher/dispatcher.js";
 
-import * as rdf from "@ignavia/rdf";
+import * as rdf      from "@ignavia/rdf";
 import {IDGenerator} from "@ignavia/util";
 
-const alertIDGenerator = new IDGenerator("a");
+
+
+// App ------------------------------------------------------------------------
+
+export function changeViewport(viewport) {
+    dispatcher.dispatch({ type: "CHANGE_VIEWPORT", viewport });
+}
+
+export function permanentMenubar(enabled) {
+    dispatcher.dispatch({ type: "PERMANENT_MENUBAR", enabled });
+}
+
+export function permanentLeftSidebar(enabled) {
+    dispatcher.dispatch({ type: "PERMANENT_LEFT_SIDEBAR", enabled });
+}
+
+export function permanentRightSidebar(enabled) {
+    dispatcher.dispatch({ type: "PERMANENT_RIGHT_SIDEBAR", enabled });
+}
+
+export function shrinkNodeValuesInTable(enabled) {
+    dispatcher.dispatch({ type: "SHRINK_NODE_VALUES_IN_TABLE", enabled });
+}
+
+export function setTableSorting(sorting) {
+    dispatcher.dispatch({ type: "SET_TABLE_SORTING", sorting});
+}
+
+/**
+ * An alert message to display.
+ */
 class Alert {
+
+    /**
+     * @param {String} type
+     * The type of the alert. This is one of "info", "success", "warning" or
+     * "error".
+     *
+     * @param {String} message
+     * The message to display.
+     */
     constructor(type, message) {
+
+        /**
+         * The type of the alert.
+         *
+         * @type {String}
+         */
         this.type = type;
 
+        /**
+         * The message to display.
+         *
+         * @type {String}
+         */
         this.message = message;
 
-        this.id = alertIDGenerator.next();
+        /**
+         * The ID of the alert.
+         *
+         * @type {String}
+         */
+        this.id = Alert.idGenerator.next();
     }
+}
+Alert.idGenerator = new IDGenerator("a");
+
+export function enqueueAlert(type, message) {
+    dispatcher.dispatch({ type: "ENQUEUE_ALERT", alert: new Alert(type, message) });
+}
+
+export function dequeueAlert() {
+    dispatcher.dispatch({ type: "DEQUEUE_ALERT" });
 }
 
 // Dialog ---------------------------------------------------------------------
+
+/**
+ * Sets the visibility of the given dialog.
+ *
+ * @param {String} dialog
+ * The dialog to set the visibility for.
+ *
+ * @param {Boolean} show
+ * Whether to show the dialog.
+ */
+export function setDialogVisibility(dialog, show) {
+    dispatcher.dispatch({
+        type: "SET_DIALOG_VISIBILITY",
+        dialog,
+        show
+    });
+}
 
 export function submitOpenDialog(content) {
     dispatcher.dispatch({ type: "SUBMIT_OPEN_DIALOG", content });
@@ -66,7 +147,16 @@ export function randomLayout(conf) {
     dispatcher.dispatch({ type: "RANDOM_LAYOUT", conf});
 }
 
-export function rotate(angle) {
+/**
+ * Rotates the layout aorund the given point by the angle.
+ *
+ * @param {Number} angle
+ * How far to rotate.
+ *
+ * @param {Vec2} center
+ * The point to rotate around.
+ */
+export function rotate(angle, center) {
     dispatcher.dispatch({ type: "ROTATE", angle });
 }
 
@@ -93,89 +183,13 @@ export function translate(vec) {
     dispatcher.dispatch({ type: "TRANSLATE", vec });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-// Make actions for rotate, scale, open_file etc, not for the dialogs
-
-/**
- * Sets the visibility of the given dialog.
- *
- * @param {String} dialog
- * The dialog to set the visibility for.
- *
- * @param {Boolean} show
- * Whether to show the dialog.
- */
-export function setDialogVisibility(dialog, show) {
-    dispatcher.dispatch({
-        type: "SET_DIALOG_VISIBILITY",
-        dialog,
-        show
-    });
-}
-
-
-
-function simpleAction(type) {
-    return () => dispatcher.dispatch({ type });
-}
-
-function dialogAction(type) {
-    return show => dispatcher.dispatch({ type, show });
-}
+// RDF ------------------------------------------------------------------------
 
 const parser = new rdf.TurtleReader();
-async function parseTurtle(s) {
+export async function parseTurtle(s) {
     try {
         dispatcher.dispatch({ type: "PARSE_TURTLE", result: await parser.parse(s) });
     } catch (err) {
         enqueueAlert("danger", err.message);
     }
 }
-
-
-
-function changeViewport(viewport) {
-    dispatcher.dispatch({ type: "CHANGE_VIEWPORT", viewport });
-}
-
-function enqueueAlert(type, message) {
-    dispatcher.dispatch({ type: "ENQUEUE_ALERT", alert: new Alert(type, message) });
-}
-
-function setTableSorting(sorting) {
-    dispatcher.dispatch({ type: "SET_TABLE_SORTING", sorting});
-}
-
-
-
-export default {
-    "SHOW_OPEN_DIALOG":                   dialogAction("SHOW_OPEN_DIALOG"),
-    "SUBMIT_OPEN_DIALOG":                 submitOpenDialog,
-    "SHOW_SAVE_DIALOG":                   dialogAction("SHOW_SAVE_DIALOG"),
-    "SHOW_CLOSE_DIALOG":                  dialogAction("SHOW_CLOSE_DIALOG"),
-    "SHOW_TRANSLATE_DIALOG":              dialogAction("SHOW_TRANSLATE_DIALOG"),
-    "SHOW_SCALE_DIALOG":                  dialogAction("SHOW_SCALE_DIALOG"),
-    "SUBMIT_SCALE_DIALOG":                submitScaleDialog,
-    "SHOW_ROTATE_DIALOG":                 dialogAction("SHOW_ROTATE_DIALOG"),
-    "SUBMIT_ROTATE_DIALOG":               submitRotateDialog,
-    "CHANGE_VIEWPORT":                    changeViewport,
-    "TOGGLE_PERMANENT_MENUBAR":           simpleAction("TOGGLE_PERMANENT_MENUBAR"),
-    "TOGGLE_PERMANENT_LEFT_SIDEBAR":      simpleAction("TOGGLE_PERMANENT_LEFT_SIDEBAR"),
-    "TOGGLE_PERMANENT_RIGHT_SIDEBAR":     simpleAction("TOGGLE_PERMANENT_RIGHT_SIDEBAR"),
-    "TOGGLE_SHRINK_NODE_VALUES_IN_TABLE": dialogAction("TOGGLE_SHRINK_NODE_VALUES_IN_TABLE"),
-    "ENQUEUE_ALERT":                      enqueueAlert,
-    "DEQUEUE_ALERT":                      simpleAction("DEQUEUE_ALERT"),
-    "PARSE_TURTLE":                       parseTurtle,
-    "SET_TABLE_SORTING":                  setTableSorting
-};

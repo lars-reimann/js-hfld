@@ -18,13 +18,8 @@ export default class extends React.Component {
      */
     constructor(props) {
         super(props);
-    }
 
-    /**
-     * Initializes the state.
-     */
-    getInitialState() {
-        return {
+        this.state = {
             minX: "0",
             minY: "0",
             maxX: "1",

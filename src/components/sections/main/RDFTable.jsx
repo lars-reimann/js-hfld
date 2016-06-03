@@ -2,9 +2,9 @@ import _       from "lodash/fp";
 import React   from "react";
 import {Table} from "react-bootstrap";
 
-import actions from "../actions/actions.js";
+import actions from "../../../actions/actions.js";
 
-import SortingGlyphicon from "./SortingGlyphicon.jsx";
+import SortingGlyphicon from "../../glyphicons/SortingGlyphicon.jsx";
 
 export default class extends React.Component {
 

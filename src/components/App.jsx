@@ -5,10 +5,7 @@ import {OpenDialog, TranslateDialog, ScaleDialog, RotateDialog} from "./dialogs/
 
 import AlertQueueWrapper from "../alertSystem/containers/AlertQueueWrapper.jsx";
 
-import Menubar      from "./Menubar.jsx";
-import LeftSidebar  from "./LeftSidebar.jsx";
-import Viewport     from "./Viewport.jsx";
-import RightSidebar from "./RightSidebar.jsx";
+import {Menubar, LeftSidebar, Viewport, RightSidebar} from "./sections/sections.js";
 
 
 export default class extends React.Component {

@@ -1,5 +1,5 @@
 import React from "react";
-import {Modal, Tabs, Tab, Input, Button} from "react-bootstrap";
+import {Modal, Tabs, Tab, FormGroup, FormControl, Button} from "react-bootstrap";
 
 import actions                          from "../../actions/actions.js";
 import {validators, getValidationStyle} from "../../utils/utils.js";
@@ -7,14 +7,11 @@ import {validators, getValidationStyle} from "../../utils/utils.js";
 export default class extends React.Component {
     constructor(props) {
         super(props);
-        this.initState();
-    }
 
-    initState() {
         this.state = {
             activeTab: "direct",
-            direct: "",
-            url: ""
+            direct:    "",
+            url:       ""
         };
     }
 
@@ -24,20 +21,10 @@ export default class extends React.Component {
         });
     }
 
-    handleDirectChange() {
+    handleChange(e) {
         this.setState({
-            direct: this.refs.direct.getValue()
+            [e.target.id]: e.target.value
         });
-    }
-
-    handleURLChange() {
-        this.setState({
-            url: this.refs.url.getValue()
-        })
-    }
-
-    isValid() {
-        return true;
     }
 
     ok() { // TODO pass the selected tab and the content (needed for async)
@@ -47,7 +34,7 @@ export default class extends React.Component {
             s = this.state.direct; break;
         case "file":
         case "url":
-            s = ""
+            s = "";
         }
         this.initState();
         actions.SUBMIT_OPEN_DIALOG(s);
@@ -58,45 +45,53 @@ export default class extends React.Component {
         actions.SHOW_OPEN_DIALOG(false);
     }
 
-
     render() {
         const style = {
             marginTop: 20
         };
 
         return (
-            <Modal show={this.props.app.get("showOpenDialog")} onHide={::this.cancel}>
+            <Modal show={this.props.visible} onHide={() => this.cancel()}>
             <Modal.Header closeButton>
                 <Modal.Title>Open Dialog</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Tabs activeKey={this.state.activeTab} onSelect={::this.handleTabChange}>
+                <Tabs activeKey={this.state.activeTab} onSelect={() => this.handleTabChange()} id="method">
                     <Tab eventKey="direct" title="Direct Input" style={style}>
-                         <Input
-                            type="textarea"
-                            placeholder="Enter turtle data..."
-                            ref="direct"
-                            value={this.state.direct}
-                            onChange={::this.handleDirectChange}
-                         />
+                         <FormGroup controlId="direct">
+                            <FormControl
+                                type="textarea"
+                                value={this.state.direct}
+                                placeholder="Enter turtle data..."
+                                onChange={e => this.handleChange(e)}
+                            />
+                        </FormGroup>
                     </Tab>
-                    <Tab eventKey="file" title="File Upload" style={style} disabled>
-                         <Input type="file" />
+                    <Tab eventKey="file" title="File Upload" style={style}>
+                         <FormGroup controlId="file">
+                            <FormControl
+                                type="file"
+                                onChange={e => this.handleChange(e)}
+                            />
+                            <FormControl.Feedback />
+                        </FormGroup>
                     </Tab>
-                    <Tab eventKey="url" title="URL" style={style} disabled>
-                         <Input
-                            type="url"
-                            placeholder="Enter a URL..."
-                            ref="url"
-                            value={this.state.url}
-                            onChange={::this.handleURLChange}
-                         />
+                    <Tab eventKey="url" title="URL" style={style}>
+                         <FormGroup controlId="url">
+                            <FormControl
+                                type="url"
+                                value={this.state.url}
+                                placeholder="Enter a URL..."
+                                onChange={e => this.handleChange(e)}
+                            />
+                            <FormControl.Feedback />
+                        </FormGroup>
                     </Tab>
                 </Tabs>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={::this.ok} disabled={!this.isValid()}>OK</Button>
-                <Button onClick={::this.cancel}>Cancel</Button>
+                <Button onClick={() => this.ok()}>OK</Button>
+                <Button onClick={() => this.cancel()}>Cancel</Button>
             </Modal.Footer>
             </Modal>
         );

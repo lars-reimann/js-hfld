@@ -20,13 +20,8 @@ export default class extends React.Component {
      */
     constructor(props) {
         super(props);
-    }
 
-    /**
-     * Initializes the state.
-     */
-    getInitialState() {
-        return {
+        this.state = {
             angle:  "0",
             centerX: "0",
             centerY: "0",

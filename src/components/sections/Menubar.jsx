@@ -1,10 +1,9 @@
 import React from "react";
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem, Glyphicon} from "react-bootstrap";
 
-import actions from "../actions/actions.js";
+import actions from "../../actions/actions.js";
 
-import BlankGlyphicon  from "./BlankGlyphicon.jsx";
-import ToggleGlyphicon from "./ToggleGlyphicon.jsx";
+import {BlankGlyphicon, ToggleGlyphicon} from "../glyphicons/glyphicons.js";
 
 export default class extends React.Component {
     constructor(props) {

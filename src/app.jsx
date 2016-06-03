@@ -11,9 +11,9 @@ import "bootstrap/dist/css/bootstrap-theme.css!";
 import React    from "react";
 import ReactDOM from "react-dom";
 
-import {HFLDContainer} from "./components/components.js";
+import {AppWrapper} from "./containers/containers.js";
 
 ReactDOM.render(
-    <HFLDContainer />,
+    <AppWrapper />,
     document.getElementById("container")
 );

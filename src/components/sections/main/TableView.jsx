@@ -4,4 +4,6 @@ import RDFTable from "./RDFTable.jsx";
 
 // TODO make it scrollable
 
-export default props => <RDFTable {...props} />;
+export default function (props) {
+    return <RDFTable {...props} />;
+}

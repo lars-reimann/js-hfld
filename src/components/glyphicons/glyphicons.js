@@ -1,3 +1,3 @@
-export BlankGlyphicon   from "./BlankGlyphicon.js";
-export SortingGlyphicon from "./SortingGlyphicon.js";
-export ToggleGlyphicon  from "./ToggleGlyphicon.js";
+export BlankGlyphicon   from "./BlankGlyphicon.jsx";
+export SortingGlyphicon from "./SortingGlyphicon.jsx";
+export ToggleGlyphicon  from "./ToggleGlyphicon.jsx";

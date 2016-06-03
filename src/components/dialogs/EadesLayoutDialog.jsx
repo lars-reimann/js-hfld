@@ -18,13 +18,8 @@ export default class extends React.Component {
      */
     constructor(props) {
         super(props);
-    }
 
-    /**
-     * Initializes the state.
-     */
-    getInitialState() {
-        return {
+        this.state = {
             springForceCoef:     "2",
             repulsiveForceCoef:  "1",
             idealDistance:       "0.1",

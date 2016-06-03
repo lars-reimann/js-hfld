@@ -3,9 +3,9 @@ import {Container} from "flux/utils";
 
 import {appStore, graphStore, rdfStore} from "../stores/stores.js";
 
-import HFLD from "./HFLD.jsx";
+import App from "../components/App.jsx";
 
-class HFLDContainer extends React.Component {
+class AppWrapper extends React.Component {
     static getStores() {
         return [appStore, graphStore, rdfStore];
     }
@@ -19,8 +19,8 @@ class HFLDContainer extends React.Component {
     }
 
     render() {
-        return <HFLD {...this.state} />;
+        return <App {...this.state} />;
     }
 }
 
-export default Container.create(HFLDContainer, {pure: false});
+export default Container.create(AppWrapper, {pure: false});

@@ -2,7 +2,7 @@ import _       from "lodash/fp";
 import React   from "react";
 import {Table} from "react-bootstrap";
 
-import actions from "../../../actions/actions.js";
+import * as actions from "../../../actions/actions.js";
 
 import SortingGlyphicon from "../../glyphicons/SortingGlyphicon.jsx";
 
@@ -24,14 +24,12 @@ export default class extends React.Component {
     }
 
     handleClick(column) {
-        return () => {
-            const {column: curCol, order: curOrd} = this.props.app.tableSorting;
-            if (curCol === column) {
-                actions.SET_TABLE_SORTING({column, order: this.swapOrder(curOrd)});
-            } else {
-                actions.SET_TABLE_SORTING({column, order: "asc"});
-            }
-        };
+        const {column: curCol, order: curOrd} = this.props.app.tableSorting;
+        if (curCol === column) {
+            actions.setTableSorting({column, order: this.swapOrder(curOrd)});
+        } else {
+            actions.setTableSorting({column, order: "asc"});
+        }
     }
 
     render() {

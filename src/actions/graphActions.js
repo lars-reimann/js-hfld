@@ -23,7 +23,7 @@ export function randomLayout(conf) {
  * @param {Vec2} center
  * The point to rotate around.
  */
-export function rotateLayout(angle, center) {
+export function rotateLayout(angle, center) {console.log(angle, center)
     dispatcher.dispatch({ type: "ROTATE", angle, center });
 }
 

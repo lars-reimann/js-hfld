@@ -88,30 +88,30 @@ export default class extends React.Component {
                         </NavDropdown>
                         <NavDropdown title="View" id="menubar-view">
                             <MenuItem eventKey="SOURCE_VIEW">
-                                <ToggleGlyphicon active={this.props.app.get("viewport") === "source"} /> Source
+                                <ToggleGlyphicon active={this.props.app.viewport === "source"} /> Source
                             </MenuItem>
                             <MenuItem eventKey="TABLE_VIEW">
-                                <ToggleGlyphicon active={this.props.app.get("viewport") === "table"} /> Table
+                                <ToggleGlyphicon active={this.props.app.viewport === "table"} /> Table
                             </MenuItem>
                             <MenuItem eventKey="GRAPHICAL_VIEW">
-                                <ToggleGlyphicon active={this.props.app.get("viewport") === "graphical"} /> Graphical
+                                <ToggleGlyphicon active={this.props.app.viewport === "graphical"} /> Graphical
                             </MenuItem>
                             <MenuItem divider />
                             <MenuItem eventKey="TOGGLE_PERMANENT_MENUBAR">
-                                <ToggleGlyphicon active={this.props.app.get("permanentMenubar")} /> Permanent Menubar
+                                <ToggleGlyphicon active={this.props.app.permanentMenubar} /> Permanent Menubar
                             </MenuItem>
                             <MenuItem eventKey="TOGGLE_PERMANENT_LEFT_SIDEBAR">
-                                <ToggleGlyphicon active={this.props.app.get("permanentLeftSidebar")} /> Permanent Left Sidebar
+                                <ToggleGlyphicon active={this.props.app.permanentLeftSidebar} /> Permanent Left Sidebar
                             </MenuItem>
                             <MenuItem eventKey="TOGGLE_PERMANENT_RIGHT_SIDEBAR">
-                                <ToggleGlyphicon active={this.props.app.get("permanentRightSidebar")} /> Permanent Right Sidebar
+                                <ToggleGlyphicon active={this.props.app.permanentRightSidebar} /> Permanent Right Sidebar
                             </MenuItem>
-                            { this.props.app.get("viewport") !== "table" ? null :
+                            { this.props.app.viewport !== "table" ? null :
                                 <MenuItem divider />
                             }
-                            { this.props.app.get("viewport") !== "table" ? null :
+                            { this.props.app.viewport !== "table" ? null :
                                 <MenuItem eventKey="TOGGLE_SHRINK_NODE_VALUES_IN_TABLE">
-                                    <ToggleGlyphicon active={this.props.app.get("shrinkNodeValuesInTable")} /> Shrink Node Values
+                                    <ToggleGlyphicon active={this.props.app.shrinkNodeValuesInTable} /> Shrink Node Values
                                 </MenuItem>
                             }
 

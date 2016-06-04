@@ -15,12 +15,12 @@ export default class extends React.Component {
     }
 
     leftSidebarIsHidden() {
-        return !this.props.app.get("permanentLeftSidebar");
+        return !this.props.app.permanentLeftSidebar;
     }
 
     rightSidebarIsHidden() {
-        return !this.props.app.get("permanentRightSidebar") &&
-                this.props.app.get("viewport") !== "graphical";
+        return !this.props.app.permanentRightSidebar &&
+                this.props.app.viewport !== "graphical";
     }
 
     render() {

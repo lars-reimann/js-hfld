@@ -36,8 +36,14 @@ export default class extends React.Component {
             return actions.setViewport("table");
         case "GRAPHICAL_VIEW":
             return actions.setViewport("graphical");
-        default:
-            return actions[eventKey]();
+        case "TOGGLE_PERMANENT_LEFT_SIDEBAR":
+            return actions.setPermanentLeftSidebar(!this.props.app.permanentLeftSidebar);
+        case "TOGGLE_PERMANENT_MENUBAR":
+            return actions.setPermanentMenubar(!this.props.app.permanentMenubar);
+        case "TOGGLE_PERMANENT_RIGHT_SIDEBAR":
+            return actions.setPermanentRightSidebar(!this.props.app.permanentRightSidebar);
+        case "TOGGLE_SHRINK_NODE_VALUES_IN_TABLE":
+            return actions.setShrinkNodeValuesInTable(!this.props.app.shrinkNodeValuesInTable);
         }
     }
 

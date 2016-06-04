@@ -31,11 +31,11 @@ export default class extends React.Component {
         case "SHOW_ROTATE_DIALOG":
             return actions.setDialogVisibility("rotate", true);
         case "SOURCE_VIEW":
-            return actions.CHANGE_VIEWPORT("source");
+            return actions.setViewport("source");
         case "TABLE_VIEW":
-            return actions.CHANGE_VIEWPORT("table");
+            return actions.setViewport("table");
         case "GRAPHICAL_VIEW":
-            return actions.CHANGE_VIEWPORT("graphical");
+            return actions.setViewport("graphical");
         default:
             return actions[eventKey]();
         }

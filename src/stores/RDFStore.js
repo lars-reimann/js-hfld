@@ -23,7 +23,10 @@ class rdfStore extends Store {
 
     __onDispatch(action) {
         switch (action.type) {
-        case "PARSE_TURTLE":
+        case "CLOSE":
+            this.initState();
+            break;
+        case "OPEN":
             this.state = action.result;
             this.__emitChange();
             break;

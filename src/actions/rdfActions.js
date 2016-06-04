@@ -1,12 +1,11 @@
-import * as rdf from "@ignavia/rdf";
+import {TurtleReader} from "@ignavia/rdf";
 
-import dispatcher from "../dispatcher/dispatcher.js";
+import {enqueueAlert} from "./alertActions.js";
+import dispatcher    from "../dispatcher/dispatcher.js";
 
-// const parser = new rdf.TurtleReader();
-// export async function parseTurtle(s) {
-//     try {
-//         dispatcher.dispatch({ type: "PARSE_TURTLE", result: await parser.parse(s) });
-//     } catch (err) {
-//         enqueueAlert("danger", err.message);
-//     }
-// }
+const parser = new TurtleReader();
+export function parseTurtle(s) {console.log(s)
+    parser.parse(s)
+        .then(result => dispatcher.dispatch({ type: "OPEN", result }))
+        .catch(err   => enqueueAlert("danger", err.message));
+}

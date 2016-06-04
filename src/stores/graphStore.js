@@ -71,7 +71,10 @@ class GraphStore extends Store {
 
     __onDispatch(action) {
         switch (action.type) {
-            case "PARSE_TURTLE":
+            case "CLOSE":
+                this.initState();
+                break;
+            case "OPEN":
                 dispatcher.waitFor([rdfToken]);
                 this.importRDFGraph();
                 break;

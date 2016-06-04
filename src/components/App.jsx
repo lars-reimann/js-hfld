@@ -44,6 +44,10 @@ export default class extends React.Component {
                         }
                     </Row>
                 </Grid>
+
+                <AlertQueue alertMessages={this.props.alerts} onDismiss={actions.dequeueAlert}/>
+
+                <dialogs.CloseDialog              visible={this.props.dialogs.showCloseDialog} />
                 <dialogs.EadesLayoutDialog        visible={this.props.dialogs.showEadesLayoutDialog} />
                 <dialogs.FruchtermannLayoutDialog visible={this.props.dialogs.showFruchtermannLayoutDialog} />
                 <dialogs.OpenDialog               visible={this.props.dialogs.showOpenDialog} />
@@ -51,7 +55,6 @@ export default class extends React.Component {
                 <dialogs.RotateDialog             visible={this.props.dialogs.showRotateDialog} />
                 <dialogs.ScaleDialog              visible={this.props.dialogs.showScaleDialog} />
                 <dialogs.TranslateDialog          visible={this.props.dialogs.showTranslateDialog} />
-                <AlertQueue alertMessages={[]} onDismiss={actions.dismissAlert}/>
             </div>
         );
     }

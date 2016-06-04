@@ -1,7 +1,7 @@
 import React from "react";
 import {Modal, Tabs, Tab, FormGroup, FormControl, Button} from "react-bootstrap";
 
-import actions                          from "../../actions/actions.js";
+import * as actions                     from "../../actions/actions.js";
 import {validators, getValidationStyle} from "../../utils/utils.js";
 
 export default class extends React.Component {
@@ -27,20 +27,19 @@ export default class extends React.Component {
         });
     }
 
-    ok() { // TODO pass the selected tab and the content (needed for async)
-        let s;
+    ok() {
         switch (this.state.activeTab) {
         case "direct":
-            s = this.state.direct; break;
+            actions.openDirect(this.state.direct); break;
         case "file":
         case "url":
-            s = "";
+            actions.openURL(this.state.url); break;
         }
-        actions.SUBMIT_OPEN_DIALOG(s);
+        actions.setDialogVisibility("open", false);
     }
 
     cancel() {
-        actions.SHOW_OPEN_DIALOG(false);
+        actions.setDialogVisibility("open", false);
     }
 
     render() {
@@ -54,7 +53,7 @@ export default class extends React.Component {
                 <Modal.Title>Open Dialog</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Tabs activeKey={this.state.activeTab} onSelect={() => this.handleTabChange()} id="method">
+                <Tabs activeKey={this.state.activeTab} onSelect={key => this.handleTabChange(key)} id="method">
                     <Tab eventKey="direct" title="Direct Input" style={style}>
                          <FormGroup controlId="direct">
                             <FormControl
@@ -62,6 +61,7 @@ export default class extends React.Component {
                                 value={this.state.direct}
                                 placeholder="Enter turtle data..."
                                 onChange={e => this.handleChange(e)}
+                                style={{resize: "vertical"}}
                             />
                         </FormGroup>
                     </Tab>

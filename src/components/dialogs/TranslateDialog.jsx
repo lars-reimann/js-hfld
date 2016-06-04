@@ -35,7 +35,7 @@ export default class extends React.Component {
      */
     handleChange(e) {
         this.setState({
-            [field]: e.target.value
+            [e.target.id]: e.target.value
         });
     }
 
@@ -104,7 +104,7 @@ export default class extends React.Component {
                                 type="number"
                                 value={this.state.x}
                                 placeholder="Enter a number..."
-                                onChange={e => this.handleChange("x", e)}
+                                onChange={e => this.handleChange(e)}
                             />
                             <FormControl.Feedback />
                         </FormGroup>
@@ -114,7 +114,7 @@ export default class extends React.Component {
                                 type="number"
                                 value={this.state.y}
                                 placeholder="Enter a number..."
-                                onChange={e => this.handleChange("y", e)}
+                                onChange={e => this.handleChange(e)}
                             />
                             <FormControl.Feedback />
                         </FormGroup>

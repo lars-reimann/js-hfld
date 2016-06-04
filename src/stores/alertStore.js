@@ -33,7 +33,7 @@ class AlertStore extends ReduceStore {
      * The alert messages.
      */
     getState() {
-        return [...super.getState()];
+        return super.getState().toArray();
     }
 
     /**
@@ -50,6 +50,8 @@ class AlertStore extends ReduceStore {
      */
     reduce(state, action) {
         switch (action.type) {
+        case "CLOSE":
+            return Immutable.List();
         case "ENQUEUE_ALERT":
             return state.push(action.alertMessage);
         case "DEQUEUE_ALERT":

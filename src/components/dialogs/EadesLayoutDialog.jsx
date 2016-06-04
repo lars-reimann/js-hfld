@@ -5,7 +5,7 @@ import * as actions                     from "../../actions/actions.js";
 import {validators, getValidationStyle} from "../../utils/utils.js";
 
 /**
- * The dialog shown to the user when he wants to scale the layout.
+ * The dialog shown to the user when he wants to create an Eades-Layout.
  */
 export default class extends React.Component {
 

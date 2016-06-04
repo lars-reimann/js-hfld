@@ -1,4 +1,25 @@
-import dispatcher from "../dispatcher/dispatcher.js";
+import {enqueueAlert} from "./alertActions.js";
+import {parseTurtle}  from "./rdfActions.js";
+import dispatcher     from "../dispatcher/dispatcher.js";
+
+export function close() {
+    dispatcher.dispatch({ type: "CLOSE" });
+}
+
+export function openDirect(s) {
+    parseTurtle(s);
+}
+
+export function openFile() {
+
+}
+
+export function openURL(url) {
+    fetch(url, {mode: "cors"})
+        .then(res  => res.text())
+        .then(s    => parseTurtle(s))
+        .catch(err => enqueueAlert("danger", err.message));
+}
 
 export function setPermanentLeftSidebar(enabled) {
     dispatcher.dispatch({ type: "SET_PERMANENT_LEFT_SIDEBAR", enabled });

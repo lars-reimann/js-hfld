@@ -2,19 +2,12 @@ import React from "react";
 
 import {TurtleWriter} from "@ignavia/rdf";
 
-export default class extends React.Component {
-    constructor(props) {
-        super(props);
+const writer = new TurtleWriter();
 
-        this.writer = new TurtleWriter();
-    }
-
-    render() {
-        return (
-            <div>
-                <h2>Source:</h2>
-                <pre><code>{this.writer.serialize(this.props.rdf.graph, this.props.rdf.profile)}</code></pre>
-            </div>
-        );
-    }
+export default function (props) {
+    return (
+        <pre>
+            <code>{writer.serialize(props.rdf.graph, props.rdf.profile)}</code>
+        </pre>
+    );
 }

@@ -33,8 +33,9 @@ function getDuration(message) {
  * The function to call to dismiss an alert.
  */
 export default function ({type, message, onDismiss}) {
+    setTimeout(onDismiss, getDuration(message));
     return (
-        <Alert bsStyle={type} onDismiss={onDismiss} dismissAfter={getDuration(message)}>
+        <Alert bsStyle={type} onDismiss={onDismiss}>
             <p>{message}</p>
         </Alert>
     );

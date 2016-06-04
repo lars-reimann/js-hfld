@@ -10,8 +10,12 @@ export function openDirect(s) {
     parseTurtle(s);
 }
 
-export function openFile() {
+export function openFile(file) {
+    const reader   = new FileReader();
+    reader.onload  = () => parseTurtle(reader.result);
+    reader.onerror = () => enqueueAlert(reader.error.message);
 
+    reader.readAsText(file);
 }
 
 export function openURL(url) {

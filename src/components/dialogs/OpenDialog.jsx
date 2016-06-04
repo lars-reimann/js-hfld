@@ -11,6 +11,7 @@ export default class extends React.Component {
         this.state = {
             activeTab: "direct",
             direct:    "",
+            file:      undefined,
             url:       ""
         };
     }
@@ -21,10 +22,24 @@ export default class extends React.Component {
         });
     }
 
-    handleChange(e) {
+    handleInputChange(e) {
         this.setState({
             [e.target.id]: e.target.value
         });
+    }
+
+    handleFileChange(e) {
+        this.setState({
+            file: e.target.files[0]
+        });
+    }
+
+    fileIsValid() {
+        return this.state.file !== undefined;
+    }
+
+    isValid() {
+        return this.state.activeTab !== "file" || this.fileIsValid();
     }
 
     ok() {
@@ -32,6 +47,7 @@ export default class extends React.Component {
         case "direct":
             actions.openDirect(this.state.direct); break;
         case "file":
+            actions.openFile(this.state.file); break;
         case "url":
             actions.openURL(this.state.url); break;
         }
@@ -60,16 +76,16 @@ export default class extends React.Component {
                                 componentClass="textarea"
                                 value={this.state.direct}
                                 placeholder="Enter turtle data..."
-                                onChange={e => this.handleChange(e)}
+                                onChange={e => this.handleInputChange(e)}
                                 style={{resize: "vertical"}}
                             />
                         </FormGroup>
                     </Tab>
-                    <Tab eventKey="file" title="File Upload" style={style}>
+                    <Tab eventKey="file" title="File Upload" style={style} validationState={getValidationStyle(this.fileIsValid())}>
                          <FormGroup controlId="file">
                             <FormControl
                                 type="file"
-                                onChange={e => this.handleChange(e)}
+                                onChange={e => this.handleFileChange(e)}
                             />
                             <FormControl.Feedback />
                         </FormGroup>
@@ -80,15 +96,14 @@ export default class extends React.Component {
                                 type="url"
                                 value={this.state.url}
                                 placeholder="Enter a URL..."
-                                onChange={e => this.handleChange(e)}
+                                onChange={e => this.handleInputChange(e)}
                             />
-                            <FormControl.Feedback />
                         </FormGroup>
                     </Tab>
                 </Tabs>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={() => this.ok()}>OK</Button>
+                <Button onClick={() => this.ok()}disabled={!this.isValid()}>OK</Button>
                 <Button onClick={() => this.cancel()}>Cancel</Button>
             </Modal.Footer>
             </Modal>

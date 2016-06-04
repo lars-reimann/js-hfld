@@ -23,11 +23,11 @@ const style = {
  * @param {Function} props.onDismiss
  * The function to call to dismiss an alert.
  */
-export default function ({alertMessages: [first], onDismiss}) {
+export default function ({alertMessages: [first]}) {
     return (
         <div style={style}>
             { first === undefined ? null :
-                <Alert key={first.id} type={first.type} message={first.message} onDismiss={onDismiss} />
+                <Alert key={first.id} type={first.type} message={first.message} />
             }
         </div>
     );

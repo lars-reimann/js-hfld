@@ -16,7 +16,7 @@ export default class extends React.Component {
         };
     }
 
-    handleTabChange(selectedTab) {
+    handleTabChange(selectedTab = this.state.activeTab) {
         this.setState({
             activeTab: selectedTab
         });

@@ -45,7 +45,7 @@ export default class extends React.Component {
                     </Row>
                 </Grid>
 
-                <AlertQueue alertMessages={this.props.alerts} onDismiss={actions.dequeueAlert}/>
+                <AlertQueue alertMessages={this.props.alerts} />
 
                 <dialogs.CloseDialog              visible={this.props.dialogs.showCloseDialog} />
                 <dialogs.EadesLayoutDialog        visible={this.props.dialogs.showEadesLayoutDialog} />
@@ -53,6 +53,11 @@ export default class extends React.Component {
                 <dialogs.OpenDialog               visible={this.props.dialogs.showOpenDialog} />
                 <dialogs.RandomLayoutDialog       visible={this.props.dialogs.showRandomLayoutDialog} />
                 <dialogs.RotateDialog             visible={this.props.dialogs.showRotateDialog} />
+                <dialogs.SaveDialog
+                    visible={this.props.dialogs.showSaveDialog}
+                    graph={this.props.rdf.graph}
+                    profile={this.props.rdf.profile}
+                />
                 <dialogs.ScaleDialog              visible={this.props.dialogs.showScaleDialog} />
                 <dialogs.TranslateDialog          visible={this.props.dialogs.showTranslateDialog} />
             </div>

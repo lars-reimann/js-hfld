@@ -25,8 +25,10 @@ class rdfStore extends Store {
         switch (action.type) {
         case "CLOSE":
             this.initState();
+            this.__emitChange();
             break;
         case "OPEN":
+        console.log(action.result)
             this.state = action.result;
             this.__emitChange();
             break;

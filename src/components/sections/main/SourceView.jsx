@@ -1,13 +1,11 @@
 import React from "react";
 
-import {TurtleWriter} from "@ignavia/rdf";
-
-const writer = new TurtleWriter();
+import {writeTurtle} from "../../../actions/actions.js";
 
 export default function (props) {
     return (
         <pre>
-            <code>{writer.serialize(props.rdf.graph, props.rdf.profile)}</code>
+            <code>{writeTurtle(props.rdf.graph, props.rdf.profile)}</code>
         </pre>
     );
 }

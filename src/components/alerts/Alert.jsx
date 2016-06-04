@@ -2,6 +2,8 @@ import React from "react";
 
 import {Alert} from "react-bootstrap";
 
+import {dequeueAlert} from "../../actions/actions.js";
+
 /**
  * Computes how long the dialog should be visible. This is based in the
  * message length.
@@ -32,10 +34,10 @@ function getDuration(message) {
  * @param {Function} onDismiss
  * The function to call to dismiss an alert.
  */
-export default function ({type, message, onDismiss}) {
-    setTimeout(onDismiss, getDuration(message));
+export default function ({type, message}) {
+    setTimeout(dequeueAlert, getDuration(message));
     return (
-        <Alert bsStyle={type} onDismiss={onDismiss}>
+        <Alert bsStyle={type} onDismiss={dequeueAlert}>
             <p>{message}</p>
         </Alert>
     );

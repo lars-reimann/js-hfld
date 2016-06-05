@@ -13,7 +13,7 @@ export default class extends React.Component {
     }
 
     shrink(node) {
-        if (this.props.app.shrinkNodeValuesInTable) {
+        if (this.props.config.shrinkNodeValuesInTable) {
             return this.props.rdf.profile.nodeToString(node);
         }
         return node.toString();
@@ -24,7 +24,7 @@ export default class extends React.Component {
     }
 
     handleClick(column) {
-        const {column: curCol, order: curOrd} = this.props.app.tableSorting;
+        const {column: curCol, order: curOrd} = this.props.config.tableSorting;
         if (curCol === column) {
             actions.setTableSorting({column, order: this.swapOrder(curOrd)});
         } else {
@@ -33,7 +33,7 @@ export default class extends React.Component {
     }
 
     render() {
-        const {column, order} = this.props.app.tableSorting;
+        const {column, order} = this.props.config.tableSorting;
 
         const rows = _([...this.props.rdf.graph])
             .orderBy([triple => this.shrink(triple[column]).toLowerCase()], [order])

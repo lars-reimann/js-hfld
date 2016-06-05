@@ -5,7 +5,7 @@ export default class extends React.Component {
         super(props);
     }
 
-    render() {
+    render() {console.log(this.props)
         return (
             <p>Literals...</p>
         );

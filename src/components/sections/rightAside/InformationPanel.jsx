@@ -13,7 +13,7 @@ export default class extends React.Component {
         return (
             <Tabs defaultActiveKey={1} id="right-sidebar-info">
                 <Tab eventKey={1} title="Literals">
-                    <LiteralsPanel />
+                    <LiteralsPanel rdf={this.props.rdf} selection={this.props.selection} />
                 </Tab>
                 <Tab eventKey={2} title="Graph Data">
                     <GraphDataPanel />
@@ -22,3 +22,5 @@ export default class extends React.Component {
         );
     }
 }
+
+// TODO: store active tab in config store

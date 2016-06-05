@@ -30,7 +30,6 @@ class rdfStore extends Store {
         case "OPEN":
             this.state = action.result;
             this.__emitChange();
-            console.log([...this.state.graph])
             break;
         }
     }

@@ -26,7 +26,7 @@ export default class extends React.Component {
     render() {
         return (
             <div>
-                <Menubar app={this.props.config} />
+                <Menubar {...this.props.config} />
                 <Grid fluid>
                     <Row>
                         { this.leftSidebarIsHidden() ? null :
@@ -35,11 +35,21 @@ export default class extends React.Component {
                             </Col>
                         }
                         <Col xs={9 + (this.leftSidebarIsHidden() ? 1 : 0) + (this.rightSidebarIsHidden() ? 2 : 0)}>
-                            <Viewport {...this.props} />
+                            <Viewport
+                                config={this.props.config}
+                                graph={this.props.graph}
+                                rdf={this.props.rdf}
+                                selection={this.props.selection}
+                            />
                         </Col>
                         { this.rightSidebarIsHidden() ? null :
                             <Col xs={2}>
-                                <InformationPanel />
+                                <InformationPanel
+                                    config={this.props.config}
+                                    graph={this.props.graph}
+                                    rdf={this.props.rdf}
+                                    selection={this.props.selection}
+                                />
                             </Col>
                         }
                     </Row>
@@ -54,9 +64,9 @@ export default class extends React.Component {
                 <dialogs.RandomLayoutDialog       visible={this.props.dialogs.showRandomLayoutDialog} />
                 <dialogs.RotateDialog             visible={this.props.dialogs.showRotateDialog} />
                 <dialogs.SaveDialog
-                    visible={this.props.dialogs.showSaveDialog}
                     graph={this.props.rdf.graph}
                     profile={this.props.rdf.profile}
+                    visible={this.props.dialogs.showSaveDialog}
                 />
                 <dialogs.ScaleDialog              visible={this.props.dialogs.showScaleDialog} />
                 <dialogs.TranslateDialog          visible={this.props.dialogs.showTranslateDialog} />

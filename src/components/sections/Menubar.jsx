@@ -37,13 +37,13 @@ export default class extends React.Component {
         case "GRAPHICAL_VIEW":
             return actions.setViewport("graphical");
         case "TOGGLE_PERMANENT_LEFT_SIDEBAR":
-            return actions.setPermanentLeftSidebar(!this.props.app.permanentLeftSidebar);
+            return actions.setPermanentLeftSidebar(!this.props.permanentLeftSidebar);
         case "TOGGLE_PERMANENT_MENUBAR":
-            return actions.setPermanentMenubar(!this.props.app.permanentMenubar);
+            return actions.setPermanentMenubar(!this.props.permanentMenubar);
         case "TOGGLE_PERMANENT_RIGHT_SIDEBAR":
-            return actions.setPermanentRightSidebar(!this.props.app.permanentRightSidebar);
+            return actions.setPermanentRightSidebar(!this.props.permanentRightSidebar);
         case "TOGGLE_SHRINK_NODE_VALUES_IN_TABLE":
-            return actions.setShrinkNodeValuesInTable(!this.props.app.shrinkNodeValuesInTable);
+            return actions.setShrinkNodeValuesInTable(!this.props.shrinkNodeValuesInTable);
         }
     }
 
@@ -94,33 +94,32 @@ export default class extends React.Component {
                         </NavDropdown>
                         <NavDropdown title="View" id="menubar-view">
                             <MenuItem eventKey="SOURCE_VIEW">
-                                <ToggleGlyphicon active={this.props.app.viewport === "source"} /> Source
+                                <ToggleGlyphicon active={this.props.viewport === "source"} /> Source
                             </MenuItem>
                             <MenuItem eventKey="TABLE_VIEW">
-                                <ToggleGlyphicon active={this.props.app.viewport === "table"} /> Table
+                                <ToggleGlyphicon active={this.props.viewport === "table"} /> Table
                             </MenuItem>
                             <MenuItem eventKey="GRAPHICAL_VIEW">
-                                <ToggleGlyphicon active={this.props.app.viewport === "graphical"} /> Graphical
+                                <ToggleGlyphicon active={this.props.viewport === "graphical"} /> Graphical
                             </MenuItem>
                             <MenuItem divider />
                             <MenuItem eventKey="TOGGLE_PERMANENT_MENUBAR">
-                                <ToggleGlyphicon active={this.props.app.permanentMenubar} /> Permanent Menubar
+                                <ToggleGlyphicon active={this.props.permanentMenubar} /> Permanent Menubar
                             </MenuItem>
                             <MenuItem eventKey="TOGGLE_PERMANENT_LEFT_SIDEBAR">
-                                <ToggleGlyphicon active={this.props.app.permanentLeftSidebar} /> Permanent Left Sidebar
+                                <ToggleGlyphicon active={this.props.permanentLeftSidebar} /> Permanent Left Sidebar
                             </MenuItem>
                             <MenuItem eventKey="TOGGLE_PERMANENT_RIGHT_SIDEBAR">
-                                <ToggleGlyphicon active={this.props.app.permanentRightSidebar} /> Permanent Right Sidebar
+                                <ToggleGlyphicon active={this.props.permanentRightSidebar} /> Permanent Right Sidebar
                             </MenuItem>
-                            { this.props.app.viewport !== "table" ? null :
+                            { this.props.viewport !== "table" ? null :
                                 <MenuItem divider />
                             }
-                            { this.props.app.viewport !== "table" ? null :
+                            { this.props.viewport !== "table" ? null :
                                 <MenuItem eventKey="TOGGLE_SHRINK_NODE_VALUES_IN_TABLE">
-                                    <ToggleGlyphicon active={this.props.app.shrinkNodeValuesInTable} /> Shrink Node Values
+                                    <ToggleGlyphicon active={this.props.shrinkNodeValuesInTable} /> Shrink Node Values
                                 </MenuItem>
                             }
-
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>

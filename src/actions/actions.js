@@ -6,3 +6,4 @@ export * from "./appActions.js";
 export * from "./dialogActions.js";
 export * from "./graphActions.js";
 export * from "./rdfActions.js";
+export * from "./selectionActions.js";

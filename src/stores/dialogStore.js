@@ -1,12 +1,12 @@
-import {MapStore} from "flux/utils";
-import Immutable  from "immutable";
+import {ReduceStore} from "flux/utils";
+import Immutable     from "immutable";
 
 import dispatcher from "../dispatcher/dispatcher.js";
 
 /**
  * Stores the state of the dialogs.
  */
-class DialogStore extends MapStore {
+class DialogStore extends ReduceStore {
 
     /**
      * @param {Dispatcher} dispatcher

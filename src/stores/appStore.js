@@ -1,9 +1,17 @@
-import {MapStore} from "flux/utils";
-import Immutable  from "immutable";
+import {ReduceStore} from "flux/utils";
+import Immutable     from "immutable";
 
 import dispatcher from "../dispatcher/dispatcher.js";
 
-class AppStore extends MapStore {
+/**
+ * Stores various stuff of the app state.
+ */
+class AppStore extends ReduceStore {
+
+    /**
+     * @param {Dispatcher} dispatcher
+     * The dispatcher of this app.
+     */
     constructor(dispatcher) {
         super(dispatcher);
     }

@@ -4,7 +4,7 @@ import Immutable     from "immutable";
 import dispatcher from "../dispatcher/dispatcher.js";
 
 /**
- * Stores the state of the dialogs.
+ * Stores the state of the alert queue.
  */
 class AlertStore extends ReduceStore {
 

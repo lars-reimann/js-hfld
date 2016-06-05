@@ -34,8 +34,12 @@ function download(text, filename) {
 // Config ---------------------------------------------------------------------
 
 function parseConfig(s) {
-    const config = JSON.parse(s);
-    dispatcher.dispatch({ type: "OPEN_CONFIG", config });
+    try {
+        const config = JSON.parse(s);
+        dispatcher.dispatch({ type: "OPEN_CONFIG", config });
+    } catch (err) {
+        enqueueAlert("danger", err.message);
+    }
 }
 
 export function writeConfig(config) {

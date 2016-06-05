@@ -26,7 +26,7 @@ function getDuration(message) {
  *
  * @param {String} type
  * The type of the alert. This is one of "info", "success", "warning" or
- * "error".
+ * "danger".
  *
  * @param {String} message
  * The message to display.

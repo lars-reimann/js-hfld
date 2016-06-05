@@ -4,6 +4,8 @@ export FruchtermannLayoutDialog from "./FruchtermannLayoutDialog.jsx";
 export OpenDialog               from "./OpenDialog.jsx";
 export RandomLayoutDialog       from "./RandomLayoutDialog.jsx";
 export RotateDialog             from "./RotateDialog.jsx";
+export SaveConfigDialog         from "./SaveConfigDialog.jsx";
+export SaveLayoutDialog         from "./SaveLayoutDialog.jsx";
 export SaveTurtleDialog         from "./SaveTurtleDialog.jsx";
 export ScaleDialog              from "./ScaleDialog.jsx";
 export TranslateDialog          from "./TranslateDialog.jsx";

@@ -94,6 +94,10 @@ export default class extends React.Component {
                 />
                 <dialogs.RandomLayoutDialog visible={this.props.dialogs.showRandomLayoutDialog} />
                 <dialogs.RotateDialog visible={this.props.dialogs.showRotateDialog} />
+                <dialogs.SaveConfigDialog
+                    config={this.props.config}
+                    visible={this.props.dialogs.showSaveConfigDialog}
+                />
                 <dialogs.SaveTurtleDialog
                     graph={this.props.rdf.graph}
                     profile={this.props.rdf.profile}

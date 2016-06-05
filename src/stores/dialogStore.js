@@ -81,6 +81,10 @@ class DialogStore extends ReduceStore {
             return state.set("showRandomLayoutDialog", show);
         case "rotate":
             return state.set("showRotateDialog", show);
+        case "saveConfig":
+            return state.set("showSaveConfigDialog", show);
+        case "saveLayout":
+            return state.set("showSaveLayoutDialog", show);
         case "saveTurtle":
             return state.set("showSaveTurtleDialog", show);
         case "scale":

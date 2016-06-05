@@ -1,6 +1,23 @@
-import {enqueueAlert}             from "./alertActions.js";
-import {parseTurtle, writeTurtle} from "./rdfActions.js";
-import dispatcher                 from "../dispatcher/dispatcher.js";
+import {TurtleReader, TurtleWriter} from "@ignavia/rdf";
+
+import {enqueueAlert} from "./alertActions.js";
+import dispatcher     from "../dispatcher/dispatcher.js";
+
+// General --------------------------------------------------------------------
+
+function openFile(file, resolve) {
+    const reader   = new FileReader();
+    reader.onload  = () => resolve(reader.result);
+    reader.onerror = () => enqueueAlert("danger", reader.error.message);
+    reader.readAsText(file);
+}
+
+function openURL(url, resolve) {
+    fetch(url, {mode: "cors"})
+        .then(res => res.text())
+        .then(resolve)
+        .catch(err => enqueueAlert("danger", err.message));
+}
 
 function download(text, filename) {
     const element = document.createElement('a');
@@ -14,11 +31,33 @@ function download(text, filename) {
     document.body.removeChild(element);
 }
 
-export function close() {
-    dispatcher.dispatch({ type: "CLOSE" });
+// Config ---------------------------------------------------------------------
+
+function parseConfig(s) {
+    const config = JSON.parse(s);
+    dispatcher.dispatch({ type: "OPEN_CONFIG", config });
 }
 
-// Config ---------------------------------------------------------------------
+export function writeConfig(config) {
+    return JSON.stringify(config);
+}
+
+export function openConfigDirect(s) {
+    parseConfig(s);
+}
+
+export function openConfigFile(file) {
+    openFile(file, parseConfig);
+}
+
+export function openConfigURL(url) {
+    openURL(url, parseConfig);
+}
+
+export function saveConfig(config, filename) {
+    const text = writeConfig(config);
+    download(text, filename);
+}
 
 // Layout ---------------------------------------------------------------------
 
@@ -26,26 +65,38 @@ export function close() {
 
 // Turtle ---------------------------------------------------------------------
 
+const parser = new TurtleReader();
+const writer = new TurtleWriter();
+
+export function parseTurtle(s) {
+    parser.parse(s)
+        .then(result => dispatcher.dispatch({ type: "OPEN_TURTLE", result }))
+        .catch(err   => enqueueAlert("danger", err.message));
+}
+
+export function writeTurtle(graph, profile) {
+    return writer.serialize(graph, profile);
+}
+
 export function openTurtleDirect(s) {
     parseTurtle(s);
 }
 
 export function openTurtleFile(file) {
-    const reader   = new FileReader();
-    reader.onload  = () => parseTurtle(reader.result);
-    reader.onerror = () => enqueueAlert(reader.error.message);
-
-    reader.readAsText(file);
+    openFile(file, parseTurtle);
 }
 
-export function openTurleURL(url) {
-    fetch(url, {mode: "cors"})
-        .then(res  => res.text())
-        .then(s    => parseTurtle(s))
-        .catch(err => enqueueAlert("danger", err.message));
+export function openTurtleURL(url) {
+    openURL(url, parseTurtle);
 }
 
 export function saveTurtle(graph, profile, filename) {
     const text = writeTurtle(graph, profile);
     download(text, filename);
+}
+
+// Close ----------------------------------------------------------------------
+
+export function close() {
+    dispatcher.dispatch({ type: "CLOSE" });
 }

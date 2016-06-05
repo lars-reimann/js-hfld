@@ -5,7 +5,7 @@ import * as actions                     from "../../actions/actions.js";
 import {validators, getValidationStyle} from "../../utils/utils.js";
 
 /**
- * The dialog shown to the user when he wants to save the turtle data.
+ * The dialog shown to the user when he wants to save the layout.
  */
 export default class extends React.Component {
 
@@ -20,7 +20,7 @@ export default class extends React.Component {
         super(props);
 
         this.state = {
-            filename: "data.ttl",
+            filename: "layout.json",
         };
     }
 
@@ -60,15 +60,15 @@ export default class extends React.Component {
      * Submits the dialog.
      */
     ok() {
-        actions.saveTurtle(this.props.graph, this.props.profile, this.state.filename);
-        actions.setDialogVisibility("saveTurtle", false);
+        actions.saveLayout(this.props.layout);
+        actions.setDialogVisibility("saveLayout", false);
     }
 
     /**
      * Closes the dialog.
      */
     cancel() {
-        actions.setDialogVisibility("saveTurtle", false);
+        actions.setDialogVisibility("saveLayout", false);
     }
 
     /**
@@ -78,7 +78,7 @@ export default class extends React.Component {
         return (
             <Modal show={this.props.visible} onHide={() => this.cancel()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Save Turtle</Modal.Title>
+                    <Modal.Title>Save Layout</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form>

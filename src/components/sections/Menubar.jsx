@@ -20,6 +20,10 @@ export default class extends React.Component {
             return actions.setDialogVisibility("openStyle", true);
         case "SHOW_OPEN_TURTLE_DIALOG":
             return actions.setDialogVisibility("openTurtle", true);
+        case "SHOW_SAVE_CONFIG_DIALOG":
+            return actions.setDialogVisibility("saveConfig", true);
+        case "SHOW_SAVE_LAYOUT_DIALOG":
+            return actions.setDialogVisibility("saveLayout", true);
         case "SHOW_SAVE_TURTLE_DIALOG":
             return actions.setDialogVisibility("saveTurtle", true);
         case "SHOW_CLOSE_DIALOG":

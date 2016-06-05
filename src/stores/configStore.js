@@ -58,6 +58,8 @@ class ConfigStore extends ReduceStore {
      */
     reduce(state, action) {
         switch (action.type) {
+        case "OPEN_CONFIG":
+            return Immutable.Map(action.config);
         case "SET_INFORMATION_PANEL":
             return state.set("informationPanel", action.informationPanel);
         case "SET_PERMANENT_LEFT_SIDEBAR":

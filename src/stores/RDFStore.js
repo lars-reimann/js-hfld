@@ -27,7 +27,7 @@ class rdfStore extends Store {
             this.initState();
             this.__emitChange();
             break;
-        case "OPEN":
+        case "OPEN_TURTLE":
             this.state = action.result;
             this.__emitChange();
             break;

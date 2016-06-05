@@ -6,11 +6,11 @@ export function close() {
     dispatcher.dispatch({ type: "CLOSE" });
 }
 
-export function openDirect(s) {
+export function openTurtleDirect(s) {
     parseTurtle(s);
 }
 
-export function openFile(file) {
+export function openTurtleFile(file) {
     const reader   = new FileReader();
     reader.onload  = () => parseTurtle(reader.result);
     reader.onerror = () => enqueueAlert(reader.error.message);
@@ -18,7 +18,7 @@ export function openFile(file) {
     reader.readAsText(file);
 }
 
-export function openURL(url) {
+export function openTurleURL(url) {
     fetch(url, {mode: "cors"})
         .then(res  => res.text())
         .then(s    => parseTurtle(s))

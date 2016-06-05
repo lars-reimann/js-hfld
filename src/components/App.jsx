@@ -57,19 +57,50 @@ export default class extends React.Component {
 
                 <AlertQueue alertMessages={this.props.alerts} />
 
-                <dialogs.CloseDialog              visible={this.props.dialogs.showCloseDialog} />
-                <dialogs.EadesLayoutDialog        visible={this.props.dialogs.showEadesLayoutDialog} />
+                <dialogs.CloseDialog visible={this.props.dialogs.showCloseDialog} />
+                <dialogs.EadesLayoutDialog visible={this.props.dialogs.showEadesLayoutDialog} />
                 <dialogs.FruchtermannLayoutDialog visible={this.props.dialogs.showFruchtermannLayoutDialog} />
-                <dialogs.OpenDialog               visible={this.props.dialogs.showOpenDialog} />
-                <dialogs.RandomLayoutDialog       visible={this.props.dialogs.showRandomLayoutDialog} />
-                <dialogs.RotateDialog             visible={this.props.dialogs.showRotateDialog} />
+                <dialogs.OpenDialog
+                    name="openConfig"
+                    openDirect={actions.openConfigDirect}
+                    openFile={actions.openConfigFile}
+                    openURL={actions.openConfigURL}
+                    title="Open Configuration"
+                    visible={this.props.dialogs.showOpenConfigDialog}
+                />
+                <dialogs.OpenDialog
+                    name="openTurtle"
+                    openDirect={actions.openTurtleDirect}
+                    openFile={actions.openTurtleFile}
+                    openURL={actions.openTurtleURL}
+                    title="Open Turtle"
+                    visible={this.props.dialogs.showOpenTurtleDialog}
+                />
+                <dialogs.OpenDialog
+                    name="openTurtle"
+                    openDirect={actions.openTurtleDirect}
+                    openFile={actions.openTurtleFile}
+                    openURL={actions.openTurtleURL}
+                    title="Open Turtle"
+                    visible={this.props.dialogs.showOpenTurtleDialog}
+                />
+                <dialogs.OpenDialog
+                    name="openTurtle"
+                    openDirect={actions.openTurtleDirect}
+                    openFile={actions.openTurtleFile}
+                    openURL={actions.openTurtleURL}
+                    title="Open Turtle"
+                    visible={this.props.dialogs.showOpenTurtleDialog}
+                />
+                <dialogs.RandomLayoutDialog visible={this.props.dialogs.showRandomLayoutDialog} />
+                <dialogs.RotateDialog visible={this.props.dialogs.showRotateDialog} />
                 <dialogs.SaveDialog
                     graph={this.props.rdf.graph}
                     profile={this.props.rdf.profile}
-                    visible={this.props.dialogs.showSaveDialog}
+                    visible={this.props.dialogs.showSaveTurtleDialog}
                 />
-                <dialogs.ScaleDialog              visible={this.props.dialogs.showScaleDialog} />
-                <dialogs.TranslateDialog          visible={this.props.dialogs.showTranslateDialog} />
+                <dialogs.ScaleDialog visible={this.props.dialogs.showScaleDialog} />
+                <dialogs.TranslateDialog visible={this.props.dialogs.showTranslateDialog} />
             </div>
         );
     }

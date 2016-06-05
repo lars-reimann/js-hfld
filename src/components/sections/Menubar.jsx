@@ -12,10 +12,16 @@ export default class extends React.Component {
 
     handleSelect(eventKey) {
         switch (eventKey) {
-        case "SHOW_OPEN_DIALOG":
-            return actions.setDialogVisibility("open", true);
-        case "SHOW_SAVE_DIALOG":
-            return actions.setDialogVisibility("save", true);
+        case "SHOW_OPEN_CONFIG_DIALOG":
+            return actions.setDialogVisibility("openConfig", true);
+        case "SHOW_OPEN_LAYOUT_DIALOG":
+            return actions.setDialogVisibility("openLayout", true);
+        case "SHOW_OPEN_STYLE_DIALOG":
+            return actions.setDialogVisibility("openStyle", true);
+        case "SHOW_OPEN_TURTLE_DIALOG":
+            return actions.setDialogVisibility("openTurtle", true);
+        case "SHOW_SAVE_TURTLE_DIALOG":
+            return actions.setDialogVisibility("saveTurtle", true);
         case "SHOW_CLOSE_DIALOG":
             return actions.setDialogVisibility("close", true);
         case "SHOW_RANDOM_LAYOUT_DIALOG":
@@ -60,11 +66,27 @@ export default class extends React.Component {
                 <Navbar.Collapse>
                     <Nav onSelect={(key) => this.handleSelect(key)}>
                         <NavDropdown title="File" id="menubar-file">
-                            <MenuItem eventKey="SHOW_OPEN_DIALOG">
-                                Open...
+                            <MenuItem eventKey="SHOW_OPEN_TURTLE_DIALOG">
+                                Open Turtle...
                             </MenuItem>
-                            <MenuItem eventKey="SHOW_SAVE_DIALOG">
-                                Save...
+                            <MenuItem eventKey="SHOW_OPEN_STYLE_DIALOG">
+                                Open Style...
+                            </MenuItem>
+                            <MenuItem eventKey="SHOW_OPEN_LAYOUT_DIALOG">
+                                Open Layout...
+                            </MenuItem>
+                            <MenuItem eventKey="SHOW_OPEN_CONFIG_DIALOG">
+                                Open Configuration...
+                            </MenuItem>
+                            <MenuItem divider />
+                            <MenuItem eventKey="SHOW_SAVE_TURTLE_DIALOG">
+                                Save Turtle...
+                            </MenuItem>
+                            <MenuItem eventKey="SHOW_SAVE_LAYOUT_DIALOG">
+                                Save Layout...
+                            </MenuItem>
+                            <MenuItem eventKey="SHOW_SAVE_CONFIG_DIALOG">
+                                Save Configuration...
                             </MenuItem>
                             <MenuItem divider />
                             <MenuItem eventKey="SHOW_CLOSE_DIALOG">

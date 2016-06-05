@@ -45,17 +45,17 @@ export default class extends React.Component {
     ok() {
         switch (this.state.activeTab) {
         case "direct":
-            actions.openDirect(this.state.direct); break;
+            this.props.openDirect(this.state.direct); break;
         case "file":
-            actions.openFile(this.state.file); break;
+            this.props.openFile(this.state.file); break;
         case "url":
-            actions.openURL(this.state.url); break;
+            this.props.openURL(this.state.url); break;
         }
-        actions.setDialogVisibility("open", false);
+        actions.setDialogVisibility(this.props.name, false);
     }
 
     cancel() {
-        actions.setDialogVisibility("open", false);
+        actions.setDialogVisibility(this.props.name, false);
     }
 
     render() {
@@ -66,7 +66,7 @@ export default class extends React.Component {
         return (
             <Modal show={this.props.visible} onHide={() => this.cancel()}>
             <Modal.Header closeButton>
-                <Modal.Title>Open Dialog</Modal.Title>
+                <Modal.Title>{this.props.title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Tabs activeKey={this.state.activeTab} onSelect={key => this.handleTabChange(key)} id="method">
@@ -75,7 +75,7 @@ export default class extends React.Component {
                             <FormControl
                                 componentClass="textarea"
                                 value={this.state.direct}
-                                placeholder="Enter turtle data..."
+                                placeholder="Enter data..."
                                 onChange={e => this.handleInputChange(e)}
                                 style={{resize: "vertical"}}
                             />

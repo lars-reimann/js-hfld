@@ -137,7 +137,7 @@ export default class extends React.Component {
         return (
             <Modal show={this.props.visible} onHide={() => this.cancel()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Eades-Layout Dialog</Modal.Title>
+                    <Modal.Title>Eades-Layout</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form>

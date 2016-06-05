@@ -1,21 +1,26 @@
 import React from "react";
 import {Tabs, Tab} from "react-bootstrap";
 
-import GraphDataPanel from "./GraphDataPanel.jsx";
-import LiteralsPanel  from "./LiteralsPanel.jsx";
+import {setInformationPanel} from "../../../actions/actions.js";
+import GraphDataPanel        from "./GraphDataPanel.jsx";
+import LiteralsPanel         from "./LiteralsPanel.jsx";
 
 export default class extends React.Component {
     constructor(props) {
         super(props);
     }
 
+    handleTabChange(selectedTab) {
+        setInformationPanel(selectedTab);
+    }
+
     render() {
         return (
-            <Tabs defaultActiveKey={1} id="right-sidebar-info">
-                <Tab eventKey={1} title="Literals">
+            <Tabs defaultActiveKey={this.props.config.informationPanel} onSelect={key => this.handleTabChange(key)} id="type">
+                <Tab eventKey="literals" title="Literals">
                     <LiteralsPanel rdf={this.props.rdf} selection={this.props.selection} />
                 </Tab>
-                <Tab eventKey={2} title="Graph Data">
+                <Tab eventKey="graphData" title="Graph Data">
                     <GraphDataPanel />
                 </Tab>
             </Tabs>

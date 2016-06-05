@@ -66,14 +66,14 @@ export default class extends React.Component {
      */
     ok() {
         actions.save(this.props.graph, this.props.profile, this.state.filename);
-        actions.setDialogVisibility("save", false);
+        actions.setDialogVisibility("saveTurtle", false);
     }
 
     /**
      * Closes the dialog.
      */
     cancel() {
-        actions.setDialogVisibility("save", false);
+        actions.setDialogVisibility("saveTurtle", false);
     }
 
     /**
@@ -83,7 +83,7 @@ export default class extends React.Component {
         return (
             <Modal show={this.props.visible} onHide={() => this.cancel()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Save Dialog</Modal.Title>
+                    <Modal.Title>Save</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form>

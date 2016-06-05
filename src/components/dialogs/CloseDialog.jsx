@@ -44,7 +44,7 @@ export default class extends React.Component {
         return (
             <Modal show={this.props.visible} onHide={() => this.cancel()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Close Dialog</Modal.Title>
+                    <Modal.Title>Close</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <p>Do you really want to close this graph?</p>

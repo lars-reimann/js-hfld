@@ -1,4 +1,8 @@
-import dispatcher                 from "../dispatcher/dispatcher.js";
+import dispatcher from "../dispatcher/dispatcher.js";
+
+export function setInformationPanel(informationPanel) {
+    dispatcher.dispatch({ type: "SET_INFORMATION_PANEL", informationPanel });
+}
 
 export function setPermanentLeftSidebar(enabled) {
     dispatcher.dispatch({ type: "SET_PERMANENT_LEFT_SIDEBAR", enabled });

@@ -27,10 +27,13 @@ class DialogStore extends ReduceStore {
             showCloseDialog:              false,
             showEadesLayoutDialog:        false,
             showFruchtermannLayoutDialog: false,
-            showOpenDialog:               false,
+            showOpenConfigDialog:         false,
+            showOpenLayoutDialog:         false,
+            showOpenStyleDialog:          false,
+            showOpenTurtleDialog:         false,
             showRandomLayoutDialog:       false,
             showRotateDialog:             false,
-            showSaveDialog:               false,
+            showSaveTurtleDialog:         false,
             showScaleDialog:              false,
             showTranslateDialog:          false,
         });
@@ -66,14 +69,20 @@ class DialogStore extends ReduceStore {
             return state.set("showEadesLayoutDialog", show);
         case "fruchtermannLayout":
             return state.set("showFruchtermannLayoutDialog", show);
-        case "open":
-            return state.set("showOpenDialog", show);
+        case "openConfig":
+            return state.set("showOpenConfigDialog", show);
+        case "openLayout":
+            return state.set("showOpenLayoutDialog", show);
+        case "openStyle":
+            return state.set("showOpenStyleDialog", show);
+        case "openTurtle":
+            return state.set("showOpenTurtleDialog", show);
         case "randomLayout":
             return state.set("showRandomLayoutDialog", show);
         case "rotate":
             return state.set("showRotateDialog", show);
-        case "save":
-            return state.set("showSaveDialog", show);
+        case "saveTurtle":
+            return state.set("showSaveTurtleDialog", show);
         case "scale":
             return state.set("showScaleDialog", show);
         case "translate":

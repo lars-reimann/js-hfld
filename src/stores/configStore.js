@@ -24,6 +24,7 @@ class ConfigStore extends ReduceStore {
      */
     getInitialState() {
         return Immutable.Map({
+            informationPanel:        "literals",
             permanentLeftSidebar:    false,
             permanentMenubar:        true,
             permanentRightSidebar:   true,
@@ -57,6 +58,8 @@ class ConfigStore extends ReduceStore {
      */
     reduce(state, action) {
         switch (action.type) {
+        case "SET_INFORMATION_PANEL":
+            return state.set("informationPanel", action.informationPanel);
         case "SET_PERMANENT_LEFT_SIDEBAR":
             return state.set("permanentLeftSidebar", action.enabled);
         case "SET_PERMANENT_MENUBAR":

@@ -15,18 +15,18 @@ export default class extends React.Component {
     }
 
     leftSidebarIsHidden() {
-        return !this.props.app.permanentLeftSidebar;
+        return !this.props.config.permanentLeftSidebar;
     }
 
     rightSidebarIsHidden() {
-        return !this.props.app.permanentRightSidebar &&
-                this.props.app.viewport !== "graphical";
+        return !this.props.config.permanentRightSidebar &&
+                this.props.config.viewport !== "graphical";
     }
 
     render() {
         return (
             <div>
-                <Menubar app={this.props.app} />
+                <Menubar app={this.props.config} />
                 <Grid fluid>
                     <Row>
                         { this.leftSidebarIsHidden() ? null :
@@ -35,7 +35,7 @@ export default class extends React.Component {
                             </Col>
                         }
                         <Col xs={9 + (this.leftSidebarIsHidden() ? 1 : 0) + (this.rightSidebarIsHidden() ? 2 : 0)}>
-                            <Viewport {...this.props}/>
+                            <Viewport {...this.props} />
                         </Col>
                         { this.rightSidebarIsHidden() ? null :
                             <Col xs={2}>

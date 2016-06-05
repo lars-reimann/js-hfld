@@ -2,14 +2,32 @@ import dispatcher from "../dispatcher/dispatcher.js";
 
 // Layout ---------------------------------------------------------------------
 
+/**
+ * Uses the Eades-Layout-Algorithm to position the nodes of the graph.
+ *
+ * @param {Object} conf
+ * The configuration of the algorithm.
+ */
 export function eadesLayout(conf) {
     dispatcher.dispatch({ type: "EADES_LAYOUT", conf});
 }
 
+/**
+ * Uses the Fruchtermann-Layout-Algorithm to position the nodes of the graph.
+ *
+ * @param {Object} conf
+ * The configuration of the algorithm.
+ */
 export function fruchtermannLayout(conf) {
     dispatcher.dispatch({ type: "FRUCHTERMANN_LAYOUT", conf});
 }
 
+/**
+ * Randomly positions the nodes of the graph.
+ *
+ * @param {Object} conf
+ * The configuration of the algorithm.
+ */
 export function randomLayout(conf) {
     dispatcher.dispatch({ type: "RANDOM_LAYOUT", conf});
 }

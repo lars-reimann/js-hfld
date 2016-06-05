@@ -4,9 +4,9 @@ import Immutable     from "immutable";
 import dispatcher from "../dispatcher/dispatcher.js";
 
 /**
- * Stores various stuff of the app state.
+ * Stores the state of various options.
  */
-class AppStore extends ReduceStore {
+class ConfigStore extends ReduceStore {
 
     /**
      * @param {Dispatcher} dispatcher
@@ -75,4 +75,4 @@ class AppStore extends ReduceStore {
     }
 }
 
-export default new AppStore(dispatcher);
+export default new ConfigStore(dispatcher);

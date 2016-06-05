@@ -10,11 +10,11 @@ export default class extends React.Component {
     }
 
     render() {
-        switch(this.props.app.viewport) {
+        switch(this.props.config.viewport) {
         case "source":
             return <SourceView rdf={this.props.rdf} />;
         case "table":
-            return <TableView app={this.props.app} rdf={this.props.rdf} />;
+            return <TableView app={this.props.config} rdf={this.props.rdf} />;
         case "graphical":
             return <GraphicalView />;
         default:

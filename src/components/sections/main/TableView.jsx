@@ -32,16 +32,37 @@ export default class extends React.Component {
         }
     }
 
+    tripleSelectionStyle(tripleId) {
+        if (this.props.selection.triples.includes(tripleId)) {
+            return {
+                backgroundColor: "lightYellow",
+            };
+        } else {
+            return {};
+        }
+    }
+
+    nodeSelectionStyle(nodeId) {console.log(this.props.selection.nodes, nodeId)
+        if (this.props.selection.nodes.includes(nodeId)) {
+            return {
+                color: "maroon",
+                fontWeight: "bold",
+            };
+        } else {
+            return {};
+        }
+    }
+
     render() {
         const {column, order} = this.props.config.tableSorting;
 
         const rows = _([...this.props.rdf.graph])
             .orderBy([triple => this.shrink(triple[column]).toLowerCase()], [order])
             .map(triple => (
-                <tr key={triple.id}>
-                    <td>{this.shrink(triple.subject)}</td>
-                    <td>{this.shrink(triple.predicate)}</td>
-                    <td>{this.shrink(triple.object)}</td>
+                <tr key={triple.id} style={this.tripleSelectionStyle(triple.id)}>
+                    <td style={this.nodeSelectionStyle(triple.subject.id)}>{this.shrink(triple.subject)}</td>
+                    <td style={this.nodeSelectionStyle(triple.predicate.id)}>{this.shrink(triple.predicate)}</td>
+                    <td style={this.nodeSelectionStyle(triple.object.id)}>{this.shrink(triple.object)}</td>
                 </tr>))
             .value();
 

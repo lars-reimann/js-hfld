@@ -24,8 +24,8 @@ class SelectionStore extends ReduceStore {
      */
     getInitialState() {
         return Immutable.Map({
-            nodes:   Immutable.Set(),
-            triples: Immutable.Set(),
+            nodes:   Immutable.Set(["n0", "n1", "n8"]),
+            triples: Immutable.Set(["t0"]),
         });
     }
 

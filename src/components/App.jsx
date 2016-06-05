@@ -5,7 +5,7 @@ import * as dialogs from "./dialogs/dialogs.js";
 
 import AlertQueue from "./alerts/AlertQueue.jsx";
 
-import {Menubar, LeftSidebar, Viewport, RightSidebar} from "./sections/sections.js";
+import {Menubar, LeftSidebar, Viewport, InformationPanel} from "./sections/sections.js";
 
 import * as actions from "../actions/actions.js";
 
@@ -39,7 +39,7 @@ export default class extends React.Component {
                         </Col>
                         { this.rightSidebarIsHidden() ? null :
                             <Col xs={2}>
-                                <RightSidebar />
+                                <InformationPanel />
                             </Col>
                         }
                     </Row>

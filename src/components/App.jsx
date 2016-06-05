@@ -69,20 +69,20 @@ export default class extends React.Component {
                     visible={this.props.dialogs.showOpenConfigDialog}
                 />
                 <dialogs.OpenDialog
-                    name="openTurtle"
-                    openDirect={actions.openTurtleDirect}
-                    openFile={actions.openTurtleFile}
-                    openURL={actions.openTurtleURL}
-                    title="Open Turtle"
-                    visible={this.props.dialogs.showOpenTurtleDialog}
+                    name="openLayout"
+                    openDirect={actions.openLayoutDirect}
+                    openFile={actions.openLayoutFile}
+                    openURL={actions.openLayoutURL}
+                    title="Open Layout"
+                    visible={this.props.dialogs.showOpenLayoutDialog}
                 />
                 <dialogs.OpenDialog
-                    name="openTurtle"
-                    openDirect={actions.openTurtleDirect}
-                    openFile={actions.openTurtleFile}
-                    openURL={actions.openTurtleURL}
-                    title="Open Turtle"
-                    visible={this.props.dialogs.showOpenTurtleDialog}
+                    name="openStyle"
+                    openDirect={actions.openStyleDirect}
+                    openFile={actions.openStyleFile}
+                    openURL={actions.openStyleURL}
+                    title="Open Style"
+                    visible={this.props.dialogs.showOpenStyleDialog}
                 />
                 <dialogs.OpenDialog
                     name="openTurtle"
@@ -94,7 +94,7 @@ export default class extends React.Component {
                 />
                 <dialogs.RandomLayoutDialog visible={this.props.dialogs.showRandomLayoutDialog} />
                 <dialogs.RotateDialog visible={this.props.dialogs.showRotateDialog} />
-                <dialogs.SaveDialog
+                <dialogs.SaveTurtleDialog
                     graph={this.props.rdf.graph}
                     profile={this.props.rdf.profile}
                     visible={this.props.dialogs.showSaveTurtleDialog}

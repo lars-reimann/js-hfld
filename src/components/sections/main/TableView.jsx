@@ -3,6 +3,7 @@ import React   from "react";
 import {Table} from "react-bootstrap";
 
 import * as actions from "../../../actions/actions.js";
+import {shrinkNodeValue} from "../../../utils/utils.js";
 
 import SortingGlyphicon from "../../glyphicons/SortingGlyphicon.jsx";
 
@@ -13,10 +14,11 @@ export default class extends React.Component {
     }
 
     shrink(node) {
-        if (this.props.config.shrinkNodeValuesInTable) {
-            return this.props.rdf.profile.nodeToString(node);
-        }
-        return node.toString();
+        return shrinkNodeValue(
+            this.props.rdf.profile,
+            this.props.config.shrinkNodeValues,
+            node
+        );
     }
 
     swapOrder(order) {
@@ -42,7 +44,7 @@ export default class extends React.Component {
         }
     }
 
-    nodeSelectionStyle(nodeId) {console.log(this.props.selection.nodes, nodeId)
+    nodeSelectionStyle(nodeId) {
         if (this.props.selection.nodes.includes(nodeId)) {
             return {
                 color: "maroon",

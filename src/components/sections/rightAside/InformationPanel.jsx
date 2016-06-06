@@ -18,7 +18,7 @@ export default class extends React.Component {
         return (
             <Tabs defaultActiveKey={this.props.config.informationPanel} onSelect={key => this.handleTabChange(key)} id="type">
                 <Tab eventKey="literals" title="Literals">
-                    <LiteralsPanel rdf={this.props.rdf} selection={this.props.selection} />
+                    <LiteralsPanel shrinkNodeValues={this.props.config.shrinkNodeValues} rdf={this.props.rdf} selection={this.props.selection} />
                 </Tab>
                 <Tab eventKey="graphData" title="Graph Data">
                     <GraphDataPanel />

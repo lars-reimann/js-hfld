@@ -28,7 +28,7 @@ class ConfigStore extends ReduceStore {
             permanentLeftSidebar:    false,
             permanentMenubar:        true,
             permanentRightSidebar:   true,
-            shrinkNodeValuesInTable: true,
+            shrinkNodeValues:        true,
             tableSorting:            {column: "subject", order: "asc"},
             viewport:                "graphical",
         });
@@ -68,8 +68,8 @@ class ConfigStore extends ReduceStore {
             return state.set("permanentMenubar", action.enabled);
         case "SET_PERMANENT_RIGHT_SIDEBAR":
             return state.set("permanentRightSidebar", action.enabled);
-        case "SET_SHRINK_NODE_VALUES_IN_TABLE":
-            return state.set("shrinkNodeValuesInTable", action.enabled);
+        case "SET_SHRINK_NODE_VALUES":
+            return state.set("shrinkNodeValues", action.enabled);
         case "SET_TABLE_SORTING":
             return state.set("tableSorting", action.sorting);
         case "SET_VIEWPORT":

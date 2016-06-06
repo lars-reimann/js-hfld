@@ -52,16 +52,12 @@ export default class extends React.Component {
             return actions.setPermanentMenubar(!this.props.permanentMenubar);
         case "TOGGLE_PERMANENT_RIGHT_SIDEBAR":
             return actions.setPermanentRightSidebar(!this.props.permanentRightSidebar);
-        case "TOGGLE_SHRINK_NODE_VALUES_IN_TABLE":
-            return actions.setShrinkNodeValuesInTable(!this.props.shrinkNodeValuesInTable);
+        case "TOGGLE_SHRINK_NODE_VALUES":
+            return actions.setShrinkNodeValues(!this.props.shrinkNodeValues);
         }
     }
 
     render() {
-        const style = {
-            visibility: "hidden"
-        };
-
         return (
             <Navbar fluid inverse staticTop>
                 <Navbar.Header>
@@ -138,14 +134,9 @@ export default class extends React.Component {
                             <MenuItem eventKey="TOGGLE_PERMANENT_RIGHT_SIDEBAR">
                                 <ToggleGlyphicon active={this.props.permanentRightSidebar} /> Permanent Right Sidebar
                             </MenuItem>
-                            { this.props.viewport !== "table" ? null :
-                                <MenuItem divider />
-                            }
-                            { this.props.viewport !== "table" ? null :
-                                <MenuItem eventKey="TOGGLE_SHRINK_NODE_VALUES_IN_TABLE">
-                                    <ToggleGlyphicon active={this.props.shrinkNodeValuesInTable} /> Shrink Node Values
-                                </MenuItem>
-                            }
+                            <MenuItem eventKey="TOGGLE_SHRINK_NODE_VALUES">
+                                <ToggleGlyphicon active={this.props.shrinkNodeValues} /> Shrink Node Values
+                            </MenuItem>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>

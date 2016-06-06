@@ -16,8 +16,8 @@ export function setPermanentRightSidebar(enabled) {
     dispatcher.dispatch({ type: "SET_PERMANENT_RIGHT_SIDEBAR", enabled });
 }
 
-export function setShrinkNodeValuesInTable(enabled) {
-    dispatcher.dispatch({ type: "SET_SHRINK_NODE_VALUES_IN_TABLE", enabled });
+export function setShrinkNodeValues(enabled) {
+    dispatcher.dispatch({ type: "SET_SHRINK_NODE_VALUES", enabled });
 }
 
 export function setTableSorting(sorting) {

@@ -1,13 +1,24 @@
 import React from "react";
 
-export default class extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+import PredicateList from "./PredicateList.jsx";
 
-    render() {console.log(this.props)
-        return (
-            <p>Literals...</p>
-        );
-    }
+export default function (props) {
+    const entries = props.selection.nodes
+        .map(   id   => props.rdf.graph.getNodeById(id))
+        .filter(subject => subject !== undefined)
+        // .filter(subject => ) // TODO filter empty predicate lists
+
+        // add functions subjectHasLiteral and predicateHasLiterals to RDF
+        .map(   subject => <PredicateList
+            key={subject.id}
+            subject={subject}
+            rdf={props.rdf}
+            shrinkNodeValues={props.shrinkNodeValues}
+        />);
+
+    return (
+        <div style={{overflow: "auto"}}>
+            {entries}
+        </div>
+    );
 }

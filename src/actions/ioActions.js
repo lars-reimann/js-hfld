@@ -42,7 +42,7 @@ function parseConfig(s) {
     }
 }
 
-export function writeConfig(config) {
+function writeConfig(config) {
     return JSON.stringify(config);
 }
 

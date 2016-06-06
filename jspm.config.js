@@ -5,7 +5,7 @@ SystemJS.config({
     devConfig: {
         "map": {
             "@ignavia/earl": "npm:@ignavia/earl@1.3.1",
-            "@ignavia/rdf": "npm:@ignavia/rdf@1.3.0",
+            "@ignavia/rdf": "npm:@ignavia/rdf@1.5.0",
             "@ignavia/util": "npm:@ignavia/util@1.3.3",
             "babel-plugin-transform-async-to-generator": "npm:babel-plugin-transform-async-to-generator@6.8.0",
             "babel-plugin-transform-export-extensions": "npm:babel-plugin-transform-export-extensions@6.8.0",
@@ -34,12 +34,6 @@ SystemJS.config({
             "npm:@ignavia/earl@1.3.1": {
                 "map": {
                     "@ignavia/util": "npm:@ignavia/util@1.3.3"
-                }
-            },
-            "npm:@ignavia/rdf@1.3.0": {
-                "map": {
-                    "@ignavia/util": "npm:@ignavia/util@1.3.3",
-                    "n3": "npm:n3@0.4.5"
                 }
             },
             "npm:@ignavia/util@1.3.3": {
@@ -186,7 +180,7 @@ SystemJS.config({
                     "babel-runtime": "npm:babel-runtime@6.9.2",
                     "babel-traverse": "npm:babel-traverse@6.9.0",
                     "babel-types": "npm:babel-types@6.9.1",
-                    "babylon": "npm:babylon@6.8.0",
+                    "babylon": "npm:babylon@6.8.1",
                     "lodash": "npm:lodash@4.13.1"
                 }
             },
@@ -196,16 +190,11 @@ SystemJS.config({
                     "babel-messages": "npm:babel-messages@6.8.0",
                     "babel-runtime": "npm:babel-runtime@6.9.2",
                     "babel-types": "npm:babel-types@6.9.1",
-                    "babylon": "npm:babylon@6.8.0",
+                    "babylon": "npm:babylon@6.8.1",
                     "debug": "npm:debug@2.2.0",
                     "globals": "npm:globals@8.18.0",
                     "invariant": "npm:invariant@2.2.1",
                     "lodash": "npm:lodash@4.13.1"
-                }
-            },
-            "npm:babylon@6.8.0": {
-                "map": {
-                    "babel-runtime": "npm:babel-runtime@6.9.2"
                 }
             },
             "npm:chalk@1.1.3": {
@@ -295,6 +284,17 @@ SystemJS.config({
                     "lodash": "npm:lodash@4.13.1",
                     "babel-runtime": "npm:babel-runtime@6.9.2",
                     "to-fast-properties": "npm:to-fast-properties@1.0.2"
+                }
+            },
+            "npm:@ignavia/rdf@1.5.0": {
+                "map": {
+                    "@ignavia/util": "npm:@ignavia/util@1.3.3",
+                    "n3": "npm:n3@0.4.5"
+                }
+            },
+            "npm:babylon@6.8.1": {
+                "map": {
+                    "babel-runtime": "npm:babel-runtime@6.9.2"
                 }
             }
         }

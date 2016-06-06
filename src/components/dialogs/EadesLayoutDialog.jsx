@@ -180,7 +180,7 @@ export default class extends React.Component {
                             </ControlLabel>
                             <FormControl
                                 type="number"
-                                value={this.state.idealDistance}
+                                value={this.state.idealDistance} // TODO: make ideal distance based on screen diagonal
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />

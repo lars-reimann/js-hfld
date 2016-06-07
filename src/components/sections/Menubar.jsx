@@ -12,6 +12,12 @@ export default class extends React.Component {
 
     handleSelect(eventKey) {
         switch (eventKey) {
+        case "CLEAR_NODE_SELECTION":
+            return actions.clearNodeSelection();
+        case "CLEAR_SELECTION":
+            return actions.clearSelection();
+        case "CLEAR_TRIPLE_SELECTION":
+            return actions.clearTripleSelection();
         case "SHOW_OPEN_CONFIG_DIALOG":
             return actions.setDialogVisibility("openConfig", true);
         case "SHOW_OPEN_LAYOUT_DIALOG":
@@ -91,6 +97,17 @@ export default class extends React.Component {
                             <MenuItem divider />
                             <MenuItem eventKey="SHOW_CLOSE_DIALOG">
                                 Close...
+                            </MenuItem>
+                        </NavDropdown>
+                        <NavDropdown title="Edit" id="menubar-edit">
+                            <MenuItem eventKey="CLEAR_NODE_SELECTION">
+                                Clear Node Selection
+                            </MenuItem>
+                            <MenuItem eventKey="CLEAR_TRIPLE_SELECTION">
+                                Clear Triple Selection
+                            </MenuItem>
+                            <MenuItem eventKey="CLEAR_SELECTION">
+                                Clear Selection
                             </MenuItem>
                         </NavDropdown>
                         <NavDropdown title="Layout" id="menubar-layout">

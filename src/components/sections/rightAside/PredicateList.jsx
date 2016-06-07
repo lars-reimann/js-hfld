@@ -12,8 +12,9 @@ function shrink(props) {
 }
 
 export default function (props) {
-    let entries = [...props.rdf.graph.predicates(props.subject)]
-        .filter(predicate => [...props.rdf.graph.literals(props.subject, predicate)].length !== 0)
+    const graph = props.rdf.graph;
+    let entries = [...graph.predicates(props.subject)]
+        .filter(predicate => graph.predicateHasLiterals(props.subject, predicate))
         .map(predicate => <LiteralsList
             key={predicate.id}
             subject={props.subject}

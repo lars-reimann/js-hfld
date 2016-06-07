@@ -142,7 +142,7 @@ export default class extends React.Component {
                                 <ToggleGlyphicon active={this.props.viewport === "graphical"} /> Graphical
                             </MenuItem>
                             <MenuItem divider />
-                            <MenuItem eventKey="TOGGLE_PERMANENT_MENUBAR">
+                            <MenuItem eventKey="TOGGLE_PERMANENT_MENUBAR" disabled>
                                 <ToggleGlyphicon active={this.props.permanentMenubar} /> Permanent Menubar
                             </MenuItem>
                             <MenuItem eventKey="TOGGLE_PERMANENT_LEFT_SIDEBAR">

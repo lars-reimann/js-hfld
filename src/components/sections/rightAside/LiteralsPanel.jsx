@@ -3,12 +3,8 @@ import React from "react";
 import PredicateList from "./PredicateList.jsx";
 
 export default function (props) {
-    const entries = props.selection.getState().nodes
-        .map(   id   => props.rdf.graph.getNodeById(id))
-        .filter(subject => subject !== undefined)
-        // .filter(subject => ) // TODO filter empty predicate lists
-
-        // add functions subjectHasLiteral and predicateHasLiterals to RDF
+    const entries = props.selection.getSelectedNodes()
+        .filter(subject => props.rdf.graph.subjectHasLiterals(subject))
         .map(   subject => <PredicateList
             key={subject.id}
             subject={subject}

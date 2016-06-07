@@ -34,22 +34,12 @@ class SelectionStore extends ReduceStore {
     }
 
     /**
-     * Returns an object with the dialog state.
-     *
-     * @return {Object}
-     * The state of the dialogs.
-     */
-    getState() {
-        return super.getState().toObject();
-    }
-
-    /**
      * Tests if the given node (or an equivalent one) is selected.
      *
      * @param {String} idToCheck
      * The ID of the node to test.
      */
-    isSelectedNode(idToCheck, selection = this.getState().nodes) {
+    isSelectedNode(idToCheck, selection = this.getNodeSelection()) {
         for (let id of this.iterEquivalentIds(idToCheck)) {
             if (selection.has(id)) {
                 return true;
@@ -64,8 +54,54 @@ class SelectionStore extends ReduceStore {
      * @param {String} id
      * The ID of the triple to test.
      */
-    isSelectedTriple(id, selection = this.getState().triples) {
+    isSelectedTriple(id, selection = this.getTripleSelection()) {
         return selection.has(id);
+    }
+
+    getSelectedNodes(selection = this.getNodeSelection()) {
+        const graph = this.getGraph();
+        return [...selection].map(id => graph.getNodeById(id));
+    }
+
+    getSelectedTriples(selection = this.getTripleSelection()) {
+        const graph = this.getGraph();
+        return [...selection].map(id => graph.getTripleById(id));
+    }
+
+    /**
+     * Retrieves the node selection from the current state.
+     *
+     * @return {Immutable.Set}
+     * The node selection.
+     *
+     * @private
+     */
+    getNodeSelection() {
+        return this.getState().get("nodes");
+    }
+
+    /**
+     * Retrieves the triple selection from the current state.
+     *
+     * @return {Immutable.Set}
+     * The triple selection.
+     *
+     * @private
+     */
+    getTripleSelection() {
+        return this.getState().get("triples");
+    }
+
+    /**
+     * Retrieves the graph from the RDF store.
+     *
+     * @return {Graph}
+     * The graph.
+     *
+     * @private
+     */
+    getGraph() {
+        return rdfStore.getState().graph;
     }
 
     /**
@@ -254,7 +290,7 @@ class SelectionStore extends ReduceStore {
      * @private
      */
     * iterEquivalentIds(id) {
-        const graph       = rdfStore.getState().graph;
+        const graph       = this.getGraph();
         const nodeToMatch = graph.getNodeById(id);
         for (let node of graph.iterEquivalentNodes(nodeToMatch)) {
             yield node.id;

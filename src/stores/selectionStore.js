@@ -40,11 +40,32 @@ class SelectionStore extends ReduceStore {
      * The state of the dialogs.
      */
     getState() {
-        const {nodes, triples} = super.getState().toObject();
-        return {
-            nodes:   nodes.toArray(),
-            triples: triples.toArray(),
-        };
+        return super.getState().toObject();
+    }
+
+    /**
+     * Tests if the given node (or an equivalent one) is selected.
+     *
+     * @param {String} idToCheck
+     * The ID of the node to test.
+     */
+    isSelectedNode(idToCheck, selection = this.getState().nodes) {
+        for (let id of this.iterEquivalentIds(idToCheck)) {
+            if (selection.has(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Tests if the given triple is selected.
+     *
+     * @param {String} id
+     * The ID of the triple to test.
+     */
+    isSelectedTriple(id, selection = this.getState().triples) {
+        return selection.has(id);
     }
 
     /**
@@ -58,6 +79,8 @@ class SelectionStore extends ReduceStore {
      *
      * @return {Immutable.Map}
      * The new state.
+     *
+     * @private
      */
     selectNodes(state, ids) {
         let selection = state.get("nodes");
@@ -67,8 +90,19 @@ class SelectionStore extends ReduceStore {
         return state.set("nodes", selection);
     }
 
+    /**
+     * Selects the given node.
+     *
+     * @param {Immutable.Set} selection
+     * The currently selected nodes.
+     *
+     * @param {String} id
+     * The ID of the node to select.
+     *
+     * @private
+     */
     selectNode(selection, id) {
-        if (this.isSelectedNode(selection, id)) {
+        if (this.isSelectedNode(id, selection)) {
             return selection;
         }
         return selection.add(id);
@@ -85,6 +119,8 @@ class SelectionStore extends ReduceStore {
      *
      * @return {Immutable.Map}
      * The new state.
+     *
+     * @private
      */
     selectTriple(state, field, ids) {
         const oldSelection = state.get("triples");
@@ -103,6 +139,8 @@ class SelectionStore extends ReduceStore {
      *
      * @return {Immutable.Map}
      * The new state.
+     *
+     * @private
      */
     deselectNodes(state, ids) {
         let selection = state.get("nodes");
@@ -112,9 +150,20 @@ class SelectionStore extends ReduceStore {
         return state.set("nodes", selection);
     }
 
-    deselectNode(selection, id) {
+    /**
+     * Deselects the given node.
+     *
+     * @param {Immutable.Set} selection
+     * The currently selected nodes.
+     *
+     * @param {String} idToDeselect
+     * The ID of the node to deselect.
+     *
+     * @private
+     */
+    deselectNode(selection, idToDeselect) {
         let result = selection;
-        for (let id of this.iterEquivalentIds(id)) {
+        for (let id of this.iterEquivalentIds(idToDeselect)) {
             result = result.delete(id);
         }
         return result;
@@ -131,6 +180,8 @@ class SelectionStore extends ReduceStore {
      *
      * @return {Immutable.Map}
      * The new state.
+     *
+     * @private
      */
     deselectTriples(state, ids) {
         const oldSelection = state.get("triples");
@@ -150,28 +201,20 @@ class SelectionStore extends ReduceStore {
      *
      * @return {Immutable.Map}
      * The new state.
+     *
+     * @private
      */
     toggleNodeSelection(state, ids) {
         const oldSelection = state.get("nodes");
         let   newSelection = oldSelection;
         for (let id of ids) {
-            if (this.isSelectedNode(oldSelection, id)) {
+            if (this.isSelectedNode(id, oldSelection)) {
                 newSelection = this.deselectNode(newSelection, id);
             } else {
                 newSelection = this.selectNode(newSelection, id);
             }
         }
-        console.log([...newSelection])
         return state.set("nodes", newSelection);
-    }
-
-    isSelectedNode(selection, idToCheck) {
-        for (let id of this.iterEquivalentIds(idToCheck)) {
-            if (selection.has(id)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
@@ -186,6 +229,8 @@ class SelectionStore extends ReduceStore {
      *
      * @return {Immutable.Map}
      * The new state.
+     *
+     * @private
      */
     toggleTripleSelection(state, ids) {
         const oldSelection = state.get("triples");
@@ -200,6 +245,14 @@ class SelectionStore extends ReduceStore {
         return state.set("triples", newSelection);
     }
 
+    /**
+     * Yields the IDs of equivalent nodes.
+     *
+     * @param {String} id
+     * The ID of the node to match.
+     *
+     * @private
+     */
     * iterEquivalentIds(id) {
         const graph       = rdfStore.getState().graph;
         const nodeToMatch = graph.getNodeById(id);

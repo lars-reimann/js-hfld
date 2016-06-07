@@ -39,7 +39,7 @@ export default class extends React.Component {
     }
 
     tripleSelectionStyle(tripleId) {
-        if (this.props.selection.triples.includes(tripleId)) {
+        if (this.props.selection.isSelectedTriple(tripleId)) {
             return {
                 backgroundColor: "lightYellow",
             };
@@ -49,7 +49,7 @@ export default class extends React.Component {
     }
 
     nodeSelectionStyle(nodeId) {
-        if (this.props.selection.nodes.includes(nodeId)) {
+        if (this.props.selection.isSelectedNode(nodeId)) {
             return {
                 color: "maroon",
                 fontWeight: "bold",

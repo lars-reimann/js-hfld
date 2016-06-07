@@ -3,7 +3,7 @@ import React from "react";
 import PredicateList from "./PredicateList.jsx";
 
 export default function (props) {
-    const entries = props.selection.nodes
+    const entries = props.selection.getState().nodes
         .map(   id   => props.rdf.graph.getNodeById(id))
         .filter(subject => subject !== undefined)
         // .filter(subject => ) // TODO filter empty predicate lists

@@ -2,12 +2,13 @@ import React from "react";
 import {Tabs, Tab} from "react-bootstrap";
 
 import {setInformationPanel} from "../../../actions/actions.js";
-import GraphDataPanel        from "./GraphDataPanel.jsx";
-import LiteralsPanel         from "./LiteralsPanel.jsx";
+import GraphDataPanel        from "./graphDataPanel/GraphDataPanel.jsx";
+import LiteralsPanel         from "./literalsPanel/LiteralsPanel.jsx";
 
 export default class extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props)
     }
 
     handleTabChange(selectedTab) {
@@ -21,7 +22,7 @@ export default class extends React.Component {
                     <LiteralsPanel shrinkNodeValues={this.props.config.shrinkNodeValues} rdf={this.props.rdf} selection={this.props.selection} />
                 </Tab>
                 <Tab eventKey="graphData" title="Graph Data">
-                    <GraphDataPanel />
+                    <GraphDataPanel earl={this.props.earl} selection={this.props.selection}/>
                 </Tab>
             </Tabs>
         );

@@ -1,17 +1,14 @@
 import React from "react";
 
-import {shrinkNodeValue} from "../../../utils/utils.js";
-
-function shrink(props, node) { // TODO rename to nodeToString or something
-    return shrinkNodeValue(
-        props.rdf.profile,
-        props.shrinkNodeValues,
-        node
+function shrink(props, node) {
+    return props.rdf.nodeToString(
+        node,
+        props.shrinkNodeValue
     );
 }
 
 export default function (props) {
-    let entries = [...props.rdf.graph.literals(props.subject, props.predicate)]
+    let entries = [...props.rdf.getGraph().literals(props.subject, props.predicate)]
         .map(literal => <li key={literal.id}>
             {shrink(props, literal)}
         </li>);

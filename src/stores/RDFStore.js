@@ -4,6 +4,8 @@ import * as rdf from "@ignavia/rdf";
 
 import dispatcher from "../dispatcher/dispatcher.js";
 
+const writer = new rdf.TurtleWriter();
+
 class rdfStore extends Store {
     constructor(dispatcher) {
         super(dispatcher);
@@ -19,6 +21,25 @@ class rdfStore extends Store {
 
     getState() {
         return this.state;
+    }
+
+    getGraph() {
+        return this.state.graph;
+    }
+
+    getProfile() {
+        return this.state.profile;
+    }
+
+    toString() {
+        return writer.serialize(this.state.graph, this.state.profile);
+    }
+
+    nodeToString(node, shrink = true){
+        return (shrink ?
+            this.state.profile.nodeToString(node) :
+            node.toString()
+        );
     }
 
     __onDispatch(action) {

@@ -60,7 +60,7 @@ export default class extends React.Component {
      * Submits the dialog.
      */
     ok() {
-        actions.saveTurtle(this.props.graph, this.props.profile, this.state.filename);
+        actions.saveTurtle(this.props.rdf, this.state.filename);
         actions.setDialogVisibility("saveTurtle", false);
     }
 

@@ -99,8 +99,7 @@ export default class extends React.Component {
                     visible={this.props.dialogs.showSaveConfigDialog}
                 />
                 <dialogs.SaveTurtleDialog
-                    graph={this.props.rdf.graph}
-                    profile={this.props.rdf.profile}
+                    rdf={this.props.rdf}
                     visible={this.props.dialogs.showSaveTurtleDialog}
                 />
                 <dialogs.ScaleDialog visible={this.props.dialogs.showScaleDialog} />

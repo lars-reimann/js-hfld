@@ -1,4 +1,4 @@
-import {TurtleReader, TurtleWriter} from "@ignavia/rdf";
+import {TurtleReader} from "@ignavia/rdf";
 
 import {enqueueAlert} from "./alertActions.js";
 import dispatcher     from "../dispatcher/dispatcher.js";
@@ -70,16 +70,11 @@ export function saveConfig(config, filename) {
 // Turtle ---------------------------------------------------------------------
 
 const parser = new TurtleReader();
-const writer = new TurtleWriter();
 
 export function parseTurtle(s) {
     parser.parse(s)
         .then(result => dispatcher.dispatch({ type: "OPEN_TURTLE", result }))
         .catch(err   => enqueueAlert("danger", err.message));
-}
-
-export function writeTurtle(graph, profile) {
-    return writer.serialize(graph, profile);
 }
 
 export function openTurtleDirect(s) {
@@ -94,8 +89,8 @@ export function openTurtleURL(url) {
     openURL(url, parseTurtle);
 }
 
-export function saveTurtle(graph, profile, filename) {
-    const text = writeTurtle(graph, profile);
+export function saveTurtle(rdf, filename) {
+    const text = rdf.toString();
     download(text, filename);
 }
 

@@ -3,8 +3,8 @@ import React   from "react";
 import {Table} from "react-bootstrap";
 
 import * as actions from "../../../actions/actions.js";
-import {shrinkNodeValue} from "../../../utils/utils.js";
 
+import ToggleGlyphicon from "../../glyphicons/ToggleGlyphicon.jsx";
 import SortingGlyphicon from "../../glyphicons/SortingGlyphicon.jsx";
 
 export default class extends React.Component {
@@ -14,10 +14,9 @@ export default class extends React.Component {
     }
 
     shrink(node) {
-        return shrinkNodeValue(
-            this.props.rdf.profile,
-            this.props.config.shrinkNodeValues,
-            node
+        return this.props.rdf.nodeToString(
+            node,
+            this.props.config.shrinkNodeValues
         );
     }
 
@@ -38,8 +37,8 @@ export default class extends React.Component {
         actions.toggleNodeSelection([e.target.id]);
     }
 
-    handleTripleClick(e) {
-        actions.toggleTripleSelection([e.target.id]);
+    handleTripleClick(id) {
+        actions.toggleTripleSelection([id]);
     }
 
     tripleSelectionStyle(tripleId) {
@@ -67,14 +66,16 @@ export default class extends React.Component {
         const {column, order} = this.props.config.tableSorting;
 
         // TODO: pagination
-        const rows = _([...this.props.rdf.graph])
+        const rows = _([...this.props.rdf.getGraph()])
             .orderBy([triple => this.shrink(triple[column]).toLowerCase()], [order])
             .map(triple => (
                 <tr key={triple.id} style={this.tripleSelectionStyle(triple.id)}>
                     <td onClick={e => this.handleNodeClick(e)} id={triple.subject.id} style={this.nodeSelectionStyle(triple.subject.id)}>{this.shrink(triple.subject)}</td>
                     <td onClick={e => this.handleNodeClick(e)} id={triple.predicate.id} style={this.nodeSelectionStyle(triple.predicate.id)}>{this.shrink(triple.predicate)}</td>
                     <td onClick={e => this.handleNodeClick(e)} id={triple.object.id} style={this.nodeSelectionStyle(triple.object.id)}>{this.shrink(triple.object)}</td>
-                    <td onClick={e => this.handleTripleClick(e)} id={triple.id} style={{width: "10px"}}>o</td>
+                    <td onClick={() => this.handleTripleClick(triple.id)} style={{width: "10px"}}>
+                        <ToggleGlyphicon enabled={this.props.selection.isSelectedTriple(triple.id)} />
+                    </td>
                 </tr>))
             .value();
 

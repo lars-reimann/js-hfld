@@ -26,6 +26,30 @@ class GraphStore extends Store {
         };
     }
 
+    getGraph() {
+        return this.state.earl;
+    }
+
+    getLayout() {
+        return this.state.layout;
+    }
+
+    translateEarlNodeToRDFNode(id) {
+        return this.earlToRDF.nodes.xToY(id)[0];
+    }
+
+    translateRDFNodeToEarlNode(id) {
+        return this.earlToRDF.nodes.yToX(id)[0];
+    }
+
+    translateEarlEdgeToRDFTriple(id) {
+        return this.earlToRDF.triples.xToY(id)[0];
+    }
+
+    translateRDFTripleToEarlEdge(id) {
+        return this.earlToRDF.triples.yToX(id)[0];
+    }
+
     getState() {
         return this.state;
     }

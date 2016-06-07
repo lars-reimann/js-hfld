@@ -1,18 +1,16 @@
 import React from "react";
 
-import {shrinkNodeValue} from "../../../utils/utils.js";
-import LiteralsList      from "./LiteralsList.jsx";
+import LiteralsList from "./LiteralsList.jsx";
 
 function shrink(props) {
-    return shrinkNodeValue(
-        props.rdf.profile,
-        props.shrinkNodeValues,
-        props.subject
+    return props.rdf.nodeToString(
+        props.subject,
+        props.shrinkNodeValues
     );
 }
 
 export default function (props) {
-    const graph = props.rdf.graph;
+    const graph = props.rdf.getGraph();
     let entries = [...graph.predicates(props.subject)]
         .filter(predicate => graph.predicateHasLiterals(props.subject, predicate))
         .map(predicate => <LiteralsList

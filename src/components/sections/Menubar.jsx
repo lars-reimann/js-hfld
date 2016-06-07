@@ -133,26 +133,26 @@ export default class extends React.Component {
                         </NavDropdown>
                         <NavDropdown title="View" id="menubar-view">
                             <MenuItem eventKey="SOURCE_VIEW">
-                                <ToggleGlyphicon active={this.props.viewport === "source"} /> Source
+                                <ToggleGlyphicon enabled={this.props.viewport === "source"} /> Source
                             </MenuItem>
                             <MenuItem eventKey="TABLE_VIEW">
-                                <ToggleGlyphicon active={this.props.viewport === "table"} /> Table
+                                <ToggleGlyphicon enabled={this.props.viewport === "table"} /> Table
                             </MenuItem>
                             <MenuItem eventKey="GRAPHICAL_VIEW">
-                                <ToggleGlyphicon active={this.props.viewport === "graphical"} /> Graphical
+                                <ToggleGlyphicon enabled={this.props.viewport === "graphical"} /> Graphical
                             </MenuItem>
                             <MenuItem divider />
                             <MenuItem eventKey="TOGGLE_PERMANENT_MENUBAR" disabled>
-                                <ToggleGlyphicon active={this.props.permanentMenubar} /> Permanent Menubar
+                                <ToggleGlyphicon enabled={this.props.permanentMenubar} /> Permanent Menubar
                             </MenuItem>
                             <MenuItem eventKey="TOGGLE_PERMANENT_LEFT_SIDEBAR">
-                                <ToggleGlyphicon active={this.props.permanentLeftSidebar} /> Permanent Left Sidebar
+                                <ToggleGlyphicon enabled={this.props.permanentLeftSidebar} /> Permanent Left Sidebar
                             </MenuItem>
                             <MenuItem eventKey="TOGGLE_PERMANENT_RIGHT_SIDEBAR">
-                                <ToggleGlyphicon active={this.props.permanentRightSidebar} /> Permanent Right Sidebar
+                                <ToggleGlyphicon enabled={this.props.permanentRightSidebar} /> Permanent Right Sidebar
                             </MenuItem>
                             <MenuItem eventKey="TOGGLE_SHRINK_NODE_VALUES">
-                                <ToggleGlyphicon active={this.props.shrinkNodeValues} /> Shrink Node Values
+                                <ToggleGlyphicon enabled={this.props.shrinkNodeValues} /> Shrink Node Values
                             </MenuItem>
                         </NavDropdown>
                     </Nav>

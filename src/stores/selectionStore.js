@@ -59,12 +59,12 @@ class SelectionStore extends ReduceStore {
     }
 
     getSelectedNodes(selection = this.getNodeSelection()) {
-        const graph = this.getGraph();
+        const graph = rdfStore.getGraph();
         return [...selection].map(id => graph.getNodeById(id));
     }
 
     getSelectedTriples(selection = this.getTripleSelection()) {
-        const graph = this.getGraph();
+        const graph = rdfStore.getGraph();
         return [...selection].map(id => graph.getTripleById(id));
     }
 
@@ -90,18 +90,6 @@ class SelectionStore extends ReduceStore {
      */
     getTripleSelection() {
         return this.getState().get("triples");
-    }
-
-    /**
-     * Retrieves the graph from the RDF store.
-     *
-     * @return {Graph}
-     * The graph.
-     *
-     * @private
-     */
-    getGraph() {
-        return rdfStore.getState().graph;
     }
 
     /**
@@ -290,7 +278,7 @@ class SelectionStore extends ReduceStore {
      * @private
      */
     * iterEquivalentIds(id) {
-        const graph       = this.getGraph();
+        const graph       = rdfStore.getGraph();
         const nodeToMatch = graph.getNodeById(id);
         for (let node of graph.iterEquivalentNodes(nodeToMatch)) {
             yield node.id;

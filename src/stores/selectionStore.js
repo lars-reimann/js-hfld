@@ -24,7 +24,7 @@ class SelectionStore extends ReduceStore {
      */
     getInitialState() {
         return Immutable.Map({
-            nodes:   Immutable.Set(["n0", "n1", "n8"]),
+            nodes:   Immutable.Set(),
             triples: Immutable.Set(["t0"]),
         });
     }
@@ -106,9 +106,9 @@ class SelectionStore extends ReduceStore {
         let   newSelection = oldSelection;
         for (let id of ids) {
             if (oldSelection.has(id)) {
-                newSelection.delete(id);
+                newSelection = newSelection.delete(id);
             } else {
-                newSelection.add(id);
+                newSelection = newSelection.add(id);
             }
         }
         return state.set(field, newSelection);

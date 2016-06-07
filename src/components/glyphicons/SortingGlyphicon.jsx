@@ -1,6 +1,8 @@
 import React       from "react";
 import {Glyphicon} from "react-bootstrap";
 
+import BlankGlyphicon from "./BlankGlyphicon.jsx";
+
 /**
  * A glyphicon to show the how something is sorted.
  *
@@ -16,6 +18,6 @@ export default function ({order}) {
     } else if (order === "desc") {
         return <Glyphicon glyph="triangle-bottom" />;
     } else {
-        return null;
+        return <BlankGlyphicon />;
     }
 }

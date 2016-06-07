@@ -25,13 +25,17 @@ export default class extends React.Component {
         return order === "asc" ? "desc" : "asc";
     }
 
-    handleClick(column) {
+    handleHeaderClick(column) {
         const {column: curCol, order: curOrd} = this.props.config.tableSorting;
         if (curCol === column) {
             actions.setTableSorting({column, order: this.swapOrder(curOrd)});
         } else {
             actions.setTableSorting({column, order: "asc"});
         }
+    }
+
+    handleDataClick(e) {
+        actions.toggleNodeSelection([e.target.id]);
     }
 
     tripleSelectionStyle(tripleId) {
@@ -58,27 +62,28 @@ export default class extends React.Component {
     render() {
         const {column, order} = this.props.config.tableSorting;
 
+        // TODO: pagination
         const rows = _([...this.props.rdf.graph])
             .orderBy([triple => this.shrink(triple[column]).toLowerCase()], [order])
             .map(triple => (
                 <tr key={triple.id} style={this.tripleSelectionStyle(triple.id)}>
-                    <td style={this.nodeSelectionStyle(triple.subject.id)}>{this.shrink(triple.subject)}</td>
-                    <td style={this.nodeSelectionStyle(triple.predicate.id)}>{this.shrink(triple.predicate)}</td>
-                    <td style={this.nodeSelectionStyle(triple.object.id)}>{this.shrink(triple.object)}</td>
+                    <td onClick={e => this.handleDataClick(e)} id={triple.subject.id} style={this.nodeSelectionStyle(triple.subject.id)}>{this.shrink(triple.subject)}</td>
+                    <td onClick={e => this.handleDataClick(e)} id={triple.predicate.id} style={this.nodeSelectionStyle(triple.predicate.id)}>{this.shrink(triple.predicate)}</td>
+                    <td onClick={e => this.handleDataClick(e)} id={triple.object.id} style={this.nodeSelectionStyle(triple.object.id)}>{this.shrink(triple.object)}</td>
                 </tr>))
             .value();
 
         return (
-            <Table striped bordered responsive hover condensed>
-                <thead style={{cursor: "pointer"}}>
+            <Table striped bordered responsive hover condensed style={{cursor: "pointer"}}>
+                <thead>
                     <tr>
-                        <th onClick={() => this.handleClick("subject")}>
+                        <th onClick={() => this.handleHeaderClick("subject")}>
                             Subject {column === "subject" ? <SortingGlyphicon order={order} /> : null}
                         </th>
-                        <th onClick={() => this.handleClick("predicate")}>
+                        <th onClick={() => this.handleHeaderClick("predicate")}>
                             Predicate {column === "predicate" ? <SortingGlyphicon order={order} /> : null}
                         </th>
-                        <th onClick={() => this.handleClick("object")}>
+                        <th onClick={() => this.handleHeaderClick("object")}>
                             Object {column === "object" ? <SortingGlyphicon order={order} /> : null}
                         </th>
                     </tr>

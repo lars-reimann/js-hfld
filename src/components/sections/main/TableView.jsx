@@ -34,8 +34,12 @@ export default class extends React.Component {
         }
     }
 
-    handleDataClick(e) {
+    handleNodeClick(e) {
         actions.toggleNodeSelection([e.target.id]);
+    }
+
+    handleTripleClick(e) {
+        actions.toggleTripleSelection([e.target.id]);
     }
 
     tripleSelectionStyle(tripleId) {
@@ -67,10 +71,10 @@ export default class extends React.Component {
             .orderBy([triple => this.shrink(triple[column]).toLowerCase()], [order])
             .map(triple => (
                 <tr key={triple.id} style={this.tripleSelectionStyle(triple.id)}>
-                    <td onClick={e => this.handleDataClick(e)} id={triple.subject.id} style={this.nodeSelectionStyle(triple.subject.id)}>{this.shrink(triple.subject)}</td>
-                    <td onClick={e => this.handleDataClick(e)} id={triple.predicate.id} style={this.nodeSelectionStyle(triple.predicate.id)}>{this.shrink(triple.predicate)}</td>
-                    <td onClick={e => this.handleDataClick(e)} id={triple.object.id} style={this.nodeSelectionStyle(triple.object.id)}>{this.shrink(triple.object)}</td>
-                    <td style={{width: "10px"}}>o</td>
+                    <td onClick={e => this.handleNodeClick(e)} id={triple.subject.id} style={this.nodeSelectionStyle(triple.subject.id)}>{this.shrink(triple.subject)}</td>
+                    <td onClick={e => this.handleNodeClick(e)} id={triple.predicate.id} style={this.nodeSelectionStyle(triple.predicate.id)}>{this.shrink(triple.predicate)}</td>
+                    <td onClick={e => this.handleNodeClick(e)} id={triple.object.id} style={this.nodeSelectionStyle(triple.object.id)}>{this.shrink(triple.object)}</td>
+                    <td onClick={e => this.handleTripleClick(e)} id={triple.id} style={{width: "10px"}}>o</td>
                 </tr>))
             .value();
 

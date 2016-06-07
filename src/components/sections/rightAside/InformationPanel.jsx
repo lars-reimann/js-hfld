@@ -5,28 +5,24 @@ import {setInformationPanel} from "../../../actions/actions.js";
 import GraphDataPanel        from "./graphDataPanel/GraphDataPanel.jsx";
 import LiteralsPanel         from "./literalsPanel/LiteralsPanel.jsx";
 
-export default class extends React.Component {
-    constructor(props) {
-        super(props);
-        console.log(props)
-    }
-
-    handleTabChange(selectedTab) {
-        setInformationPanel(selectedTab);
-    }
-
-    render() {
-        return (
-            <Tabs defaultActiveKey={this.props.config.informationPanel} onSelect={key => this.handleTabChange(key)} id="type">
-                <Tab eventKey="literals" title="Literals">
-                    <LiteralsPanel shrinkNodeValues={this.props.config.shrinkNodeValues} rdf={this.props.rdf} selection={this.props.selection} />
-                </Tab>
-                <Tab eventKey="graphData" title="Graph Data">
-                    <GraphDataPanel earl={this.props.earl} selection={this.props.selection}/>
-                </Tab>
-            </Tabs>
-        );
-    }
+export default function (props) {
+    return (
+        <Tabs defaultActiveKey={props.config.informationPanel} onSelect={setInformationPanel} id="type">
+            <Tab eventKey="literals" title="Literals">
+                <LiteralsPanel
+                    shrinkNodeValues={props.config.shrinkNodeValues}
+                    rdf={props.rdf}
+                    selection={props.selection}
+                />
+            </Tab>
+            <Tab eventKey="graphData" title="Graph Data">
+                <GraphDataPanel
+                    shrinkNodeValues={props.config.shrinkNodeValues}
+                    rdf={props.rdf}
+                    graph={props.graph}
+                    selection={props.selection}
+                />
+            </Tab>
+        </Tabs>
+    );
 }
-
-// TODO: store active tab in config store

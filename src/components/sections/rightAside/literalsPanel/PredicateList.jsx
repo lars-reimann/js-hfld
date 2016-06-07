@@ -2,7 +2,7 @@ import React from "react";
 
 import LiteralsList from "./LiteralsList.jsx";
 
-function shrink(props) {
+function titleString(props) {
     return props.rdf.nodeToString(
         props.subject,
         props.shrinkNodeValues
@@ -23,7 +23,7 @@ export default function (props) {
 
     return (
         <div>
-            <h2>{shrink(props)}</h2>
+            <h2>{titleString(props)}</h2>
             {entries}
         </div>
     );

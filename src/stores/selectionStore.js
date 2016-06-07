@@ -58,14 +58,26 @@ class SelectionStore extends ReduceStore {
         return selection.has(id);
     }
 
+    /**
+     * Returns an array of the selected nodes.
+     *
+     * @return {Array<RDFNode>}
+     * The selected nodes.
+     */
     getSelectedNodes(selection = this.getNodeSelection()) {
         const graph = rdfStore.getGraph();
-        return [...selection].map(id => graph.getNodeById(id));
+        return [...selection.values()].map(id => graph.getNodeById(id));
     }
 
+    /**
+     * Returns an array of the selected triples.
+     *
+     * @return {Array<RDFNode>}
+     * The selected triples.
+     */
     getSelectedTriples(selection = this.getTripleSelection()) {
         const graph = rdfStore.getGraph();
-        return [...selection].map(id => graph.getTripleById(id));
+        return [...selection.values()].map(id => graph.getTripleById(id));
     }
 
     /**
@@ -301,6 +313,8 @@ class SelectionStore extends ReduceStore {
         dispatcher.waitFor([rdfToken]);
         switch (action.type) {
         case "CLEAR_SELECTION":
+        case "CLOSE":
+        case "OPEN_TURTLE":
             return this.getInitialState();
         case "CLEAR_NODE_SELECTION":
             return state.set("nodes", Immutable.Set());

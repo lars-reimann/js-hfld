@@ -22,7 +22,7 @@ class AppWrapper extends React.Component {
             alerts:    stores.alertStore.getState(),
             config:    stores.configStore.getState(),
             dialogs:   stores.dialogStore.getState(),
-            graph:     stores.graphStore.getState(),
+            graph:     stores.graphStore,
             rdf:       stores.rdfStore,
             selection: stores.selectionStore,
         };

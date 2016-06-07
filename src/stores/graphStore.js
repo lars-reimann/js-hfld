@@ -1,7 +1,7 @@
 import {Store} from "flux/utils";
 
-import * as earl        from "@ignavia/earl";
-import {Tolkien1To1Map} from "@ignavia/util";
+import * as earl                        from "@ignavia/earl";
+import {Tolkien1To1Map, Tolkien1ToNMap} from "@ignavia/util";
 
 import dispatcher from "../dispatcher/dispatcher.js";
 
@@ -17,9 +17,9 @@ class GraphStore extends Store {
 
     initState() {
         this.state = {
-            earl:      new earl.Graph(),
+            graph:     new earl.Graph(),
             earlToRDF: {
-                nodes: new Tolkien1To1Map(),
+                nodes: new Tolkien1ToNMap(),
                 edges: new Tolkien1To1Map()
             },
             layout:    new Map()
@@ -27,27 +27,31 @@ class GraphStore extends Store {
     }
 
     getGraph() {
-        return this.state.earl;
+        return this.state.graph;
     }
 
     getLayout() {
         return this.state.layout;
     }
 
-    translateEarlNodeToRDFNode(id) {
-        return this.earlToRDF.nodes.xToY(id)[0];
+    convertEarlNodeToRDFNode(earlNode) {
+        const rdfNodeId = this.state.earlToRDF.nodes.convertXToY(earlNode.id)[0];
+        return rdfStore.getGraph().getNodeById(rdfNodeId);
     }
 
-    translateRDFNodeToEarlNode(id) {
-        return this.earlToRDF.nodes.yToX(id)[0];
+    convertRDFNodeToEarlNode(rdfNode) {
+        const earlNodeId = this.state.earlToRDF.nodes.convertYToX(rdfNode.id)[0];
+        return this.state.graph.getNodeById(earlNodeId);
     }
 
-    translateEarlEdgeToRDFTriple(id) {
-        return this.earlToRDF.triples.xToY(id)[0];
+    convertEarlEdgeToRDFTriple(earlEdge) {
+        const rdfTripleId = this.state.earlToRDF.triples.convertXToY(earlEdge.id)[0];
+        return rdfStore.getGraph().getTripleById(rdfTripleId);
     }
 
-    translateRDFTripleToEarlEdge(id) {
-        return this.earlToRDF.triples.yToX(id)[0];
+    convertRDFTripleToEarlEdge(rdfTriple) {
+        const earlEdgeId = this.state.earlToRDF.triples.convertYToX(rdfTriple.id)[0];
+        return this.state.graph.getEdgeById(earlEdgeId);
     }
 
     getState() {
@@ -63,9 +67,12 @@ class GraphStore extends Store {
             const hash = this.hashRDFNode(rdfNode);
             if (!imported.has(hash)) {
                 const node = new earl.Node();
-                this.state.earl.addNodes(node);
+                this.state.graph.addNodes(node);
                 this.state.earlToRDF.nodes.add(node.id, rdfNode.id);
                 imported.set(hash, node.id);
+            } else {
+                const nodeId = imported.get(hash);
+                this.state.earlToRDF.nodes.add(nodeId, rdfNode.id);
             }
         }
     }
@@ -77,7 +84,7 @@ class GraphStore extends Store {
         const targetId    = imported.get(objectHash);
         if (sourceId && targetId) {
             const edge = new earl.Edge(sourceId, targetId);
-            this.state.earl.addEdges(edge);
+            this.state.graph.addEdges(edge);
             this.state.earlToRDF.edges.add(edge.id, predicate.id);
         }
     }

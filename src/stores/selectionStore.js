@@ -3,6 +3,10 @@ import Immutable     from "immutable";
 
 import dispatcher from "../dispatcher/dispatcher.js";
 
+import rdfStore from "./rdfStore.js";
+
+const rdfToken = rdfStore.getDispatchToken();
+
 /**
  * Stores the state of the selection.
  */
@@ -49,60 +53,142 @@ class SelectionStore extends ReduceStore {
      * @param {Immutable.Map} state
      * The current state.
      *
-     * @param {String} field
-     * What to select (nodes or triples).
-     *
      * @param {Array} ids
      * The IDs to select.
      *
      * @return {Immutable.Map}
      * The new state.
      */
-    select(state, field, ids) {
-        const oldSelection = state.get(field);
+    selectNodes(state, ids) {
+        let selection = state.get("nodes");
+        for (let id of ids) {
+            selection = this.selectNode(id);
+        }
+        return state.set("nodes", selection);
+    }
+
+    selectNode(selection, id) {
+        if (this.isSelectedNode(selection, id)) {
+            return selection;
+        }
+        return selection.add(id);
+    }
+
+    /**
+     * Selects the given triples.
+     *
+     * @param {Immutable.Map} state
+     * The current state.
+     *
+     * @param {Array} ids
+     * The IDs of the triples to select.
+     *
+     * @return {Immutable.Map}
+     * The new state.
+     */
+    selectTriple(state, field, ids) {
+        const oldSelection = state.get("triples");
         const newSelection = oldSelection.union(ids);
-        return state.set(field, newSelection);
+        return state.set("triples", newSelection);
     }
 
     /**
-     * Deselects the given IDs.
+     * Deselects the given nodes.
      *
      * @param {Immutable.Map} state
      * The current state.
      *
-     * @param {String} field
-     * What to deselect (nodes or triples).
-     *
      * @param {Array} ids
-     * The IDs to deselect.
+     * The IDs of the nodes to deselect.
      *
      * @return {Immutable.Map}
      * The new state.
      */
-    deselect(state, field, ids) {
-        const oldSelection = state.get(field);
+    deselectNodes(state, ids) {
+        let selection = state.get("nodes");
+        for (let id of ids) {
+            selection = this.deselectNode(selection, id);
+        }
+        return state.set("nodes", selection);
+    }
+
+    deselectNode(selection, id) {
+        let result = selection;
+        for (let id of this.iterEquivalentIds(id)) {
+            result = result.delete(id);
+        }
+        return result;
+    }
+
+    /**
+     * Deselects the given triples.
+     *
+     * @param {Immutable.Map} state
+     * The current state.
+     *
+     * @param {Array} ids
+     * The IDs of the triples to deselect.
+     *
+     * @return {Immutable.Map}
+     * The new state.
+     */
+    deselectTriples(state, ids) {
+        const oldSelection = state.get("triples");
         const newSelection = oldSelection.subtract(ids);
-        return state.set(field, newSelection);
+        return state.set("triples", newSelection);
     }
 
     /**
-     * Toggles the selection of the given IDs. If something is selected already,
-     * it is deselected. Otherwise it is added to the selection.
+     * Toggles the selection of the given nodes. If something is selected
+     * already, it is deselected. Otherwise it is added to the selection.
      *
      * @param {Immutable.Map} state
      * The current state.
      *
-     * @param {String} field
-     * What to toggle (nodes or triples).
-     *
      * @param {Array} ids
-     * The IDs to toggle.
+     * The IDs of the nodes to toggle.
      *
      * @return {Immutable.Map}
      * The new state.
      */
-    toggleSelection(state, field, ids) {
-        const oldSelection = state.get(field);
+    toggleNodeSelection(state, ids) {
+        const oldSelection = state.get("nodes");
+        let   newSelection = oldSelection;
+        for (let id of ids) {
+            if (this.isSelectedNode(oldSelection, id)) {
+                newSelection = this.deselectNode(newSelection, id);
+            } else {
+                newSelection = this.selectNode(newSelection, id);
+            }
+        }
+        console.log([...newSelection])
+        return state.set("nodes", newSelection);
+    }
+
+    isSelectedNode(selection, idToCheck) {
+        for (let id of this.iterEquivalentIds(idToCheck)) {
+            if (selection.has(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Toggles the selection of the given triples. If something is selected
+     * already, it is deselected. Otherwise it is added to the selection.
+     *
+     * @param {Immutable.Map} state
+     * The current state.
+     *
+     * @param {Array} ids
+     * The IDs of the triples to toggle.
+     *
+     * @return {Immutable.Map}
+     * The new state.
+     */
+    toggleTripleSelection(state, ids) {
+        const oldSelection = state.get("triples");
         let   newSelection = oldSelection;
         for (let id of ids) {
             if (oldSelection.has(id)) {
@@ -111,7 +197,15 @@ class SelectionStore extends ReduceStore {
                 newSelection = newSelection.add(id);
             }
         }
-        return state.set(field, newSelection);
+        return state.set("triples", newSelection);
+    }
+
+    * iterEquivalentIds(id) {
+        const graph       = rdfStore.getState().graph;
+        const nodeToMatch = graph.getNodeById(id);
+        for (let node of graph.iterEquivalentNodes(nodeToMatch)) {
+            yield node.id;
+        }
     }
 
     /**
@@ -127,6 +221,7 @@ class SelectionStore extends ReduceStore {
      * The new state.
      */
     reduce(state, action) {
+        dispatcher.waitFor([rdfToken]);
         switch (action.type) {
         case "CLEAR_SELECTION":
             return this.getInitialState();
@@ -135,17 +230,17 @@ class SelectionStore extends ReduceStore {
         case "CLEAR_TRIPLE_SELECTION":
             return state.set("triples", Immutable.Set());
         case "SELECT_NODES":
-            return this.select(state, "nodes", action.ids);
+            return this.selectNodes(state, action.ids);
         case "SELECT_TRIPLES":
-            return this.select(state, "triples", action.ids);
+            return this.selectTriples(state, action.ids);
         case "DESELECT_NODES":
-            return this.deselect(state, "nodes", action.ids);
+            return this.deselectNodes(state, action.ids);
         case "DESELECT_TRIPLES":
-            return this.deselect(state, "triples", action.ids);
+            return this.deselectTriples(state, action.ids);
         case "TOGGLE_NODE_SELECTION":
-            return this.toggleSelection(state, "nodes", action.ids);
+            return this.toggleNodeSelection(state, action.ids);
         case "TOGGLE_TRIPLE_SELECTION":
-            return this.toggleSelection(state, "triples", action.ids);
+            return this.toggleTripleSelection(state, action.ids);
         default:
             return state;
         }

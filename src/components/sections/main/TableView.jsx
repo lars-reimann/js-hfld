@@ -70,6 +70,7 @@ export default class extends React.Component {
                     <td onClick={e => this.handleDataClick(e)} id={triple.subject.id} style={this.nodeSelectionStyle(triple.subject.id)}>{this.shrink(triple.subject)}</td>
                     <td onClick={e => this.handleDataClick(e)} id={triple.predicate.id} style={this.nodeSelectionStyle(triple.predicate.id)}>{this.shrink(triple.predicate)}</td>
                     <td onClick={e => this.handleDataClick(e)} id={triple.object.id} style={this.nodeSelectionStyle(triple.object.id)}>{this.shrink(triple.object)}</td>
+                    <td style={{width: "10px"}}>o</td>
                 </tr>))
             .value();
 

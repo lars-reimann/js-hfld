@@ -50,6 +50,15 @@ export default function (props) {
                     />
                 </Tab>
             }
+            { isHiddenTab(props, "rdfData") ? null :
+                <Tab eventKey="rdfData" title="RDF Data">
+                    <RDFDataPanel
+                        shrinkNodeValues={props.config.shrinkNodeValues}
+                        rdf={props.rdf}
+                        selection={props.selection}
+                    />
+                </Tab>
+            }
         </Tabs>
     );
 }

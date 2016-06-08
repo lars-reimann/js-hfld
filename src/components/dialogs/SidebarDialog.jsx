@@ -128,35 +128,3 @@ export default function (props) {
         </Modal>
     );
 }
-
-/*
-                    <FormGroup controlId="angle" validationState={getValidationStyle(this.angleIsValid())}>
-                        <ControlLabel>Angle:</ControlLabel>
-                        <FormControl
-                            type="number"
-                            value={this.state.angle}
-                            placeholder="Enter a number..."
-                            onChange={e => this.handleChange(e)}
-                        />
-                        <FormControl.Feedback />
-                    </FormGroup>
-                    <FormGroup controlId="centerX" validationState={getValidationStyle(this.centerXIsValid())}>
-                        <ControlLabel>x-coordinate:</ControlLabel>
-                        <FormControl
-                            type="number"
-                            value={this.state.centerX}
-                            placeholder="Enter a number..."
-                            onChange={e => this.handleChange(e)}
-                        />
-                        <FormControl.Feedback />
-                    </FormGroup>
-                    <FormGroup controlId="centerY" validationState={getValidationStyle(this.centerYIsValid())}>
-                        <ControlLabel>y-coordinate:</ControlLabel>
-                        <FormControl
-                            type="number"
-                            value={this.state.centerY}
-                            placeholder="Enter a number..."
-                            onChange={e => this.handleChange(e)}
-                        />
-                        <FormControl.Feedback />
-                    </FormGroup>*/

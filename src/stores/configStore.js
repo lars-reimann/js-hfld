@@ -24,13 +24,13 @@ class ConfigStore extends ReduceStore {
      */
     getInitialState() {
         return this.openConfig({
-            leftSidebarActiveTab:  "earlData",
-            leftSidebarTabs:       ["earlData", "rdfData"],
+            leftSidebarActiveTab:  "literals",
+            leftSidebarTabs:       ["literals"],
             leftSidebarWidth:      2,
             permanentMenubar:      true,
             rightSidebarActiveTab: "literals",
-            rightSidebarTabs:      ["literals"],
-            rightSidebarWidth:     2,
+            rightSidebarTabs:      ["literals", "earlData", "rdfData"],
+            rightSidebarWidth:     3,
             showLeftSidebar:       false,
             showRightSidebar:      true,
             shrinkNodeValues:      true,
@@ -96,9 +96,6 @@ class ConfigStore extends ReduceStore {
             return this.openRightSidebarTab(state, tab);
         }
     }
-
-    // TODO: might need to set the active tabs to the first on in the set of
-    // available tabs when it is hidden
 
     /**
      * Transforms the state given an action.

@@ -1,11 +1,18 @@
 import React from "react";
 
-export default function (props) {
-    return ( // TODO move the overflow up a level
-        <div style={{overflow: "auto"}}>
-
+function graphData(props) {
+    return (
+        <div>
+            <h2>Graph Data</h2>
+            <span>Number of triples: {props.rdf.getGraph().length}</span>
         </div>
     );
 }
 
-// TODO
+export default function (props) {
+    return (
+        <div style={{overflow: "auto"}}>
+            {graphData(props)}
+        </div>
+    );
+}

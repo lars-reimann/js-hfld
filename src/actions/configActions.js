@@ -28,6 +28,10 @@ export function setLeftSidebarVisibility(show) {
     dispatcher.dispatch({ type: "SET_LEFT_SIDEBAR_VISIBILITY", show });
 }
 
+export function setLeftSidebarWidth(width) {
+    dispatcher.dispatch({ type: "SET_LEFT_SIDEBAR_WIDTH", width });
+}
+
 export function setPermanentMenubar(enabled) {
     dispatcher.dispatch({ type: "SET_PERMANENT_MENUBAR", enabled });
 }
@@ -42,6 +46,10 @@ export function setRightSidebar(tabs) {
 
 export function setRightSidebarVisibility(show) {
     dispatcher.dispatch({ type: "SET_RIGHT_SIDEBAR_VISIBILITY", show });
+}
+
+export function setRightSidebarWidth(width) {
+    dispatcher.dispatch({ type: "SET_RIGHT_SIDEBAR_WIDTH", width });
 }
 
 export function setShrinkNodeValues(enabled) {

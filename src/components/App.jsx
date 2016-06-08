@@ -18,6 +18,24 @@ export default class extends React.Component {
         return !this.props.config.showLeftSidebar;
     }
 
+    leftSidebarWidth() {
+        if (this.leftSidebarIsHidden()) {
+            return 0;
+        }
+        return this.props.config.leftSidebarWidth;
+    }
+
+    viewportWidth() {
+        return 12 - this.leftSidebarWidth() - this.rightSidebarWidth();
+    }
+
+    rightSidebarWidth() {
+        if (this.rightSidebarIsHidden()) {
+            return 0;
+        }
+        return this.props.config.rightSidebarWidth;
+    }
+
     rightSidebarIsHidden() {
         return !this.props.config.showRightSidebar;
     }
@@ -29,11 +47,11 @@ export default class extends React.Component {
                 <Grid fluid>
                     <Row>
                         { this.leftSidebarIsHidden() ? null :
-                            <Col xs={1}>
+                            <Col xs={this.leftSidebarWidth()}>
                                 <LeftSidebar />
                             </Col>
                         }
-                        <Col xs={9 + (this.leftSidebarIsHidden() ? 1 : 0) + (this.rightSidebarIsHidden() ? 2 : 0)}>
+                        <Col xs={this.viewportWidth()}>
                             <Viewport
                                 config={this.props.config}
                                 graph={this.props.graph}
@@ -42,7 +60,7 @@ export default class extends React.Component {
                             />
                         </Col>
                         { this.rightSidebarIsHidden() ? null :
-                            <Col xs={2}>
+                            <Col xs={this.rightSidebarWidth()}>
                                 <RightSidebar
                                     config={this.props.config}
                                     graph={this.props.graph}

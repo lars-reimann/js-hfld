@@ -3,7 +3,7 @@ import React from "react";
 function nodeToString(props, node) {
     return props.rdf.nodeToString(
         node,
-        props.shrinkNodeValue
+        props.shrinkNodeValues
     );
 }
 

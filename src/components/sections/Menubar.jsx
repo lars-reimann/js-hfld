@@ -52,12 +52,12 @@ export default class extends React.Component {
             return actions.setViewport("table");
         case "GRAPHICAL_VIEW":
             return actions.setViewport("graphical");
-        case "TOGGLE_PERMANENT_LEFT_SIDEBAR":
-            return actions.setPermanentLeftSidebar(!this.props.permanentLeftSidebar);
         case "TOGGLE_PERMANENT_MENUBAR":
             return actions.setPermanentMenubar(!this.props.permanentMenubar);
-        case "TOGGLE_PERMANENT_RIGHT_SIDEBAR":
-            return actions.setPermanentRightSidebar(!this.props.permanentRightSidebar);
+        case "TOGGLE_LEFT_SIDEBAR_VISIBILITY":
+            return actions.setLeftSidebarVisibility(!this.props.showLeftSidebar);
+        case "TOGGLE_RIGHT_SIDEBAR_VISIBILITY":
+            return actions.setRightSidebarVisibility(!this.props.showRightSidebar);
         case "TOGGLE_SHRINK_NODE_VALUES":
             return actions.setShrinkNodeValues(!this.props.shrinkNodeValues);
         }
@@ -145,12 +145,13 @@ export default class extends React.Component {
                             <MenuItem eventKey="TOGGLE_PERMANENT_MENUBAR" disabled>
                                 <ToggleGlyphicon enabled={this.props.permanentMenubar} /> Permanent Menubar
                             </MenuItem>
-                            <MenuItem eventKey="TOGGLE_PERMANENT_LEFT_SIDEBAR">
-                                <ToggleGlyphicon enabled={this.props.permanentLeftSidebar} /> Permanent Left Sidebar
+                            <MenuItem eventKey="TOGGLE_LEFT_SIDEBAR_VISIBILITY">
+                                <ToggleGlyphicon enabled={this.props.showLeftSidebar} /> Show Left Sidebar
                             </MenuItem>
-                            <MenuItem eventKey="TOGGLE_PERMANENT_RIGHT_SIDEBAR">
-                                <ToggleGlyphicon enabled={this.props.permanentRightSidebar} /> Permanent Right Sidebar
+                            <MenuItem eventKey="TOGGLE_RIGHT_SIDEBAR_VISIBILITY">
+                                <ToggleGlyphicon enabled={this.props.showRightSidebar} /> Show Right Sidebar
                             </MenuItem>
+                            <MenuItem divider />
                             <MenuItem eventKey="TOGGLE_SHRINK_NODE_VALUES">
                                 <ToggleGlyphicon enabled={this.props.shrinkNodeValues} /> Shrink Node Values
                             </MenuItem>

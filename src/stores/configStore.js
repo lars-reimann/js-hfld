@@ -26,9 +26,11 @@ class ConfigStore extends ReduceStore {
         return Immutable.Map({
             leftSidebarActiveTab:  "literals",
             leftSidebarTabs:       Immutable.Set(["earlData", "rdfData"]),
+            leftSidebarWidth:      2,
             permanentMenubar:      true,
             rightSidebarActiveTab: "literals",
             rightSidebarTabs:      Immutable.Set(["literals"]),
+            rightSidebarWidth:     2,
             showLeftSidebar:       false,
             showRightSidebar:      true,
             shrinkNodeValues:      true,
@@ -101,6 +103,8 @@ class ConfigStore extends ReduceStore {
             return state.set("leftSidebarTabs", Immutable.Set(action.tabs));
         case "SET_LEFT_SIDEBAR_VISIBILITY":
             return state.set("showLeftSidebar", action.show);
+        case "SET_LEFT_SIDEBAR_WIDTH":
+            return state.set("leftSidebarWidth", action.width);
         case "SET_RIGHT_SIDEBAR_ACTIVE_TAB":
             return state.set("rightSidebarActiveTab", action.activeTab);
         case "SET_PERMANENT_MENUBAR":
@@ -109,6 +113,8 @@ class ConfigStore extends ReduceStore {
             return state.set("showRightSidebar", action.show);
         case "SET_RIGHT_SIDEBAR_TABS":
             return state.set("rightSidebarTabs", Immutable.Set(action.tabs));
+        case "SET_RIGHT_SIDEBAR_WIDTH":
+            return state.set("rightSidebarWidth", action.width);
         case "SET_SHRINK_NODE_VALUES":
             return state.set("shrinkNodeValues", action.enabled);
         case "SET_TABLE_SORTING":

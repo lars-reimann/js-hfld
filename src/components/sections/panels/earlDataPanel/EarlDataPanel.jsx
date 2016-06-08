@@ -5,7 +5,7 @@ import NodeData from "./NodeData.jsx";
 function nodeToString(props, node) {
     return props.rdf.nodeToString(
         node,
-        props.shrinkNodeValue
+        props.shrinkNodeValues
     );
 }
 
@@ -23,18 +23,18 @@ function graphData(props) {
 }
 
 function nodeData(props) {
-    const selectedNodes = props.selection.getSelectedNodes();
+    const selectedNodes = props.selection.getSelectedNodes()
+        .map(node  => ({
+            rdfNode: node,
+            earlNode: props.graph.convertRDFNodeToEarlNode(node)
+        }))
+        .filter(({rdfNode, earlNode}) => rdfNode !== undefined && earlNode !== undefined);
 
     if (selectedNodes.length === 0) {
         return null;
     }
 
     const entries = selectedNodes
-        .map(node  => ({
-            rdfNode: node,
-            earlNode: props.graph.convertRDFNodeToEarlNode(node)
-        }))
-        .filter(({rdfNode, earlNode}) => rdfNode !== undefined && earlNode !== undefined)
         .map(({rdfNode, earlNode}) => <NodeData
                 key={rdfNode.id}
                 title={nodeToString(props, rdfNode)}

@@ -28,9 +28,14 @@ class SelectionStore extends ReduceStore {
      */
     getInitialState() {
         return Immutable.Map({
-            nodes:   Immutable.Set(),
-            triples: Immutable.Set(),
+            nodes:     Immutable.Set(),
+            triples:   Immutable.Set(),
+            tablePage: 1,
         });
+    }
+
+    getTablePage() {
+        return this.getState().get("tablePage");
     }
 
     /**
@@ -332,6 +337,8 @@ class SelectionStore extends ReduceStore {
             return this.toggleNodeSelection(state, action.ids);
         case "TOGGLE_TRIPLE_SELECTION":
             return this.toggleTripleSelection(state, action.ids);
+        case "SELECT_TABLE_PAGE":
+            return state.set("tablePage", action.tablePage);
         default:
             return state;
         }

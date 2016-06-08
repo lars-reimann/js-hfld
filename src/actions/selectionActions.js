@@ -42,6 +42,16 @@ export function selectTriples(ids) {
 }
 
 /**
+ * Selects the given table page.
+ *
+ * @param {Number} tablePage
+ * The table page to select.
+ */
+export function selectTablePage(tablePage) {
+    return dispatcher.dispatch({ type: "SELECT_TABLE_PAGE", tablePage });
+}
+
+/**
  * Deselects the given nodes.
  *
  * @param {Array} ids

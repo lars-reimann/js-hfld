@@ -56,6 +56,10 @@ export function setShrinkNodeValues(enabled) {
     dispatcher.dispatch({ type: "SET_SHRINK_NODE_VALUES", enabled });
 }
 
+export function setTableRowsPerPage(rowsPerPage) {
+    dispatcher.dispatch({ type: "SET_TABLE_ROWS_PER_PAGE", rowsPerPage });
+}
+
 export function setTableSorting(sorting) {
     dispatcher.dispatch({ type: "SET_TABLE_SORTING", sorting });
 }

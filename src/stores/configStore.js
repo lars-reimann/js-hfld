@@ -34,6 +34,7 @@ class ConfigStore extends ReduceStore {
             showLeftSidebar:       false,
             showRightSidebar:      true,
             shrinkNodeValues:      true,
+            tableRowsPerPage:      20,
             tableSorting:          {column: "subject", order: "asc"},
             viewport:              "graphical",
         });
@@ -141,6 +142,8 @@ class ConfigStore extends ReduceStore {
             return state.set("rightSidebarWidth", action.width);
         case "SET_SHRINK_NODE_VALUES":
             return state.set("shrinkNodeValues", action.enabled);
+        case "SET_TABLE_ROWS_PER_PAGE":
+            return state.set("tableRowsPerPage", action.rowsPerPage);
         case "SET_TABLE_SORTING":
             return state.set("tableSorting", action.sorting);
         case "SET_VIEWPORT":

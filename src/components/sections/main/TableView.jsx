@@ -1,6 +1,6 @@
-import _       from "lodash/fp";
-import React   from "react";
-import {Table} from "react-bootstrap";
+import _                   from "lodash/fp";
+import React               from "react";
+import {Table, Pagination} from "react-bootstrap";
 
 import * as actions from "../../../actions/actions.js";
 
@@ -62,12 +62,26 @@ export default class extends React.Component {
         }
     }
 
-    render() {
-        const {column, order} = this.props.config.tableSorting;
+    handleTablePageSelection(tablePageString) {
+        const tablePage = Number(tablePageString);
+        actions.selectTablePage(tablePage);
+    }
 
-        // TODO: pagination
+    numberOfPages() {
+        return Math.ceil(
+            this.props.rdf.getGraph().length /
+            this.props.config.tableRowsPerPage
+        );
+    }
+
+    render() {
+        const {column, order}  = this.props.config.tableSorting;
+        const tablePage        = this.props.selection.getTablePage();
+        const tableRowsPerPage = this.props.config.tableRowsPerPage;
+
         const rows = _([...this.props.rdf.getGraph()])
             .orderBy([triple => this.shrink(triple[column]).toLowerCase()], [order])
+            .slice((tablePage - 1) * tableRowsPerPage, tablePage * tableRowsPerPage)
             .map(triple => (
                 <tr key={triple.id} style={this.tripleSelectionStyle(triple.id)}>
                     <td onClick={e => this.handleNodeClick(e)} id={triple.subject.id} style={this.nodeSelectionStyle(triple.subject.id)}>{this.shrink(triple.subject)}</td>
@@ -80,22 +94,31 @@ export default class extends React.Component {
             .value();
 
         return (
-            <Table striped bordered responsive hover condensed style={{cursor: "pointer"}}>
-                <thead>
-                    <tr>
-                        <th onClick={() => this.handleHeaderClick("subject")}>
-                            Subject {column === "subject" ? <SortingGlyphicon order={order} /> : null}
-                        </th>
-                        <th onClick={() => this.handleHeaderClick("predicate")}>
-                            Predicate {column === "predicate" ? <SortingGlyphicon order={order} /> : null}
-                        </th>
-                        <th onClick={() => this.handleHeaderClick("object")}>
-                            Object {column === "object" ? <SortingGlyphicon order={order} /> : null}
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>{rows}</tbody>
-            </Table>
+            <div>
+                <Table striped bordered responsive hover condensed style={{cursor: "pointer"}}>
+                    <thead>
+                        <tr>
+                            <th onClick={() => this.handleHeaderClick("subject")}>
+                                Subject {column === "subject" ? <SortingGlyphicon order={order} /> : null}
+                            </th>
+                            <th onClick={() => this.handleHeaderClick("predicate")}>
+                                Predicate {column === "predicate" ? <SortingGlyphicon order={order} /> : null}
+                            </th>
+                            <th onClick={() => this.handleHeaderClick("object")}>
+                                Object {column === "object" ? <SortingGlyphicon order={order} /> : null}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>{rows}</tbody>
+                </Table>
+                <Pagination
+                    first prev next last
+                    activePage={this.props.selection.getTablePage()}
+                    items={this.numberOfPages()}
+                    maxButtons={10}
+                    onSelect={this.handleTablePageSelection}
+                />
+            </div>
         );
     }
 }

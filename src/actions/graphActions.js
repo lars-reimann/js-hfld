@@ -48,14 +48,17 @@ export function rotateLayout(angle, center) {
 /**
  * Scales the layout from the given center by the factor.
  *
- * @param {Number} factor
- * The scalar to multiply the vector by.
+ * @param {Number} factorX
+ * The scalar to multiply the x-component of the vector by.
+ *
+ * @param {Number} factorY
+ * The scalar to multiply the y-component of the vector by.
  *
  * @param {Vec2} center
  * Where to start the scaling.
  */
-export function scaleLayout(factor, center) {
-    dispatcher.dispatch({ type: "SCALE", factor, center });
+export function scaleLayout(factorX, factorY, center) {
+    dispatcher.dispatch({ type: "SCALE", factorX, factorY, center });
 }
 
 /**

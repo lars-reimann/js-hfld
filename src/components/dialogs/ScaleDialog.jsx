@@ -22,7 +22,8 @@ export default class extends React.Component {
         super(props);
 
         this.state = {
-            factor:  "1",
+            factorX: "1",
+            factorY: "1",
             centerX: "0",
             centerY: "0",
         };
@@ -41,13 +42,27 @@ export default class extends React.Component {
     }
 
     /**
-     * Checks if the entered factor is valid.
+     * Checks if the entered x-factor is valid.
      *
      * @return {Boolean}
-     * Whether the factor is valid.
+     * Whether the x-factor is valid.
+     *
+     * @private
      */
-    factorIsValid() {
-        return validators.isNumber(this.state.factor);
+    factorXIsValid() {
+        return validators.isNumber(this.state.factorX);
+    }
+
+    /**
+     * Checks if the entered y-factor is valid.
+     *
+     * @return {Boolean}
+     * Whether the y-factor is valid.
+     *
+     * @private
+     */
+    factorYIsValid() {
+        return validators.isNumber(this.state.factorY);
     }
 
     /**
@@ -77,17 +92,21 @@ export default class extends React.Component {
      * Whether all values are valid.
      */
     isValid() {
-        return this.factorIsValid() && this.centerXIsValid() && this.centerYIsValid();
+        return this.factorXIsValid() &&
+               this.factorYIsValid() &&
+               this.centerXIsValid() &&
+               this.centerYIsValid();
     }
 
     /**
      * Submits the dialog.
      */
     ok() {
-        const factor  = Number(this.state.factor);
+        const factorX = Number(this.state.factorX);
+        const factorY = Number(this.state.factorY);
         const centerX = Number(this.state.centerX);
         const centerY = Number(this.state.centerY);
-        actions.scaleLayout(factor, new Vec2(centerX, centerY));
+        actions.scaleLayout(factorX, factorY, new Vec2(centerX, centerY));
         actions.setDialogVisibility("scale", false);
     }
 
@@ -110,11 +129,21 @@ export default class extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                     <form>
-                        <FormGroup controlId="factor" validationState={getValidationStyle(this.factorIsValid())}>
+                        <FormGroup controlId="factorX" validationState={getValidationStyle(this.factorXIsValid())}>
                             <ControlLabel>Factor:</ControlLabel>
                             <FormControl
                                 type="number"
-                                value={this.state.factor}
+                                value={this.state.factorX}
+                                placeholder="Enter a number..."
+                                onChange={e => this.handleChange(e)}
+                            />
+                            <FormControl.Feedback />
+                        </FormGroup>
+                        <FormGroup controlId="factorY" validationState={getValidationStyle(this.factorYIsValid())}>
+                            <ControlLabel>Factor:</ControlLabel>
+                            <FormControl
+                                type="number"
+                                value={this.state.factorY}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />

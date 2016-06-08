@@ -302,6 +302,17 @@ class SelectionStore extends ReduceStore {
         }
     }
 
+    setTableRowsPerPage(state, rowsPerPage) {
+        const tablePage = Math.min(
+            state.get("tablePage"),
+            Math.ceil(
+                rdfStore.getGraph().length  /
+                rowsPerPage
+            )
+        );
+        return state.set("tablePage", tablePage);
+    }
+
     /**
      * Transforms the state given an action.
      *
@@ -339,6 +350,8 @@ class SelectionStore extends ReduceStore {
             return this.toggleTripleSelection(state, action.ids);
         case "SELECT_TABLE_PAGE":
             return state.set("tablePage", action.tablePage);
+        case "SET_TABLE_ROWS_PER_PAGE":
+            return this.setTableRowsPerPage(state, action.rowsPerPage);
         default:
             return state;
         }

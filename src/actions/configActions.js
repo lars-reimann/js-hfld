@@ -1,19 +1,47 @@
 import dispatcher from "../dispatcher/dispatcher.js";
 
-export function setInformationPanel(informationPanel) {
-    dispatcher.dispatch({ type: "SET_INFORMATION_PANEL", informationPanel });
+export function closeLeftSidebarTab(tab) {
+    dispatcher.dispatch({ type: "CLOSE_LEFT_SIDEBAR_TAB", tab });
 }
 
-export function setPermanentLeftSidebar(enabled) {
-    dispatcher.dispatch({ type: "SET_PERMANENT_LEFT_SIDEBAR", enabled });
+export function closeRightSidebarTab(tab) {
+    dispatcher.dispatch({ type: "CLOSE_RIGHT_SIDEBAR_TAB", tab });
+}
+
+export function openLeftSidebarTab(tab) {
+    dispatcher.dispatch({ type: "OPEN_LEFT_SIDEBAR_TAB", tab });
+}
+
+export function openRightSidebarTab(tab) {
+    dispatcher.dispatch({ type: "OPEN_RIGHT_SIDEBAR_TAB", tab });
+}
+
+export function setLeftSidebarActiveTab(activeTab) {
+    dispatcher.dispatch({ type: "SET_LEFT_SIDEBAR_ACTIVE_TAB", activeTab });
+}
+
+export function setLeftSidebarTabs(tabs) {
+    dispatcher.dispatch({ type: "SET_LEFT_SIDEBAR_TABS", tabs });
+}
+
+export function setLeftSidebarVisibility(show) {
+    dispatcher.dispatch({ type: "SET_LEFT_SIDEBAR_VISIBILITY", show });
 }
 
 export function setPermanentMenubar(enabled) {
     dispatcher.dispatch({ type: "SET_PERMANENT_MENUBAR", enabled });
 }
 
-export function setPermanentRightSidebar(enabled) {
-    dispatcher.dispatch({ type: "SET_PERMANENT_RIGHT_SIDEBAR", enabled });
+export function setRightSidebarActiveTab(activeTab) {
+    dispatcher.dispatch({ type: "SET_RIGHT_SIDEBAR_ACTIVE_TAB", activeTab });
+}
+
+export function setRightSidebar(tabs) {
+    dispatcher.dispatch({ type: "SET_RIGHT_SIDEBAR_TABS", tabs });
+}
+
+export function setRightSidebarVisibility(show) {
+    dispatcher.dispatch({ type: "SET_RIGHT_SIDEBAR_VISIBILITY", show });
 }
 
 export function setShrinkNodeValues(enabled) {

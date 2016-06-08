@@ -1,1 +1,0 @@
-export InformationPanel from "./InformationPanel.jsx";

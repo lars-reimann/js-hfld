@@ -24,13 +24,16 @@ class ConfigStore extends ReduceStore {
      */
     getInitialState() {
         return Immutable.Map({
-            informationPanel:        "literals",
-            permanentLeftSidebar:    false,
-            permanentMenubar:        true,
-            permanentRightSidebar:   true,
-            shrinkNodeValues:        true,
-            tableSorting:            {column: "subject", order: "asc"},
-            viewport:                "graphical",
+            leftSidebarActiveTab:  "literals",
+            leftSidebarTabs:       Immutable.Set(["earlData", "rdfData"]),
+            permanentMenubar:      true,
+            rightSidebarActiveTab: "literals",
+            rightSidebarTabs:      Immutable.Set(["literals"]),
+            showLeftSidebar:       false,
+            showRightSidebar:      true,
+            shrinkNodeValues:      true,
+            tableSorting:          {column: "subject", order: "asc"},
+            viewport:              "graphical",
         });
     }
 
@@ -42,6 +45,30 @@ class ConfigStore extends ReduceStore {
      */
     getState() {
         return super.getState().toObject();
+    }
+
+    closeLeftSidebarTab(state, tab) {
+        const currentTabs = state.get("leftSidebarTabs");
+        const newTabs     = currentTabs.delete(tab);
+        return state.set("leftSidebarTabs", newTabs);
+    }
+
+    closeRightSidebarTab(state, tab) {
+        const currentTabs = state.get("rightSidebarTabs");
+        const newTabs     = currentTabs.delete(tab);
+        return state.set("rightSidebarTabs", newTabs);
+    }
+
+    openLeftSidebarTab(state, tab) {
+        const currentTabs = state.get("leftSidebarTabs");
+        const newTabs     = currentTabs.add(tab);
+        return state.set("leftSidebarTabs", newTabs);
+    }
+
+    openRightSidebarTab(state, tab) {
+        const currentTabs = state.get("rightSidebarTabs");
+        const newTabs     = currentTabs.add(tab);
+        return state.set("rightSidebarTabs", newTabs);
     }
 
     /**
@@ -58,16 +85,30 @@ class ConfigStore extends ReduceStore {
      */
     reduce(state, action) {
         switch (action.type) {
+        case "CLOSE_LEFT_SIDEBAR_TAB":
+            return this.closeLeftSidebarTab(state, action.tab);
+        case "CLOSE_RIGHT_SIDEBAR_TAB":
+            return this.closeRightSidebarTab(state, action.tab);
         case "OPEN_CONFIG":
             return Immutable.Map(action.config);
-        case "SET_INFORMATION_PANEL":
-            return state.set("informationPanel", action.informationPanel);
-        case "SET_PERMANENT_LEFT_SIDEBAR":
-            return state.set("permanentLeftSidebar", action.enabled);
+        case "OPEN_LEFT_SIDEBAR_TAB":
+            return this.openLeftSidebarTab(state, action.tab);
+        case "OPEN_RIGHT_SIDEBAR_TAB":
+            return this.openRightSidebarTab(state, action.tab);
+        case "SET_LEFT_SIDEBAR_ACTIVE_TAB":
+            return state.set("leftSidebarActiveTab", action.activeTab);
+        case "SET_LEFT_SIDEBAR_TABS":
+            return state.set("leftSidebarTabs", Immutable.Set(action.tabs));
+        case "SET_LEFT_SIDEBAR_VISIBILITY":
+            return state.set("showLeftSidebar", action.show);
+        case "SET_RIGHT_SIDEBAR_ACTIVE_TAB":
+            return state.set("rightSidebarActiveTab", action.activeTab);
         case "SET_PERMANENT_MENUBAR":
             return state.set("permanentMenubar", action.enabled);
-        case "SET_PERMANENT_RIGHT_SIDEBAR":
-            return state.set("permanentRightSidebar", action.enabled);
+        case "SET_RIGHT_SIDEBAR_VISIBILITY":
+            return state.set("showRightSidebar", action.show);
+        case "SET_RIGHT_SIDEBAR_TABS":
+            return state.set("rightSidebarTabs", Immutable.Set(action.tabs));
         case "SET_SHRINK_NODE_VALUES":
             return state.set("shrinkNodeValues", action.enabled);
         case "SET_TABLE_SORTING":

@@ -1,9 +1,8 @@
 import React from "react";
 import {Tabs, Tab} from "react-bootstrap";
 
-import {setInformationPanel} from "../../../actions/actions.js";
-import EarlDataPanel         from "./earlDataPanel/EarlDataPanel.jsx";
-import LiteralsPanel         from "./literalsPanel/LiteralsPanel.jsx";
+import {setInformationPanel}                        from "../../actions/actions.js";
+import {EarlDataPanel, LiteralsPanel, RDFDataPanel} from "./panels/panels.js";
 
 export default function (props) {
     return (

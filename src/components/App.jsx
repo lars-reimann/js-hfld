@@ -131,6 +131,10 @@ export default class extends React.Component {
                     config={this.props.config}
                     visible={this.props.dialogs.showSidebarDialog}
                 />
+                <dialogs.TableDialog
+                    config={this.props.config}
+                    visible={this.props.dialogs.showTableDialog}
+                />
                 <dialogs.TranslateDialog visible={this.props.dialogs.showTranslateDialog} />
             </div>
         );

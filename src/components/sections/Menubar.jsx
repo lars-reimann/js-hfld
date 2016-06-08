@@ -58,6 +58,8 @@ export default class extends React.Component {
             return actions.setLeftSidebarVisibility(!this.props.showLeftSidebar);
         case "TOGGLE_RIGHT_SIDEBAR_VISIBILITY":
             return actions.setRightSidebarVisibility(!this.props.showRightSidebar);
+        case "SHOW_TABLE_DIALOG":
+            return actions.setDialogVisibility("table", true);
         case "SHOW_SIDEBAR_DIALOG":
             return actions.setDialogVisibility("sidebar", true);
         case "TOGGLE_SHRINK_NODE_VALUES":
@@ -152,6 +154,10 @@ export default class extends React.Component {
                             </MenuItem>
                             <MenuItem eventKey="TOGGLE_RIGHT_SIDEBAR_VISIBILITY">
                                 <ToggleGlyphicon enabled={this.props.showRightSidebar} /> Show Right Sidebar
+                            </MenuItem>
+                            <MenuItem divider />
+                            <MenuItem eventKey="SHOW_TABLE_DIALOG">
+                                <BlankGlyphicon /> Configure Table...
                             </MenuItem>
                             <MenuItem eventKey="SHOW_SIDEBAR_DIALOG">
                                 <BlankGlyphicon /> Configure Sidebars...

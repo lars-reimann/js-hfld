@@ -5,7 +5,7 @@ import {Tooltip, OverlayTrigger} from "react-bootstrap";
 export default function (props) {
     return (
         <div>
-            <h2>{props.title}</h2>
+            <h4>{props.title}</h4>
             <OverlayTrigger placement="right" overlay={
                 <Tooltip id="numberOfAdjacentNodes">
                     <span>Incoming: {props.node.getNumberOfAdjacentNodes("inc")}</span>

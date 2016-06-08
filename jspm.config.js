@@ -5,7 +5,7 @@ SystemJS.config({
     devConfig: {
         "map": {
             "@ignavia/earl": "npm:@ignavia/earl@1.3.1",
-            "@ignavia/rdf": "npm:@ignavia/rdf@1.6.0",
+            "@ignavia/rdf": "npm:@ignavia/rdf@1.6.2",
             "@ignavia/util": "npm:@ignavia/util@1.3.3",
             "babel-plugin-transform-async-to-generator": "npm:babel-plugin-transform-async-to-generator@6.8.0",
             "babel-plugin-transform-export-extensions": "npm:babel-plugin-transform-export-extensions@6.8.0",
@@ -291,10 +291,9 @@ SystemJS.config({
                     "babel-runtime": "npm:babel-runtime@6.9.2"
                 }
             },
-            "npm:@ignavia/rdf@1.6.0": {
+            "npm:@ignavia/rdf@1.6.2": {
                 "map": {
-                    "@ignavia/util": "npm:@ignavia/util@1.3.3",
-                    "n3": "npm:n3@0.4.5"
+                    "@ignavia/util": "npm:@ignavia/util@1.3.3"
                 }
             }
         }

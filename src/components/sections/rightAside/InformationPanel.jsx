@@ -2,7 +2,7 @@ import React from "react";
 import {Tabs, Tab} from "react-bootstrap";
 
 import {setInformationPanel} from "../../../actions/actions.js";
-import GraphDataPanel        from "./graphDataPanel/GraphDataPanel.jsx";
+import EarlDataPanel         from "./earlDataPanel/EarlDataPanel.jsx";
 import LiteralsPanel         from "./literalsPanel/LiteralsPanel.jsx";
 
 export default function (props) {
@@ -15,8 +15,8 @@ export default function (props) {
                     selection={props.selection}
                 />
             </Tab>
-            <Tab eventKey="graphData" title="Graph Data">
-                <GraphDataPanel
+            <Tab eventKey="earlData" title="Earl Data">
+                <EarlDataPanel
                     shrinkNodeValues={props.config.shrinkNodeValues}
                     rdf={props.rdf}
                     graph={props.graph}

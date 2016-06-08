@@ -63,3 +63,11 @@ export function setTableSorting(sorting) {
 export function setViewport(viewport) {
     dispatcher.dispatch({ type: "SET_VIEWPORT", viewport });
 }
+
+export function toggleLeftSidebarTab(tab) {
+    dispatcher.dispatch({ type: "TOGGLE_LEFT_SIDEBAR_TAB", tab });
+}
+
+export function toggleRightSidebarTab(tab) {
+    dispatcher.dispatch({ type: "TOGGLE_RIGHT_SIDEBAR_TAB", tab });
+}

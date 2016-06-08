@@ -5,7 +5,7 @@ import * as dialogs from "./dialogs/dialogs.js";
 
 import AlertQueue from "./alerts/AlertQueue.jsx";
 
-import {Menubar, LeftSidebar, Viewport, RightSidebar} from "./sections/sections.js";
+import {Menubar, Sidebar, Viewport} from "./sections/sections.js";
 
 import * as actions from "../actions/actions.js";
 
@@ -18,18 +18,18 @@ export default class extends React.Component {
         return !this.props.config.showLeftSidebar;
     }
 
-    leftSidebarWidth() {
+    getLeftSidebarWidth() {
         if (this.leftSidebarIsHidden()) {
             return 0;
         }
         return this.props.config.leftSidebarWidth;
     }
 
-    viewportWidth() {
-        return 12 - this.leftSidebarWidth() - this.rightSidebarWidth();
+    getViewportWidth() {
+        return 12 - this.getLeftSidebarWidth() - this.getRightSidebarWidth();
     }
 
-    rightSidebarWidth() {
+    getRightSidebarWidth() {
         if (this.rightSidebarIsHidden()) {
             return 0;
         }
@@ -47,11 +47,17 @@ export default class extends React.Component {
                 <Grid fluid>
                     <Row>
                         { this.leftSidebarIsHidden() ? null :
-                            <Col xs={this.leftSidebarWidth()}>
-                                <LeftSidebar />
+                            <Col xs={this.getLeftSidebarWidth()}>
+                                <Sidebar
+                                    side="left"
+                                    config={this.props.config}
+                                    graph={this.props.graph}
+                                    rdf={this.props.rdf}
+                                    selection={this.props.selection}
+                                />
                             </Col>
                         }
-                        <Col xs={this.viewportWidth()}>
+                        <Col xs={this.getViewportWidth()}>
                             <Viewport
                                 config={this.props.config}
                                 graph={this.props.graph}
@@ -60,8 +66,9 @@ export default class extends React.Component {
                             />
                         </Col>
                         { this.rightSidebarIsHidden() ? null :
-                            <Col xs={this.rightSidebarWidth()}>
-                                <RightSidebar
+                            <Col xs={this.getRightSidebarWidth()}>
+                                <Sidebar
+                                    side="right"
                                     config={this.props.config}
                                     graph={this.props.graph}
                                     rdf={this.props.rdf}
@@ -120,6 +127,10 @@ export default class extends React.Component {
                     visible={this.props.dialogs.showSaveTurtleDialog}
                 />
                 <dialogs.ScaleDialog visible={this.props.dialogs.showScaleDialog} />
+                <dialogs.SidebarDialog
+                    config={this.props.config}
+                    visible={this.props.dialogs.showSidebarDialog}
+                />
                 <dialogs.TranslateDialog visible={this.props.dialogs.showTranslateDialog} />
             </div>
         );

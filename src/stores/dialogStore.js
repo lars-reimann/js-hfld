@@ -35,6 +35,7 @@ class DialogStore extends ReduceStore {
             showRotateDialog:             false,
             showSaveTurtleDialog:         false,
             showScaleDialog:              false,
+            showSidebarDialog:            false,
             showTranslateDialog:          false,
         });
     }
@@ -89,6 +90,8 @@ class DialogStore extends ReduceStore {
             return state.set("showSaveTurtleDialog", show);
         case "scale":
             return state.set("showScaleDialog", show);
+        case "sidebar":
+            return state.set("showSidebarDialog", show);
         case "translate":
             return state.set("showTranslateDialog", show);
         default:

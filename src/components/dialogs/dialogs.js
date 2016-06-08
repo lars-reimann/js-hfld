@@ -8,4 +8,5 @@ export SaveConfigDialog         from "./SaveConfigDialog.jsx";
 export SaveLayoutDialog         from "./SaveLayoutDialog.jsx";
 export SaveTurtleDialog         from "./SaveTurtleDialog.jsx";
 export ScaleDialog              from "./ScaleDialog.jsx";
+export SidebarDialog            from "./SidebarDialog.jsx";
 export TranslateDialog          from "./TranslateDialog.jsx";

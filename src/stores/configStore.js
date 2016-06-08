@@ -23,13 +23,13 @@ class ConfigStore extends ReduceStore {
      * The initial state of the store.
      */
     getInitialState() {
-        return Immutable.Map({
-            leftSidebarActiveTab:  "literals",
-            leftSidebarTabs:       Immutable.Set(["earlData", "rdfData"]),
+        return this.openConfig({
+            leftSidebarActiveTab:  "earlData",
+            leftSidebarTabs:       ["earlData", "rdfData"],
             leftSidebarWidth:      2,
             permanentMenubar:      true,
             rightSidebarActiveTab: "literals",
-            rightSidebarTabs:      Immutable.Set(["literals"]),
+            rightSidebarTabs:      ["literals"],
             rightSidebarWidth:     2,
             showLeftSidebar:       false,
             showRightSidebar:      true,
@@ -73,6 +73,33 @@ class ConfigStore extends ReduceStore {
         return state.set("rightSidebarTabs", newTabs);
     }
 
+    openConfig(config) {
+        return Immutable.Map(config)
+            .set("leftSidebarTabs",  Immutable.Set(config.leftSidebarTabs))
+            .set("rightSidebarTabs", Immutable.Set(config.rightSidebarTabs));
+    }
+
+    toggleLeftSidebarTab(state, tab) {
+        const currentTabs = state.get("leftSidebarTabs");
+        if (currentTabs.has(tab)) {
+            return this.closeLeftSidebarTab(state, tab);
+        } else {
+            return this.openLeftSidebarTab(state, tab);
+        }
+    }
+
+    toggleRightSidebarTab(state, tab) {
+        const currentTabs = state.get("rightSidebarTabs");
+        if (currentTabs.has(tab)) {
+            return this.closeRightSidebarTab(state, tab);
+        } else {
+            return this.openRightSidebarTab(state, tab);
+        }
+    }
+
+    // TODO: might need to set the active tabs to the first on in the set of
+    // available tabs when it is hidden
+
     /**
      * Transforms the state given an action.
      *
@@ -92,7 +119,7 @@ class ConfigStore extends ReduceStore {
         case "CLOSE_RIGHT_SIDEBAR_TAB":
             return this.closeRightSidebarTab(state, action.tab);
         case "OPEN_CONFIG":
-            return Immutable.Map(action.config);
+            return this.openConfig(action.config);
         case "OPEN_LEFT_SIDEBAR_TAB":
             return this.openLeftSidebarTab(state, action.tab);
         case "OPEN_RIGHT_SIDEBAR_TAB":
@@ -121,6 +148,10 @@ class ConfigStore extends ReduceStore {
             return state.set("tableSorting", action.sorting);
         case "SET_VIEWPORT":
             return state.set("viewport", action.viewport);
+        case "TOGGLE_LEFT_SIDEBAR_TAB":
+            return this.toggleLeftSidebarTab(state, action.tab);
+        case "TOGGLE_RIGHT_SIDEBAR_TAB":
+            return this.toggleRightSidebarTab(state, action.tab);
         default:
             return state;
         }

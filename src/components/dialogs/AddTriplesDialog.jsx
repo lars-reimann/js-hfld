@@ -126,7 +126,7 @@ export default class extends React.Component {
     /**
      * Closes the dialog.
      */
-    cancel() {
+    close() {
         actions.setDialogVisibility("addTriples", false);
     }
 
@@ -135,7 +135,7 @@ export default class extends React.Component {
      */
     render() {
         return (
-            <Modal show={this.props.visible} onHide={() => this.cancel()}>
+            <Modal show={this.props.visible} onHide={() => this.close()}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add Triples</Modal.Title>
                 </Modal.Header>
@@ -214,8 +214,7 @@ export default class extends React.Component {
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={() => this.ok()} disabled={!this.isValid()}>OK</Button>
-                    <Button onClick={() => this.cancel()}>Cancel</Button>
+                    <Button onClick={() => this.ok()} disabled={!this.isValid()}>Save</Button>
                 </Modal.Footer>
             </Modal>
         );

@@ -85,6 +85,10 @@ export default class extends React.Component {
                 <dialogs.AddTriplesDialog visible={this.props.dialogs.showAddTriplesDialog} />
                 <dialogs.CloseDialog visible={this.props.dialogs.showCloseDialog} />
                 <dialogs.EadesLayoutDialog visible={this.props.dialogs.showEadesLayoutDialog} />
+                <dialogs.EditNamespacesDialog
+                    visible={this.props.dialogs.showEditNamespacesDialog}
+                    prefixes={this.props.rdf.getProfile().prefixes}
+                />
                 <dialogs.FruchtermannLayoutDialog visible={this.props.dialogs.showFruchtermannLayoutDialog} />
                 <dialogs.OpenDialog
                     name="openConfig"

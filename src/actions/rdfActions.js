@@ -15,3 +15,7 @@ export function addNamespace(prefix, iri) {
 export function removeNamespace(prefix) {
     dispatcher.dispatch({ type: "REMOVE_NAMESPACE", prefix });
 }
+
+export function editNamespace(prefix, iri) {
+    dispatcher.dispatch({ type: "EDIT_NAMESPACE", prefix, iri });
+}

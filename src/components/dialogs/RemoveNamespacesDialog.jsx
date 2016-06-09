@@ -51,8 +51,8 @@ export default class extends React.Component {
         });
     }
 
-    options(prefixes) {
-        return [...prefixes]
+    options() {
+        return [...this.props.prefixes]
             .map(([prefix, iri]) => (
                 <option key={prefix} value={prefix}>{prefix} => {iri}</option>
             ));
@@ -67,7 +67,7 @@ export default class extends React.Component {
         return (
             <Modal show={this.props.visible} onHide={() => this.close()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Add Namespaces</Modal.Title>
+                    <Modal.Title>Remove Namespaces</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form>
@@ -75,9 +75,9 @@ export default class extends React.Component {
                             <ControlLabel>Prefix:</ControlLabel>
                             <FormControl
                                 componentClass="select"
-                                value={this.state.prefix}
+                                value={prefix}
                                 onChange={e => this.handleSelection(e)}>
-                                {this.options(this.props.prefixes)}
+                                {this.options()}
                             </FormControl>
                         </FormGroup>
                     </form>

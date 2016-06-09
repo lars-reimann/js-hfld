@@ -1,46 +1,53 @@
 import React                                                 from "react";
 import {Modal, FormGroup, ControlLabel, FormControl, Button} from "react-bootstrap";
 
+import * as rdf from "@ignavia/rdf";
+
 import BlankNodeInput from "./BlankNodeInput.jsx";
 import NamedNodeInput from "./NamedNodeInput.jsx";
 
-function nodeInput(node) {
+const defaultBlankNode = new rdf.BlankNode("");
+const defaultNamedNode = new rdf.NamedNode("");
+
+function nodeInput(node, valid, handleChange) {
+    const props = {node, valid, handleChange};
     switch (node.interfaceName) {
-    case "blankNode":console.log("blank")
-        return (
-            <BlankNodeInput
-                node={node}
-            />
-        );
-    case "namedNode":
-        return (
-            <NamedNodeInput
-                node={node}
-            />
-        );
+    case "BlankNode":
+        return <BlankNodeInput {...props} />;
+    case "NamedNode":
+        return <NamedNodeInput {...props} />;
     }
 }
 
-function handleInterfaceNameChange(interfaceName) {
-    this.setState({ interfaceName });
+function handleInterfaceChange(interfaceName, handleChange) {
+    switch (interfaceName) {
+    case "BlankNode":
+        return handleChange({
+            node:  defaultBlankNode,
+            valid: false
+        });
+    case "NamedNode":
+        return handleChange({
+            node:  defaultNamedNode,
+            valid: false
+        });
+    }
 }
 
-export default function ({node}) {
-    const interfaceName = node.interfaceName;
+export default function ({node, valid, handleChange}) {
     return (
         <div>
             <FormGroup controlId="interfaceName">
                 <ControlLabel>Interface Name</ControlLabel>
                 <FormControl
                     componentClass="select"
-                    value={interfaceName}
-                    onChange={value => handleInterfaceNameChange(value)}>
-                    <option value="blankNode">Blank Node</option>
-                    <option value="literal">Literal</option>
-                    <option value="namedNode">Named Node</option>
+                    value={node.interfaceName}
+                    onChange={e => handleInterfaceChange(e.target.value, handleChange)}>
+                    <option value="BlankNode">Blank Node</option>
+                    <option value="NamedNode">Named Node</option>
                 </FormControl>
             </FormGroup>
-            {nodeInput(node)}
+            {nodeInput(node, valid, handleChange)}
         </div>
     );
 }

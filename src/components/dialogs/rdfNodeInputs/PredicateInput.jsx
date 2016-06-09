@@ -4,9 +4,5 @@ import {Modal, FormGroup, ControlLabel, FormControl, Button} from "react-bootstr
 import NamedNodeInput from "./NamedNodeInput.jsx";
 
 export default function (props) {
-    return (
-        <NamedNodeInput
-            node={props.node}
-        />
-    );
+    return <NamedNodeInput {...props} />;
 }

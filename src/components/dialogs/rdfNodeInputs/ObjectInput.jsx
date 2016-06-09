@@ -7,19 +7,19 @@ import NamedNodeInput from "./NamedNodeInput.jsx";
 
 function nodeInput(node) {
     switch (node.interfaceName) {
-    case "blankNode":
+    case "BlankNode":
         return (
             <BlankNodeInput
                 node={node}
             />
         );
-    case "literal":
+    case "Literal":
         return (
             <LiteralInput
                 node={node}
             />
         );
-    case "namedNode":
+    case "NamedNode":
         return (
             <NamedNodeInput
                 node={node}
@@ -32,7 +32,7 @@ function handleInterfaceNameChange(interfaceName) {
     this.setState({ interfaceName });
 }
 
-export default function ({node}) {
+export default function ({node, valid}) {
     const interfaceName = node.interfaceName;
     return (
         <div>
@@ -42,9 +42,9 @@ export default function ({node}) {
                     componentClass="select"
                     value={interfaceName}
                     onChange={value => this.handleInterfaceNameChange(value)}>
-                    <option value="blankNode">Language String</option>
-                    <option value="literal">String</option>
-                    <option value="namedNode">Boolean</option>
+                    <option value="BlankNode">Blank Node</option>
+                    <option value="Literal">Literal</option>
+                    <option value="NamedNode">Named Node</option>
                 </FormControl>
             </FormGroup>
             {nodeInput(node)}

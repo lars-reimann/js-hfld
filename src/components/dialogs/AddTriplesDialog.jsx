@@ -28,76 +28,34 @@ export default class extends React.Component {
         super(props);
 
         this.state = {
-            subject:   defaultNamedNode,
-            predicate: defaultNamedNode,
-            object:    defaultNamedNode,
+            subject:          defaultNamedNode,
+            subjectIsValid:   false,
+            predicate:        defaultNamedNode,
+            predicateIsValid: false,
+            object:           defaultNamedNode,
+            objectIsValid:    false,
         };
     }
 
-    /**
-     * Handles user input.
-     *
-     * @param {Event} e
-     * The fired event.
-     */
-    handleChange(e) {
+    handleSubjectChange({node, valid}) {
         this.setState({
-            [e.target.id]: e.target.value
+            subject:        node,
+            subjectIsValid: valid,
         });
     }
 
-    handleInterfaceChange() {
-        // TODO
+    handlePredicateChange({node, valid}) {
+        this.setState({
+            predicate:        node,
+            predicateIsValid: valid,
+        });
     }
 
-    /**
-     * Checks if the entered spring force coefficient is valid.
-     *
-     * @return {Boolean}
-     * Whether the spring force coefficient is valid.
-     */
-    springForceCoefIsValid() {
-        return validators.isNumber(this.state.springForceCoef);
-    }
-
-    /**
-     * Checks if the entered repulsive force coefficent is valid.
-     *
-     * @return {Boolean}
-     * Whether the repulsive force coefficent is valid.
-     */
-    repulsiveForceCoefIsValid() {
-        return validators.isNumber(this.state.repulsiveForceCoef);
-    }
-
-    /**
-     * Checks if the entered ideal distance is valid.
-     *
-     * @return {Boolean}
-     * Whether the ideal distance is valid.
-     */
-    idealDistanceIsValid() {
-        return validators.isNumber(this.state.idealDistance);
-    }
-
-    /**
-     * Checks if the entered force-to-distance coefficient is valid.
-     *
-     * @return {Boolean}
-     * Whether the force-to-distance coefficient is valid.
-     */
-    forceToDistanceCoefIsValid() {
-        return validators.isNumber(this.state.forceToDistanceCoef);
-    }
-
-    /**
-     * Checks if the entered number of simulation steps is valid.
-     *
-     * @return {Boolean}
-     * Whether the number of simulation steps is valid.
-     */
-    nStepsIsValid() {
-        return validators.isNumber(this.state.nSteps);
+    handleObjectChange({node, valid}) {
+        this.setState({
+            object:        node,
+            objectIsValid: valid,
+        });
     }
 
     /**
@@ -107,30 +65,16 @@ export default class extends React.Component {
      * Whether all values are valid.
      */
     isValid() {
-        return this.springForceCoefIsValid()     &&
-               this.repulsiveForceCoefIsValid()  &&
-               this.idealDistanceIsValid()       &&
-               this.forceToDistanceCoefIsValid() &&
-               this.nStepsIsValid();
+        return this.state.subjectIsValid   &&
+               this.state.predicateIsValid &&
+               this.state.objectIsValid;
     }
 
     /**
      * Submits the dialog.
      */
-    ok() {
-        const springForceCoef     = Number(this.state.springForceCoef);
-        const repulsiveForceCoef  = Number(this.state.repulsiveForceCoef);
-        const idealDistance       = Number(this.state.idealDistance);
-        const forceToDistanceCoef = Number(this.state.forceToDistanceCoef);
-        const nSteps              = Number(this.state.nSteps);
-        actions.randomLayout({
-            springForceCoef,
-            repulsiveForceCoef,
-            idealDistance,
-            forceToDistanceCoef,
-            nSteps
-        });
-        actions.setDialogVisibility("addTriples", false);
+    save() {
+        // TODO add action to add a triple
     }
 
     /**
@@ -153,20 +97,30 @@ export default class extends React.Component {
                     <form>
                         <fieldset>
                             <legend>Subject</legend>
-                            <SubjectInput node={this.state.subject} />
+                            <SubjectInput
+                                node={this.state.subject}
+                                valid={this.state.subjectIsValid}
+                                handleChange={result => this.handleSubjectChange(result)}
+                            />
                         </fieldset>
                         <fieldset>
                             <legend>Predicate</legend>
-                            <PredicateInput node={this.state.predicate} />
+                            <PredicateInput
+                                node={this.state.predicate}
+                                valid={this.state.predicateIsValid}
+                                handleChange={result => this.handlePredicateChange(result)} />
                         </fieldset>
                         <fieldset>
                             <legend>Object</legend>
-                            <ObjectInput node={this.state.object} />
+                            <ObjectInput
+                                node={this.state.object}
+                                valid={this.state.objectIsValid}
+                                handleChange={result => this.handleObjectChange(result)} />
                         </fieldset>
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={() => this.ok()} disabled={!this.isValid()}>Save</Button>
+                    <Button onClick={() => this.save()} disabled={!this.isValid()}>Save</Button>
                 </Modal.Footer>
             </Modal>
         );

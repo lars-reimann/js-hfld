@@ -119,6 +119,10 @@ export default class extends React.Component {
                     visible={this.props.dialogs.showOpenTurtleDialog}
                 />
                 <dialogs.RandomLayoutDialog visible={this.props.dialogs.showRandomLayoutDialog} />
+                <dialogs.RemoveNamespacesDialog
+                    visible={this.props.dialogs.showRemoveNamespacesDialog}
+                    prefixes={this.props.rdf.getProfile().prefixes}
+                />
                 <dialogs.RemoveTriplesDialog
                     triples={this.props.selection.getSelectedTriples()}
                     visible={this.props.dialogs.showRemoveTriplesDialog}

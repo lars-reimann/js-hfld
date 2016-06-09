@@ -59,6 +59,10 @@ class rdfStore extends Store {
             this.state.profile.setPrefix(action.prefix, action.iri);
             this.__emitChange();
             break;
+        case "REMOVE_NAMESPACE":console.log("remove >" + action.prefix + "<");
+            this.state.profile.prefixes.remove(action.prefix);
+            this.__emitChange();
+            break;
         case "REMOVE_TRIPLES":
             return this.removeTriples(action.triples);
         case "CLOSE":

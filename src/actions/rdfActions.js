@@ -11,3 +11,7 @@ export function removeTriples(triples) {
 export function addNamespace(prefix, iri) {
     dispatcher.dispatch({ type: "ADD_NAMESPACE", prefix, iri });
 }
+
+export function removeNamespace(prefix) {
+    dispatcher.dispatch({ type: "REMOVE_NAMESPACE", prefix });
+}

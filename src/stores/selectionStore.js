@@ -31,6 +31,11 @@ class SelectionStore extends ReduceStore {
             nodes:     Immutable.Set(),
             triples:   Immutable.Set(),
             tablePage: 1,
+            tripleFilter: {
+                subject:   false,
+                predicate: false,
+                object:    false,
+            },
         });
     }
 

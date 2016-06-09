@@ -43,7 +43,7 @@ export default function (props) {
     return (
         <Modal show={props.visible} onHide={hide}>
             <Modal.Header closeButton>
-                <Modal.Title>Sidebar Dialog</Modal.Title>
+                <Modal.Title>Configure Sidebars</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <form>

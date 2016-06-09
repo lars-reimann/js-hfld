@@ -12,6 +12,14 @@ export default class extends React.Component {
 
     handleSelect(eventKey) {
         switch (eventKey) {
+        case "SHOW_ADD_TRIPLES_DIALOG":
+            return actions.setDialogVisibility("addTriples", true);
+        case "SHOW_EDIT_TRIPLES_DIALOG":
+            return actions.setDialogVisibility("editTriples", true);
+        case "SHOW_FILTER_TRIPLES_DIALOG":
+            return actions.setDialogVisibility("filterTriples", true);
+        case "SHOW_REMOVE_TRIPLES_DIALOG":
+            return actions.setDialogVisibility("removeTriples", true);
         case "CLEAR_NODE_SELECTION":
             return actions.clearNodeSelection();
         case "CLEAR_SELECTION":
@@ -104,6 +112,20 @@ export default class extends React.Component {
                             </MenuItem>
                         </NavDropdown>
                         <NavDropdown title="Edit" id="menubar-edit">
+                            <MenuItem eventKey="SHOW_ADD_TRIPLES_DIALOG">
+                                Add Triples...
+                            </MenuItem>
+                            <MenuItem eventKey="SHOW_EDIT_TRIPLES_DIALOG">
+                                Edit Triples...
+                            </MenuItem>
+                            <MenuItem eventKey="SHOW_REMOVE_TRIPLES_DIALOG">
+                                Remove Triples...
+                            </MenuItem>
+                            <MenuItem divider/>
+                            <MenuItem eventKey="SHOW_FILTER_TRIPLES_DIALOG">
+                                Filter Triples...
+                            </MenuItem>
+                            <MenuItem divider />
                             <MenuItem eventKey="CLEAR_NODE_SELECTION">
                                 Clear Node Selection
                             </MenuItem>

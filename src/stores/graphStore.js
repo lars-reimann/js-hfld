@@ -17,12 +17,13 @@ class GraphStore extends Store {
 
     initState() {
         this.state = {
+            imported:  new Map(),
             graph:     new earl.Graph(),
             earlToRDF: {
                 nodes: new Tolkien1ToNMap(),
-                edges: new Tolkien1To1Map()
+                edges: new Tolkien1To1Map(),
             },
-            layout:    new Map()
+            layout:    new Map(),
         };
     }
 
@@ -62,7 +63,8 @@ class GraphStore extends Store {
         return `${rdfNode.interfaceName}#${rdfNode.nominalValue}`;
     }
 
-    importRDFNode(imported, rdfNode) {
+    importRDFNode(rdfNode) {
+        const imported = this.state.imported;
         if (rdfNode.interfaceName !== "Literal") {
             const hash = this.hashRDFNode(rdfNode);
             if (!imported.has(hash)) {
@@ -77,7 +79,8 @@ class GraphStore extends Store {
         }
     }
 
-    importTriple(imported, {subject, predicate, object}) {
+    importTriple({subject, predicate, object}) {
+        const imported    = this.state.imported;
         const subjectHash = this.hashRDFNode(subject);
         const objectHash  = this.hashRDFNode(object);
         const sourceId    = imported.get(subjectHash);
@@ -92,11 +95,10 @@ class GraphStore extends Store {
     importRDFGraph() {
         this.initState();
 
-        const imported = new Map();
         for (let triple of rdfStore.state.graph) {
-            this.importRDFNode(imported, triple.subject);
-            this.importRDFNode(imported, triple.object);
-            this.importTriple(imported, triple);
+            this.importRDFNode(triple.subject);
+            this.importRDFNode(triple.object);
+            this.importTriple(triple);
         }
     }
 

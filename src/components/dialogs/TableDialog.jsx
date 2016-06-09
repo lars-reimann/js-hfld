@@ -22,7 +22,7 @@ export default function (props) {
     return (
         <Modal show={props.visible} onHide={hide}>
             <Modal.Header closeButton>
-                <Modal.Title>Table Dialog</Modal.Title>
+                <Modal.Title>Configure Table View</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <form>

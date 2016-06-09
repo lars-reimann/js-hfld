@@ -1,7 +1,7 @@
 import React                                  from "react";
 import {FormGroup, ControlLabel, FormControl} from "react-bootstrap";
 
-import {getValidationStyle} from "../../utils/utils.js";
+import {getValidationStyle} from "../../../utils/utils.js";
 
 export default function ({node, handleChange}) {
     const tempName = node.nominalValue;

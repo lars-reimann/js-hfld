@@ -3,7 +3,7 @@ import {FormGroup, ControlLabel, FormControl, Checkbox} from "react-bootstrap";
 
 import {xmlSchemaTypes as xsd} from "@ignavia/rdf";
 
-import {getValidationStyle} from "../../utils/utils.js";
+import {getValidationStyle} from "../../../utils/utils.js";
 
 const langString = "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString";
 

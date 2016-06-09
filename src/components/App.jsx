@@ -118,6 +118,10 @@ export default class extends React.Component {
                     visible={this.props.dialogs.showOpenTurtleDialog}
                 />
                 <dialogs.RandomLayoutDialog visible={this.props.dialogs.showRandomLayoutDialog} />
+                <dialogs.RemoveTriplesDialog
+                    triples={this.props.selection.getSelectedTriples()}
+                    visible={this.props.dialogs.showRemoveTriplesDialog}
+                />
                 <dialogs.RotateDialog visible={this.props.dialogs.showRotateDialog} />
                 <dialogs.SaveConfigDialog
                     config={this.props.config}

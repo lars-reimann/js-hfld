@@ -46,12 +46,12 @@ class GraphStore extends Store {
     }
 
     convertEarlEdgeToRDFTriple(earlEdge) {
-        const rdfTripleId = this.state.earlToRDF.triples.convertXToY(earlEdge.id)[0];
+        const rdfTripleId = this.state.earlToRDF.edges.convertXToY(earlEdge.id)[0];
         return rdfStore.getGraph().getTripleById(rdfTripleId);
     }
 
     convertRDFTripleToEarlEdge(rdfTriple) {
-        const earlEdgeId = this.state.earlToRDF.triples.convertYToX(rdfTriple.id)[0];
+        const earlEdgeId = this.state.earlToRDF.edges.convertYToX(rdfTriple.id)[0];
         return this.state.graph.getEdgeById(earlEdgeId);
     }
 
@@ -79,7 +79,7 @@ class GraphStore extends Store {
         }
     }
 
-    importTriple({subject, predicate, object}) {
+    importTriple({subject, predicate, object, id}) {
         const imported    = this.state.imported;
         const subjectHash = this.hashRDFNode(subject);
         const objectHash  = this.hashRDFNode(object);
@@ -88,7 +88,7 @@ class GraphStore extends Store {
         if (sourceId && targetId) {
             const edge = new earl.Edge(sourceId, targetId);
             this.state.graph.addEdges(edge);
-            this.state.earlToRDF.edges.add(edge.id, predicate.id);
+            this.state.earlToRDF.edges.add(edge.id, id);
         }
     }
 
@@ -106,6 +106,32 @@ class GraphStore extends Store {
         this.importTriple(triple);
     }
 
+    removeNode(rdfNode) {
+        const node = this.convertRDFNodeToEarlNode(rdfNode);
+        if (node.getNumberOfIncidentEdges() === 0) {
+            this.state.graph.removeNodes(node);
+            this.state.earlToRDF.nodes.deleteX(node.id);
+            this.state.layout.delete(node.id);
+        }
+    }
+
+    removeTriple(rdfTriple) {
+        const edge = this.convertRDFTripleToEarlEdge(rdfTriple);
+        console.log(edge);
+        this.state.graph.removeEdges(edge);
+        this.state.earlToRDF.edges.deleteX(edge.id);
+        this.removeNode(rdfTriple.subject);
+        this.removeNode(rdfTriple.object);
+    }
+
+    removeTriples(triples) {
+        dispatcher.waitFor([rdfToken]);
+        for (let triple of triples) {
+            this.removeTriple(triple);
+        }
+        this.__emitChange();
+    }
+
     __onDispatch(action) {
         switch (action.type) {
             case "ADD_TRIPLE":
@@ -113,6 +139,8 @@ class GraphStore extends Store {
                 this.addTriple(action.triple);
                 this.__emitChange();
                 break;
+            case "REMOVE_TRIPLES":
+                return this.removeTriples(action.triples);
             case "CLOSE":
                 this.initState();
                 this.__emitChange();

@@ -112,6 +112,10 @@ export default class extends React.Component {
                             </MenuItem>
                         </NavDropdown>
                         <NavDropdown title="Edit" id="menubar-edit">
+                            <MenuItem eventKey="SHOW_EDIT_NODES_DIALOG">
+                                Edit Nodes...
+                            </MenuItem>
+                            <MenuItem divider />
                             <MenuItem eventKey="SHOW_ADD_TRIPLES_DIALOG">
                                 Add Triples...
                             </MenuItem>
@@ -121,7 +125,7 @@ export default class extends React.Component {
                             <MenuItem eventKey="SHOW_REMOVE_TRIPLES_DIALOG">
                                 Remove Triples...
                             </MenuItem>
-                            <MenuItem divider/>
+                            <MenuItem divider />
                             <MenuItem eventKey="SHOW_FILTER_TRIPLES_DIALOG">
                                 Filter Triples...
                             </MenuItem>

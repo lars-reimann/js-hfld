@@ -42,12 +42,21 @@ class rdfStore extends Store {
         );
     }
 
+    removeTriples(triples) {
+        for (let triple of triples) {
+            this.state.graph.remove(triple);
+        }
+        this.__emitChange();
+    }
+
     __onDispatch(action) {
         switch (action.type) {
         case "ADD_TRIPLE":
             this.state.graph.add(action.triple);
             this.__emitChange();
             break;
+        case "REMOVE_TRIPLES":
+            return this.removeTriples(action.triples);
         case "CLOSE":
             this.initState();
             this.__emitChange();

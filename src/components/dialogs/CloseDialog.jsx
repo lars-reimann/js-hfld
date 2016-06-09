@@ -1,10 +1,7 @@
-import React                                                 from "react";
-import {Modal, FormGroup, ControlLabel, FormControl, Button} from "react-bootstrap";
-
-import {Vec2} from "@ignavia/ella";
+import React           from "react";
+import {Modal, Button} from "react-bootstrap";
 
 import * as actions                     from "../../actions/actions.js";
-import {validators, getValidationStyle} from "../../utils/utils.js";
 
 /**
  * The dialog shown to the user when he wants close the graph.

@@ -24,9 +24,12 @@ class DialogStore extends ReduceStore {
      */
     getInitialState() {
         return Immutable.Map({
+            showAddNamespacesDialog:      false,
             showAddTriplesDialog:         false,
             showCloseDialog:              false,
             showEadesLayoutDialog:        false,
+            showEditNamespacesDialog:     false,
+            showEditNodesDialog:          false,
             showEditTriplesDialog:        false,
             showFilterTriplesDialog:      false,
             showFruchtermannLayoutDialog: false,
@@ -35,6 +38,7 @@ class DialogStore extends ReduceStore {
             showOpenStyleDialog:          false,
             showOpenTurtleDialog:         false,
             showRandomLayoutDialog:       false,
+            showRemoveNamespacesDialog:   false,
             showRemoveTriplesDialog:      false,
             showRotateDialog:             false,
             showSaveTurtleDialog:         false,
@@ -75,6 +79,8 @@ class DialogStore extends ReduceStore {
             return state.set("showCloseDialog", show);
         case "eadesLayout":
             return state.set("showEadesLayoutDialog", show);
+        case "editNodes":
+            return state.set("showEditNodesDialog", show);
         case "editTriples":
             return state.set("showEditTriplesDialog", show);
         case "filterTriples":

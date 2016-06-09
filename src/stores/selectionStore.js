@@ -318,6 +318,11 @@ class SelectionStore extends ReduceStore {
         return state.set("tablePage", tablePage);
     }
 
+    removeTriples(state, triples) {
+        const ids = triples.map(triple => triple.id);
+        return this.deselectTriples(state, ids);
+    }
+
     /**
      * Transforms the state given an action.
      *
@@ -333,6 +338,8 @@ class SelectionStore extends ReduceStore {
     reduce(state, action) {
         dispatcher.waitFor([rdfToken]);
         switch (action.type) {
+        case "REMOVE_TRIPLES":
+            return this.removeTriples(state, action.triples);
         case "CLEAR_SELECTION":
         case "CLOSE":
         case "OPEN_TURTLE":

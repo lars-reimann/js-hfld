@@ -37,6 +37,17 @@ export default class extends React.Component {
         };
     }
 
+    resetState() {
+        this.setState({
+            subject:          defaultNamedNode,
+            subjectIsValid:   false,
+            predicate:        defaultNamedNode,
+            predicateIsValid: false,
+            object:           defaultNamedNode,
+            objectIsValid:    false,
+        });
+    }
+
     handleSubjectChange({node, valid}) {
         this.setState({
             subject:        node,
@@ -74,7 +85,12 @@ export default class extends React.Component {
      * Submits the dialog.
      */
     save() {
-        // TODO add action to add a triple
+        const triple = new rdf.Triple(
+            this.state.subject,
+            this.state.predicate,
+            this.state.object
+        );
+        actions.addTriple(triple);
     }
 
     /**
@@ -120,7 +136,8 @@ export default class extends React.Component {
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={() => this.save()} disabled={!this.isValid()}>Save</Button>
+                    <Button onClick={() => this.save()} bsStyle="primary" disabled={!this.isValid()}>Save</Button>
+                    <Button onClick={() => this.resetState()} bsStyle="danger">Reset Form</Button>
                 </Modal.Footer>
             </Modal>
         );

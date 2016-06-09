@@ -44,6 +44,10 @@ class rdfStore extends Store {
 
     __onDispatch(action) {
         switch (action.type) {
+        case "ADD_TRIPLE":
+            this.state.graph.add(action.triple);
+            this.__emitChange();
+            break;
         case "CLOSE":
             this.initState();
             this.__emitChange();

@@ -96,20 +96,31 @@ class GraphStore extends Store {
         this.initState();
 
         for (let triple of rdfStore.state.graph) {
-            this.importRDFNode(triple.subject);
-            this.importRDFNode(triple.object);
-            this.importTriple(triple);
+            this.addTriple(triple);
         }
+    }
+
+    addTriple(triple) {
+        this.importRDFNode(triple.subject);
+        this.importRDFNode(triple.object);
+        this.importTriple(triple);
     }
 
     __onDispatch(action) {
         switch (action.type) {
+            case "ADD_TRIPLE":
+                dispatcher.waitFor([rdfToken]);
+                this.addTriple(action.triple);
+                this.__emitChange();
+                break;
             case "CLOSE":
                 this.initState();
+                this.__emitChange();
                 break;
             case "OPEN_TURTLE":
                 dispatcher.waitFor([rdfToken]);
                 this.importRDFGraph();
+                this.__emitChange();
                 break;
         }
     }

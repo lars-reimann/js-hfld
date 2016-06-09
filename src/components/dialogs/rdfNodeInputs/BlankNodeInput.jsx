@@ -8,7 +8,7 @@ import {getValidationStyle} from "../../../utils/utils.js";
 function onChange(value, handleChange) {
     const node = new BlankNode(value);
     const valid = value !== "";
-    handleChange({node, value});
+    handleChange({node, valid});
 }
 
 export default function ({node, valid, handleChange}) {

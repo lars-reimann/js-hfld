@@ -12,6 +12,12 @@ export default class extends React.Component {
 
     handleSelect(eventKey) {
         switch (eventKey) {
+        case "SHOW_ADD_NAMESPACES_DIALOG":
+            return actions.setDialogVisibility("addNamespaces", true);
+        case "SHOW_EDIT_NAMESPACES_DIALOG":
+            return actions.setDialogVisibility("editNamespaces", true);
+        case "SHOW_REMOVE_NAMESPACES_DIALOG":
+            return actions.setDialogVisibility("removeNamespaces", true);
         case "SHOW_ADD_TRIPLES_DIALOG":
             return actions.setDialogVisibility("addTriples", true);
         case "SHOW_EDIT_TRIPLES_DIALOG":
@@ -112,6 +118,16 @@ export default class extends React.Component {
                             </MenuItem>
                         </NavDropdown>
                         <NavDropdown title="Edit" id="menubar-edit">
+                            <MenuItem eventKey="SHOW_ADD_NAMESPACES_DIALOG">
+                                Add Namespaces...
+                            </MenuItem>
+                            <MenuItem eventKey="SHOW_EDIT_NAMESPACES_DIALOG">
+                                Edit Namespaces...
+                            </MenuItem>
+                            <MenuItem eventKey="SHOW_REMOVE_NAMESPACES_DIALOG">
+                                Remove Namespaces...
+                            </MenuItem>
+                            <MenuItem divider />
                             <MenuItem eventKey="SHOW_EDIT_NODES_DIALOG">
                                 Edit Nodes...
                             </MenuItem>

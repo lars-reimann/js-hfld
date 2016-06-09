@@ -8,7 +8,8 @@ import Alert from "./Alert.jsx";
 const style = {
     position: "absolute",
     right: 10,
-    bottom: 10
+    bottom: 10,
+    zIndex: 1000000,
 };
 
 /**

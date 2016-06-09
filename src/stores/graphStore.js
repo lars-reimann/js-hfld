@@ -108,7 +108,7 @@ class GraphStore extends Store {
 
     removeNode(rdfNode) {
         const node = this.convertRDFNodeToEarlNode(rdfNode);
-        if (node.getNumberOfIncidentEdges() === 0) {
+        if (node && node.getNumberOfIncidentEdges() === 0) {
             this.state.graph.removeNodes(node);
             this.state.earlToRDF.nodes.deleteX(node.id);
             this.state.layout.delete(node.id);
@@ -117,11 +117,12 @@ class GraphStore extends Store {
 
     removeTriple(rdfTriple) {
         const edge = this.convertRDFTripleToEarlEdge(rdfTriple);
-        console.log(edge);
-        this.state.graph.removeEdges(edge);
-        this.state.earlToRDF.edges.deleteX(edge.id);
-        this.removeNode(rdfTriple.subject);
-        this.removeNode(rdfTriple.object);
+        if (edge) {
+            this.state.graph.removeEdges(edge);
+            this.state.earlToRDF.edges.deleteX(edge.id);
+            this.removeNode(rdfTriple.subject);
+            this.removeNode(rdfTriple.object);
+        }
     }
 
     removeTriples(triples) {

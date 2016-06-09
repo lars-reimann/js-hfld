@@ -73,12 +73,16 @@ class DialogStore extends ReduceStore {
      */
     setDialogVisibility(state, {dialog, show}) {
         switch (dialog) {
+        case "addNamespaces":
+            return state.set("showAddNamespacesDialog", show);
         case "addTriples":
             return state.set("showAddTriplesDialog", show);
         case "close":
             return state.set("showCloseDialog", show);
         case "eadesLayout":
             return state.set("showEadesLayoutDialog", show);
+        case "editNamespaces":
+            return state.set("showEditNamespacesDialog", show);
         case "editNodes":
             return state.set("showEditNodesDialog", show);
         case "editTriples":
@@ -97,6 +101,8 @@ class DialogStore extends ReduceStore {
             return state.set("showOpenTurtleDialog", show);
         case "randomLayout":
             return state.set("showRandomLayoutDialog", show);
+        case "removeNamespaces":
+            return state.set("showRemoveNamespacesDialog", show);
         case "removeTriples":
             return state.set("showRemoveTriplesDialog", show);
         case "rotate":

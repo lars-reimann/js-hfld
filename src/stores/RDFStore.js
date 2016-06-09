@@ -55,6 +55,10 @@ class rdfStore extends Store {
             this.state.graph.add(action.triple);
             this.__emitChange();
             break;
+        case "ADD_NAMESPACE":
+            this.state.profile.setPrefix(action.prefix, action.iri);
+            this.__emitChange();
+            break;
         case "REMOVE_TRIPLES":
             return this.removeTriples(action.triples);
         case "CLOSE":

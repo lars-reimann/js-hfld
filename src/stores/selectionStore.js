@@ -320,7 +320,8 @@ class SelectionStore extends ReduceStore {
 
     removeTriples(state, triples) {
         const ids = triples.map(triple => triple.id);
-        return this.deselectTriples(state, ids);
+        return this.deselectTriples(state, ids)
+            .set("nodes", Immutable.Set());
     }
 
     /**

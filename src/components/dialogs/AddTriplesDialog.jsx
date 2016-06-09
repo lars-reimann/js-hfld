@@ -90,6 +90,7 @@ export default class extends React.Component {
             this.state.predicate,
             this.state.object
         );
+        actions.enqueueAlert("success", "Added a triple.");
         actions.addTriple(triple);
     }
 

@@ -8,12 +8,12 @@ import {getValidationStyle} from "../../../utils/utils.js";
 function onChange(value, handleChange) {
     const node = new NamedNode(value);
     const valid = value !== "";
-    handleChange({node, value});
+    handleChange({node, valid});
 }
 
 export default function ({node, valid, handleChange}) {
     return (
-        <FormGroup controlId="iri" validationStyle={getValidationStyle(valid)}>
+        <FormGroup controlId="iri" validationState={getValidationStyle(valid)}>
             <ControlLabel>IRI</ControlLabel>
             <FormControl
                 type="text"

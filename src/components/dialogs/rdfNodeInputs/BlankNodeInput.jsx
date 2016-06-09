@@ -14,7 +14,7 @@ function onChange(value, handleChange) {
 export default function ({node, valid, handleChange}) {
     const tempName = node.nominalValue;
     return (
-        <FormGroup controlId="tempName" validationStyle={getValidationStyle(valid)}>
+        <FormGroup controlId="tempName" validationState={getValidationStyle(valid)}>
             <ControlLabel>Temporary Name</ControlLabel>
             <FormControl
                 type="text"

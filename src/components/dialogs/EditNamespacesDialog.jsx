@@ -1,5 +1,5 @@
 import React                                                 from "react";
-import {Modal, FormGroup, ControlLabel, FormControl, Button} from "react-bootstrap";
+import {Modal, FormGroup, ControlLabel, FormControl, Button, Tabs, Tab} from "react-bootstrap";
 
 import * as actions                     from "../../actions/actions.js";
 import {validators, getValidationStyle} from "../../utils/utils.js";
@@ -23,8 +23,11 @@ export default class extends React.Component {
         const prefix   = selected === undefined ? "" : selected;
         this.state = {
             selected,
-            prefix,
-            iri: selected === undefined ? "" : this.props.prefixes.resolve(prefix),
+            activeTab: "add",
+            prefixToAdd: "",
+            iriToAdd: "",
+            prefixToEdit: prefix,
+            iriToEdit: selected === undefined ? "" : this.props.prefixes.resolve(prefix)
         };
     }
 
@@ -33,44 +36,21 @@ export default class extends React.Component {
         const prefix   = selected === undefined ? "" : selected;
         this.setState({
             selected,
-            prefix,
-            iri:    selected === undefined ? "" : this.props.prefixes.resolve(prefix),
+            prefixToAdd: "",
+            iriToAdd: "",
+            prefixToEdit: prefix,
+            iriToEdit: selected === undefined ? "" : this.props.prefixes.resolve(prefix)
         });
     }
 
-    /**
-     * Submits the dialog.
-     */
-    save() {
-        actions.enqueueAlert("success", "Edited a namespace.");
-        actions.editNamespace(this.state.prefix, this.state.iri);
-    }
-
-    /**
-     * Closes the dialog.
-     */
-    close() {
-        actions.setDialogVisibility("editNamespaces", false);
-    }
-
-    handleSelection(e) {
+    handleSelectionChange(e) {
         const selected = e.target.value;
         const prefix   = selected === undefined ? "" : selected;
         this.setState({
             selected,
-            prefix,
-            iri:    selected === undefined ? "" : this.props.prefixes.resolve(prefix),
+            prefixToEdit: prefix,
+            iriToEdit:    selected === undefined ? "" : this.props.prefixes.resolve(prefix),
         });
-    }
-
-    /**
-     * Checks if the entered y-coordinate is valid.
-     *
-     * @return {Boolean}
-     * Whether the y-coordinate is valid.
-     */
-    iriIsValid() {
-        return validators.isNotEmpty(this.state.iri);
     }
 
     /**
@@ -79,8 +59,12 @@ export default class extends React.Component {
      * @return {Boolean}
      * Whether all values are valid.
      */
-    isValid() {
-        return this.iriIsValid();
+    stuffToAddIsValid() {
+        return this.iriToAddIsValid();
+    }
+
+    stuffToUpdateIsValid() {
+        return this.iriToEditIsValid();
     }
 
     options() {
@@ -96,53 +80,136 @@ export default class extends React.Component {
         });
     }
 
+    handleTabChange(key) {
+        this.setState({
+            activeTab: key
+        });
+    }
+
+    close() {
+        actions.setDialogVisibility("editNamespaces", false);
+    }
+
+    add() {
+        actions.enqueueAlert("success", "Added a namespace.");
+        actions.addNamespace(this.state.prefixToAdd, this.state.iriToAdd);
+    }
+
+    update() {
+        actions.enqueueAlert("success", "Update a namespace.");
+        actions.editNamespace(this.state.prefixToEdit, this.state.iriToEdit);
+    }
+
+    remove() {
+        actions.enqueueAlert("success", "Removed a namespace.");
+        actions.removeNamespace(this.state.prefixToEdit);
+    }
+
+    footer() {
+        switch (this.state.activeTab) {
+        case "add":
+            return (
+                <div>
+                    <Button onClick={() => this.add()} bsStyle="primary" disabled={!this.stuffToAddIsValid()}>Add</Button>
+                    <Button onClick={() => this.resetState()} bsStyle="danger">Reset Form</Button>
+                </div>
+            );
+        case "update":
+            return (
+                <div>
+                    <Button onClick={() => this.update()} bsStyle="primary" disabled={!this.stuffToUpdateIsValid()}>Update</Button>
+                    <Button onClick={() => this.remove()} bsStyle="danger">Remove</Button>
+                </div>
+            );
+        }
+    }
+
+    iriToAddIsValid() {
+        return validators.isNotEmpty(this.state.iriToAdd);
+    }
+
+    iriToEditIsValid() {
+        return validators.isNotEmpty(this.state.iriToEdit);
+    }
+
     /**
      * Renders this component.
      */
     render() {
+        const style = {
+            marginTop: 20
+        };
+
         return (
             <Modal show={this.props.visible} onHide={() => this.close()}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Namespaces</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form>
-                        <FormGroup controlId="selected">
-                            <ControlLabel>Selection:</ControlLabel>
-                            <FormControl
-                                componentClass="select"
-                                value={this.state.selected}
-                                onChange={e => this.handleSelection(e)}>
-                                {this.options()}
-                            </FormControl>
-                        </FormGroup>
-                        { this.state.selected === undefined ? null :
-                            <div>
-                                <FormGroup controlId="prefix">
-                                    <ControlLabel>Prefix</ControlLabel>
+                    <Tabs activeKey={this.state.activeTab} onSelect={key => this.handleTabChange(key)} id="method">
+                        <Tab eventKey="add" title="Add" style={style}>
+                            <form>
+                                <FormGroup controlId="prefixToAdd">
+                                    <ControlLabel>Prefix:</ControlLabel>
                                     <FormControl
                                         type="text"
-                                        value={this.state.prefix}
+                                        value={this.state.prefixtoAdd}
                                         placeholder="Enter a string..."
                                         onChange={e => this.handleInputChange(e)}
                                     />
                                 </FormGroup>
-                                <FormGroup controlId="iri" validationState={getValidationStyle(this.iriIsValid())}>
-                                    <ControlLabel>IRI</ControlLabel>
+                                <FormGroup controlId="iriToAdd" validationState={getValidationStyle(this.iriToAddIsValid())}>
+                                    <ControlLabel>IRI:</ControlLabel>
                                     <FormControl
                                         type="text"
-                                        value={this.state.iri}
+                                        value={this.state.iriToAdd}
                                         placeholder="Enter a string..."
                                         onChange={e => this.handleInputChange(e)}
                                     />
                                     <FormControl.Feedback />
                                 </FormGroup>
-                            </div>
-                        }
-                    </form>
+                            </form>
+                        </Tab>
+                        <Tab eventKey="update" title="Update/Remove" style={style}>
+                            <form>
+                                <FormGroup controlId="selected">
+                                    <ControlLabel>Selection:</ControlLabel>
+                                    <FormControl
+                                        componentClass="select"
+                                        value={this.state.selected}
+                                        onChange={e => this.handleSelectionChange(e)}>
+                                        {this.options()}
+                                    </FormControl>
+                                </FormGroup>
+                                { this.state.selected === undefined ? null :
+                                    <div>
+                                        <FormGroup controlId="prefixToEdit">
+                                            <ControlLabel>Prefix</ControlLabel>
+                                            <FormControl
+                                                type="text"
+                                                value={this.state.prefixToEdit}
+                                                placeholder="Enter a string..."
+                                                onChange={e => this.handleInputChange(e)}
+                                            />
+                                        </FormGroup>
+                                        <FormGroup controlId="iriToEdit" validationState={getValidationStyle(this.iriToEditIsValid())}>
+                                            <ControlLabel>IRI</ControlLabel>
+                                            <FormControl
+                                                type="text"
+                                                value={this.state.iriToEdit}
+                                                placeholder="Enter a string..."
+                                                onChange={e => this.handleInputChange(e)}
+                                            />
+                                            <FormControl.Feedback />
+                                        </FormGroup>
+                                    </div>
+                                }
+                            </form>
+                        </Tab>
+                    </Tabs>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={() => this.save()} disabled={!this.isValid()}>Save</Button>
+                    {this.footer()}
                 </Modal.Footer>
             </Modal>
         );

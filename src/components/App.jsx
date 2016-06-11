@@ -81,7 +81,6 @@ export default class extends React.Component {
 
                 <AlertQueue alertMessages={this.props.alerts} />
 
-                <dialogs.AddNamespacesDialog visible={this.props.dialogs.showAddNamespacesDialog} />
                 <dialogs.AddTriplesDialog visible={this.props.dialogs.showAddTriplesDialog} />
                 <dialogs.CloseDialog visible={this.props.dialogs.showCloseDialog} />
                 <dialogs.EadesLayoutDialog visible={this.props.dialogs.showEadesLayoutDialog} />
@@ -123,10 +122,6 @@ export default class extends React.Component {
                     visible={this.props.dialogs.showOpenTurtleDialog}
                 />
                 <dialogs.RandomLayoutDialog visible={this.props.dialogs.showRandomLayoutDialog} />
-                <dialogs.RemoveNamespacesDialog
-                    visible={this.props.dialogs.showRemoveNamespacesDialog}
-                    prefixes={this.props.rdf.getProfile().prefixes}
-                />
                 <dialogs.RemoveTriplesDialog
                     triples={this.props.selection.getSelectedTriples()}
                     visible={this.props.dialogs.showRemoveTriplesDialog}

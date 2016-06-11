@@ -24,7 +24,6 @@ class DialogStore extends ReduceStore {
      */
     getInitialState() {
         return Immutable.Map({
-            showAddNamespacesDialog:      false,
             showAddTriplesDialog:         false,
             showCloseDialog:              false,
             showEadesLayoutDialog:        false,
@@ -38,7 +37,6 @@ class DialogStore extends ReduceStore {
             showOpenStyleDialog:          false,
             showOpenTurtleDialog:         false,
             showRandomLayoutDialog:       false,
-            showRemoveNamespacesDialog:   false,
             showRemoveTriplesDialog:      false,
             showRotateDialog:             false,
             showSaveTurtleDialog:         false,
@@ -73,8 +71,6 @@ class DialogStore extends ReduceStore {
      */
     setDialogVisibility(state, {dialog, show}) {
         switch (dialog) {
-        case "addNamespaces":
-            return state.set("showAddNamespacesDialog", show);
         case "addTriples":
             return state.set("showAddTriplesDialog", show);
         case "close":
@@ -101,8 +97,6 @@ class DialogStore extends ReduceStore {
             return state.set("showOpenTurtleDialog", show);
         case "randomLayout":
             return state.set("showRandomLayoutDialog", show);
-        case "removeNamespaces":
-            return state.set("showRemoveNamespacesDialog", show);
         case "removeTriples":
             return state.set("showRemoveTriplesDialog", show);
         case "rotate":

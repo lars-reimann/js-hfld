@@ -92,7 +92,10 @@ export default class extends React.Component {
                     visible={this.props.dialogs.showEditTriplesDialog}
                     rdf={this.props.rdf}
                 />
-                <dialogs.FilterTriplesDialog visible={this.props.dialogs.showFilterTriplesDialog} />
+                <dialogs.FilterTriplesDialog
+                    filter={this.props.selection.getTripleFilter()}
+                    visible={this.props.dialogs.showFilterTriplesDialog}
+                />
                 <dialogs.FruchtermannLayoutDialog visible={this.props.dialogs.showFruchtermannLayoutDialog} />
                 <dialogs.OpenDialog
                     name="openConfig"

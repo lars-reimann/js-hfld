@@ -27,26 +27,30 @@ export default class extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = this.initialState();
+        this.state = this.initialState(props);
 
         // TODO receive current filter as props
     }
 
-    initialState() {
+    initialState(props) {
         return {
             subject: {
-                value: false,
+                value: props.filter.subject,
                 valid: true,
             },
             predicate: {
-                value: false,
+                value: props.filter.predicate,
                 valid: true,
             },
             object: {
-                value: false,
+                value: props.filter.object,
                 valid: true,
             }
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState(this.initialState(nextProps));
     }
 
     handleRDFSubjectChange({node, valid}) {
@@ -150,8 +154,8 @@ export default class extends React.Component {
         });
     }
 
-    resetState() {
-        this.setState(this.initialState());
+    resetForm() {
+        actions.clearTripleFilter();
     }
 
     subjectFilter() {
@@ -295,8 +299,8 @@ export default class extends React.Component {
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={() => this.filter()} bsStyle="primary" disabled={!this.isValid()}>Add</Button>
-                    <Button onClick={() => this.resetForm()} bsStyle="danger">Reset Form</Button>
+                    <Button onClick={() => this.filter()} bsStyle="primary" disabled={!this.isValid()}>Filter</Button>
+                    <Button onClick={() => this.resetForm()} bsStyle="danger">Clear Filter</Button>
                 </Modal.Footer>
             </Modal>
         );

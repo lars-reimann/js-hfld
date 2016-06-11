@@ -39,6 +39,10 @@ class SelectionStore extends ReduceStore {
         });
     }
 
+    getTripleFilter() {
+        return this.getState().get("tripleFilter");
+    }
+
     getFilteredGraph() {
         return rdfStore.getGraph().match(this.getState().get("tripleFilter"));
     }

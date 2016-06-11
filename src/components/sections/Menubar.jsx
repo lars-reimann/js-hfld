@@ -24,6 +24,8 @@ export default class extends React.Component {
             return actions.clearSelection();
         case "CLEAR_TRIPLE_SELECTION":
             return actions.clearTripleSelection();
+        case "CLEAR_TRIPLE_FILTER":
+            return actions.clearTripleFilter();
         case "SHOW_OPEN_CONFIG_DIALOG":
             return actions.setDialogVisibility("openConfig", true);
         case "SHOW_OPEN_LAYOUT_DIALOG":
@@ -123,7 +125,7 @@ export default class extends React.Component {
                             <MenuItem eventKey="SHOW_FILTER_TRIPLES_DIALOG">
                                 Filter Triples...
                             </MenuItem>
-                            <MenuItem eventKey="CLEAR_TRIPLE_FILTER" disabled>
+                            <MenuItem eventKey="CLEAR_TRIPLE_FILTER">
                                 Clear Triple Filter
                             </MenuItem>
                             <MenuItem eventKey="SELECT_ALL_MATCHING_TRIPLES" disabled>

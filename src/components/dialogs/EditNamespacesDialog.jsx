@@ -97,7 +97,7 @@ export default class extends React.Component {
 
     update() {
         actions.enqueueAlert("success", "Update a namespace.");
-        actions.editNamespace(this.state.prefixToEdit, this.state.iriToEdit);
+        actions.updateNamespace(this.state.selected, this.state.prefixToEdit, this.state.iriToEdit);
     }
 
     remove() {

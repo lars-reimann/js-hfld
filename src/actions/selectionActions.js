@@ -32,16 +32,6 @@ export function selectNodes(ids) {
 }
 
 /**
- * Selects the given triples.
- *
- * @param {Array} ids
- * The triples to select.
- */
-export function selectTriples(ids) {
-     return dispatcher.dispatch({ type: "SELECT_TRIPLES", ids });
-}
-
-/**
  * Selects the given table page.
  *
  * @param {Number} tablePage
@@ -49,6 +39,16 @@ export function selectTriples(ids) {
  */
 export function selectTablePage(tablePage) {
     return dispatcher.dispatch({ type: "SELECT_TABLE_PAGE", tablePage });
+}
+
+/**
+ * Selects the given triples.
+ *
+ * @param {Array} ids
+ * The triples to select.
+ */
+export function selectTriples(ids) {
+     return dispatcher.dispatch({ type: "SELECT_TRIPLES", ids });
 }
 
 /**

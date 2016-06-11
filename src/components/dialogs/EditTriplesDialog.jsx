@@ -173,7 +173,7 @@ export default class extends React.Component {
         this.setState(this.getToUpdateState(this.props.triples[0]));
 
         actions.enqueueAlert("success", "Updated the selected triple.");
-        actions.updateTriple(oldTriple, newTriple);
+        actions.updateTriple(oldTriple, newTriple, true);
     }
 
     remove() {
@@ -276,7 +276,7 @@ export default class extends React.Component {
                                 </fieldset>
                             </form>
                         </Tab>
-                        <Tab eventKey="update" title="Update" style={style}>
+                        <Tab eventKey="update" title="Update" style={style} disabled={this.props.triples.length === 0}>
                             <form>
                                 <FormGroup controlId="tripleToUpdate">
                                     <ControlLabel>Selection:</ControlLabel>
@@ -315,7 +315,7 @@ export default class extends React.Component {
                                 }
                             </form>
                         </Tab>
-                        <Tab eventKey="remove" title="Remove" style={style}>
+                        <Tab eventKey="remove" title="Remove" style={style} disabled={this.props.triples.length === 0}>
                             <p>
                                 Do you really want to remove the {this.numberOfTriples()} selected
                                 triple{this.numberOfTriples() === 1 ? "" : "s"}?

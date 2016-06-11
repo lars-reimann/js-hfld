@@ -56,7 +56,7 @@ class rdfStore extends Store {
             this.__emitChange();
             break;
         case "ADD_NAMESPACE":
-        case "EDIT_NAMESPACE":
+        case "UPDATE_NAMESPACE":
             this.state.profile.setPrefix(action.prefix, action.iri);
             this.__emitChange();
             break;

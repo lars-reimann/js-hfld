@@ -79,7 +79,7 @@ export default class extends React.Component {
         const tablePage        = this.props.selection.getTablePage();
         const tableRowsPerPage = this.props.config.tableRowsPerPage;
 
-        const rows = _([...this.props.rdf.getGraph()])
+        const rows = _([...this.props.selection.getFilteredGraph()])
             .orderBy([triple => this.shrink(triple[column]).toLowerCase()], [order])
             .slice((tablePage - 1) * tableRowsPerPage, tablePage * tableRowsPerPage)
             .map(triple => (

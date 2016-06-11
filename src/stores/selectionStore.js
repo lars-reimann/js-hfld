@@ -39,6 +39,10 @@ class SelectionStore extends ReduceStore {
         });
     }
 
+    getFilteredGraph() {
+        return rdfStore.getGraph().match(this.getState().get("tripleFilter"));
+    }
+
     getTablePage() {
         return this.getState().get("tablePage");
     }
@@ -365,6 +369,14 @@ class SelectionStore extends ReduceStore {
             return state.set("tablePage", action.tablePage);
         case "SET_TABLE_ROWS_PER_PAGE":
             return this.setTableRowsPerPage(state, action.rowsPerPage);
+        case "FILTER_TRIPLES":
+            return state.set("tripleFilter", action.filter);
+        case "CLEAR_TRIPLE_FILTER":
+            return state.set("tripleFilter", {
+                subject:   false,
+                predicate: false,
+                object:    false,
+            });
         default:
             return state;
         }

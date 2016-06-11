@@ -29,6 +29,7 @@
     "name": "@ignavia/hfld",
     "dependencies": {
       "@ignavia/ella": "^1.0.15",
+      "@ignavia/rdf": "^1.7.1",
       "ella": "@ignavia/ella@^1.0.15",
       "immutable": "^3.7.6",
       "lodash": "^4.13.1",
@@ -36,7 +37,6 @@
     },
     "devDependencies": {
       "@ignavia/earl": "^1.2.2",
-      "@ignavia/rdf": "^1.1.2",
       "@ignavia/util": "^1.2.4",
       "babel-plugin-transform-async-to-generator": "^6.7.4",
       "babel-plugin-transform-export-extensions": "^6.5.0",
@@ -52,7 +52,10 @@
     "peerDependencies": {
       "assert": "github:jspm/nodelibs-assert@^0.2.0-alpha",
       "buffer": "github:jspm/nodelibs-buffer@^0.2.0-alpha",
+      "child_process": "github:jspm/nodelibs-child_process@^0.2.0-alpha",
+      "constants": "github:jspm/nodelibs-constants@^0.2.0-alpha",
       "core-js": "^1.2.0",
+      "crypto": "github:jspm/nodelibs-crypto@^0.2.0-alpha",
       "domain": "github:jspm/nodelibs-domain@^0.2.0-alpha",
       "events": "github:jspm/nodelibs-events@^0.2.0-alpha",
       "fs": "github:jspm/nodelibs-fs@^0.2.0-alpha",
@@ -62,7 +65,7 @@
       "os": "github:jspm/nodelibs-os@^0.2.0-alpha",
       "path": "github:jspm/nodelibs-path@^0.2.0-alpha",
       "process": "github:jspm/nodelibs-process@^0.2.0-alpha",
-      "react": "*",
+      "react": "^0.14.8",
       "react-dom": "^0.14.7",
       "stream": "github:jspm/nodelibs-stream@^0.2.0-alpha",
       "string_decoder": "github:jspm/nodelibs-string_decoder@^0.2.0-alpha",

@@ -4,7 +4,7 @@ import {Glyphicon} from "react-bootstrap";
 import BlankGlyphicon from "./BlankGlyphicon.jsx";
 
 /**
- * A glyphicon to show the how something is sorted.
+ * A glyphicon to show how something is sorted.
  *
  * @param {Object} props
  * The props to use.

@@ -90,3 +90,11 @@ export function toggleNodeSelection(ids) {
 export function toggleTripleSelection(ids) {
      return dispatcher.dispatch({ type: "TOGGLE_TRIPLE_SELECTION", ids });
 }
+
+export function filterTriples(filter) {console.log(filter)
+    return dispatcher.dispatch({ type: "FILTER_TRIPLES", filter });
+}
+
+export function clearTripleFilter() {
+    return dispatcher.dispatch({ type: "CLEAR_TRIPLE_FILTER" });
+}

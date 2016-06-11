@@ -126,21 +126,16 @@ export default class extends React.Component {
                             <MenuItem eventKey="CLEAR_TRIPLE_FILTER" disabled>
                                 Clear Triple Filter
                             </MenuItem>
+                            <MenuItem eventKey="SELECT_ALL_MATCHING_TRIPLES" disabled>
+                                Select All Matching Triples
+                            </MenuItem>
                             <MenuItem divider />
-                            <MenuItem eventKey="SELECT_ALL_MATCHING_NODES" disabled>
-                                Select All Matching Nodes
+                            <MenuItem eventKey="CLEAR_TRIPLE_SELECTION">
+                                Clear Triple Selection
                             </MenuItem>
                             <MenuItem eventKey="CLEAR_NODE_SELECTION">
                                 Clear Node Selection
                             </MenuItem>
-                            <MenuItem divider />
-                            <MenuItem eventKey="SELECT_ALL_MATCHING_TRIPLES" disabled>
-                                Select All Matching Triples
-                            </MenuItem>
-                            <MenuItem eventKey="CLEAR_TRIPLE_SELECTION">
-                                Clear Triple Selection
-                            </MenuItem>
-                            <MenuItem divider />
                             <MenuItem eventKey="CLEAR_SELECTION">
                                 Clear Selection
                             </MenuItem>

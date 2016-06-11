@@ -168,7 +168,7 @@ class SelectionStore extends ReduceStore {
      *
      * @private
      */
-    selectTriple(state, field, ids) {
+    selectTriples(state, ids) {
         const oldSelection = state.get("triples");
         const newSelection = oldSelection.union(ids);
         return state.set("triples", newSelection);

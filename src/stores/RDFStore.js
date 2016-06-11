@@ -35,7 +35,7 @@ class rdfStore extends Store {
         return writer.serialize(this.state.graph, this.state.profile);
     }
 
-    nodeToString(node, shrink = true){
+    nodeToString(node, shrink = true) {
         return (shrink ?
             this.state.profile.nodeToString(node) :
             node.toString()
@@ -60,7 +60,7 @@ class rdfStore extends Store {
             this.state.profile.setPrefix(action.prefix, action.iri);
             this.__emitChange();
             break;
-        case "REMOVE_NAMESPACE":console.log("remove >" + action.prefix + "<");
+        case "REMOVE_NAMESPACE":
             this.state.profile.prefixes.remove(action.prefix);
             this.__emitChange();
             break;

@@ -1,5 +1,7 @@
 import dispatcher from "../dispatcher/dispatcher.js";
 
+import {selectTriples} from "./selectionActions.js";
+
 export function addTriple(triple) {
     dispatcher.dispatch({ type: "ADD_TRIPLE", triple });
 }
@@ -18,4 +20,10 @@ export function removeNamespace(prefix) {
 
 export function editNamespace(prefix, iri) {
     dispatcher.dispatch({ type: "EDIT_NAMESPACE", prefix, iri });
+}
+
+export function updateTriple(oldTriple, newTriple) {
+    removeTriples([oldTriple]);
+    addTriple(newTriple);
+    selectTriples(newTriple.id);
 }

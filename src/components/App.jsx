@@ -81,12 +81,16 @@ export default class extends React.Component {
 
                 <AlertQueue alertMessages={this.props.alerts} />
 
-                <dialogs.AddTriplesDialog visible={this.props.dialogs.showAddTriplesDialog} />
                 <dialogs.CloseDialog visible={this.props.dialogs.showCloseDialog} />
                 <dialogs.EadesLayoutDialog visible={this.props.dialogs.showEadesLayoutDialog} />
                 <dialogs.EditNamespacesDialog
                     visible={this.props.dialogs.showEditNamespacesDialog}
                     prefixes={this.props.rdf.getProfile().prefixes}
+                />
+                <dialogs.EditTriplesDialog
+                    triples={this.props.selection.getSelectedTriples()}
+                    visible={this.props.dialogs.showEditTriplesDialog}
+                    rdf={this.props.rdf}
                 />
                 <dialogs.FruchtermannLayoutDialog visible={this.props.dialogs.showFruchtermannLayoutDialog} />
                 <dialogs.OpenDialog
@@ -122,10 +126,6 @@ export default class extends React.Component {
                     visible={this.props.dialogs.showOpenTurtleDialog}
                 />
                 <dialogs.RandomLayoutDialog visible={this.props.dialogs.showRandomLayoutDialog} />
-                <dialogs.RemoveTriplesDialog
-                    triples={this.props.selection.getSelectedTriples()}
-                    visible={this.props.dialogs.showRemoveTriplesDialog}
-                />
                 <dialogs.RotateDialog visible={this.props.dialogs.showRotateDialog} />
                 <dialogs.SaveConfigDialog
                     config={this.props.config}

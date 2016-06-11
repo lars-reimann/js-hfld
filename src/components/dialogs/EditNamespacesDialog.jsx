@@ -105,13 +105,21 @@ export default class extends React.Component {
         actions.removeNamespace(this.state.prefixToEdit);
     }
 
+    removeAll() {
+        // TODO
+    }
+
+    resetToAddState() {
+        // TODO
+    }
+
     footer() {
         switch (this.state.activeTab) {
         case "add":
             return (
                 <div>
                     <Button onClick={() => this.add()} bsStyle="primary" disabled={!this.stuffToAddIsValid()}>Add</Button>
-                    <Button onClick={() => this.resetState()} bsStyle="danger">Reset Form</Button>
+                    <Button onClick={() => this.resetToAddState()} bsStyle="danger">Reset Form</Button>
                 </div>
             );
         case "update":
@@ -120,6 +128,10 @@ export default class extends React.Component {
                     <Button onClick={() => this.update()} bsStyle="primary" disabled={!this.stuffToUpdateIsValid()}>Update</Button>
                     <Button onClick={() => this.remove()} bsStyle="danger">Remove</Button>
                 </div>
+            );
+        case "remove":
+            return (
+                <Button onClick={() => this.removeAll()} bsStyle="danger">Remove All</Button>
             );
         }
     }
@@ -205,6 +217,9 @@ export default class extends React.Component {
                                     </div>
                                 }
                             </form>
+                        </Tab>
+                        <Tab eventKey="remove" title="Remove All">
+
                         </Tab>
                     </Tabs>
                 </Modal.Body>

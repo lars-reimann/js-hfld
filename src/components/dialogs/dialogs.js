@@ -1,5 +1,3 @@
-export AddNamespacesDialog      from "./AddNamespacesDialog.jsx";
-export AddTriplesDialog         from "./AddTriplesDialog.jsx";
 export CloseDialog              from "./CloseDialog.jsx";
 export EadesLayoutDialog        from "./EadesLayoutDialog.jsx";
 export EditNamespacesDialog     from "./EditNamespacesDialog.jsx";
@@ -9,8 +7,6 @@ export FilterTriplesDialog      from "./FilterTriplesDialog.jsx";
 export FruchtermannLayoutDialog from "./FruchtermannLayoutDialog.jsx";
 export OpenDialog               from "./OpenDialog.jsx";
 export RandomLayoutDialog       from "./RandomLayoutDialog.jsx";
-export RemoveNamespacesDialog   from "./RemoveNamespacesDialog.jsx";
-export RemoveTriplesDialog      from "./RemoveTriplesDialog.jsx";
 export RotateDialog             from "./RotateDialog.jsx";
 export SaveConfigDialog         from "./SaveConfigDialog.jsx";
 export SaveLayoutDialog         from "./SaveLayoutDialog.jsx";

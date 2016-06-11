@@ -98,3 +98,7 @@ export function filterTriples(filter) {console.log(filter)
 export function clearTripleFilter() {
     return dispatcher.dispatch({ type: "CLEAR_TRIPLE_FILTER" });
 }
+
+export function selectAllMatchingTriples() {
+    return dispatcher.dispatch({ type: "SELECT_ALL_MATCHING_TRIPLES" });
+}

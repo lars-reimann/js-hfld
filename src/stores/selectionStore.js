@@ -39,6 +39,11 @@ class SelectionStore extends ReduceStore {
         });
     }
 
+    selectAllMatchingTriples(state) {
+        const triples = [...this.getFilteredGraph()].map(triple => triple.id);
+        return this.selectTriples(state, triples);
+    }
+
     getTripleFilter() {
         return this.getState().get("tripleFilter");
     }
@@ -357,6 +362,8 @@ class SelectionStore extends ReduceStore {
             return state.set("nodes", Immutable.Set());
         case "CLEAR_TRIPLE_SELECTION":
             return state.set("triples", Immutable.Set());
+        case "SELECT_ALL_MATCHING_TRIPLES":
+            return this.selectAllMatchingTriples(state);
         case "SELECT_NODES":
             return this.selectNodes(state, action.ids);
         case "SELECT_TRIPLES":

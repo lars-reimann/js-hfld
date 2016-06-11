@@ -27,7 +27,7 @@ export default class extends React.Component {
     constructor(props) {
         super(props);
 
-        const selected = this.props.triples[0];
+        const selected = this.props.triples[0]; // TODO: initially nothing is selected and the input fields are not shown
 
         this.state = {
             activeTab:                "add",
@@ -276,7 +276,7 @@ export default class extends React.Component {
                                 </fieldset>
                             </form>
                         </Tab>
-                        <Tab eventKey="update" title="Update" style={style} disabled={this.props.triples.length === 0}>
+                        <Tab eventKey="update" title="Update/Remove" style={style} disabled={this.props.triples.length === 0}>
                             <form>
                                 <FormGroup controlId="tripleToUpdate">
                                     <ControlLabel>Selection:</ControlLabel>
@@ -315,7 +315,7 @@ export default class extends React.Component {
                                 }
                             </form>
                         </Tab>
-                        <Tab eventKey="remove" title="Remove" style={style} disabled={this.props.triples.length === 0}>
+                        <Tab eventKey="remove" title="Remove All" style={style} disabled={this.props.triples.length === 0}>
                             <p>
                                 Do you really want to remove the {this.numberOfTriples()} selected
                                 triple{this.numberOfTriples() === 1 ? "" : "s"}?

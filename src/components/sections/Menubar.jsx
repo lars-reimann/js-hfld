@@ -72,6 +72,8 @@ export default class extends React.Component {
             return actions.setDialogVisibility("sidebar", true);
         case "TOGGLE_SHRINK_NODE_VALUES":
             return actions.setShrinkNodeValues(!this.props.shrinkNodeValues);
+        case "SELECT_ALL_MATCHING_TRIPLES":
+            return actions.selectAllMatchingTriples();
         }
     }
 
@@ -128,7 +130,7 @@ export default class extends React.Component {
                             <MenuItem eventKey="CLEAR_TRIPLE_FILTER">
                                 Clear Triple Filter
                             </MenuItem>
-                            <MenuItem eventKey="SELECT_ALL_MATCHING_TRIPLES" disabled>
+                            <MenuItem eventKey="SELECT_ALL_MATCHING_TRIPLES">
                                 Select All Matching Triples
                             </MenuItem>
                             <MenuItem divider />

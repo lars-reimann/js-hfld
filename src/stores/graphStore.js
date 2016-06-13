@@ -2,6 +2,7 @@ import {Store} from "flux/utils";
 
 import * as earl                        from "@ignavia/earl";
 import {Tolkien1To1Map, Tolkien1ToNMap} from "@ignavia/util";
+import {GraphView} from "@ignavia/draph";
 
 import dispatcher from "../dispatcher/dispatcher.js";
 
@@ -16,9 +17,11 @@ class GraphStore extends Store {
     }
 
     initState() {
+        const graph = new earl.Graph();
         this.state = {
             imported:  new Map(),
-            graph:     new earl.Graph(),
+            graph:     graph,
+            draph:     new GraphView(graph, "container"),
             earlToRDF: {
                 nodes: new Tolkien1ToNMap(),
                 edges: new Tolkien1To1Map(),
@@ -33,6 +36,10 @@ class GraphStore extends Store {
 
     getLayout() {
         return this.state.layout;
+    }
+
+    getDraph() {
+        return this.state.draph;
     }
 
     convertEarlNodeToRDFNode(earlNode) {
@@ -98,6 +105,8 @@ class GraphStore extends Store {
         for (let triple of rdfStore.state.graph) {
             this.addTriple(triple);
         }
+
+        this.state.draph = new GraphView(this.state.graph, "container");
     }
 
     addTriple(triple) {

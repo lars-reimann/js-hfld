@@ -16,7 +16,7 @@ export default class extends React.Component {
         case "table":
             return <TableView config={this.props.config} rdf={this.props.rdf} selection={this.props.selection} />;
         case "graphical":
-            return <GraphicalView />;
+            return <GraphicalView graphView={this.props.graph.getDraph()} />;
         default:
             return <p>No type selected.</p>;
         }

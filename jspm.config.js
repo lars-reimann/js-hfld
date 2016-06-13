@@ -30,11 +30,6 @@ SystemJS.config({
                     "jquery": "github:components/jquery@2.2.4"
                 }
             },
-            "npm:@ignavia/earl@1.3.1": {
-                "map": {
-                    "@ignavia/util": "npm:@ignavia/util@1.3.3"
-                }
-            },
             "npm:babel-code-frame@6.8.0": {
                 "map": {
                     "babel-runtime": "npm:babel-runtime@6.9.2",
@@ -326,6 +321,7 @@ SystemJS.config({
         "github:*/*.json"
     ],
     map: {
+        "@ignavia/draph": "npm:@ignavia/draph@1.0.5",
         "@ignavia/ella": "npm:@ignavia/ella@1.0.15",
         "@ignavia/rdf": "npm:@ignavia/rdf@1.7.2",
         "assert": "github:jspm/nodelibs-assert@0.2.0-alpha",
@@ -342,6 +338,7 @@ SystemJS.config({
         "https": "github:jspm/nodelibs-https@0.2.0-alpha",
         "immutable": "npm:immutable@3.8.1",
         "lodash": "npm:lodash@4.13.1",
+        "module": "github:jspm/nodelibs-module@0.2.0-alpha",
         "net": "github:jspm/nodelibs-net@0.2.0-alpha",
         "os": "github:jspm/nodelibs-os@0.2.0-alpha",
         "path": "github:jspm/nodelibs-path@0.2.0-alpha",
@@ -349,8 +346,10 @@ SystemJS.config({
         "react": "npm:react@0.14.8",
         "react-bootstrap": "npm:react-bootstrap@0.29.4",
         "react-dom": "npm:react-dom@0.14.8",
+        "source-map": "npm:source-map@0.1.43",
         "stream": "github:jspm/nodelibs-stream@0.2.0-alpha",
         "string_decoder": "github:jspm/nodelibs-string_decoder@0.2.0-alpha",
+        "tls": "github:jspm/nodelibs-tls@0.2.0-alpha",
         "tty": "github:jspm/nodelibs-tty@0.2.0-alpha",
         "url": "github:jspm/nodelibs-url@0.2.0-alpha",
         "util": "github:jspm/nodelibs-util@0.2.0-alpha",
@@ -669,6 +668,186 @@ SystemJS.config({
         "npm:@ignavia/rdf@1.7.2": {
             "map": {
                 "@ignavia/util": "npm:@ignavia/util@1.3.3"
+            }
+        },
+        "npm:@ignavia/earl@1.3.1": {
+            "map": {
+                "@ignavia/util": "npm:@ignavia/util@1.3.3"
+            }
+        },
+        "npm:@ignavia/draph@1.0.5": {
+            "map": {
+                "pixi.js": "npm:pixi.js@3.0.11",
+                "jquery-mousewheel": "npm:jquery-mousewheel@3.1.13",
+                "jquery": "npm:jquery@2.2.4",
+                "lodash": "npm:lodash@4.13.1",
+                "@ignavia/earl": "npm:@ignavia/earl@1.3.1",
+                "@ignavia/util": "npm:@ignavia/util@1.3.3",
+                "@ignavia/ella": "npm:@ignavia/ella@1.0.15"
+            }
+        },
+        "npm:pixi.js@3.0.11": {
+            "map": {
+                "async": "npm:async@1.5.2",
+                "eventemitter3": "npm:eventemitter3@1.2.0",
+                "brfs": "npm:brfs@1.4.3",
+                "earcut": "npm:earcut@2.1.1",
+                "browserify-versionify": "npm:browserify-versionify@1.0.6",
+                "object-assign": "npm:object-assign@4.1.0",
+                "resource-loader": "npm:resource-loader@1.6.5"
+            }
+        },
+        "npm:source-map@0.1.43": {
+            "map": {
+                "amdefine": "npm:amdefine@1.0.0"
+            }
+        },
+        "npm:resource-loader@1.6.5": {
+            "map": {
+                "async": "npm:async@0.9.2",
+                "eventemitter3": "npm:eventemitter3@1.2.0"
+            }
+        },
+        "npm:brfs@1.4.3": {
+            "map": {
+                "static-module": "npm:static-module@1.3.1",
+                "quote-stream": "npm:quote-stream@1.0.2",
+                "through2": "npm:through2@2.0.1",
+                "resolve": "npm:resolve@1.1.7"
+            }
+        },
+        "npm:browserify-versionify@1.0.6": {
+            "map": {
+                "through2": "npm:through2@0.6.3",
+                "find-root": "npm:find-root@0.1.2"
+            }
+        },
+        "npm:static-module@1.3.1": {
+            "map": {
+                "quote-stream": "npm:quote-stream@0.0.0",
+                "through2": "npm:through2@0.4.2",
+                "concat-stream": "npm:concat-stream@1.4.10",
+                "duplexer2": "npm:duplexer2@0.0.2",
+                "escodegen": "npm:escodegen@1.3.3",
+                "readable-stream": "npm:readable-stream@1.0.34",
+                "shallow-copy": "npm:shallow-copy@0.0.1",
+                "falafel": "npm:falafel@1.2.0",
+                "static-eval": "npm:static-eval@0.2.4",
+                "object-inspect": "npm:object-inspect@0.4.0",
+                "has": "npm:has@1.0.1"
+            }
+        },
+        "npm:quote-stream@1.0.2": {
+            "map": {
+                "through2": "npm:through2@2.0.1",
+                "minimist": "npm:minimist@1.2.0",
+                "buffer-equal": "npm:buffer-equal@0.0.1"
+            }
+        },
+        "npm:through2@2.0.1": {
+            "map": {
+                "readable-stream": "npm:readable-stream@2.0.6",
+                "xtend": "npm:xtend@4.0.1"
+            }
+        },
+        "npm:through2@0.6.3": {
+            "map": {
+                "readable-stream": "npm:readable-stream@1.0.34",
+                "xtend": "npm:xtend@4.0.1"
+            }
+        },
+        "npm:quote-stream@0.0.0": {
+            "map": {
+                "minimist": "npm:minimist@0.0.8",
+                "through2": "npm:through2@0.4.2"
+            }
+        },
+        "npm:through2@0.4.2": {
+            "map": {
+                "xtend": "npm:xtend@2.1.2",
+                "readable-stream": "npm:readable-stream@1.0.34"
+            }
+        },
+        "npm:concat-stream@1.4.10": {
+            "map": {
+                "readable-stream": "npm:readable-stream@1.1.14",
+                "typedarray": "npm:typedarray@0.0.6",
+                "inherits": "npm:inherits@2.0.1"
+            }
+        },
+        "npm:duplexer2@0.0.2": {
+            "map": {
+                "readable-stream": "npm:readable-stream@1.1.14"
+            }
+        },
+        "npm:static-eval@0.2.4": {
+            "map": {
+                "escodegen": "npm:escodegen@0.0.28"
+            }
+        },
+        "npm:escodegen@1.3.3": {
+            "map": {
+                "estraverse": "npm:estraverse@1.5.1",
+                "esprima": "npm:esprima@1.1.1",
+                "esutils": "npm:esutils@1.0.0"
+            }
+        },
+        "npm:readable-stream@2.0.6": {
+            "map": {
+                "core-util-is": "npm:core-util-is@1.0.2",
+                "inherits": "npm:inherits@2.0.1",
+                "isarray": "npm:isarray@1.0.0",
+                "util-deprecate": "npm:util-deprecate@1.0.2",
+                "string_decoder": "npm:string_decoder@0.10.31",
+                "process-nextick-args": "npm:process-nextick-args@1.0.7"
+            }
+        },
+        "npm:readable-stream@1.0.34": {
+            "map": {
+                "core-util-is": "npm:core-util-is@1.0.2",
+                "inherits": "npm:inherits@2.0.1",
+                "isarray": "npm:isarray@0.0.1",
+                "string_decoder": "npm:string_decoder@0.10.31",
+                "stream-browserify": "npm:stream-browserify@1.0.0"
+            }
+        },
+        "npm:falafel@1.2.0": {
+            "map": {
+                "isarray": "npm:isarray@0.0.1",
+                "acorn": "npm:acorn@1.2.2",
+                "object-keys": "npm:object-keys@1.0.9",
+                "foreach": "npm:foreach@2.0.5"
+            }
+        },
+        "npm:xtend@2.1.2": {
+            "map": {
+                "object-keys": "npm:object-keys@0.4.0"
+            }
+        },
+        "npm:readable-stream@1.1.14": {
+            "map": {
+                "core-util-is": "npm:core-util-is@1.0.2",
+                "string_decoder": "npm:string_decoder@0.10.31",
+                "inherits": "npm:inherits@2.0.1",
+                "stream-browserify": "npm:stream-browserify@1.0.0",
+                "isarray": "npm:isarray@0.0.1"
+            }
+        },
+        "npm:escodegen@0.0.28": {
+            "map": {
+                "esprima": "npm:esprima@1.0.4",
+                "estraverse": "npm:estraverse@1.3.2"
+            }
+        },
+        "npm:has@1.0.1": {
+            "map": {
+                "function-bind": "npm:function-bind@1.1.0"
+            }
+        },
+        "npm:stream-browserify@1.0.0": {
+            "map": {
+                "inherits": "npm:inherits@2.0.1",
+                "readable-stream": "npm:readable-stream@1.1.14"
             }
         }
     }

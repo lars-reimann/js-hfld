@@ -17,11 +17,25 @@ class GraphStore extends Store {
     }
 
     initState() {
+        const g = new earl.Graph();
+const n0 = new earl.Node("n0");
+const n1 = new earl.Node("n1");
+const n2 = new earl.Node("n2");
+g.addNodes(n0, n1, n2);
+
+const e0 = new earl.Edge("n0", "n1");
+const e1 = new earl.Edge("n1", "n2");
+const e2 = new earl.Edge("n2", "n3");
+const e3 = new earl.Edge("n3", "n0");
+const e4 = new earl.Edge("n2", "n0");
+const e5 = new earl.Edge("n3", "n1");
+g.addEdges(e0, e1, e2, e3, e4, e5);
+console.log(n0, n1, n2, e0, e1, e2,e3, e4,e5, new earl.Node(), new earl.Edge())
         const graph = new earl.Graph();
         this.state = {
             imported:  new Map(),
             graph:     graph,
-            draph:     new GraphView(graph, "container"),
+            draph:     new GraphView(g),
             earlToRDF: {
                 nodes: new Tolkien1ToNMap(),
                 edges: new Tolkien1To1Map(),
@@ -79,6 +93,7 @@ class GraphStore extends Store {
                 this.state.graph.addNodes(node);
                 this.state.earlToRDF.nodes.add(node.id, rdfNode.id);
                 imported.set(hash, node.id);
+                console.log("added node", node);
             } else {
                 const nodeId = imported.get(hash);
                 this.state.earlToRDF.nodes.add(nodeId, rdfNode.id);
@@ -96,6 +111,7 @@ class GraphStore extends Store {
             const edge = new earl.Edge(sourceId, targetId);
             this.state.graph.addEdges(edge);
             this.state.earlToRDF.edges.add(edge.id, id);
+            console.log("added edge", edge);
         }
     }
 
@@ -105,8 +121,8 @@ class GraphStore extends Store {
         for (let triple of rdfStore.state.graph) {
             this.addTriple(triple);
         }
-
-        this.state.draph = new GraphView(this.state.graph, "container");
+        console.log("graph", this.state.graph);
+        this.state.draph = new GraphView(this.state.graph);
     }
 
     addTriple(triple) {

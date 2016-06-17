@@ -28,7 +28,7 @@
   "jspm": {
     "name": "@ignavia/hfld",
     "dependencies": {
-      "@ignavia/draph": "^1.0.5",
+      "@ignavia/draph": "1.0.5",
       "@ignavia/ella": "^1.0.15",
       "@ignavia/rdf": "^1.7.1",
       "ella": "@ignavia/ella@^1.0.15",

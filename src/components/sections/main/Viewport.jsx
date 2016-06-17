@@ -9,7 +9,7 @@ export default class extends React.Component {
         super(props);
     }
 
-    render() {
+    render() {console.log(this.props.graph.getGraph())
         switch(this.props.config.viewport) {
         case "source":
             return <SourceView rdf={this.props.rdf} />;

@@ -28,7 +28,9 @@ export default class extends React.Component {
         document.getElementById("draph").innerHTML = "";
     }
 
-    render() {
+    // TODO start and stop render loop
+
+    render() {console.log(this.props.graphView)
         return (
             <div id="draph"></div>
         );

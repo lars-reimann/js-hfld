@@ -25,7 +25,7 @@ class GraphStore extends Store {
         this.state = {
             imported:   new Map(),
             graph:      graph,
-            draph:      new GraphView(graph, stylesheet.com),
+            draph:      new GraphView(graph, stylesheet.computeAllStyles(rdfStore.getGraph())),
             earlToRDF: {
                 nodes:  new Tolkien1ToNMap(),
                 edges:  new Tolkien1To1Map(),

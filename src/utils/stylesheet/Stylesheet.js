@@ -86,13 +86,13 @@ export default class {
     }
 
     computeGraphStyle() {
-        return this.graph.conf;
+        return this.graphConf;
     }
 
     computeNodeStyles(rdfGraph) {
         const result = new Map();
 
-        for (let {selector, properties} of this.nodeConfs) {
+        for (let {selector, properties} of this.nodeRules) {
             for (let nodeId of selector.getAffectedNodes(rdfGraph)) {
                 const conf = result.get(nodeId) || {};
                 result.set(nodeId, adjustConf(conf, properties));
@@ -107,7 +107,7 @@ export default class {
     computeEdgeStyles(rdfGraph) {
         const result = new Map();
 
-        for (let {selector, properties} of this.edgeConfs) {
+        for (let {selector, properties} of this.edgeRules) {
             for (let edgeId of selector.getAffectedEdges(rdfGraph)) {
                 const conf = result.get(edgeId) || {};
                 result.set(edgeId, adjustConf(conf, properties));

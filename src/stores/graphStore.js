@@ -2,6 +2,7 @@ import {Store} from "flux/utils";
 
 import * as earl                        from "@ignavia/earl";
 import {Tolkien1To1Map, Tolkien1ToNMap} from "@ignavia/util";
+import * as rdf                         from "@ignavia/rdf";
 import {GraphView} from "@ignavia/draph";
 
 import dispatcher from "../dispatcher/dispatcher.js";
@@ -17,25 +18,11 @@ class GraphStore extends Store {
     }
 
     initState() {
-        const g = new earl.Graph();
-const n0 = new earl.Node("n0");
-const n1 = new earl.Node("n1");
-const n2 = new earl.Node("n2");
-g.addNodes(n0, n1, n2);
-
-const e0 = new earl.Edge("n0", "n1");
-const e1 = new earl.Edge("n1", "n2");
-const e2 = new earl.Edge("n2", "n3");
-const e3 = new earl.Edge("n3", "n0");
-const e4 = new earl.Edge("n2", "n0");
-const e5 = new earl.Edge("n3", "n1");
-g.addEdges(e0, e1, e2, e3, e4, e5);
-console.log(n0, n1, n2, e0, e1, e2,e3, e4,e5, new earl.Node(), new earl.Edge())
         const graph = new earl.Graph();
         this.state = {
             imported:  new Map(),
             graph:     graph,
-            draph:     new GraphView(g),
+            draph:     new GraphView(graph),
             earlToRDF: {
                 nodes: new Tolkien1ToNMap(),
                 edges: new Tolkien1To1Map(),
@@ -57,23 +44,19 @@ console.log(n0, n1, n2, e0, e1, e2,e3, e4,e5, new earl.Node(), new earl.Edge())
     }
 
     convertEarlNodeToRDFNode(earlNode) {
-        const rdfNodeId = this.state.earlToRDF.nodes.convertXToY(earlNode.id)[0];
-        return rdfStore.getGraph().getNodeById(rdfNodeId);
+        return this.unhashEarlNodeId(earlNode.id);
     }
 
     convertRDFNodeToEarlNode(rdfNode) {
-        const earlNodeId = this.state.earlToRDF.nodes.convertYToX(rdfNode.id)[0];
-        return this.state.graph.getNodeById(earlNodeId);
+        return this.state.graph.getNodeById(this.hashRDFNode(rdfNode));
     }
 
     convertEarlEdgeToRDFTriple(earlEdge) {
-        const rdfTripleId = this.state.earlToRDF.edges.convertXToY(earlEdge.id)[0];
-        return rdfStore.getGraph().getTripleById(rdfTripleId);
+        return rdfStore.getGraph().getTripleById(earlEdge.id);
     }
 
     convertRDFTripleToEarlEdge(rdfTriple) {
-        const earlEdgeId = this.state.earlToRDF.edges.convertYToX(rdfTriple.id)[0];
-        return this.state.graph.getEdgeById(earlEdgeId);
+        return this.state.graph.getEdgeById(rdfTriple.id);
     }
 
     getState() {
@@ -84,16 +67,28 @@ console.log(n0, n1, n2, e0, e1, e2,e3, e4,e5, new earl.Node(), new earl.Edge())
         return `${rdfNode.interfaceName}#${rdfNode.nominalValue}`;
     }
 
+    unhashEarlNodeId(earlNodeId) {
+        const regex = /^(BlankNode|NamedNode)#(.*)$/;
+        const [, interfaceName, nominalValue] = regex.exec(earlNodeId);
+        switch (interfaceName) {
+        case "BlankNode":
+            return new rdf.BlankNode(nominalValue);
+        case "NamedNode":
+            return new rdf.NamedNode(nominalValue);
+        default:
+            throw new Error(`Could not unhash ${earlNodeId}.`);
+        }
+    }
+
     importRDFNode(rdfNode) {
         const imported = this.state.imported;
         if (rdfNode.interfaceName !== "Literal") {
             const hash = this.hashRDFNode(rdfNode);
             if (!imported.has(hash)) {
-                const node = new earl.Node();
+                const node = new earl.Node(hash);
                 this.state.graph.addNodes(node);
                 this.state.earlToRDF.nodes.add(node.id, rdfNode.id);
                 imported.set(hash, node.id);
-                console.log("added node", node);
             } else {
                 const nodeId = imported.get(hash);
                 this.state.earlToRDF.nodes.add(nodeId, rdfNode.id);
@@ -108,10 +103,9 @@ console.log(n0, n1, n2, e0, e1, e2,e3, e4,e5, new earl.Node(), new earl.Edge())
         const sourceId    = imported.get(subjectHash);
         const targetId    = imported.get(objectHash);
         if (sourceId && targetId) {
-            const edge = new earl.Edge(sourceId, targetId);
+            const edge = new earl.Edge(sourceId, targetId, id);
             this.state.graph.addEdges(edge);
             this.state.earlToRDF.edges.add(edge.id, id);
-            console.log("added edge", edge);
         }
     }
 

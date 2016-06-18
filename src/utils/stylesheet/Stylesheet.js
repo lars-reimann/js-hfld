@@ -16,19 +16,7 @@ const defaultConf = {
                     conf: {
                         text: {
                             label: "$toShortString",
-                            fillColor: "$color(maroon)",
-                            stroke: {
-                                color: "$color(black)",
-                                thickness: 1
-                            }
                         },
-                        box: {
-                            backgroundColor: "$color(pink)",
-                            shape: "roundedRect",
-                            border: {
-                                radius: 10
-                            }
-                        }
                     }
                 }
             }
@@ -42,7 +30,7 @@ const defaultConf = {
                     type: "labelled",
                     conf: {
                         text: {
-                            label: "$id"
+                            label: "$toShortString"
                         }
                     }
                 },
@@ -105,10 +93,28 @@ export default class {
         };
     }
 
+    /**
+     * Computes the configuration of the graph visualizer.
+     *
+     * @return {Object}
+     * The configuration of the graph visualizer.
+     */
     computeGraphStyle() {
         return this.graphConf;
     }
 
+    /**
+     * Computes the configuration of the node visualizer.
+     *
+     * @param {Graph} rdfGraph
+     * The RDF graph.
+     *
+     * @param {Profile} profile
+     * The RDF profile.
+     *
+     * @return {Object}
+     * The configuration of the node visualizer.
+     */
     computeNodeStyles(rdfGraph, profile) {
         const result = new Map();
 
@@ -127,6 +133,18 @@ export default class {
         return result;
     }
 
+    /**
+     * Computes the configuration of the edge visualizer.
+     *
+     * @param {Graph} rdfGraph
+     * The RDF graph.
+     *
+     * @param {Profile} profile
+     * The RDF profile.
+     *
+     * @return {Object}
+     * The configuration of the edge visualizer.
+     */
     computeEdgeStyles(rdfGraph, profile) {
         const result = new Map();
 

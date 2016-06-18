@@ -6,39 +6,48 @@ import EdgeSelector from "./EdgeSelector.js";
 import NodeSelector from "./NodeSelector.js";
 
 const defaultConf = {
-  "node": [
-    {
-      "selector": "*",
-      "properties": {
-        "style": {
-          "type": "labelled",
-          "conf": {
-            "text": {
-              "label": "$toShortString",
-              "fillColor": "$color(maroon)",
-              "stroke": {
-                "color": "$color(black)",
-                "thickness": 1
-              }
-            },
-            "box": {
-              "backgroundColor": "$color(pink)",
-              "shape": "roundedRect",
-              "border": {
-                "radius": 10
-              }
+    "node": [
+        {
+            "selector": "*",
+            "properties": {
+                "style": {
+                    "type": "labelled",
+                    "conf": {
+                        "text": {
+                            "label": "$toShortString",
+                            "fillColor": "$color(maroon)",
+                            "stroke": {
+                                "color": "$color(black)",
+                                "thickness": 1
+                            }
+                        },
+                        "box": {
+                            "backgroundColor": "$color(pink)",
+                            "shape": "roundedRect",
+                            "border": {
+                                "radius": 10
+                            }
+                        }
+                    }
+                }
             }
-          }
         }
-      }
-    }
-  ],
-  "edge": [
-    {
-      "selector": "*",
-      "properties": {}
-    }
-  ]
+    ],
+    "edge": [
+        {
+            "selector": "*",
+            "properties": {
+                "decalStyle": {
+                    "type": "labelled",
+                    "conf": {
+                        "text": {
+                            "label": "$id"
+                        }
+                    }
+                }
+            }
+        }
+    ]
 };
 
 export default class {
@@ -102,7 +111,7 @@ export default class {
         }
 
         for (let [id, conf] of result) {
-            conf = this.resolveNodeMacros(conf);
+            conf = this.resolveNodeMacros(rdfGraph, id, conf);
             result.set(id, conf);
         }
 
@@ -120,7 +129,7 @@ export default class {
         }
 
         for (let [id, conf] of result) {
-            conf = this.resolveEdgeMacros(conf);
+            conf = this.resolveEdgeMacros(rdfGraph, id, conf);
             result.set(id, conf);
         }
 
@@ -131,10 +140,10 @@ export default class {
         let result = {};
         for (let {selector, properties} of this.nodeConfs) {
             if (selector.isAffectedNode(rdfGraph, nodeId)) {
-                result = adjustConf(result, properties);
+                result = _.merge(result, properties);
             }
         }
-        result = this.resolveNodeMacros(result);
+        result = this.resolveNodeMacros(rdfGraph, nodeId, result);
         return result;
     }
 
@@ -142,33 +151,53 @@ export default class {
         let result = {};
         for (let {selector, properties} of this.edgeConfs) {
             if (selector.isAffectedEdge(rdfGraph, edgeId)) {
-                result = adjustConf(result, properties);
+                result = _.merge(result, properties);
             }
         }
-        result = this.resolveEdgeMacros(result);
+        result = this.resolveEdgeMacros(rdfGraph, edgeId, result);
         return result;
     }
 
-    resolveNodeMacros(conf) {
-        return deepMap(nodeReplacement, conf);
+    resolveNodeMacros(rdfGraph, nodeId, conf) {
+        return deepMap(nodeReplacement(rdfGraph, nodeId), conf);
     }
 
-    resolveEdgeMacros(conf) {
-        return deepMap(edgeReplacement, conf);
+    resolveEdgeMacros(rdfGraph, edgeId, conf) {
+        return deepMap(edgeReplacement(rdfGraph, edgeId), conf);
     }
 }
 
-function nodeReplacement(s) {
-    s = colorReplacement(s);
+const nodeReplacement = _.curry(function (rdfGraph, nodeId, s) {
+    const replacements = [
+        colorReplacement,
+        idReplacement(nodeId)
+    ];
+
+    for (let replacement of replacements) {
+        s = replacement(s);
+        if (!_.isString(s)) {
+            return s;
+        }
+    }
 
     return s;
-}
+});
 
-function edgeReplacement(s) {
-    s = colorReplacement(s);
+const edgeReplacement = _.curry(function (rdfGraph, nodeId, s) {
+    const replacements = [
+        colorReplacement,
+        idReplacement(nodeId)
+    ];
+
+    for (let replacement of replacements) {
+        s = replacement(s);
+        if (!_.isString(s)) {
+            return s;
+        }
+    }
 
     return s;
-}
+});
 
 function colorReplacement(s) {
     const colorRegex = /^\$color\((.*)\)$/;
@@ -178,6 +207,14 @@ function colorReplacement(s) {
     }
     return s;
 }
+
+const idReplacement = _.curry(function (id, s) {
+    const idRegex = /\$id/;
+    if (idRegex.test(s)) {
+        return s.replace(idRegex, id);
+    }
+    return s;
+});
 
 function deepMap(f, p) {
     if (_.isString(p)) {

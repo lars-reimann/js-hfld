@@ -1,31 +1,32 @@
 import _ from "lodash";
 
+import * as rdf           from "@ignavia/rdf";
 import {predefinedColors} from "@ignavia/util";
 
 import EdgeSelector from "./EdgeSelector.js";
 import NodeSelector from "./NodeSelector.js";
 
 const defaultConf = {
-    "node": [
+    node: [
         {
-            "selector": "*",
-            "properties": {
-                "style": {
-                    "type": "labelled",
-                    "conf": {
-                        "text": {
-                            "label": "$toShortString",
-                            "fillColor": "$color(maroon)",
-                            "stroke": {
-                                "color": "$color(black)",
-                                "thickness": 1
+            selector: "*",
+            properties: {
+                style: {
+                    type: "labelled",
+                    conf: {
+                        text: {
+                            label: "$toNT",
+                            fillColor: "$color(maroon)",
+                            stroke: {
+                                color: "$color(black)",
+                                thickness: 1
                             }
                         },
-                        "box": {
-                            "backgroundColor": "$color(pink)",
-                            "shape": "roundedRect",
-                            "border": {
-                                "radius": 10
+                        box: {
+                            backgroundColor: "$color(pink)",
+                            shape: "roundedRect",
+                            border: {
+                                radius: 10
                             }
                         }
                     }
@@ -33,15 +34,23 @@ const defaultConf = {
             }
         }
     ],
-    "edge": [
+    edge: [
         {
-            "selector": "*",
-            "properties": {
-                "decalStyle": {
-                    "type": "labelled",
-                    "conf": {
-                        "text": {
-                            "label": "$id"
+            selector: "*",
+            properties: {
+                decalStyle: {
+                    type: "labelled",
+                    conf: {
+                        text: {
+                            label: "$id"
+                        }
+                    }
+                },
+                lineStyle: {
+                    type: "quadratic",
+                    conf: {
+                        controlPoint: {
+                            perpendicular: 100
                         }
                     }
                 }
@@ -88,7 +97,7 @@ export default class {
         return result;
     }
 
-    computeAllStyles(rdfGraph) {
+    computeAllStyles(rdfGraph) { // TODO: pass in profile
         return {
             graphConf: this.computeGraphStyle(),
             nodeConfs: this.computeNodeStyles(rdfGraph),
@@ -170,7 +179,9 @@ export default class {
 const nodeReplacement = _.curry(function (rdfGraph, nodeId, s) {
     const replacements = [
         colorReplacement,
-        idReplacement(nodeId)
+        idReplacement(nodeId),
+        nodeToNTReplacement(nodeId),
+        nodeToStringReplacement(nodeId)
     ];
 
     for (let replacement of replacements) {
@@ -215,6 +226,38 @@ const idReplacement = _.curry(function (id, s) {
     }
     return s;
 });
+
+const nodeToStringReplacement = _.curry(function (id, s) {
+    const toStringRegex = /\$toString/;
+    if (toStringRegex.test(s)) {
+        const rdfNode = makeRDFNode(id);
+        return s.replace(toStringRegex, rdfNode.toString());
+    }
+    return s;
+});
+
+const nodeToNTReplacement = _.curry(function (id, s) {
+    const toNTRegex = /\$toNT/;
+
+    if (toNTRegex.test(s)) {
+        const rdfNode = makeRDFNode(id);
+        return s.replace(toNTRegex, rdfNode.toNT());
+    }
+    return s;
+});
+
+function makeRDFNode(hash) { // TODO find better name
+    const regex = /^(BlankNode|NamedNode)#(.*)$/;
+    const [, interfaceName, nominalValue] = regex.exec(hash);
+    switch (interfaceName) {
+    case "BlankNode":
+        return new rdf.BlankNode(nominalValue);
+    case "NamedNode":
+        return new rdf.NamedNode(nominalValue);
+    default:
+        throw new Error(`Could not unhash ${earlNodeId}.`);
+    }
+}
 
 function deepMap(f, p) {
     if (_.isString(p)) {

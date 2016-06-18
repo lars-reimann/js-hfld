@@ -54,7 +54,7 @@ class AnyNodeSelector extends NodeSelector {
     getAffectedNodes(rdfGraph) {
         const result = new Set();
         for (let node of rdfGraph.iterNodes()) {
-            result.add(this.hashNode(node));
+            result.add(hashNode(node));
         }
         return result;
     }

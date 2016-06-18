@@ -1,4 +1,6 @@
-import {adjustConf} from "@ignavia/draph";
+import _ from "lodash";
+
+import {predefinedColors} from "@ignavia/util";
 
 import EdgeSelector from "./EdgeSelector.js";
 import NodeSelector from "./NodeSelector.js";
@@ -95,11 +97,14 @@ export default class {
         for (let {selector, properties} of this.nodeRules) {
             for (let nodeId of selector.getAffectedNodes(rdfGraph)) {
                 const conf = result.get(nodeId) || {};
-                result.set(nodeId, adjustConf(conf, properties));
+                result.set(nodeId, _.merge(conf, properties));
             }
         }
 
-        // TODO: resolve macros
+        for (let [id, conf] of result) {
+            conf = this.resolveNodeMacros(conf);
+            result.set(id, conf);
+        }
 
         return result;
     }
@@ -110,36 +115,86 @@ export default class {
         for (let {selector, properties} of this.edgeRules) {
             for (let edgeId of selector.getAffectedEdges(rdfGraph)) {
                 const conf = result.get(edgeId) || {};
-                result.set(edgeId, adjustConf(conf, properties));
+                result.set(edgeId, _.merge(conf, properties));
             }
         }
 
-        // TODO: resolve macros
+        for (let [id, conf] of result) {
+            conf = this.resolveEdgeMacros(conf);
+            result.set(id, conf);
+        }
 
         return result;
     }
 
     computeNodeStyle(rdfGraph, nodeId) {
         let result = {};
-
         for (let {selector, properties} of this.nodeConfs) {
             if (selector.isAffectedNode(rdfGraph, nodeId)) {
                 result = adjustConf(result, properties);
             }
         }
-
+        result = this.resolveNodeMacros(result);
         return result;
     }
 
     computeEdgeStyle(rdfGraph, edgeId) {
         let result = {};
-
         for (let {selector, properties} of this.edgeConfs) {
             if (selector.isAffectedEdge(rdfGraph, edgeId)) {
                 result = adjustConf(result, properties);
             }
         }
-
+        result = this.resolveEdgeMacros(result);
         return result;
+    }
+
+    resolveNodeMacros(conf) {
+        return deepMap(nodeReplacement, conf);
+    }
+
+    resolveEdgeMacros(conf) {
+        return deepMap(edgeReplacement, conf);
+    }
+}
+
+function nodeReplacement(s) {
+    s = colorReplacement(s);
+
+    return s;
+}
+
+function edgeReplacement(s) {
+    s = colorReplacement(s);
+
+    return s;
+}
+
+function colorReplacement(s) {
+    const colorRegex = /^\$color\((.*)\)$/;
+    if (colorRegex.test(s)) {
+        const [, color] = colorRegex.exec(s);
+        return predefinedColors[color];
+    }
+    return s;
+}
+
+function deepMap(f, p) {
+    if (_.isString(p)) {
+        return f(p);
+    } else if (_.isArray(p)) {
+        const result = [];
+        for (let v of p) {
+            result.append(deepMap(f, v));
+        }
+        return result;
+    } else if (_.isPlainObject(p)) {
+        const result = {};
+        for (let [k, v] of Object.entries(p)) {
+            result[k] = deepMap(f, v);
+        }
+        return result;
+    } else {
+        return p;
     }
 }

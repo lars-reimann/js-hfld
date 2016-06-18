@@ -31,6 +31,7 @@ class GraphStore extends Store {
                 edges:  new Tolkien1To1Map(),
             },
             layout:     new Map(),
+            stylesheet: stylesheet,
         };
     }
 
@@ -119,7 +120,11 @@ class GraphStore extends Store {
             this.addTriple(triple);
         }
         console.log("graph", this.state.graph);
-        this.state.draph = new GraphView(this.state.graph);
+        console.log("conf", this.state.stylesheet.computeAllStyles(rdfStore.getGraph()))
+        this.state.draph = new GraphView(
+            this.state.graph,
+            this.state.stylesheet.computeAllStyles(rdfStore.getGraph())
+        );
     }
 
     addTriple(triple) {

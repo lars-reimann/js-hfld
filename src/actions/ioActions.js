@@ -19,7 +19,10 @@ import {Stylesheet}   from "../utils/stylesheet/index.js";
 function openFile(file, resolve) {
     const reader   = new FileReader();
     reader.onload  = () => resolve(reader.result);
-    reader.onerror = () => enqueueAlert("danger", reader.error.message);
+    reader.onerror = () => {
+        console.error(reader.error);
+        enqueueAlert("danger", reader.error.message);
+    };
     reader.readAsText(file);
 }
 
@@ -37,7 +40,10 @@ function openURL(url, resolve) {
     fetch(url, {mode: "cors"})
         .then(res => res.text())
         .then(resolve)
-        .catch(err => enqueueAlert("danger", err.message));
+        .catch(err => {
+            console.error(err);
+            enqueueAlert("danger", err.message);
+        });
 }
 
 /**
@@ -74,6 +80,7 @@ function parseConfig(s) {
         const config = JSON.parse(s);
         dispatcher.dispatch({ type: "OPEN_CONFIG", config });
     } catch (err) {
+        console.error(err);
         enqueueAlert("danger", err.message);
     }
 }
@@ -147,6 +154,7 @@ function parseStyle(s) {
         const style = JSON.parse(s);
         dispatcher.dispatch({ type: "OPEN_STYLE", stylesheet: new Stylesheet(style) });
     } catch (err) {
+        console.error(err);
         enqueueAlert("danger", err.message);
     }
 }
@@ -194,7 +202,10 @@ const parser = new TurtleReader();
 export function parseTurtle(s) {
     parser.parse(s)
         .then(result => dispatcher.dispatch({ type: "OPEN_TURTLE", result }))
-        .catch(err   => enqueueAlert("danger", err.message));
+        .catch(err   => {
+            console.error(err);
+            enqueueAlert("danger", err.message);
+        });
 }
 
 /**

@@ -30,22 +30,22 @@
     "dependencies": {
       "@ignavia/draph": "1.0.5",
       "@ignavia/ella": "^1.0.15",
-      "@ignavia/rdf": "^1.7.1",
+      "@ignavia/rdf": "^2.0.0",
+      "@ignavia/earl": "^1.2.2",
+      "@ignavia/util": "^1.2.4",
       "immutable": "^3.7.6",
       "lodash": "^4.13.1",
+      "flux": "^2.1.1",
+      "bootstrap": "github:twbs/bootstrap@^3.3.6",
       "react-bootstrap": "^0.29.4"
     },
     "devDependencies": {
-      "@ignavia/earl": "^1.2.2",
-      "@ignavia/util": "^1.2.4",
       "babel-plugin-transform-async-to-generator": "^6.7.4",
       "babel-plugin-transform-export-extensions": "^6.5.0",
       "babel-plugin-transform-function-bind": "^6.5.2",
       "babel-plugin-transform-object-rest-spread": "^6.6.5",
       "babel-preset-react": "^6.5.0",
-      "bootstrap": "github:twbs/bootstrap@^3.3.6",
       "css": "github:systemjs/plugin-css@^0.1.20",
-      "flux": "^2.1.1",
       "plugin-babel": "systemjs-plugin-babel@^0.0.2",
       "systemjs-hot-reloader": "github:capaj/systemjs-hot-reloader@^0.5.6"
     },
@@ -214,4 +214,5 @@
       }
     }
   }
-}
+}
+

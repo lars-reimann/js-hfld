@@ -1,0 +1,35 @@
+{
+  "node": [
+    {
+      "selector": "*",
+      "properties": {
+        "style": {
+          "type": "labelled",
+          "conf": {
+            "text": {
+              "label": "$toShortString",
+              "fillColor": "$color(maroon)",
+              "stroke": {
+                "color": "$color(black)",
+                "thickness": 1
+              }
+            },
+            "box": {
+              "backgroundColor": "$color(pink)",
+              "shape": "roundedRect",
+              "border": {
+                "radius": 10
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "edge": [
+    {
+      "selector": "*",
+      "properties": {}
+    }
+  ]
+}

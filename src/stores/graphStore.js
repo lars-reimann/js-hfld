@@ -5,6 +5,8 @@ import {Tolkien1To1Map, Tolkien1ToNMap} from "@ignavia/util";
 import * as rdf                         from "@ignavia/rdf";
 import {GraphView} from "@ignavia/draph";
 
+import {Stylesheet} from "../utils/stylesheet/index.js";
+
 import dispatcher from "../dispatcher/dispatcher.js";
 
 import rdfStore from "./rdfStore.js";
@@ -18,16 +20,17 @@ class GraphStore extends Store {
     }
 
     initState() {
-        const graph = new earl.Graph();
+        const graph      = new earl.Graph();
+        const stylesheet = new Stylesheet();
         this.state = {
-            imported:  new Map(),
-            graph:     graph,
-            draph:     new GraphView(graph),
+            imported:   new Map(),
+            graph:      graph,
+            draph:      new GraphView(graph, stylesheet.com),
             earlToRDF: {
-                nodes: new Tolkien1ToNMap(),
-                edges: new Tolkien1To1Map(),
+                nodes:  new Tolkien1ToNMap(),
+                edges:  new Tolkien1To1Map(),
             },
-            layout:    new Map(),
+            layout:     new Map(),
         };
     }
 

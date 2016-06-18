@@ -4,16 +4,12 @@ SystemJS.config({
     },
     devConfig: {
         "map": {
-            "@ignavia/earl": "npm:@ignavia/earl@1.3.4",
-            "@ignavia/util": "npm:@ignavia/util@1.3.3",
             "babel-plugin-transform-async-to-generator": "npm:babel-plugin-transform-async-to-generator@6.8.0",
             "babel-plugin-transform-export-extensions": "npm:babel-plugin-transform-export-extensions@6.8.0",
             "babel-plugin-transform-function-bind": "npm:babel-plugin-transform-function-bind@6.8.0",
             "babel-plugin-transform-object-rest-spread": "npm:babel-plugin-transform-object-rest-spread@6.8.0",
             "babel-preset-react": "npm:babel-preset-react@6.5.0",
-            "bootstrap": "github:twbs/bootstrap@3.3.6",
             "css": "github:systemjs/plugin-css@0.1.23",
-            "flux": "npm:flux@2.1.1",
             "plugin-babel": "npm:systemjs-plugin-babel@0.0.2",
             "systemjs-hot-reloader": "github:capaj/systemjs-hot-reloader@0.5.9"
         },
@@ -23,11 +19,6 @@ SystemJS.config({
                     "debug": "npm:debug@2.2.0",
                     "socket.io-client": "github:socketio/socket.io-client@1.4.6",
                     "weakee": "npm:weakee@1.0.0"
-                }
-            },
-            "github:twbs/bootstrap@3.3.6": {
-                "map": {
-                    "jquery": "github:components/jquery@3.0.0"
                 }
             },
             "npm:babel-code-frame@6.8.0": {
@@ -200,59 +191,9 @@ SystemJS.config({
                     "ms": "npm:ms@0.7.1"
                 }
             },
-            "npm:encoding@0.1.12": {
-                "map": {
-                    "iconv-lite": "npm:iconv-lite@0.4.13"
-                }
-            },
-            "npm:fbemitter@2.0.2": {
-                "map": {
-                    "fbjs": "npm:fbjs@0.7.2"
-                }
-            },
-            "npm:fbjs@0.1.0-alpha.7": {
-                "map": {
-                    "core-js": "npm:core-js@1.2.6",
-                    "promise": "npm:promise@7.1.1",
-                    "whatwg-fetch": "npm:whatwg-fetch@0.9.0"
-                }
-            },
-            "npm:fbjs@0.7.2": {
-                "map": {
-                    "core-js": "npm:core-js@1.2.6",
-                    "isomorphic-fetch": "npm:isomorphic-fetch@2.2.1",
-                    "loose-envify": "npm:loose-envify@1.2.0",
-                    "promise": "npm:promise@7.1.1",
-                    "ua-parser-js": "npm:ua-parser-js@0.7.10"
-                }
-            },
-            "npm:flux@2.1.1": {
-                "map": {
-                    "fbemitter": "npm:fbemitter@2.0.2",
-                    "fbjs": "npm:fbjs@0.1.0-alpha.7",
-                    "immutable": "npm:immutable@3.8.1"
-                }
-            },
             "npm:has-ansi@2.0.0": {
                 "map": {
                     "ansi-regex": "npm:ansi-regex@2.0.0"
-                }
-            },
-            "npm:isomorphic-fetch@2.2.1": {
-                "map": {
-                    "node-fetch": "npm:node-fetch@1.5.3",
-                    "whatwg-fetch": "npm:whatwg-fetch@1.0.0"
-                }
-            },
-            "npm:node-fetch@1.5.3": {
-                "map": {
-                    "encoding": "npm:encoding@0.1.12",
-                    "is-stream": "npm:is-stream@1.1.0"
-                }
-            },
-            "npm:promise@7.1.1": {
-                "map": {
-                    "asap": "npm:asap@2.0.4"
                 }
             },
             "npm:strip-ansi@3.0.1": {
@@ -322,9 +263,12 @@ SystemJS.config({
     ],
     map: {
         "@ignavia/draph": "npm:@ignavia/draph@1.0.5",
+        "@ignavia/earl": "npm:@ignavia/earl@1.3.4",
         "@ignavia/ella": "npm:@ignavia/ella@1.0.15",
-        "@ignavia/rdf": "npm:@ignavia/rdf@1.7.2",
+        "@ignavia/rdf": "npm:@ignavia/rdf@2.0.0",
+        "@ignavia/util": "npm:@ignavia/util@1.3.3",
         "assert": "github:jspm/nodelibs-assert@0.2.0-alpha",
+        "bootstrap": "github:twbs/bootstrap@3.3.6",
         "buffer": "github:jspm/nodelibs-buffer@0.2.0-alpha",
         "child_process": "github:jspm/nodelibs-child_process@0.2.0-alpha",
         "constants": "github:jspm/nodelibs-constants@0.2.0-alpha",
@@ -332,6 +276,7 @@ SystemJS.config({
         "crypto": "github:jspm/nodelibs-crypto@0.2.0-alpha",
         "domain": "github:jspm/nodelibs-domain@0.2.0-alpha",
         "events": "github:jspm/nodelibs-events@0.2.0-alpha",
+        "flux": "npm:flux@2.1.1",
         "fs": "github:jspm/nodelibs-fs@0.2.0-alpha",
         "http": "github:jspm/nodelibs-http@0.2.0-alpha",
         "https": "github:jspm/nodelibs-https@0.2.0-alpha",
@@ -657,11 +602,6 @@ SystemJS.config({
                 "lodash": "npm:lodash@4.13.1"
             }
         },
-        "npm:@ignavia/rdf@1.7.2": {
-            "map": {
-                "@ignavia/util": "npm:@ignavia/util@1.3.3"
-            }
-        },
         "npm:@ignavia/draph@1.0.5": {
             "map": {
                 "pixi.js": "npm:pixi.js@3.0.11",
@@ -850,6 +790,66 @@ SystemJS.config({
                 "inherits": "npm:inherits@2.0.1",
                 "brorand": "npm:brorand@1.0.5",
                 "hash.js": "npm:hash.js@1.0.3"
+            }
+        },
+        "github:twbs/bootstrap@3.3.6": {
+            "map": {
+                "jquery": "github:components/jquery@3.0.0"
+            }
+        },
+        "npm:encoding@0.1.12": {
+            "map": {
+                "iconv-lite": "npm:iconv-lite@0.4.13"
+            }
+        },
+        "npm:fbemitter@2.0.2": {
+            "map": {
+                "fbjs": "npm:fbjs@0.7.2"
+            }
+        },
+        "npm:fbjs@0.1.0-alpha.7": {
+            "map": {
+                "core-js": "npm:core-js@1.2.6",
+                "promise": "npm:promise@7.1.1",
+                "whatwg-fetch": "npm:whatwg-fetch@0.9.0"
+            }
+        },
+        "npm:fbjs@0.7.2": {
+            "map": {
+                "core-js": "npm:core-js@1.2.6",
+                "isomorphic-fetch": "npm:isomorphic-fetch@2.2.1",
+                "loose-envify": "npm:loose-envify@1.2.0",
+                "promise": "npm:promise@7.1.1",
+                "ua-parser-js": "npm:ua-parser-js@0.7.10"
+            }
+        },
+        "npm:flux@2.1.1": {
+            "map": {
+                "fbemitter": "npm:fbemitter@2.0.2",
+                "fbjs": "npm:fbjs@0.1.0-alpha.7",
+                "immutable": "npm:immutable@3.8.1"
+            }
+        },
+        "npm:isomorphic-fetch@2.2.1": {
+            "map": {
+                "node-fetch": "npm:node-fetch@1.5.3",
+                "whatwg-fetch": "npm:whatwg-fetch@1.0.0"
+            }
+        },
+        "npm:node-fetch@1.5.3": {
+            "map": {
+                "encoding": "npm:encoding@0.1.12",
+                "is-stream": "npm:is-stream@1.1.0"
+            }
+        },
+        "npm:promise@7.1.1": {
+            "map": {
+                "asap": "npm:asap@2.0.4"
+            }
+        },
+        "npm:@ignavia/rdf@2.0.0": {
+            "map": {
+                "@ignavia/util": "npm:@ignavia/util@1.3.3"
             }
         }
     }

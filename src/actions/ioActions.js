@@ -2,6 +2,7 @@ import {TurtleReader} from "@ignavia/rdf";
 
 import {enqueueAlert} from "./alertActions.js";
 import dispatcher     from "../dispatcher/dispatcher.js";
+import {Stylesheet}   from "../utils/stylesheet/index.js";
 
 // General --------------------------------------------------------------------
 
@@ -134,6 +135,51 @@ export function saveConfig(config, filename) {
 // Layout ---------------------------------------------------------------------
 
 // Style ----------------------------------------------------------------------
+
+/**
+ * Parses the stylesheet and dispatches the appropriate action.
+ *
+ * @param {String} s
+ * The stringified style.
+ */
+function parseStyle(s) {
+    try {
+        const style = JSON.parse(s);
+        dispatcher.dispatch({ type: "OPEN_STYLE", stylesheet: new Stylesheet(style) });
+    } catch (err) {
+        enqueueAlert("danger", err.message);
+    }
+}
+
+/**
+ * Sets the given string as new style.
+ *
+ * @param {String} s
+ * The stringified style.
+ */
+export function openStyleDirect(s) {
+    parseStyle(s);
+}
+
+/**
+ * Sets the content of the given file as new style.
+ *
+ * @param {File} file
+ * The file containing the style.
+ */
+export function openStyleFile(file) {
+    openFile(file, parseStyle);
+}
+
+/**
+ * Sets the content of the response from the given URL as new style.
+ *
+ * @param {String} url
+ * The URL to open.
+ */
+export function openStyleURL(url) {
+    openURL(url, parseStyle);
+}
 
 // Turtle ---------------------------------------------------------------------
 

@@ -15,7 +15,7 @@ const defaultConf = {
                     type: "labelled",
                     conf: {
                         text: {
-                            label: "$toNT",
+                            label: "$toShortString",
                             fillColor: "$color(maroon)",
                             stroke: {
                                 color: "$color(black)",
@@ -97,11 +97,11 @@ export default class {
         return result;
     }
 
-    computeAllStyles(rdfGraph) { // TODO: pass in profile
+    computeAllStyles(rdfGraph, profile) {
         return {
             graphConf: this.computeGraphStyle(),
-            nodeConfs: this.computeNodeStyles(rdfGraph),
-            edgeConfs: this.computeEdgeStyles(rdfGraph),
+            nodeConfs: this.computeNodeStyles(rdfGraph, profile),
+            edgeConfs: this.computeEdgeStyles(rdfGraph, profile),
         };
     }
 
@@ -109,7 +109,7 @@ export default class {
         return this.graphConf;
     }
 
-    computeNodeStyles(rdfGraph) {
+    computeNodeStyles(rdfGraph, profile) {
         const result = new Map();
 
         for (let {selector, properties} of this.nodeRules) {
@@ -120,14 +120,14 @@ export default class {
         }
 
         for (let [id, conf] of result) {
-            conf = this.resolveNodeMacros(rdfGraph, id, conf);
+            conf = this.resolveNodeMacros(rdfGraph, profile, id, conf);
             result.set(id, conf);
         }
 
         return result;
     }
 
-    computeEdgeStyles(rdfGraph) {
+    computeEdgeStyles(rdfGraph, profile) {
         const result = new Map();
 
         for (let {selector, properties} of this.edgeRules) {
@@ -138,50 +138,51 @@ export default class {
         }
 
         for (let [id, conf] of result) {
-            conf = this.resolveEdgeMacros(rdfGraph, id, conf);
+            conf = this.resolveEdgeMacros(rdfGraph, profile, id, conf);
             result.set(id, conf);
         }
 
         return result;
     }
 
-    computeNodeStyle(rdfGraph, nodeId) {
+    computeNodeStyle(rdfGraph, profile, nodeId) {
         let result = {};
         for (let {selector, properties} of this.nodeConfs) {
             if (selector.isAffectedNode(rdfGraph, nodeId)) {
                 result = _.merge(result, properties);
             }
         }
-        result = this.resolveNodeMacros(rdfGraph, nodeId, result);
+        result = this.resolveNodeMacros(rdfGraph, profile, nodeId, result);
         return result;
     }
 
-    computeEdgeStyle(rdfGraph, edgeId) {
+    computeEdgeStyle(rdfGraph, profile, edgeId) {
         let result = {};
         for (let {selector, properties} of this.edgeConfs) {
             if (selector.isAffectedEdge(rdfGraph, edgeId)) {
                 result = _.merge(result, properties);
             }
         }
-        result = this.resolveEdgeMacros(rdfGraph, edgeId, result);
+        result = this.resolveEdgeMacros(rdfGraph, profile, edgeId, result);
         return result;
     }
 
-    resolveNodeMacros(rdfGraph, nodeId, conf) {
-        return deepMap(nodeReplacement(rdfGraph, nodeId), conf);
+    resolveNodeMacros(rdfGraph, profile, nodeId, conf) {
+        return deepMap(nodeReplacement(rdfGraph, profile, nodeId), conf);
     }
 
-    resolveEdgeMacros(rdfGraph, edgeId, conf) {
-        return deepMap(edgeReplacement(rdfGraph, edgeId), conf);
+    resolveEdgeMacros(rdfGraph, profile, edgeId, conf) {
+        return deepMap(edgeReplacement(rdfGraph, profile, edgeId), conf);
     }
 }
 
-const nodeReplacement = _.curry(function (rdfGraph, nodeId, s) {
+const nodeReplacement = _.curry(function (rdfGraph, profile, nodeId, s) {
     const replacements = [
         colorReplacement,
         idReplacement(nodeId),
         nodeToNTReplacement(nodeId),
-        nodeToStringReplacement(nodeId)
+        nodeToStringReplacement(nodeId),
+        nodeToShortStringReplacement(profile, nodeId)
     ];
 
     for (let replacement of replacements) {
@@ -194,7 +195,7 @@ const nodeReplacement = _.curry(function (rdfGraph, nodeId, s) {
     return s;
 });
 
-const edgeReplacement = _.curry(function (rdfGraph, nodeId, s) {
+const edgeReplacement = _.curry(function (rdfGraph, profile, nodeId, s) {
     const replacements = [
         colorReplacement,
         idReplacement(nodeId)
@@ -227,6 +228,16 @@ const idReplacement = _.curry(function (id, s) {
     return s;
 });
 
+const nodeToNTReplacement = _.curry(function (id, s) {
+    const toNTRegex = /\$toNT/;
+
+    if (toNTRegex.test(s)) {
+        const rdfNode = makeRDFNode(id);
+        return s.replace(toNTRegex, rdfNode.toNT());
+    }
+    return s;
+});
+
 const nodeToStringReplacement = _.curry(function (id, s) {
     const toStringRegex = /\$toString/;
     if (toStringRegex.test(s)) {
@@ -236,12 +247,11 @@ const nodeToStringReplacement = _.curry(function (id, s) {
     return s;
 });
 
-const nodeToNTReplacement = _.curry(function (id, s) {
-    const toNTRegex = /\$toNT/;
-
-    if (toNTRegex.test(s)) {
+const nodeToShortStringReplacement = _.curry(function (profile, id, s) {
+    const toShortStringRegex = /\$toShortString/;
+    if (toShortStringRegex.test(s)) {
         const rdfNode = makeRDFNode(id);
-        return s.replace(toNTRegex, rdfNode.toNT());
+        return s.replace(toShortStringRegex, profile.nodeToString(rdfNode));
     }
     return s;
 });

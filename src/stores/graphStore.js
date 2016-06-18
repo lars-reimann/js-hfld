@@ -25,7 +25,10 @@ class GraphStore extends Store {
         this.state = {
             imported:   new Map(),
             graph:      graph,
-            draph:      new GraphView(graph, stylesheet.computeAllStyles(rdfStore.getGraph())),
+            draph:      new GraphView(graph, stylesheet.computeAllStyles(
+                rdfStore.getGraph(),
+                rdfStore.getProfile()
+            )),
             earlToRDF: {
                 nodes:  new Tolkien1ToNMap(),
                 edges:  new Tolkien1To1Map(),
@@ -119,11 +122,13 @@ class GraphStore extends Store {
         for (let triple of rdfStore.state.graph) {
             this.addTriple(triple);
         }
-        console.log("graph", this.state.graph);
-        console.log("conf", this.state.stylesheet.computeAllStyles(rdfStore.getGraph()))
+
         this.state.draph = new GraphView(
             this.state.graph,
-            this.state.stylesheet.computeAllStyles(rdfStore.getGraph())
+            this.state.stylesheet.computeAllStyles(
+                rdfStore.getGraph(),
+                rdfStore.getProfile()
+            )
         );
     }
 

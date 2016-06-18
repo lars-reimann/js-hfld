@@ -8,29 +8,29 @@ export default class extends React.Component {
     componentDidMount() {
         const draph = document.getElementById("draph");
         draph.appendChild(this.props.graphView.renderer.view);
-        this.props.graphView.renderer.resize(
+        this.props.graphView.resize(
             draph.offsetWidth,
             draph.offsetHeight
         );
+        this.props.graphView.startRenderLoop();
     }
 
     componentDidUpdate() {
         const draph = document.getElementById("draph");
         draph.innerHTML = "";
         draph.appendChild(this.props.graphView.renderer.view);
-        this.props.graphView.renderer.resize(
+        this.props.graphView.resize(
             draph.offsetWidth,
             draph.offsetHeight
         );
     }
 
     componentWillUnmount() {
+        this.props.graphView.stopRenderLoop();
         document.getElementById("draph").innerHTML = "";
     }
 
-    // TODO start and stop render loop
-
-    render() {console.log(this.props.graphView)
+    render() {
         return (
             <div id="draph"></div>
         );

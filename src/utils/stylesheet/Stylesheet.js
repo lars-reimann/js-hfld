@@ -60,6 +60,37 @@ const defaultConf = {
                     }
                 }
             }
+        },
+        {
+            selector: "* -> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> -> *",
+            properties: {
+                decalStyle: {
+                    conf: {
+                        box: {
+                            backgroundColor: "$color(maroon)"
+                        },
+                        text: {
+                            fillColor: "$color(lightyellow)"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            selector: "* -> <http://www.w3.org/2002/07/owl#sameAs> -> *",
+            properties: {
+                decalStyle: {
+                    conf: {
+                        box: {
+                            backgroundColor: "$color(lightcyan)"
+                        },
+                        text: {
+                            fillColor: "$darkslategrey",
+                            label: "=",
+                        }
+                    }
+                }
+            }
         }
     ]
 };

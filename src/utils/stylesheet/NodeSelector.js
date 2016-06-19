@@ -3,35 +3,30 @@ import * as rdf from "@ignavia/rdf";
 export default class NodeSelector {
 
     static makeSelector(s) {
-        const anyRegex       = /^\*$/;
-        const interfaceRegex = /^\.(blank|named)$/;
-        const valueRegex     = /^"(.*)"$/;
-        const exactRegex     = /^"(.*)"\.(blank|named)$/;
+        const anyRegex        = /^\*$/;
+        const anyBlankRegex   = /^\.blank$/;
+        const anyNamedRegex   = /^\.named$/;
+        const valueRegex      = /^"(.*)"$/;
+        const exactBlankRegex = /^_:(.*)$/;
+        const exactNamedRegex = /^<(.*)>$/;
 
         if (anyRegex.test(s)) {
             return new AnyNodeSelector();
-        } else if (interfaceRegex.test(s)) {
-            const [, shortInterfaceName] = interfaceRegex.exec(s);
-            const interfaceName = NodeSelector.toOfficialInterfaceName(shortInterfaceName);
-            return new InterfaceNodeSelector(interfaceName);
+        } else if (anyBlankRegex.test(s)) {
+            return new InterfaceNodeSelector("BlankNode");
+        } else if (anyNamedRegex.test(s)) {
+            return new InterfaceNodeSelector("NamedNode");
         } else if (valueRegex.test(s)) {
             const [, nominalValue] = valueRegex.exec(s);
             return new ValueNodeSelector(nominalValue);
-        } else if (exactRegex.test(s)) {
-            const [, nominalValue, shortInterfaceName] = exactRegex.exec(s);
-            const interfaceName = NodeSelector.toOfficialInterfaceName(shortInterfaceName);
-            return new ExactNodeSelector(interfaceName, nominalValue);
-        }
-    }
-
-    static toOfficialInterfaceName(shortInterfaceName) {
-        switch (shortInterfaceName) {
-        case "blank":
-            return "BlankNode";
-        case "named":
-            return "NamedNode";
-        default:
-            throw new Error(`Could not translate short interface name: ${shortInterfaceName}.`);
+        } else if (exactBlankRegex.test(s)) {
+            const [, nominalValue] = exactRegex.exec(s);
+            return new ExactNodeSelector("BlankNode", nominalValue);
+        } else if (exactNamedRegex.test(s)) {
+            const [, nominalValue] = exactRegex.exec(s);
+            return new ExactNodeSelector("NamedNode", nominalValue);
+        } else {
+            throw new Error(`Invalid selector: ${s}.`);
         }
     }
 

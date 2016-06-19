@@ -70,7 +70,11 @@ const defaultConf = {
                             backgroundColor: "$color(maroon)"
                         },
                         text: {
-                            fillColor: "$color(lightyellow)"
+                            font: {
+                                size: 18
+                            },
+                            fillColor: "$color(lightyellow)",
+                            label: "is a"
                         }
                     }
                 }
@@ -85,7 +89,10 @@ const defaultConf = {
                             backgroundColor: "$color(lightcyan)"
                         },
                         text: {
-                            fillColor: "$darkslategrey",
+                            font: {
+                                size: 20
+                            },
+                            fillColor: "$color(darkslategrey)",
                             label: "=",
                         }
                     }

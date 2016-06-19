@@ -24,7 +24,6 @@ const defaultConf = {
                     type: "interactive",
                     conf: {
                         handleMousedown(e) {
-                            console.log(e.target.earlID);
                             actions.toggleNodeSelection([e.target.earlID]);
                         }
                     }
@@ -68,7 +67,15 @@ const defaultConf = {
                             perpendicular: 100
                         }
                     }
-                }
+                },
+                behaviors: [{
+                    type: "interactive",
+                    conf: {
+                        handleMousedown(e) {
+                            actions.toggleTripleSelection([e.target.earlID]);
+                        }
+                    }
+                }]
             }
         },
         {

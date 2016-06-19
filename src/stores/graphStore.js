@@ -10,8 +10,10 @@ import {Stylesheet} from "../utils/stylesheet/index.js";
 import dispatcher from "../dispatcher/dispatcher.js";
 
 import rdfStore from "./rdfStore.js";
+import selectionStore from "./selectionStore.js";
 
 const rdfToken = rdfStore.getDispatchToken();
+const selectionToken = selectionStore.getDispatchToken();
 
 class GraphStore extends Store {
     constructor(dispatcher) {
@@ -179,6 +181,26 @@ class GraphStore extends Store {
         this.__emitChange();
     }
 
+    selectNodes() {
+        const selectedNodes = selectionStore.getSelectedNodes();
+        const result = new Set();
+        for (let node of selectedNodes) {
+            if (node.interfaceName === "BlankNode" || node.interfaceName === "NamedNode") {
+                result.add(`${node.interfaceName}#${node.nominalValue}`);
+            }
+        }
+        this.state.draph.selectNodes(result);
+    }
+
+    selectTriples() {
+        const selectedTriples = selectionStore.getSelectedTriples();
+        const result = new Set();
+        for (let triple of selectedTriples) {
+            result.add(triple.id);
+        }
+        this.state.draph.selectEdges(result);
+    }
+
     __onDispatch(action) {
         switch (action.type) {
             case "ADD_TRIPLE":
@@ -199,7 +221,28 @@ class GraphStore extends Store {
                 break;
             case "OPEN_STYLE":
                 return this.openStyle(action.stylesheet);
-
+            case "CLEAR_SELECTION":
+                dispatcher.waitFor([selectionToken]);
+                this.selectNodes();
+                this.selectTriples();
+                this.__emitChange();
+            case "CLEAR_NODE_SELECTION":
+            case "SELECT_NODES":
+            case "DESELECT_NODES":
+            case "TOGGLE_NODE_SELECTION":
+                dispatcher.waitFor([selectionToken]);
+                this.selectNodes();
+                this.__emitChange();
+            case "CLEAR_TRIPLE_SELECTION":
+            case "SELECT_ALL_MATCHING_TRIPLES":
+            case "SELECT_TRIPLES":
+            case "DESELECT_TRIPLES":
+            case "TOGGLE_TRIPLE_SELECTION":
+                dispatcher.waitFor([selectionToken]);
+                this.selectTriples();
+                this.__emitChange();
+            case "FILTER_TRIPLES":
+            case "CLEAR_TRIPLE_FILTER":
         }
     }
 }

@@ -1,11 +1,17 @@
 import {ReduceStore} from "flux/utils";
 import Immutable     from "immutable";
 
+import * as rdf from "@ignavia/rdf";
+
 import dispatcher from "../dispatcher/dispatcher.js";
 
 import rdfStore from "./rdfStore.js";
 
 const rdfToken = rdfStore.getDispatchToken();
+
+// TODO disallow selection of literals
+// Store node hashes
+// Nodes are selected if their hash is selected
 
 /**
  * Stores the state of the selection.
@@ -54,6 +60,24 @@ class SelectionStore extends ReduceStore {
 
     getTablePage() {
         return this.getState().get("tablePage");
+    }
+
+    normalizeNodeId(id) {
+        const regex = /^(BlankNode|NamedNode)#(.*)$/;
+
+        if (regex.test(id)) {
+            const [, interfaceName, nominalValue] = regex.exec(id);
+            switch (interfaceName) {
+            case "BlankNode":
+                const blankNode = new rdf.BlankNode(nominalValue);
+                return [...rdfStore.getGraph().iterEquivalentNodes(blankNode)][0].id;
+            case "NamedNode":
+                const namedNode = new rdf.NamedNode(nominalValue);
+                return [...rdfStore.getGraph().iterEquivalentNodes(namedNode)][0].id;
+            }
+        } else {
+            return id;
+        }
     }
 
     /**
@@ -267,6 +291,9 @@ class SelectionStore extends ReduceStore {
         const oldSelection = state.get("nodes");
         let   newSelection = oldSelection;
         for (let id of ids) {
+            console.log(id)
+            id = this.normalizeNodeId(id);
+            console.log(id);
             if (this.isSelectedNode(id, oldSelection)) {
                 newSelection = this.deselectNode(newSelection, id);
             } else {

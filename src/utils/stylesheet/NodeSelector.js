@@ -20,10 +20,10 @@ export default class NodeSelector {
             const [, nominalValue] = valueRegex.exec(s);
             return new ValueNodeSelector(nominalValue);
         } else if (exactBlankRegex.test(s)) {
-            const [, nominalValue] = exactRegex.exec(s);
+            const [, nominalValue] = exactBlankRegex.exec(s);
             return new ExactNodeSelector("BlankNode", nominalValue);
         } else if (exactNamedRegex.test(s)) {
-            const [, nominalValue] = exactRegex.exec(s);
+            const [, nominalValue] = exactNamedRegex.exec(s);
             return new ExactNodeSelector("NamedNode", nominalValue);
         } else {
             throw new Error(`Invalid selector: ${s}.`);

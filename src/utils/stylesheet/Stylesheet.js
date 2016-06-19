@@ -3,6 +3,7 @@ import _ from "lodash";
 import * as rdf           from "@ignavia/rdf";
 import {predefinedColors} from "@ignavia/util";
 
+import * as actions from "../../actions/actions.js";
 import EdgeSelector from "./EdgeSelector.js";
 import NodeSelector from "./NodeSelector.js";
 
@@ -18,7 +19,16 @@ const defaultConf = {
                             label: "$toShortString",
                         },
                     }
-                }
+                },
+                behaviors: [{
+                    type: "interactive",
+                    conf: {
+                        handleMousedown(e) {
+                            console.log(e.target.earlID);
+                            actions.toggleNodeSelection([e.target.earlID]);
+                        }
+                    }
+                }]
             }
         },
         {
@@ -379,7 +389,7 @@ function deepMap(f, p) {
     } else if (_.isArray(p)) {
         const result = [];
         for (let v of p) {
-            result.append(deepMap(f, v));
+            result.push(deepMap(f, v));
         }
         return result;
     } else if (_.isPlainObject(p)) {

@@ -165,6 +165,20 @@ class GraphStore extends Store {
         this.__emitChange();
     }
 
+    openStyle(stylesheet) {
+        dispatcher.waitFor([rdfToken]);
+        this.state.stylesheet = stylesheet;
+        this.state.draph.stopRenderLoop();
+        this.state.draph = new GraphView(
+            this.state.graph,
+            this.state.stylesheet.computeAllStyles(
+                rdfStore.getGraph(),
+                rdfStore.getProfile()
+            )
+        );
+        this.__emitChange();
+    }
+
     __onDispatch(action) {
         switch (action.type) {
             case "ADD_TRIPLE":
@@ -183,6 +197,9 @@ class GraphStore extends Store {
                 this.importRDFGraph();
                 this.__emitChange();
                 break;
+            case "OPEN_STYLE":
+                return this.openStyle(action.stylesheet);
+
         }
     }
 }

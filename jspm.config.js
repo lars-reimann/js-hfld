@@ -289,7 +289,7 @@ SystemJS.config({
         "pixi.js": "npm:pixi.js@3.0.11",
         "process": "github:jspm/nodelibs-process@0.2.0-alpha",
         "react": "npm:react@0.14.8",
-        "react-bootstrap": "npm:react-bootstrap@0.29.4",
+        "react-bootstrap": "npm:react-bootstrap@0.29.5",
         "react-dom": "npm:react-dom@0.14.8",
         "source-map": "npm:source-map@0.1.43",
         "stream": "github:jspm/nodelibs-stream@0.2.0-alpha",
@@ -368,20 +368,6 @@ SystemJS.config({
         "npm:loose-envify@1.2.0": {
             "map": {
                 "js-tokens": "npm:js-tokens@1.0.3"
-            }
-        },
-        "npm:react-bootstrap@0.29.4": {
-            "map": {
-                "babel-runtime": "npm:babel-runtime@5.8.38",
-                "classnames": "npm:classnames@2.2.5",
-                "dom-helpers": "npm:dom-helpers@2.4.0",
-                "invariant": "npm:invariant@2.2.1",
-                "keycode": "npm:keycode@2.1.2",
-                "lodash-compat": "npm:lodash-compat@3.10.2",
-                "react-overlays": "npm:react-overlays@0.6.3",
-                "react-prop-types": "npm:react-prop-types@0.3.2",
-                "uncontrollable": "npm:uncontrollable@3.3.1",
-                "warning": "npm:warning@2.1.0"
             }
         },
         "npm:react-overlays@0.6.3": {
@@ -850,6 +836,20 @@ SystemJS.config({
         "npm:@ignavia/rdf@2.0.1": {
             "map": {
                 "@ignavia/util": "npm:@ignavia/util@1.3.3"
+            }
+        },
+        "npm:react-bootstrap@0.29.5": {
+            "map": {
+                "babel-runtime": "npm:babel-runtime@5.8.38",
+                "invariant": "npm:invariant@2.2.1",
+                "react-overlays": "npm:react-overlays@0.6.3",
+                "lodash-compat": "npm:lodash-compat@3.10.2",
+                "uncontrollable": "npm:uncontrollable@3.3.1",
+                "keycode": "npm:keycode@2.1.2",
+                "warning": "npm:warning@2.1.0",
+                "classnames": "npm:classnames@2.2.5",
+                "react-prop-types": "npm:react-prop-types@0.3.2",
+                "dom-helpers": "npm:dom-helpers@2.4.0"
             }
         }
     }

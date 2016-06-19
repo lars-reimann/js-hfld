@@ -1,0 +1,26 @@
+{
+    "node": [
+        {
+            "selector": "<http://example.org/#spiderman>",
+            "properties": {
+                "style": {
+                    "type": "illustrated",
+                    "conf": {
+                        "box": {
+                            "shape": "circle",
+                            "backgroundColor": "$color(red)"
+                        },
+                        "caption": {
+                            "side": "none"
+                        },
+                        "image": {
+                            "path": "data/spidermanImage.png",
+                            "height": 40,
+                            "width": "auto"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

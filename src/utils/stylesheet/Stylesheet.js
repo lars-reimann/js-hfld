@@ -20,6 +20,23 @@ const defaultConf = {
                     }
                 }
             }
+        },
+        {
+            selector: ".blank",
+            properties: {
+                style: {
+                    conf: {
+                        box: {
+                            shape: "roundedRect"
+                        },
+                        text: {
+                            font: {
+                                style: "italic"
+                            }
+                        }
+                    }
+                }
+            }
         }
     ],
     edge: [
@@ -213,10 +230,13 @@ const nodeReplacement = _.curry(function (rdfGraph, profile, nodeId, s) {
     return s;
 });
 
-const edgeReplacement = _.curry(function (rdfGraph, profile, nodeId, s) {
+const edgeReplacement = _.curry(function (rdfGraph, profile, edgeId, s) {
     const replacements = [
         colorReplacement,
-        idReplacement(nodeId)
+        idReplacement(edgeId),
+        edgeToNTReplacement(rdfGraph, edgeId),
+        edgeToStringReplacement(rdfGraph, edgeId),
+        edgeToShortStringReplacement(rdfGraph, profile, edgeId)
     ];
 
     for (let replacement of replacements) {
@@ -239,7 +259,7 @@ function colorReplacement(s) {
 }
 
 const idReplacement = _.curry(function (id, s) {
-    const idRegex = /\$id/;
+    const idRegex = /\$id/g;
     if (idRegex.test(s)) {
         return s.replace(idRegex, id);
     }
@@ -247,7 +267,7 @@ const idReplacement = _.curry(function (id, s) {
 });
 
 const nodeToNTReplacement = _.curry(function (id, s) {
-    const toNTRegex = /\$toNT/;
+    const toNTRegex = /\$toNT/g;
 
     if (toNTRegex.test(s)) {
         const rdfNode = makeRDFNode(id);
@@ -257,7 +277,7 @@ const nodeToNTReplacement = _.curry(function (id, s) {
 });
 
 const nodeToStringReplacement = _.curry(function (id, s) {
-    const toStringRegex = /\$toString/;
+    const toStringRegex = /\$toString/g;
     if (toStringRegex.test(s)) {
         const rdfNode = makeRDFNode(id);
         return s.replace(toStringRegex, rdfNode.toString());
@@ -266,10 +286,38 @@ const nodeToStringReplacement = _.curry(function (id, s) {
 });
 
 const nodeToShortStringReplacement = _.curry(function (profile, id, s) {
-    const toShortStringRegex = /\$toShortString/;
+    const toShortStringRegex = /\$toShortString/g;
     if (toShortStringRegex.test(s)) {
         const rdfNode = makeRDFNode(id);
         return s.replace(toShortStringRegex, profile.nodeToString(rdfNode));
+    }
+    return s;
+});
+
+const edgeToNTReplacement = _.curry(function (rdfGraph, id, s) {
+    const toNTRegex = /\$toNT/g;
+
+    if (toNTRegex.test(s)) {
+        const {predicate} = rdfGraph.getTripleById(id);
+        return s.replace(toNTRegex, predicate.toNT());
+    }
+    return s;
+});
+
+const edgeToStringReplacement = _.curry(function (rdfGraph, id, s) {
+    const toStringRegex = /\$toString/g;
+    if (toStringRegex.test(s)) {
+        const {predicate} = rdfGraph.getTripleById(id);
+        return s.replace(toStringRegex, predicate.toString());
+    }
+    return s;
+});
+
+const edgeToShortStringReplacement = _.curry(function (rdfGraph, profile, id, s) {
+    const toShortStringRegex = /\$toShortString/g;
+    if (toShortStringRegex.test(s)) {
+        const {predicate} = rdfGraph.getTripleById(id);
+        return s.replace(toShortStringRegex, profile.nodeToString(predicate));
     }
     return s;
 });

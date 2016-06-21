@@ -1,4 +1,5 @@
-import _ from "lodash";
+import _    from "lodash";
+import PIXI from "pixi.js";
 
 import * as rdf           from "@ignavia/rdf";
 import {predefinedColors} from "@ignavia/util";
@@ -129,9 +130,12 @@ const defaultConf = {
 export default class {
 
     constructor(conf = {}) {
+        this.loader    = new PIXI.loaders.Loader();
         this.graphConf = conf.graph;
         this.nodeRules = this.computeNodeRules(conf.node);
         this.edgeRules = this.computeEdgeRules(conf.edge);
+        this.loader.once("complete", actions.loadedStyle);
+        this.loader.load();
     }
 
     computeNodeRules(conf = []) {
@@ -141,8 +145,8 @@ export default class {
 
         for (let {selector, properties} of conf) {
             result.add({
-                selector: NodeSelector.makeSelector(selector),
-                properties,
+                selector:   NodeSelector.makeSelector(selector),
+                properties: this.loadImages(properties),
             });
         }
 
@@ -157,7 +161,7 @@ export default class {
         for (let {selector, properties} of conf) {
             result.add({
                 selector: EdgeSelector.makeSelector(selector),
-                properties,
+                properties: this.loadImages(properties),
             });
         }
 
@@ -271,6 +275,20 @@ export default class {
     resolveEdgeMacros(rdfGraph, profile, edgeId, conf) {
         return deepMap(edgeReplacement(rdfGraph, profile, edgeId), conf);
     }
+
+    loadImages(conf) {
+        return deepMap((s) => this.loadImage(s), conf);
+    }
+
+    loadImage(s) {
+        const imgRegex = /^\$img\((.*)\)$/;
+        if (imgRegex.test(s)) {
+            const [, path] = imgRegex.exec(s);
+            this.loader.add(path, path);
+            return path;
+        }
+        return s;
+    }
 }
 
 const nodeReplacement = _.curry(function (rdfGraph, profile, nodeId, s) {
@@ -315,7 +333,11 @@ function colorReplacement(s) {
     const colorRegex = /^\$color\((.*)\)$/;
     if (colorRegex.test(s)) {
         const [, color] = colorRegex.exec(s);
-        return predefinedColors[color];
+        const result = predefinedColors[color];
+        if (result) {
+            return result;
+        }
+        throw new Error(`Invalid color: ${color}`);
     }
     return s;
 }

@@ -189,6 +189,10 @@ export function openStyleURL(url) {
     openURL(url, parseStyle);
 }
 
+export function loadedStyle() {
+    dispatcher.dispatch({ type: "LOADED_STYLE" });
+}
+
 // Turtle ---------------------------------------------------------------------
 
 let parser = new TurtleReader();

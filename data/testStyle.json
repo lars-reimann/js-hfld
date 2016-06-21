@@ -14,7 +14,7 @@
                             "side": "none"
                         },
                         "image": {
-                            "path": "data/spidermanImage.png",
+                            "path": "$img(data/spidermanImage.png)",
                             "height": 40,
                             "width": "auto"
                         }

@@ -170,6 +170,11 @@ class GraphStore extends Store {
     openStyle(stylesheet) {
         dispatcher.waitFor([rdfToken]);
         this.state.stylesheet = stylesheet;
+        this.__emitChange();
+    }
+
+    loadedStyle() {
+        dispatcher.waitFor([rdfToken]);
         this.state.draph.stopRenderLoop();
         this.state.draph = new GraphView(
             this.state.graph,
@@ -221,6 +226,8 @@ class GraphStore extends Store {
                 break;
             case "OPEN_STYLE":
                 return this.openStyle(action.stylesheet);
+            case "LOADED_STYLE":
+                return this.loadedStyle();
             case "CLEAR_SELECTION":
                 dispatcher.waitFor([selectionToken]);
                 this.selectNodes();

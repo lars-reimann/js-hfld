@@ -24,10 +24,10 @@ const defaultConf = {
                     type: "interactive",
                     conf: {
                         handleMousedown(e) {
-                            actions.toggleNodeSelection([e.target.earlID]);
+                            actions.toggleNodeSelection([e.target.earlId]);
                         },
                         handleMouseover(e) {
-                            actions.moveNodeToTop(e.target.earlID);
+                            actions.moveNodeToTop(e.target.earlId);
                         }
                     }
                 }]
@@ -60,7 +60,8 @@ const defaultConf = {
                     conf: {
                         text: {
                             label: "$toShortString"
-                        }
+                        },
+                        rotateToLine: true
                     }
                 },
                 lineStyle: {
@@ -75,10 +76,10 @@ const defaultConf = {
                     type: "interactive",
                     conf: {
                         handleMousedown(e) {
-                            actions.toggleTripleSelection([e.target.earlID]);
+                            actions.toggleTripleSelection([e.target.earlId]);
                         },
                         handleMouseover(e) {
-                            actions.moveEdgeToTop(e.target.earlID);
+                            actions.moveEdgeToTop(e.target.earlId);
                         }
                     }
                 }]

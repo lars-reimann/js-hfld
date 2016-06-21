@@ -31,7 +31,7 @@ const defaultConf = {
                             actions.moveNodeToTop(e.target.earlId);
                         }
                     }
-                }]
+                }],
             }
         },
         {

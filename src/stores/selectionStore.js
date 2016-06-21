@@ -291,9 +291,7 @@ class SelectionStore extends ReduceStore {
         const oldSelection = state.get("nodes");
         let   newSelection = oldSelection;
         for (let id of ids) {
-            console.log(id)
             id = this.normalizeNodeId(id);
-            console.log(id);
             if (this.isSelectedNode(id, oldSelection)) {
                 newSelection = this.deselectNode(newSelection, id);
             } else {

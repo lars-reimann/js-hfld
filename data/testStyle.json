@@ -7,11 +7,11 @@
                     "type": "illustrated",
                     "conf": {
                         "box": {
-                            "shape": "circle",
+                            "shape": "ellipse",
                             "backgroundColor": "$color(red)"
                         },
                         "caption": {
-                            "side": "above",
+                            "side": "right",
                             "text": {
                                 "label": "Spiderman"
                             }

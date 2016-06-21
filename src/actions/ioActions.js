@@ -191,7 +191,7 @@ export function openStyleURL(url) {
 
 // Turtle ---------------------------------------------------------------------
 
-const parser = new TurtleReader();
+let parser = new TurtleReader();
 
 /**
  * Parses the given Turtle data and dispatches the appropriate action.
@@ -205,6 +205,7 @@ export function parseTurtle(s) {
         .catch(err   => {
             console.error(err);
             enqueueAlert("danger", err.message);
+            parser = new TurtleReader();
         });
 }
 

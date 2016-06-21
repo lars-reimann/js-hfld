@@ -25,6 +25,9 @@ const defaultConf = {
                     conf: {
                         handleMousedown(e) {
                             actions.toggleNodeSelection([e.target.earlID]);
+                        },
+                        handleMouseover(e) {console.log(e.target.earlID)
+                            actions.moveNodeToTop(e.target.earlID);
                         }
                     }
                 }]
@@ -73,7 +76,7 @@ const defaultConf = {
                     conf: {
                         handleMousedown(e) {
                             actions.toggleTripleSelection([e.target.earlID]);
-                        }
+                        },
                     }
                 }]
             }

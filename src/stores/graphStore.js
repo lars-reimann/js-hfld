@@ -226,6 +226,7 @@ class GraphStore extends Store {
                 this.selectNodes();
                 this.selectTriples();
                 this.__emitChange();
+                break;
             case "CLEAR_NODE_SELECTION":
             case "SELECT_NODES":
             case "DESELECT_NODES":
@@ -233,6 +234,7 @@ class GraphStore extends Store {
                 dispatcher.waitFor([selectionToken]);
                 this.selectNodes();
                 this.__emitChange();
+                break;
             case "CLEAR_TRIPLE_SELECTION":
             case "SELECT_ALL_MATCHING_TRIPLES":
             case "SELECT_TRIPLES":
@@ -241,6 +243,11 @@ class GraphStore extends Store {
                 dispatcher.waitFor([selectionToken]);
                 this.selectTriples();
                 this.__emitChange();
+                break;
+            case "MOVE_NODE_TO_TOP":
+                return this.state.draph.moveNodeToTop(action.nodeId);
+            case "MOVE_EDGE_TO_TOP":
+                return this.state.draph.moveEdgeToTop(action.edgeId);
             case "FILTER_TRIPLES":
             case "CLEAR_TRIPLE_FILTER":
         }

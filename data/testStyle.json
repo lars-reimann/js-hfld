@@ -11,7 +11,10 @@
                             "backgroundColor": "$color(red)"
                         },
                         "caption": {
-                            "side": "none"
+                            "side": "above",
+                            "text": {
+                                "label": "Spiderman"
+                            }
                         },
                         "image": {
                             "path": "$img(data/spidermanImage.png)",

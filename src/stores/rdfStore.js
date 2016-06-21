@@ -27,7 +27,7 @@ class rdfStore extends Store {
         return this.state.graph;
     }
 
-    getProfile() {console.log(this.state.profile)
+    getProfile() {
         return this.state.profile;
     }
 

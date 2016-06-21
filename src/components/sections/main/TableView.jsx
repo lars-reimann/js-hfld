@@ -69,7 +69,7 @@ export default class extends React.Component {
 
     numberOfPages() {
         return Math.ceil(
-            this.props.rdf.getGraph().length /
+            this.props.selection.getFilteredGraph().length /
             this.props.config.tableRowsPerPage
         );
     }

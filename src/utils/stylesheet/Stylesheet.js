@@ -8,6 +8,12 @@ import * as actions from "../../actions/actions.js";
 import EdgeSelector from "./EdgeSelector.js";
 import NodeSelector from "./NodeSelector.js";
 
+/**
+ * The default stylesheet that is prepended to the user styles.
+ *
+ * @type {Object}
+ * @ignore
+ */
 const defaultConf = {
     node: [
         {
@@ -127,17 +133,62 @@ const defaultConf = {
     ]
 };
 
+/**
+ * A graph stylesheet.
+ */
 export default class {
 
+    /**
+     * @param {Object} conf
+     * The configuration of the stylesheet.
+     */
     constructor(conf = {}) {
-        this.loader    = new PIXI.loaders.Loader();
+
+        /**
+         * Used to load images.
+         *
+         * @type {Loader}
+         * @private
+         */
+        this.loader = new PIXI.loaders.Loader();
+
+        /**
+         * The graph configuration.
+         *
+         * @type {Object}
+         * @private
+         */
         this.graphConf = conf.graph;
+
+        /**
+         * The node rules.
+         *
+         * @type {Set}
+         * @private
+         */
         this.nodeRules = this.computeNodeRules(conf.node);
+
+        /**
+         * The edge rules.
+         *
+         * @type {Set}
+         * @private
+         */
         this.edgeRules = this.computeEdgeRules(conf.edge);
+
         this.loader.once("complete", actions.loadedStyle);
         this.loader.load();
     }
 
+    /**
+     * Computes the node rules using the given configuration.
+     *
+     * @param {Array} conf
+     * The configuration.
+     *
+     * @return {Set}
+     * The computed rules.
+     */
     computeNodeRules(conf = []) {
         conf = defaultConf.node.concat(conf);
 
@@ -153,6 +204,15 @@ export default class {
         return result;
     }
 
+    /**
+     * Computes the edge rules using the given configuration.
+     *
+     * @param {Array} conf
+     * The configuration.
+     *
+     * @return {Set}
+     * The computed rules.
+     */
     computeEdgeRules(conf = []) {
         conf = defaultConf.edge.concat(conf);
 
@@ -168,6 +228,18 @@ export default class {
         return result;
     }
 
+    /**
+     * Computes the configurations of the graph, node and edge visualizers.
+     *
+     * @param {Graph} rdfGraph
+     * The graph to draw.
+     *
+     * @param {Profile} profile
+     * The profile to use to shrink node values.
+     *
+     * @return {Object}
+     * The configurations.
+     */
     computeAllStyles(rdfGraph, profile) {
         return {
             graphConf: this.computeGraphStyle(),
@@ -187,7 +259,7 @@ export default class {
     }
 
     /**
-     * Computes the configuration of the node visualizer.
+     * Computes the configurations of the node visualizers.
      *
      * @param {Graph} rdfGraph
      * The RDF graph.
@@ -195,8 +267,8 @@ export default class {
      * @param {Profile} profile
      * The RDF profile.
      *
-     * @return {Object}
-     * The configuration of the node visualizer.
+     * @return {Map}
+     * The configurations of the node visualizers.
      */
     computeNodeStyles(rdfGraph, profile) {
         const result = new Map();
@@ -225,8 +297,8 @@ export default class {
      * @param {Profile} profile
      * The RDF profile.
      *
-     * @return {Object}
-     * The configuration of the edge visualizer.
+     * @return {Map}
+     * The configurations of the edge visualizer.
      */
     computeEdgeStyles(rdfGraph, profile) {
         const result = new Map();
@@ -246,6 +318,21 @@ export default class {
         return result;
     }
 
+    /**
+     * Computes the configuration of the node visualizer for the given node.
+     *
+     * @param {Graph} rdfGraph
+     * The RDF graph.
+     *
+     * @param {Profile} profile
+     * The RDF profile.
+     *
+     * @param {String} nodeId
+     * The ID of the node to display.
+     *
+     * @return {Object}
+     * The configuration of the node visualizer.
+     */
     computeNodeStyle(rdfGraph, profile, nodeId) {
         let result = {};
         for (let {selector, properties} of this.nodeConfs) {
@@ -257,6 +344,21 @@ export default class {
         return result;
     }
 
+    /**
+     * Computes the configuration of the edge visualizer for the given edge.
+     *
+     * @param {Graph} rdfGraph
+     * The RDF graph.
+     *
+     * @param {Profile} profile
+     * The RDF profile.
+     *
+     * @param {String} edgeId
+     * The ID of the edge to display.
+     *
+     * @return {Object}
+     * The configuration of the edge visualizer.
+     */
     computeEdgeStyle(rdfGraph, profile, edgeId) {
         let result = {};
         for (let {selector, properties} of this.edgeConfs) {
@@ -268,18 +370,73 @@ export default class {
         return result;
     }
 
+    /**
+     * Resolves the node macros in the given configuration object.
+     *
+     * @param {Graph} rdfGraph
+     * The RDF graph.
+     *
+     * @param {Profile} profile
+     * The RDF profile.
+     *
+     * @param {String} nodeId
+     * The ID of the node to display.
+     *
+     * @param {Object} conf
+     * The old configuration.
+     *
+     * @return {Object}
+     * The updated configuration.
+     */
     resolveNodeMacros(rdfGraph, profile, nodeId, conf) {
         return deepMap(nodeReplacement(rdfGraph, profile, nodeId), conf);
     }
 
+    /**
+     * Resolves the edge macros in the given configuration object.
+     *
+     * @param {Graph} rdfGraph
+     * The RDF graph.
+     *
+     * @param {Profile} profile
+     * The RDF profile.
+     *
+     * @param {String} edgeId
+     * The ID of the edge to display.
+     *
+     * @param {Object} conf
+     * The old configuration.
+     *
+     * @return {Object}
+     * The updated configuration.
+     */
     resolveEdgeMacros(rdfGraph, profile, edgeId, conf) {
         return deepMap(edgeReplacement(rdfGraph, profile, edgeId), conf);
     }
 
+    /**
+     * Loads the images in the given configuration.
+     *
+     * @param {Object} conf
+     * The old configuration.
+     *
+     * @return {Object}
+     * The updated configuration.
+     */
     loadImages(conf) {
         return deepMap((s) => this.loadImage(s), conf);
     }
 
+    /**
+     * Checks if the given string contains any image paths and loads the image
+     * if they do.
+     *
+     * @param {String} s
+     * The string to check.
+     *
+     * @return {String}
+     * The updated string.
+     */
     loadImage(s) {
         const imgRegex = /^\$img\((.*)\)$/;
         if (imgRegex.test(s)) {
@@ -291,6 +448,24 @@ export default class {
     }
 }
 
+/**
+ * Replaces all node macros in the given string.
+ *
+ * @param {Graph} rdfGraph
+ * The graph to display.
+ *
+ * @param {Profile} profile
+ * The profile to use to shrink node values.
+ *
+ * @param {String} nodeId
+ * The ID of the node to display.
+ *
+ * @param {String} s
+ * The string to parse.
+ *
+ * @return {String}
+ * The updated string.
+ */
 const nodeReplacement = _.curry(function (rdfGraph, profile, nodeId, s) {
     const replacements = [
         colorReplacement,
@@ -310,6 +485,24 @@ const nodeReplacement = _.curry(function (rdfGraph, profile, nodeId, s) {
     return s;
 });
 
+/**
+ * Replaces all edge macros in the given string.
+ *
+ * @param {Graph} rdfGraph
+ * The graph to display.
+ *
+ * @param {Profile} profile
+ * The profile to use to shrink edge values.
+ *
+ * @param {String} edgeId
+ * The ID of the edge to display.
+ *
+ * @param {String} s
+ * The string to parse.
+ *
+ * @return {String}
+ * The updated string.
+ */
 const edgeReplacement = _.curry(function (rdfGraph, profile, edgeId, s) {
     const replacements = [
         colorReplacement,
@@ -329,6 +522,15 @@ const edgeReplacement = _.curry(function (rdfGraph, profile, edgeId, s) {
     return s;
 });
 
+/**
+ * Replaces color macros in the given string.
+ *
+ * @param {String} s
+ * The string to parse.
+ *
+ * @return {String}
+ * The updated string.
+ */
 function colorReplacement(s) {
     const colorRegex = /^\$color\((.*)\)$/;
     if (colorRegex.test(s)) {
@@ -342,6 +544,18 @@ function colorReplacement(s) {
     return s;
 }
 
+/**
+ * Replaces ID macros in the given string.
+ *
+ * @param {String} id
+ * The ID to put in.
+ *
+ * @param {String} s
+ * The string to parse.
+ *
+ * @return {String}
+ * The updated string.
+ */
 const idReplacement = _.curry(function (id, s) {
     const idRegex = /\$id/g;
     if (idRegex.test(s)) {
@@ -350,6 +564,18 @@ const idReplacement = _.curry(function (id, s) {
     return s;
 });
 
+/**
+ * Replaces nodeToNT macros in the given string.
+ *
+ * @param {String} id
+ * The ID of the node.
+ *
+ * @param {String} s
+ * The string to parse.
+ *
+ * @return {String}
+ * The updated string.
+ */
 const nodeToNTReplacement = _.curry(function (id, s) {
     const toNTRegex = /\$toNT/g;
 
@@ -360,6 +586,18 @@ const nodeToNTReplacement = _.curry(function (id, s) {
     return s;
 });
 
+/**
+ * Replaces nodeToString macros in the given string.
+ *
+ * @param {String} id
+ * The ID of the node.
+ *
+ * @param {String} s
+ * The string to parse.
+ *
+ * @return {String}
+ * The updated string.
+ */
 const nodeToStringReplacement = _.curry(function (id, s) {
     const toStringRegex = /\$toString/g;
     if (toStringRegex.test(s)) {
@@ -369,6 +607,21 @@ const nodeToStringReplacement = _.curry(function (id, s) {
     return s;
 });
 
+/**
+ * Replaces nodeToShortString macros in the given string.
+ *
+ * @param {Profile} profile
+ * The profile to use to shrink node values.
+ *
+ * @param {String} id
+ * The ID to put in.
+ *
+ * @param {String} s
+ * The string to parse.
+ *
+ * @return {String}
+ * The updated string.
+ */
 const nodeToShortStringReplacement = _.curry(function (profile, id, s) {
     const toShortStringRegex = /\$toShortString/g;
     if (toShortStringRegex.test(s)) {
@@ -378,6 +631,21 @@ const nodeToShortStringReplacement = _.curry(function (profile, id, s) {
     return s;
 });
 
+/**
+ * Replaces edgeToNT macros in the given string.
+ *
+ * @param {Graph} rdfGraph
+ * The graph to display.
+ *
+ * @param {String} id
+ * The ID of the edge.
+ *
+ * @param {String} s
+ * The string to parse.
+ *
+ * @return {String}
+ * The updated string.
+ */
 const edgeToNTReplacement = _.curry(function (rdfGraph, id, s) {
     const toNTRegex = /\$toNT/g;
 
@@ -388,6 +656,21 @@ const edgeToNTReplacement = _.curry(function (rdfGraph, id, s) {
     return s;
 });
 
+/**
+ * Replaces edgeToString macros in the given string.
+ *
+ * @param {Graph} rdfGraph
+ * The graph to display.
+ *
+ * @param {String} id
+ * The ID of the edge.
+ *
+ * @param {String} s
+ * The string to parse.
+ *
+ * @return {String}
+ * The updated string.
+ */
 const edgeToStringReplacement = _.curry(function (rdfGraph, id, s) {
     const toStringRegex = /\$toString/g;
     if (toStringRegex.test(s)) {
@@ -397,6 +680,24 @@ const edgeToStringReplacement = _.curry(function (rdfGraph, id, s) {
     return s;
 });
 
+/**
+ * Replaces edgeToShortString macros in the given string.
+ *
+ * @param {Graph} rdfGraph
+ * The graph to display.
+ *
+ * @param {Profile} profile
+ * The profile to use to shrink the edge value.
+ *
+ * @param {String} id
+ * The ID of the edge.
+ *
+ * @param {String} s
+ * The string to parse.
+ *
+ * @return {String}
+ * The updated string.
+ */
 const edgeToShortStringReplacement = _.curry(function (rdfGraph, profile, id, s) {
     const toShortStringRegex = /\$toShortString/g;
     if (toShortStringRegex.test(s)) {
@@ -406,7 +707,16 @@ const edgeToShortStringReplacement = _.curry(function (rdfGraph, profile, id, s)
     return s;
 });
 
-function makeRDFNode(hash) { // TODO find better name
+/**
+ * Creates an RDFNode from the given hash.
+ *
+ * @param {String} hash
+ * The hashed node.
+ *
+ * @return {RDFNode}
+ * The created RDFNode.
+ */
+function makeRDFNode(hash) {
     const regex = /^(BlankNode|NamedNode)#(.*)$/;
     const [, interfaceName, nominalValue] = regex.exec(hash);
     switch (interfaceName) {
@@ -419,6 +729,16 @@ function makeRDFNode(hash) { // TODO find better name
     }
 }
 
+/**
+ * Traverses the given value and calls the given function on any string it
+ * finds.
+ *
+ * @param {Function} f
+ * The function to call.
+ *
+ * @param {*} p
+ * The value to traverse.
+ */
 function deepMap(f, p) {
     if (_.isString(p)) {
         return f(p);

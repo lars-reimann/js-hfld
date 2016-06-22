@@ -125,7 +125,6 @@ export default class extends React.Component {
             <Modal show={this.props.visible} onHide={() => this.cancel()}>
                 <Modal.Header closeButton>
                     <Modal.Title>Scale</Modal.Title>
-                    <p>The top-left corner of the screen is (0, 0) and the bottom-right corner is (1, 1).</p>
                 </Modal.Header>
                 <Modal.Body>
                     <form>

@@ -27,8 +27,8 @@ export default class extends React.Component {
         this.state = {
             minX: "0",
             minY: "0",
-            maxX: "1",
-            maxY: "1",
+            maxX: "" + screen.width,
+            maxY: "" + screen.height,
         };
     }
 
@@ -124,7 +124,6 @@ export default class extends React.Component {
             <Modal show={this.props.visible} onHide={() => this.cancel()}>
                 <Modal.Header closeButton>
                     <Modal.Title>Random Layout</Modal.Title>
-                    <p>The top-left corner of the screen is (0, 0) and the bottom-right corner is (1, 1).</p>
                 </Modal.Header>
                 <Modal.Body>
                     <form>

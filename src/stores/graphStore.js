@@ -206,6 +206,31 @@ class GraphStore extends Store {
         this.state.draph.selectEdges(result);
     }
 
+    randomLayout(conf) {
+        this.state.layout = earl.randomLayout(this.state.graph, conf);
+        this.state.draph.setLayout(this.state.layout);
+    }
+
+    eadesLayout(conf) {
+        this.state.layout = earl.eadesLayout(this.state.graph, conf);
+        this.state.draph.setLayout(this.state.layout);
+    }
+
+    scaleLayout(factorX, factorY, center) {
+        this.state.layout.scaleAll(factorX, factorY, center);
+        this.state.draph.setLayout(this.state.layout);
+    }
+
+    translateLayout(vec) {
+        this.state.layout.translateAll(vec);
+        this.state.draph.setLayout(this.state.layout);
+    }
+
+    rotateLayout(angle, center) {
+        this.state.layout.rotateAll(angle, center);
+        this.state.draph.setLayout(this.state.layout);
+    }
+
     __onDispatch(action) {
         switch (action.type) {
             case "ADD_TRIPLE":
@@ -255,6 +280,16 @@ class GraphStore extends Store {
                 return this.state.draph.moveNodeToTop(action.nodeId);
             case "MOVE_EDGE_TO_TOP":
                 return this.state.draph.moveEdgeToTop(action.edgeId);
+            case "RANDOM_LAYOUT":
+                return this.randomLayout(action.conf);
+            case "EADES_LAYOUT":
+                return this.eadesLayout(action.conf);
+            case "SCALE":
+                return this.scaleLayout(action.factorX, action.factorY, action.center);
+            case "ROTATE":
+                return this.rotateLayout(action.angle, action.center);
+            case "TRANSLATE":
+                return this.translateLayout(action.vec);
             case "FILTER_TRIPLES":
             case "CLEAR_TRIPLE_FILTER":
         }

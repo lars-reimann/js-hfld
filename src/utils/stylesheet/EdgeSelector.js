@@ -51,6 +51,12 @@ export default class EdgeSelector {
 
     /**
      * Tests if the given edge is affected by this selector.
+     *
+     * @param {Graph} rdfGraph
+     * The graph to filter.
+     *
+     * @param {String} edgeId
+     * The ID of the edge to test.
      */
     isAffectedEdge(rdfGraph, edgeId) {
         return this.getAffectedEdges(rdfGraph).has(edgeId);

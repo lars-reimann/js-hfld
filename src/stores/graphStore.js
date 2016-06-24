@@ -222,7 +222,7 @@ class GraphStore extends Store {
     }
 
     translateLayout(vec) {
-        this.state.layout.translateAll(vec);
+        this.state.layout.moveAll(vec);
         this.state.draph.setLayout(this.state.layout);
     }
 

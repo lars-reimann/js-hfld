@@ -129,7 +129,7 @@ export default class extends React.Component {
                 <Modal.Body>
                     <form>
                         <FormGroup controlId="factorX" validationState={getValidationStyle(this.factorXIsValid())}>
-                            <ControlLabel>Factor:</ControlLabel>
+                            <ControlLabel>Factor in x-direction:</ControlLabel>
                             <FormControl
                                 type="number"
                                 value={this.state.factorX}
@@ -139,7 +139,7 @@ export default class extends React.Component {
                             <FormControl.Feedback />
                         </FormGroup>
                         <FormGroup controlId="factorY" validationState={getValidationStyle(this.factorYIsValid())}>
-                            <ControlLabel>Factor:</ControlLabel>
+                            <ControlLabel>Factor in y-direction:</ControlLabel>
                             <FormControl
                                 type="number"
                                 value={this.state.factorY}

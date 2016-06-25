@@ -96,7 +96,12 @@ export default class extends React.Component {
                 <rbs.Modal.Body>
                     <form>
                         <rbs.FormGroup controlId="x" validationState={getValidationStyle(this.isValid("x"))}>
-                            <rbs.ControlLabel>x-Coordinate:</rbs.ControlLabel>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="x-tooltip">How far to move in the x-direction.</rbs.Tooltip>}>
+                                    <span>x-Coordinate:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
                                 value={this.state.x}
@@ -106,7 +111,12 @@ export default class extends React.Component {
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
                         <rbs.FormGroup controlId="y" validationState={getValidationStyle(this.isValid("y"))}>
-                            <rbs.ControlLabel>y-Coordinate:</rbs.ControlLabel>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="y-tooltip">How far to move in the y-direction.</rbs.Tooltip>}>
+                                    <span>y-Coordinate:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
                                 value={this.state.y}

@@ -100,7 +100,12 @@ export default class extends React.Component {
                 <rbs.Modal.Body>
                     <form>
                         <rbs.FormGroup controlId="factorX" validationState={getValidationStyle(this.isValid("factorX"))}>
-                            <rbs.ControlLabel>Factor in x-Direction:</rbs.ControlLabel>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="factorX-tooltip">The factor by which to stretch the layout in the x-direction.</rbs.Tooltip>}>
+                                    <span>Factor in x-Direction:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
                                 value={this.state.factorX}
@@ -110,7 +115,12 @@ export default class extends React.Component {
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
                         <rbs.FormGroup controlId="factorY" validationState={getValidationStyle(this.isValid("factorY"))}>
-                            <rbs.ControlLabel>Factor in y-Direction:</rbs.ControlLabel>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="factorY-tooltip">The factor by which to stretch the layout in the y-direction.</rbs.Tooltip>}>
+                                    <span>Factor in y-Direction:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
                                 value={this.state.factorY}
@@ -120,7 +130,12 @@ export default class extends React.Component {
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
                         <rbs.FormGroup controlId="centerX" validationState={getValidationStyle(this.isValid("centerX"))}>
-                            <rbs.ControlLabel>x-Coordinate of Center:</rbs.ControlLabel>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="centerX-tooltip">The x-coordinate of the point from which to scale.</rbs.Tooltip>}>
+                                    <span>x-Coordinate:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
                                 value={this.state.centerX}
@@ -130,7 +145,12 @@ export default class extends React.Component {
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
                         <rbs.FormGroup controlId="centerY" validationState={getValidationStyle(this.isValid("centerY"))}>
-                            <rbs.ControlLabel>y-Coordinate of Center:</rbs.ControlLabel>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="centerY-tooltip">The y-coordinate of the point from which to scale.</rbs.Tooltip>}>
+                                    <span>y-Coordinate:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
                                 value={this.state.centerY}

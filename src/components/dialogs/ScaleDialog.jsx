@@ -4,7 +4,7 @@ import * as rbs from "react-bootstrap";
 import {Vec2} from "@ignavia/ella";
 
 import * as actions                     from "../../actions/actions.js";
-import {validators, getValidationStyle} from "../../utils/utils.js";
+import {validators, getValidationState} from "../../utils/utils.js";
 
 /**
  * The dialog shown to the user when he wants to scale the layout.
@@ -99,7 +99,7 @@ export default class extends React.Component {
                 </rbs.Modal.Header>
                 <rbs.Modal.Body>
                     <form>
-                        <rbs.FormGroup controlId="factorX" validationState={getValidationStyle(this.isValid("factorX"))}>
+                        <rbs.FormGroup controlId="factorX" validationState={getValidationState(this.isValid("factorX"))}>
                             <rbs.ControlLabel>
                                 <rbs.OverlayTrigger placement="right" overlay={
                                     <rbs.Tooltip id="factorX-tooltip">The factor by which to stretch the layout in the x-direction.</rbs.Tooltip>}>
@@ -114,7 +114,7 @@ export default class extends React.Component {
                             />
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
-                        <rbs.FormGroup controlId="factorY" validationState={getValidationStyle(this.isValid("factorY"))}>
+                        <rbs.FormGroup controlId="factorY" validationState={getValidationState(this.isValid("factorY"))}>
                             <rbs.ControlLabel>
                                 <rbs.OverlayTrigger placement="right" overlay={
                                     <rbs.Tooltip id="factorY-tooltip">The factor by which to stretch the layout in the y-direction.</rbs.Tooltip>}>
@@ -129,7 +129,7 @@ export default class extends React.Component {
                             />
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
-                        <rbs.FormGroup controlId="centerX" validationState={getValidationStyle(this.isValid("centerX"))}>
+                        <rbs.FormGroup controlId="centerX" validationState={getValidationState(this.isValid("centerX"))}>
                             <rbs.ControlLabel>
                                 <rbs.OverlayTrigger placement="right" overlay={
                                     <rbs.Tooltip id="centerX-tooltip">The x-coordinate of the point from which to scale.</rbs.Tooltip>}>
@@ -144,7 +144,7 @@ export default class extends React.Component {
                             />
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
-                        <rbs.FormGroup controlId="centerY" validationState={getValidationStyle(this.isValid("centerY"))}>
+                        <rbs.FormGroup controlId="centerY" validationState={getValidationState(this.isValid("centerY"))}>
                             <rbs.ControlLabel>
                                 <rbs.OverlayTrigger placement="right" overlay={
                                     <rbs.Tooltip id="centerY-tooltip">The y-coordinate of the point from which to scale.</rbs.Tooltip>}>

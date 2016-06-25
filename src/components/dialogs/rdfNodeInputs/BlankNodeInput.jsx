@@ -3,7 +3,7 @@ import {FormGroup, ControlLabel, FormControl} from "react-bootstrap";
 
 import {BlankNode} from "@ignavia/rdf";
 
-import {getValidationStyle} from "../../../utils/utils.js";
+import {getValidationState} from "../../../utils/utils.js";
 
 function onChange(value, handleChange) {
     const node = new BlankNode(value);
@@ -14,7 +14,7 @@ function onChange(value, handleChange) {
 export default function ({node, valid, handleChange}) {
     const tempName = node.nominalValue;
     return (
-        <FormGroup controlId="tempName" validationState={getValidationStyle(valid)}>
+        <FormGroup controlId="tempName" validationState={getValidationState(valid)}>
             <ControlLabel>Temporary Name</ControlLabel>
             <FormControl
                 type="text"

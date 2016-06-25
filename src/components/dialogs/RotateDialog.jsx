@@ -4,7 +4,7 @@ import * as rbs from "react-bootstrap";
 import {Vec2} from "@ignavia/ella";
 
 import * as actions                     from "../../actions/actions.js";
-import {validators, getValidationStyle} from "../../utils/utils.js";
+import {validators, getValidationState} from "../../utils/utils.js";
 
 /**
  * The dialog shown to the user when he wants to rotate the layout.
@@ -97,7 +97,7 @@ export default class extends React.Component {
                 </rbs.Modal.Header>
                 <rbs.Modal.Body>
                     <form>
-                        <rbs.FormGroup controlId="angle" validationState={getValidationStyle(this.isValid("angle"))}>
+                        <rbs.FormGroup controlId="angle" validationState={getValidationState(this.isValid("angle"))}>
                             <rbs.ControlLabel>
                                 <rbs.OverlayTrigger placement="right" overlay={
                                     <rbs.Tooltip id="rotate-tooltip">The angle by which to rotate.</rbs.Tooltip>}>
@@ -112,7 +112,7 @@ export default class extends React.Component {
                             />
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
-                        <rbs.FormGroup controlId="centerX" validationState={getValidationStyle(this.isValid("centerX"))}>
+                        <rbs.FormGroup controlId="centerX" validationState={getValidationState(this.isValid("centerX"))}>
                             <rbs.ControlLabel>
                                 <rbs.OverlayTrigger placement="right" overlay={
                                     <rbs.Tooltip id="centerX-tooltip">The x-coordinate of the point around which to rotate.</rbs.Tooltip>}>
@@ -127,7 +127,7 @@ export default class extends React.Component {
                             />
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
-                        <rbs.FormGroup controlId="centerY" validationState={getValidationStyle(this.isValid("centerY"))}>
+                        <rbs.FormGroup controlId="centerY" validationState={getValidationState(this.isValid("centerY"))}>
                             <rbs.ControlLabel>
                                 <rbs.OverlayTrigger placement="right" overlay={
                                     <rbs.Tooltip id="centerY-tooltip">The y-coordinate of the point around which to rotate.</rbs.Tooltip>}>

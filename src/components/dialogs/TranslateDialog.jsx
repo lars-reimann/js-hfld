@@ -4,7 +4,7 @@ import * as rbs from "react-bootstrap";
 import {Vec2} from "@ignavia/ella";
 
 import * as actions                     from "../../actions/actions.js";
-import {validators, getValidationStyle} from "../../utils/utils.js";
+import {validators, getValidationState} from "../../utils/utils.js";
 
 /**
  * The dialog shown to the user when he wants to move the layout.
@@ -95,7 +95,7 @@ export default class extends React.Component {
                 </rbs.Modal.Header>
                 <rbs.Modal.Body>
                     <form>
-                        <rbs.FormGroup controlId="x" validationState={getValidationStyle(this.isValid("x"))}>
+                        <rbs.FormGroup controlId="x" validationState={getValidationState(this.isValid("x"))}>
                             <rbs.ControlLabel>
                                 <rbs.OverlayTrigger placement="right" overlay={
                                     <rbs.Tooltip id="x-tooltip">How far to move in the x-direction.</rbs.Tooltip>}>
@@ -110,7 +110,7 @@ export default class extends React.Component {
                             />
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
-                        <rbs.FormGroup controlId="y" validationState={getValidationStyle(this.isValid("y"))}>
+                        <rbs.FormGroup controlId="y" validationState={getValidationState(this.isValid("y"))}>
                             <rbs.ControlLabel>
                                 <rbs.OverlayTrigger placement="right" overlay={
                                     <rbs.Tooltip id="y-tooltip">How far to move in the y-direction.</rbs.Tooltip>}>

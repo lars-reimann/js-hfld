@@ -6,7 +6,7 @@ import {ObjectInput, PredicateInput, SubjectInput} from "./rdfNodeInputs/rdfNode
 import * as rdf from "@ignavia/rdf";
 
 import * as actions                     from "../../actions/actions.js";
-import {validators, getValidationStyle} from "../../utils/utils.js";
+import {validators, getValidationState} from "../../utils/utils.js";
 
 const defaultBlankNode = new rdf.BlankNode("");
 const defaultLiteral   = new rdf.Literal("");

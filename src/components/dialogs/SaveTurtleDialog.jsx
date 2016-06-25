@@ -2,7 +2,7 @@ import React                                                 from "react";
 import {Modal, FormGroup, ControlLabel, FormControl, Button} from "react-bootstrap";
 
 import * as actions                     from "../../actions/actions.js";
-import {validators, getValidationStyle} from "../../utils/utils.js";
+import {validators, getValidationState} from "../../utils/utils.js";
 
 /**
  * The dialog shown to the user when he wants to save the turtle data.
@@ -82,7 +82,7 @@ export default class extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                     <form>
-                        <FormGroup controlId="filename" validationState={getValidationStyle(this.filenameIsValid())}>
+                        <FormGroup controlId="filename" validationState={getValidationState(this.filenameIsValid())}>
                             <ControlLabel>Filename:</ControlLabel>
                             <FormControl
                                 type="text"

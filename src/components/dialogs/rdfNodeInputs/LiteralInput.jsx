@@ -3,7 +3,7 @@ import {FormGroup, ControlLabel, FormControl, Checkbox} from "react-bootstrap";
 
 import {xmlSchemaTypes as xsd, Literal} from "@ignavia/rdf";
 
-import {getValidationStyle, validators} from "../../../utils/utils.js";
+import {getValidationState, validators} from "../../../utils/utils.js";
 
 const langString = "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString";
 
@@ -183,7 +183,7 @@ export default function ({node, valid, handleChange}) {
                     <option value={langString} disabled>Language String</option>
                 </FormControl>
             </FormGroup>
-            <FormGroup controlId="value" validationState={getValidationStyle(valid)}>
+            <FormGroup controlId="value" validationState={getValidationState(valid)}>
                 <ControlLabel>Value</ControlLabel>
                 {valueInput(node, handleChange)}
                 <FormControl.Feedback />

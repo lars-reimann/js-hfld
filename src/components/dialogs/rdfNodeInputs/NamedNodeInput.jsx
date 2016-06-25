@@ -3,7 +3,7 @@ import {FormGroup, ControlLabel, FormControl} from "react-bootstrap";
 
 import {NamedNode} from "@ignavia/rdf";
 
-import {getValidationStyle} from "../../../utils/utils.js";
+import {getValidationState} from "../../../utils/utils.js";
 
 function onChange(value, handleChange) {
     const node = new NamedNode(value);
@@ -13,7 +13,7 @@ function onChange(value, handleChange) {
 
 export default function ({node, valid, handleChange}) {
     return (
-        <FormGroup controlId="iri" validationState={getValidationStyle(valid)}>
+        <FormGroup controlId="iri" validationState={getValidationState(valid)}>
             <ControlLabel>IRI</ControlLabel>
             <FormControl
                 type="text"

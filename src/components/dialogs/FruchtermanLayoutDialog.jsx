@@ -2,7 +2,7 @@ import React                                                                    
 import {Modal, FormGroup, ControlLabel, FormControl, Button, Tooltip, OverlayTrigger} from "react-bootstrap";
 
 import * as actions                     from "../../actions/actions.js";
-import {validators, getValidationStyle} from "../../utils/utils.js";
+import {validators, getValidationState} from "../../utils/utils.js";
 
 /**
  * The dialog shown to the user when he wants to scale the layout.
@@ -137,11 +137,11 @@ export default class extends React.Component {
         return (
             <Modal show={this.props.visible} onHide={() => this.cancel()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Fruchterman-Layout</Modal.Title>
+                    <Modal.Title>Fruchterman-Reingold-Layout</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form>
-                        <FormGroup controlId="springForceCoef" validationState={getValidationStyle(this.springForceCoefIsValid())}>
+                        <FormGroup controlId="springForceCoef" validationState={getValidationState(this.springForceCoefIsValid())}>
                             <ControlLabel>
                                 <OverlayTrigger placement="right" overlay={
                                     <Tooltip id="springForceCoef-tooltip">The spring force between two adjacent nodes scales linearly with this parameter.</Tooltip>}>
@@ -156,7 +156,7 @@ export default class extends React.Component {
                             />
                             <FormControl.Feedback />
                         </FormGroup>
-                        <FormGroup controlId="repulsiveForceCoef" validationState={getValidationStyle(this.repulsiveForceCoefIsValid())}>
+                        <FormGroup controlId="repulsiveForceCoef" validationState={getValidationState(this.repulsiveForceCoefIsValid())}>
                             <ControlLabel>
                                 <OverlayTrigger placement="right" overlay={
                                     <Tooltip id="repulsiveForceCoef-tooltip">The repulsive force between two non-adjacent nodes scales linearly with this parameter.</Tooltip>}>
@@ -171,7 +171,7 @@ export default class extends React.Component {
                             />
                             <FormControl.Feedback />
                         </FormGroup>
-                        <FormGroup controlId="idealDistance" validationState={getValidationStyle(this.idealDistanceIsValid())}>
+                        <FormGroup controlId="idealDistance" validationState={getValidationState(this.idealDistanceIsValid())}>
                             <ControlLabel>
                                 <OverlayTrigger placement="right" overlay={
                                     <Tooltip id="idealDistance-tooltip">If the distance between two adjacent nodes equals this value, the force is 0.</Tooltip>}>
@@ -186,7 +186,7 @@ export default class extends React.Component {
                             />
                             <FormControl.Feedback />
                         </FormGroup>
-                        <FormGroup controlId="forceToDistanceCoef" validationState={getValidationStyle(this.forceToDistanceCoefIsValid())}>
+                        <FormGroup controlId="forceToDistanceCoef" validationState={getValidationState(this.forceToDistanceCoefIsValid())}>
                             <ControlLabel>
                                 <OverlayTrigger placement="right" overlay={
                                     <Tooltip id="forceToDistance-tooltip">The conversion from a force to a translation scales linearly with this value.</Tooltip>}>
@@ -201,7 +201,7 @@ export default class extends React.Component {
                             />
                             <FormControl.Feedback />
                         </FormGroup>
-                        <FormGroup controlId="nSteps" validationState={getValidationStyle(this.nStepsIsValid())}>
+                        <FormGroup controlId="nSteps" validationState={getValidationState(this.nStepsIsValid())}>
                             <ControlLabel>Number of Simulation Steps:</ControlLabel>
                             <FormControl
                                 type="number"

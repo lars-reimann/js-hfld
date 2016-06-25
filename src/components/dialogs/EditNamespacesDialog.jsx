@@ -2,7 +2,7 @@ import React                                                 from "react";
 import {Modal, FormGroup, ControlLabel, FormControl, Button, Tabs, Tab} from "react-bootstrap";
 
 import * as actions                     from "../../actions/actions.js";
-import {validators, getValidationStyle} from "../../utils/utils.js";
+import {validators, getValidationState} from "../../utils/utils.js";
 
 /**
  * The dialog shown to the user when he wants to rotate the layout.
@@ -170,7 +170,7 @@ export default class extends React.Component {
                                         onChange={e => this.handleInputChange(e)}
                                     />
                                 </FormGroup>
-                                <FormGroup controlId="iriToAdd" validationState={getValidationStyle(this.iriToAddIsValid())}>
+                                <FormGroup controlId="iriToAdd" validationState={getValidationState(this.iriToAddIsValid())}>
                                     <ControlLabel>IRI:</ControlLabel>
                                     <FormControl
                                         type="text"
@@ -204,7 +204,7 @@ export default class extends React.Component {
                                                 onChange={e => this.handleInputChange(e)}
                                             />
                                         </FormGroup>
-                                        <FormGroup controlId="iriToEdit" validationState={getValidationStyle(this.iriToEditIsValid())}>
+                                        <FormGroup controlId="iriToEdit" validationState={getValidationState(this.iriToEditIsValid())}>
                                             <ControlLabel>IRI</ControlLabel>
                                             <FormControl
                                                 type="text"

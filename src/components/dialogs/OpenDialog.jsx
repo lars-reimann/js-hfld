@@ -2,7 +2,7 @@ import React from "react";
 import {Modal, Tabs, Tab, FormGroup, FormControl, Button} from "react-bootstrap";
 
 import * as actions                     from "../../actions/actions.js";
-import {validators, getValidationStyle} from "../../utils/utils.js";
+import {validators, getValidationState} from "../../utils/utils.js";
 
 export default class extends React.Component {
     constructor(props) {
@@ -81,7 +81,7 @@ export default class extends React.Component {
                             />
                         </FormGroup>
                     </Tab>
-                    <Tab eventKey="file" title="File Upload" style={style} validationState={getValidationStyle(this.fileIsValid())}>
+                    <Tab eventKey="file" title="File Upload" style={style} validationState={getValidationState(this.fileIsValid())}>
                          <FormGroup controlId="file">
                             <FormControl
                                 type="file"

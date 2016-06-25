@@ -7,6 +7,17 @@ import * as actions                     from "../../actions/actions.js";
 import {validators, getValidationState} from "../../utils/utils.js";
 
 /**
+ * The initial state of the dialog.
+ *
+ * @type {Object}
+ * @ignore
+ */
+const initialState = {
+    x: "0",
+    y: "0",
+};
+
+/**
  * The dialog shown to the user when he wants to move the layout.
  */
 export default class extends React.Component {
@@ -21,10 +32,7 @@ export default class extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            x: "0",
-            y: "0",
-        };
+        this.state = initialState;
     }
 
     /**
@@ -85,6 +93,15 @@ export default class extends React.Component {
     }
 
     /**
+     * Resets the dialog.
+     *
+     * @private
+     */
+    reset() {
+        this.setState(initialState);
+    }
+
+    /**
      * Renders this component.
      */
     render() {
@@ -128,8 +145,9 @@ export default class extends React.Component {
                     </form>
                 </rbs.Modal.Body>
                 <rbs.Modal.Footer>
-                    <rbs.Button onClick={() => this.ok()} disabled={!this.isValid()}>OK</rbs.Button>
+                    <rbs.Button onClick={() => this.ok()} disabled={!this.isValid()} bsStyle="primary">OK</rbs.Button>
                     <rbs.Button onClick={() => this.cancel()}>Cancel</rbs.Button>
+                    <rbs.Button onClick={() => this.reset()} bsStyle="warning">Reset Form</rbs.Button>
                 </rbs.Modal.Footer>
             </rbs.Modal>
         );

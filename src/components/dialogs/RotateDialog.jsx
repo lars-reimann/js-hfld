@@ -58,9 +58,7 @@ export default class extends React.Component {
         if (key) {
             return validators.isNumber(this.state[key]);
         } else {
-            return this.isValid("angle")   &&
-                   this.isValid("centerX") &&
-                   this.isValid("centerY");
+            return validators.isValidState(k => this.isValid(k), this.state);
         }
     }
 
@@ -100,7 +98,12 @@ export default class extends React.Component {
                 <rbs.Modal.Body>
                     <form>
                         <rbs.FormGroup controlId="angle" validationState={getValidationStyle(this.isValid("angle"))}>
-                            <rbs.ControlLabel>Angle:</rbs.ControlLabel>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="rotate-tooltip">The angle by which to rotate.</rbs.Tooltip>}>
+                                    <span>Angle:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
                                 value={this.state.angle}
@@ -110,7 +113,12 @@ export default class extends React.Component {
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
                         <rbs.FormGroup controlId="centerX" validationState={getValidationStyle(this.isValid("centerX"))}>
-                            <rbs.ControlLabel>x-Coordinate of the Center:</rbs.ControlLabel>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="centerX-tooltip">The x-coordinate of the point around which to rotate.</rbs.Tooltip>}>
+                                    <span>x-Coordinate:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
                                 value={this.state.centerX}
@@ -120,7 +128,12 @@ export default class extends React.Component {
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
                         <rbs.FormGroup controlId="centerY" validationState={getValidationStyle(this.isValid("centerY"))}>
-                            <rbs.ControlLabel>y-Coordinate of the Center:</rbs.ControlLabel>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="centerY-tooltip">The y-coordinate of the point around which to rotate.</rbs.Tooltip>}>
+                                    <span>y-Coordinate:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
                                 value={this.state.centerY}

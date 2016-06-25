@@ -1,5 +1,5 @@
-import React                                                 from "react";
-import {Modal, FormGroup, ControlLabel, FormControl, Button} from "react-bootstrap";
+import React    from "react";
+import * as rbs from "react-bootstrap";
 
 import {Vec2} from "@ignavia/ella";
 
@@ -34,6 +34,8 @@ export default class extends React.Component {
      *
      * @param {Event} e
      * The fired event.
+     *
+     * @private
      */
     handleChange(e) {
         this.setState({
@@ -42,60 +44,26 @@ export default class extends React.Component {
     }
 
     /**
-     * Checks if the entered x-factor is valid.
+     * Validated the input. If a key is given, only this input is checked,
+     * otherwise the complete input is tested.
      *
-     * @return {Boolean}
-     * Whether the x-factor is valid.
+     * @param {string} [key]
+     * The part of the input to test.
      *
-     * @private
-     */
-    factorXIsValid() {
-        return validators.isNumber(this.state.factorX);
-    }
-
-    /**
-     * Checks if the entered y-factor is valid.
-     *
-     * @return {Boolean}
-     * Whether the y-factor is valid.
+     * @return {boolean}
+     * Whether the input is valid.
      *
      * @private
      */
-    factorYIsValid() {
-        return validators.isNumber(this.state.factorY);
-    }
-
-    /**
-     * Checks if the entered x-coordinate is valid.
-     *
-     * @return {Boolean}
-     * Whether the x-coordinate is valid.
-     */
-    centerXIsValid() {
-        return validators.isNumber(this.state.centerX);
-    }
-
-    /**
-     * Checks if the entered y-coordinate is valid.
-     *
-     * @return {Boolean}
-     * Whether the y-coordinate is valid.
-     */
-    centerYIsValid() {
-        return validators.isNumber(this.state.centerY);
-    }
-
-    /**
-     * Checks if all entered values are valid.
-     *
-     * @return {Boolean}
-     * Whether all values are valid.
-     */
-    isValid() {
-        return this.factorXIsValid() &&
-               this.factorYIsValid() &&
-               this.centerXIsValid() &&
-               this.centerYIsValid();
+    isValid(key) {
+        if (key) {
+            return validators.isNumber(this.state[key]);
+        } else {
+            return this.isValid("factorX") &&
+                   this.isValid("factorY") &&
+                   this.isValid("centerX") &&
+                   this.isValid("centerY");
+        }
     }
 
     /**
@@ -104,9 +72,11 @@ export default class extends React.Component {
     ok() {
         const factorX = Number(this.state.factorX);
         const factorY = Number(this.state.factorY);
-        const centerX = Number(this.state.centerX);
-        const centerY = Number(this.state.centerY);
-        actions.scaleLayout(factorX, factorY, new Vec2(centerX, centerY));
+        const center  = new Vec2(
+            Number(this.state.centerX),
+            Number(this.state.centerY)
+        );
+        actions.scaleLayout(factorX, factorY, center);
         actions.setDialogVisibility("scale", false);
     }
 
@@ -122,59 +92,59 @@ export default class extends React.Component {
      */
     render() {
         return (
-            <Modal show={this.props.visible} onHide={() => this.cancel()}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Scale</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+            <rbs.Modal show={this.props.visible} onHide={() => this.cancel()}>
+                <rbs.Modal.Header closeButton>
+                    <rbs.Modal.Title>Scale</rbs.Modal.Title>
+                </rbs.Modal.Header>
+                <rbs.Modal.Body>
                     <form>
-                        <FormGroup controlId="factorX" validationState={getValidationStyle(this.factorXIsValid())}>
-                            <ControlLabel>Factor in x-direction:</ControlLabel>
-                            <FormControl
+                        <rbs.FormGroup controlId="factorX" validationState={getValidationStyle(this.isValid("factorX"))}>
+                            <rbs.ControlLabel>Factor in x-Direction:</rbs.ControlLabel>
+                            <rbs.FormControl
                                 type="number"
                                 value={this.state.factorX}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />
-                            <FormControl.Feedback />
-                        </FormGroup>
-                        <FormGroup controlId="factorY" validationState={getValidationStyle(this.factorYIsValid())}>
-                            <ControlLabel>Factor in y-direction:</ControlLabel>
-                            <FormControl
+                            <rbs.FormControl.Feedback />
+                        </rbs.FormGroup>
+                        <rbs.FormGroup controlId="factorY" validationState={getValidationStyle(this.isValid("factorY"))}>
+                            <rbs.ControlLabel>Factor in y-Direction:</rbs.ControlLabel>
+                            <rbs.FormControl
                                 type="number"
                                 value={this.state.factorY}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />
-                            <FormControl.Feedback />
-                        </FormGroup>
-                        <FormGroup controlId="centerX" validationState={getValidationStyle(this.centerXIsValid())}>
-                            <ControlLabel>x-coordinate:</ControlLabel>
-                            <FormControl
+                            <rbs.FormControl.Feedback />
+                        </rbs.FormGroup>
+                        <rbs.FormGroup controlId="centerX" validationState={getValidationStyle(this.isValid("centerX"))}>
+                            <rbs.ControlLabel>x-Coordinate of Center:</rbs.ControlLabel>
+                            <rbs.FormControl
                                 type="number"
                                 value={this.state.centerX}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />
-                            <FormControl.Feedback />
-                        </FormGroup>
-                        <FormGroup controlId="centerY" validationState={getValidationStyle(this.centerYIsValid())}>
-                            <ControlLabel>y-coordinate:</ControlLabel>
-                            <FormControl
+                            <rbs.FormControl.Feedback />
+                        </rbs.FormGroup>
+                        <rbs.FormGroup controlId="centerY" validationState={getValidationStyle(this.isValid("centerY"))}>
+                            <rbs.ControlLabel>y-Coordinate of Center:</rbs.ControlLabel>
+                            <rbs.FormControl
                                 type="number"
                                 value={this.state.centerY}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />
-                            <FormControl.Feedback />
-                        </FormGroup>
+                            <rbs.FormControl.Feedback />
+                        </rbs.FormGroup>
                     </form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={() => this.ok()} disabled={!this.isValid()}>OK</Button>
-                    <Button onClick={() => this.cancel()}>Cancel</Button>
-                </Modal.Footer>
-            </Modal>
+                </rbs.Modal.Body>
+                <rbs.Modal.Footer>
+                    <rbs.Button onClick={() => this.ok()} disabled={!this.isValid()}>OK</rbs.Button>
+                    <rbs.Button onClick={() => this.cancel()}>Cancel</rbs.Button>
+                </rbs.Modal.Footer>
+            </rbs.Modal>
         );
     }
 }

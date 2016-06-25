@@ -28,7 +28,7 @@ function isHiddenTab(props, tab) {
     }
 }
 
-export default function (props) {
+export default function render(props) {
     return (
         <Tabs activeKey={getActiveKey(props)} onSelect={tab => handleTabChange(props, tab)} id="type">
             { isHiddenTab(props, "literals") ? null :

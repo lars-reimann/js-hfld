@@ -35,7 +35,7 @@ class GraphStore extends Store {
                 nodes:  new Tolkien1ToNMap(),
                 edges:  new Tolkien1To1Map(),
             },
-            layout:     new Map(),
+            layout:     new earl.Layout(), // todo : generate random layout
             stylesheet: stylesheet,
         };
     }

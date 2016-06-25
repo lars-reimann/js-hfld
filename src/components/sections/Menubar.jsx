@@ -46,8 +46,8 @@ export default class extends React.Component {
             return actions.setDialogVisibility("randomLayout", true);
         case "SHOW_EADES_LAYOUT_DIALOG":
             return actions.setDialogVisibility("eadesLayout", true);
-        case "SHOW_FRUCHTERMANN_LAYOUT_DIALOG":
-            return actions.setDialogVisibility("fruchtermannLayout", true);
+        case "SHOW_FRUCHTERMAN_LAYOUT_DIALOG":
+            return actions.setDialogVisibility("fruchtermanLayout", true);
         case "SHOW_TRANSLATE_DIALOG":
             return actions.setDialogVisibility("translate", true);
         case "SHOW_SCALE_DIALOG":
@@ -151,7 +151,7 @@ export default class extends React.Component {
                             <MenuItem eventKey="SHOW_EADES_LAYOUT_DIALOG">
                                 Eades Layout...
                             </MenuItem>
-                            <MenuItem eventKey="SHOW_FRUCHTERMANN_LAYOUT_DIALOG">
+                            <MenuItem eventKey="SHOW_FRUCHTERMAN_LAYOUT_DIALOG">
                                 Fruchtermann Layout...
                             </MenuItem>
                             <MenuItem divider />

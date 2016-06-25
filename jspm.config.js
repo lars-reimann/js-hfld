@@ -266,7 +266,7 @@ SystemJS.config({
         "@ignavia/earl": "npm:@ignavia/earl@1.3.4",
         "@ignavia/ella": "npm:@ignavia/ella@1.0.15",
         "@ignavia/rdf": "npm:@ignavia/rdf@2.0.1",
-        "@ignavia/util": "npm:@ignavia/util@1.3.3",
+        "@ignavia/util": "npm:@ignavia/util@1.4.0",
         "assert": "github:jspm/nodelibs-assert@0.2.0-alpha",
         "bootstrap": "github:twbs/bootstrap@3.3.6",
         "buffer": "github:jspm/nodelibs-buffer@0.2.0-alpha",
@@ -304,7 +304,7 @@ SystemJS.config({
     packages: {
         "github:jspm/nodelibs-buffer@0.2.0-alpha": {
             "map": {
-                "buffer-browserify": "npm:buffer@4.6.0"
+                "buffer-browserify": "npm:buffer@4.7.0"
             }
         },
         "github:jspm/nodelibs-domain@0.2.0-alpha": {
@@ -351,13 +351,6 @@ SystemJS.config({
             "map": {
                 "pako": "npm:pako@0.2.8",
                 "readable-stream": "npm:readable-stream@2.1.4"
-            }
-        },
-        "npm:buffer@4.6.0": {
-            "map": {
-                "base64-js": "npm:base64-js@1.1.2",
-                "ieee754": "npm:ieee754@1.1.6",
-                "isarray": "npm:isarray@1.0.0"
             }
         },
         "npm:invariant@2.2.1": {
@@ -583,11 +576,6 @@ SystemJS.config({
                 "inherits": "npm:inherits@2.0.1"
             }
         },
-        "npm:@ignavia/util@1.3.3": {
-            "map": {
-                "lodash": "npm:lodash@4.13.1"
-            }
-        },
         "npm:@ignavia/draph@1.0.5": {
             "map": {
                 "pixi.js": "npm:pixi.js@3.0.11",
@@ -595,7 +583,7 @@ SystemJS.config({
                 "jquery": "npm:jquery@2.2.4",
                 "lodash": "npm:lodash@4.13.1",
                 "@ignavia/earl": "npm:@ignavia/earl@1.3.4",
-                "@ignavia/util": "npm:@ignavia/util@1.3.3",
+                "@ignavia/util": "npm:@ignavia/util@1.4.0",
                 "@ignavia/ella": "npm:@ignavia/ella@1.0.15"
             }
         },
@@ -766,7 +754,7 @@ SystemJS.config({
         "npm:@ignavia/earl@1.3.4": {
             "map": {
                 "@ignavia/ella": "npm:@ignavia/ella@1.0.15",
-                "@ignavia/util": "npm:@ignavia/util@1.3.3",
+                "@ignavia/util": "npm:@ignavia/util@1.4.0",
                 "lodash": "npm:lodash@4.13.1"
             }
         },
@@ -835,7 +823,7 @@ SystemJS.config({
         },
         "npm:@ignavia/rdf@2.0.1": {
             "map": {
-                "@ignavia/util": "npm:@ignavia/util@1.3.3"
+                "@ignavia/util": "npm:@ignavia/util@1.4.0"
             }
         },
         "npm:react-bootstrap@0.29.5": {
@@ -850,6 +838,18 @@ SystemJS.config({
                 "classnames": "npm:classnames@2.2.5",
                 "react-prop-types": "npm:react-prop-types@0.3.2",
                 "dom-helpers": "npm:dom-helpers@2.4.0"
+            }
+        },
+        "npm:@ignavia/util@1.4.0": {
+            "map": {
+                "lodash": "npm:lodash@4.13.1"
+            }
+        },
+        "npm:buffer@4.7.0": {
+            "map": {
+                "ieee754": "npm:ieee754@1.1.6",
+                "isarray": "npm:isarray@1.0.0",
+                "base64-js": "npm:base64-js@1.1.2"
             }
         }
     }

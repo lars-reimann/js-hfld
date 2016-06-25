@@ -1,8 +1,10 @@
-import React                                                 from "react";
-import {Modal, FormGroup, ControlLabel, FormControl, Button} from "react-bootstrap";
+import React    from "react";
+import * as rbs from "react-bootstrap";
+
+import {Vec2} from "@ignavia/ella";
 
 import * as actions                     from "../../actions/actions.js";
-import {validators, getValidationStyle} from "../../utils/utils.js";
+import {validators, getValidationState} from "../../utils/utils.js";
 
 /**
  * The dialog shown to the user when he wants to randomly position the nodes.
@@ -25,10 +27,10 @@ export default class extends React.Component {
          * @type {Object}
          */
         this.state = {
-            minX: "0",
-            minY: "0",
-            maxX: "" + screen.width,
-            maxY: "" + screen.height,
+            posX:   "0",
+            posY:   "0",
+            width:  `${screen.width}`,
+            height: `${screen.height}`,
         };
     }
 
@@ -50,8 +52,8 @@ export default class extends React.Component {
      * @return {Boolean}
      * Whether the minimum x-coordinate is valid.
      */
-    minXIsValid() {
-        return validators.isNumber(this.state.minX);
+    posXIsValid() {
+        return validators.isNumber(this.state.posX);
     }
 
     /**
@@ -60,28 +62,28 @@ export default class extends React.Component {
      * @return {Boolean}
      * Whether the minimum y-coordinate is valid.
      */
-    minYIsValid() {
-        return validators.isNumber(this.state.minY);
+    posYIsValid() {
+        return validators.isNumber(this.state.posY);
     }
 
     /**
-     * Checks if the entered maximum x-coordinate is valid.
+     * Checks if the entered width is valid.
      *
      * @return {Boolean}
-     * Whether the maximum x-coordinate is valid.
+     * Whether the width is valid.
      */
-    maxXIsValid() {
-        return validators.isNumber(this.state.maxX);
+    widthIsValid() {
+        return validators.isNumber(this.state.width);
     }
 
     /**
-     * Checks if the entered maximum y-coordinate is valid.
+     * Checks if the entered height is valid.
      *
      * @return {Boolean}
-     * Whether the maximum y-coordinate is valid.
+     * Whether the height is valid.
      */
-    maxYIsValid() {
-        return validators.isNumber(this.state.maxY);
+    heightIsValid() {
+        return validators.isNumber(this.state.height);
     }
 
     /**
@@ -91,21 +93,23 @@ export default class extends React.Component {
      * Whether all values are valid.
      */
     isValid() {
-        return this.minXIsValid() &&
-               this.minYIsValid() &&
-               this.maxXIsValid() &&
-               this.maxYIsValid();
+        return this.posXIsValid()  &&
+               this.posYIsValid()  &&
+               this.widthIsValid() &&
+               this.heightIsValid();
     }
 
     /**
      * Submits the dialog.
      */
     ok() {
-        const minX = Number(this.state.minX);
-        const minY = Number(this.state.minY);
-        const maxX = Number(this.state.maxX);
-        const maxY = Number(this.state.maxY);
-        actions.randomLayout({ minX, minY, maxX, maxY });
+        const pos = new Vec2(
+            Number(this.state.posX),
+            Number(this.state.posY)
+        );
+        const width  = Number(this.state.width);
+        const height = Number(this.state.height);
+        actions.randomLayout({ pos, width, height });
         actions.setDialogVisibility("randomLayout", false);
     }
 
@@ -121,59 +125,59 @@ export default class extends React.Component {
      */
     render() {
         return (
-            <Modal show={this.props.visible} onHide={() => this.cancel()}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Random Layout</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+            <rbs.Modal show={this.props.visible} onHide={() => this.cancel()}>
+                <rbs.Modal.Header closeButton>
+                    <rbs.Modal.Title>Random Layout</rbs.Modal.Title>
+                </rbs.Modal.Header>
+                <rbs.Modal.Body>
                     <form>
-                        <FormGroup controlId="minX" validationState={getValidationStyle(this.minXIsValid())}>
-                            <ControlLabel>Minimum x-coordinate:</ControlLabel>
-                            <FormControl
+                        <rbs.FormGroup controlId="posX" validationState={getValidationState(this.posXIsValid())}>
+                            <rbs.ControlLabel>Minimum x-coordinate:</rbs.ControlLabel>
+                            <rbs.FormControl
                                 type="number"
-                                value={this.state.minX}
+                                value={this.state.posX}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />
-                            <FormControl.Feedback />
-                        </FormGroup>
-                        <FormGroup controlId="minY" validationState={getValidationStyle(this.minYIsValid())}>
-                            <ControlLabel>Minimum y-coordinate:</ControlLabel>
-                            <FormControl
+                            <rbs.FormControl.Feedback />
+                        </rbs.FormGroup>
+                        <rbs.FormGroup controlId="posY" validationState={getValidationState(this.posYIsValid())}>
+                            <rbs.ControlLabel>Minimum y-coordinate:</rbs.ControlLabel>
+                            <rbs.FormControl
                                 type="number"
-                                value={this.state.minY}
+                                value={this.state.posY}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />
-                            <FormControl.Feedback />
-                        </FormGroup>
-                        <FormGroup controlId="maxX" validationState={getValidationStyle(this.maxXIsValid())}>
-                            <ControlLabel>Maximum x-coordinate:</ControlLabel>
-                            <FormControl
+                            <rbs.FormControl.Feedback />
+                        </rbs.FormGroup>
+                        <rbs.FormGroup controlId="width" validationState={getValidationState(this.widthIsValid())}>
+                            <rbs.ControlLabel>Width:</rbs.ControlLabel>
+                            <rbs.FormControl
                                 type="number"
-                                value={this.state.maxX}
+                                value={this.state.width}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />
-                            <FormControl.Feedback />
-                        </FormGroup>
-                        <FormGroup controlId="maxY" validationState={getValidationStyle(this.maxYIsValid())}>
-                            <ControlLabel>Maximum y-coordinate:</ControlLabel>
-                            <FormControl
+                            <rbs.FormControl.Feedback />
+                        </rbs.FormGroup>
+                        <rbs.FormGroup controlId="height" validationState={getValidationState(this.heightIsValid())}>
+                            <rbs.ControlLabel>Height:</rbs.ControlLabel>
+                            <rbs.FormControl
                                 type="number"
-                                value={this.state.maxY}
+                                value={this.state.height}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />
-                            <FormControl.Feedback />
-                        </FormGroup>
+                            <rbs.FormControl.Feedback />
+                        </rbs.FormGroup>
                     </form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={() => this.ok()} disabled={!this.isValid()}>OK</Button>
-                    <Button onClick={() => this.cancel()}>Cancel</Button>
-                </Modal.Footer>
-            </Modal>
+                </rbs.Modal.Body>
+                <rbs.Modal.Footer>
+                    <rbs.Button onClick={() => this.ok()} disabled={!this.isValid()}>OK</rbs.Button>
+                    <rbs.Button onClick={() => this.cancel()}>Cancel</rbs.Button>
+                </rbs.Modal.Footer>
+            </rbs.Modal>
         );
     }
 }

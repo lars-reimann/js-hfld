@@ -37,7 +37,7 @@ export function isTime(s) {
 export function all(validators) {
     return function (s) {
         for (let validator of validators) {
-            if (validator(s) === false) {
+            if (!validator(s)) {
                 return false;
             }
         }
@@ -48,10 +48,17 @@ export function all(validators) {
 export function any(validators) {
     return function (s) {
         for (let validator of validators) {
-            if (validator(s) === true) {
+            if (validator(s)) {
                 return true;
             }
         }
         return false;
     };
 }
+
+// export function isValidState(validator, state) {
+//     for (let k of Object.keys(state)) {
+//         if ()
+//     }
+//     return true;
+// }

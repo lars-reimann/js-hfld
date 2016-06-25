@@ -109,7 +109,7 @@ export default class extends React.Component {
                 <rbs.Modal.Body>
                     <form>
                         <rbs.FormGroup controlId="posX" validationState={getValidationState(this.isValid("posX"))}>
-                            <rbs.ControlLabel>Minimum x-coordinate:</rbs.ControlLabel>
+                            <rbs.ControlLabel>x-Coordinate:</rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
                                 value={this.state.posX}
@@ -119,7 +119,7 @@ export default class extends React.Component {
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
                         <rbs.FormGroup controlId="posY" validationState={getValidationState(this.isValid("posY"))}>
-                            <rbs.ControlLabel>Minimum y-coordinate:</rbs.ControlLabel>
+                            <rbs.ControlLabel>y-Coordinate:</rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
                                 value={this.state.posY}

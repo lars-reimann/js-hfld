@@ -22,7 +22,7 @@ export default class extends React.Component {
         super(props);
 
         this.state = {
-            angle:  "0",
+            angle:   "0",
             centerX: "0",
             centerY: "0",
         };

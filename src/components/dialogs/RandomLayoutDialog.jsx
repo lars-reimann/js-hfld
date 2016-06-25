@@ -15,7 +15,7 @@ export default class extends React.Component {
      * @param {Object} props
      * The props to use.
      *
-     * @param {Boolean} props.visible
+     * @param {boolean} props.visible
      * Whether to show the dialog.
      */
     constructor(props) {
@@ -25,6 +25,7 @@ export default class extends React.Component {
          * The initial state.
          *
          * @type {Object}
+         * @private
          */
         this.state = {
             posX:   "0",
@@ -39,6 +40,8 @@ export default class extends React.Component {
      *
      * @param {Event} e
      * The fired event.
+     *
+     * @private
      */
     handleChange(e) {
         this.setState({
@@ -47,60 +50,32 @@ export default class extends React.Component {
     }
 
     /**
-     * Checks if the entered minimum x-coordinate is valid.
+     * Validated the input. If a key is given, only this input is checked,
+     * otherwise the complete input is tested.
      *
-     * @return {Boolean}
-     * Whether the minimum x-coordinate is valid.
-     */
-    posXIsValid() {
-        return validators.isNumber(this.state.posX);
-    }
-
-    /**
-     * Checks if the entered minimum y-coordinate is valid.
+     * @param {string} [key]
+     * The part of the input to test.
      *
-     * @return {Boolean}
-     * Whether the minimum y-coordinate is valid.
-     */
-    posYIsValid() {
-        return validators.isNumber(this.state.posY);
-    }
-
-    /**
-     * Checks if the entered width is valid.
+     * @return {boolean}
+     * Whether the input is valid.
      *
-     * @return {Boolean}
-     * Whether the width is valid.
+     * @private
      */
-    widthIsValid() {
-        return validators.isNumber(this.state.width);
-    }
-
-    /**
-     * Checks if the entered height is valid.
-     *
-     * @return {Boolean}
-     * Whether the height is valid.
-     */
-    heightIsValid() {
-        return validators.isNumber(this.state.height);
-    }
-
-    /**
-     * Checks if all entered values are valid.
-     *
-     * @return {Boolean}
-     * Whether all values are valid.
-     */
-    isValid() {
-        return this.posXIsValid()  &&
-               this.posYIsValid()  &&
-               this.widthIsValid() &&
-               this.heightIsValid();
+    isValid(key) {
+        if (key) {
+            return validators.isNumber(this.state[key]);
+        } else {
+            return this.isValid("posX")  &&
+                   this.isValid("posY")  &&
+                   this.isValid("width") &&
+                   this.isValid("height");
+        }
     }
 
     /**
      * Submits the dialog.
+     *
+     * @private
      */
     ok() {
         const pos = new Vec2(
@@ -115,6 +90,8 @@ export default class extends React.Component {
 
     /**
      * Closes the dialog.
+     *
+     * @private
      */
     cancel() {
         actions.setDialogVisibility("randomLayout", false);
@@ -131,7 +108,7 @@ export default class extends React.Component {
                 </rbs.Modal.Header>
                 <rbs.Modal.Body>
                     <form>
-                        <rbs.FormGroup controlId="posX" validationState={getValidationState(this.posXIsValid())}>
+                        <rbs.FormGroup controlId="posX" validationState={getValidationState(this.isValid("posX"))}>
                             <rbs.ControlLabel>Minimum x-coordinate:</rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
@@ -141,7 +118,7 @@ export default class extends React.Component {
                             />
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
-                        <rbs.FormGroup controlId="posY" validationState={getValidationState(this.posYIsValid())}>
+                        <rbs.FormGroup controlId="posY" validationState={getValidationState(this.isValid("posY"))}>
                             <rbs.ControlLabel>Minimum y-coordinate:</rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
@@ -151,7 +128,7 @@ export default class extends React.Component {
                             />
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
-                        <rbs.FormGroup controlId="width" validationState={getValidationState(this.widthIsValid())}>
+                        <rbs.FormGroup controlId="width" validationState={getValidationState(this.isValid("width"))}>
                             <rbs.ControlLabel>Width:</rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
@@ -161,7 +138,7 @@ export default class extends React.Component {
                             />
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
-                        <rbs.FormGroup controlId="height" validationState={getValidationState(this.heightIsValid())}>
+                        <rbs.FormGroup controlId="height" validationState={getValidationState(this.isValid("height"))}>
                             <rbs.ControlLabel>Height:</rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"

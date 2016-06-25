@@ -1,5 +1,5 @@
-import React                                                 from "react";
-import {Modal, FormGroup, ControlLabel, FormControl, Button} from "react-bootstrap";
+import React    from "react";
+import * as rbs from "react-bootstrap";
 
 import {Vec2} from "@ignavia/ella";
 
@@ -32,6 +32,8 @@ export default class extends React.Component {
      *
      * @param {Event} e
      * The fired event.
+     *
+     * @private
      */
     handleChange(e) {
         this.setState({
@@ -40,47 +42,44 @@ export default class extends React.Component {
     }
 
     /**
-     * Checks if the entered x-coordinate is valid.
+     * Validated the input. If a key is given, only this input is checked,
+     * otherwise the complete input is tested.
      *
-     * @return {Boolean}
-     * Whether the x-coordinate is valid.
-     */
-    xIsValid() {
-        return validators.isNumber(this.state.x);
-    }
-
-    /**
-     * Checks if the entered y-coordinate is valid.
+     * @param {string} [key]
+     * The part of the input to test.
      *
-     * @return {Boolean}
-     * Whether the y-coordinate is valid.
-     */
-    yIsValid() {
-        return validators.isNumber(this.state.y);
-    }
-
-    /**
-     * Checks if all entered values are valid.
+     * @return {boolean}
+     * Whether the input is valid.
      *
-     * @return {Boolean}
-     * Whether all values are valid.
+     * @private
      */
-    isValid() {
-        return this.xIsValid() && this.yIsValid();
+    isValid(key) {
+        if (key) {
+            return validators.isNumber(this.state[key]);
+        } else {
+            return this.isValid("x") &&
+                   this.isValid("y");
+        }
     }
 
     /**
      * Submits the dialog.
+     *
+     * @private
      */
     ok() {
-        const x = Number(this.state.x);
-        const y = Number(this.state.y);
-        actions.translateLayout(new Vec2(x, y));
+        const vector = new Vec2(
+        	Number(this.state.x),
+        	Number(this.state.y)
+        );
+        actions.translateLayout(vector);
         actions.setDialogVisibility("translate", false);
     }
 
     /**
      * Closes the dialog.
+     *
+     * @private
      */
     cancel() {
         actions.setDialogVisibility("translate", false);
@@ -91,39 +90,39 @@ export default class extends React.Component {
      */
     render() {
         return (
-            <Modal show={this.props.visible} onHide={() => this.cancel()}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Translate</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+            <rbs.Modal show={this.props.visible} onHide={() => this.cancel()}>
+                <rbs.Modal.Header closeButton>
+                    <rbs.Modal.Title>Translate</rbs.Modal.Title>
+                </rbs.Modal.Header>
+                <rbs.Modal.Body>
                     <form>
-                        <FormGroup controlId="x" validationState={getValidationStyle(this.xIsValid())}>
-                            <ControlLabel>x-coordinate:</ControlLabel>
-                            <FormControl
+                        <rbs.FormGroup controlId="x" validationState={getValidationStyle(this.isValid("x"))}>
+                            <rbs.ControlLabel>x-Coordinate:</rbs.ControlLabel>
+                            <rbs.FormControl
                                 type="number"
                                 value={this.state.x}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />
-                            <FormControl.Feedback />
-                        </FormGroup>
-                        <FormGroup controlId="y" validationState={getValidationStyle(this.yIsValid())}>
-                            <ControlLabel>y-coordinate:</ControlLabel>
-                            <FormControl
+                            <rbs.FormControl.Feedback />
+                        </rbs.FormGroup>
+                        <rbs.FormGroup controlId="y" validationState={getValidationStyle(this.isValid("y"))}>
+                            <rbs.ControlLabel>y-Coordinate:</rbs.ControlLabel>
+                            <rbs.FormControl
                                 type="number"
                                 value={this.state.y}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />
-                            <FormControl.Feedback />
-                        </FormGroup>
+                            <rbs.FormControl.Feedback />
+                        </rbs.FormGroup>
                     </form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={() => this.ok()} disabled={!this.isValid()}>OK</Button>
-                    <Button onClick={() => this.cancel()}>Cancel</Button>
-                </Modal.Footer>
-            </Modal>
+                </rbs.Modal.Body>
+                <rbs.Modal.Footer>
+                    <rbs.Button onClick={() => this.ok()} disabled={!this.isValid()}>OK</rbs.Button>
+                    <rbs.Button onClick={() => this.cancel()}>Cancel</rbs.Button>
+                </rbs.Modal.Footer>
+            </rbs.Modal>
         );
     }
 }

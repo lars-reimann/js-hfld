@@ -68,6 +68,8 @@ export default class extends React.Component {
 
     /**
      * Submits the dialog.
+     *
+     * @private
      */
     ok() {
         const factorX = Number(this.state.factorX);
@@ -82,6 +84,8 @@ export default class extends React.Component {
 
     /**
      * Closes the dialog.
+     *
+     * @private
      */
     cancel() {
         actions.setDialogVisibility("scale", false);

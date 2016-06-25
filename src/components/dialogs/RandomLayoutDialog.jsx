@@ -28,8 +28,8 @@ export default class extends React.Component {
          * @private
          */
         this.state = {
-            posX:   "0",
-            posY:   "0",
+            x:   "0",
+            y:   "0",
             width:  `${screen.width}`,
             height: `${screen.height}`,
         };
@@ -65,10 +65,7 @@ export default class extends React.Component {
         if (key) {
             return validators.isNumber(this.state[key]);
         } else {
-            return this.isValid("posX")  &&
-                   this.isValid("posY")  &&
-                   this.isValid("width") &&
-                   this.isValid("height");
+            return validators.isValidState(k => this.isValid(k), this.state);
         }
     }
 
@@ -79,8 +76,8 @@ export default class extends React.Component {
      */
     ok() {
         const pos = new Vec2(
-            Number(this.state.posX),
-            Number(this.state.posY)
+            Number(this.state.x),
+            Number(this.state.y)
         );
         const width  = Number(this.state.width);
         const height = Number(this.state.height);
@@ -108,28 +105,43 @@ export default class extends React.Component {
                 </rbs.Modal.Header>
                 <rbs.Modal.Body>
                     <form>
-                        <rbs.FormGroup controlId="posX" validationState={getValidationState(this.isValid("posX"))}>
-                            <rbs.ControlLabel>x-Coordinate:</rbs.ControlLabel>
+                        <rbs.FormGroup controlId="x" validationState={getValidationState(this.isValid("x"))}>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="x-tooltip">The x-coordinate of the top left corner of the bounding rectangle.</rbs.Tooltip>}>
+                                    <span>x-Coordinate:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
-                                value={this.state.posX}
+                                value={this.state.x}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
-                        <rbs.FormGroup controlId="posY" validationState={getValidationState(this.isValid("posY"))}>
-                            <rbs.ControlLabel>y-Coordinate:</rbs.ControlLabel>
+                        <rbs.FormGroup controlId="y" validationState={getValidationState(this.isValid("y"))}>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="y-tooltip">The y-coordinate of the top left corner of the bounding rectangle.</rbs.Tooltip>}>
+                                    <span>y-Coordinate:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
-                                value={this.state.posY}
+                                value={this.state.y}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
                         <rbs.FormGroup controlId="width" validationState={getValidationState(this.isValid("width"))}>
-                            <rbs.ControlLabel>Width:</rbs.ControlLabel>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="width-tooltip">The width of the bounding rectangle.</rbs.Tooltip>}>
+                                    <span>Width:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
                                 value={this.state.width}
@@ -139,7 +151,12 @@ export default class extends React.Component {
                             <rbs.FormControl.Feedback />
                         </rbs.FormGroup>
                         <rbs.FormGroup controlId="height" validationState={getValidationState(this.isValid("height"))}>
-                            <rbs.ControlLabel>Height:</rbs.ControlLabel>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="height-tooltip">The height of the bounding rectangle.</rbs.Tooltip>}>
+                                    <span>Height:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
                             <rbs.FormControl
                                 type="number"
                                 value={this.state.height}

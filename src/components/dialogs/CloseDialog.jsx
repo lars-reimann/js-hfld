@@ -1,7 +1,7 @@
-import React           from "react";
-import {Modal, Button} from "react-bootstrap";
+import React    from "react";
+import * as rbs from "react-bootstrap";
 
-import * as actions                     from "../../actions/actions.js";
+import * as actions from "../../actions/actions.js";
 
 /**
  * The dialog shown to the user when he wants close the graph.
@@ -21,6 +21,8 @@ export default class extends React.Component {
 
     /**
      * Submits the dialog.
+     *
+     * @private
      */
     ok() {
         actions.close();
@@ -29,6 +31,8 @@ export default class extends React.Component {
 
     /**
      * Closes the dialog.
+     *
+     * @private
      */
     cancel() {
         actions.setDialogVisibility("close", false);
@@ -39,18 +43,18 @@ export default class extends React.Component {
      */
     render() {
         return (
-            <Modal show={this.props.visible} onHide={() => this.cancel()}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Close</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+            <rbs.Modal show={this.props.visible} onHide={() => this.cancel()}>
+                <rbs.Modal.Header closeButton>
+                    <rbs.Modal.Title>Close</rbs.Modal.Title>
+                </rbs.Modal.Header>
+                <rbs.Modal.Body>
                     <p>Do you really want to close this graph?</p>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={() => this.ok()}>OK</Button>
-                    <Button onClick={() => this.cancel()}>Cancel</Button>
-                </Modal.Footer>
-            </Modal>
+                </rbs.Modal.Body>
+                <rbs.Modal.Footer>
+                    <rbs.Button onClick={() => this.ok()}>OK</rbs.Button>
+                    <rbs.Button onClick={() => this.cancel()}>Cancel</rbs.Button>
+                </rbs.Modal.Footer>
+            </rbs.Modal>
         );
     }
 }

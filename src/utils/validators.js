@@ -56,9 +56,11 @@ export function any(validators) {
     };
 }
 
-// export function isValidState(validator, state) {
-//     for (let k of Object.keys(state)) {
-//         if ()
-//     }
-//     return true;
-// }
+export function isValidState(validator, state) {
+    for (let [k, v] of Object.entries(state)) {
+        if (!validator(k, v)) {
+            return false;
+        }
+    }
+    return true;
+}

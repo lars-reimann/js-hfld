@@ -59,10 +59,7 @@ export default class extends React.Component {
         if (key) {
             return validators.isNumber(this.state[key]);
         } else {
-            return this.isValid("factorX") &&
-                   this.isValid("factorY") &&
-                   this.isValid("centerX") &&
-                   this.isValid("centerY");
+            return validators.isValidState(k => this.isValid(k), this.state);
         }
     }
 

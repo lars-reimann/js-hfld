@@ -1,5 +1,5 @@
-import React                                                 from "react";
-import {Modal, FormGroup, ControlLabel, FormControl, Button, Tabs, Tab} from "react-bootstrap";
+import React    from "react";
+import * as rbs from "react-bootstrap";
 
 import * as actions                     from "../../actions/actions.js";
 import {validators, getValidationState} from "../../utils/utils.js";
@@ -118,20 +118,20 @@ export default class extends React.Component {
         case "add":
             return (
                 <div>
-                    <Button onClick={() => this.add()} bsStyle="primary" disabled={!this.stuffToAddIsValid()}>Add</Button>
-                    <Button onClick={() => this.resetToAddState()} bsStyle="danger">Reset Form</Button>
+                    <rbs.Button onClick={() => this.add()} bsStyle="primary" disabled={!this.stuffToAddIsValid()}>Add</rbs.Button>
+                    <rbs.Button onClick={() => this.resetToAddState()} bsStyle="warning">Reset Form</rbs.Button>
                 </div>
             );
         case "update":
             return (
                 <div>
-                    <Button onClick={() => this.update()} bsStyle="primary" disabled={!this.stuffToUpdateIsValid()}>Update</Button>
-                    <Button onClick={() => this.remove()} bsStyle="danger">Remove</Button>
+                    <rbs.Button onClick={() => this.update()} bsStyle="primary" disabled={!this.stuffToUpdateIsValid()}>Update</rbs.Button>
+                    <rbs.Button onClick={() => this.remove()} bsStyle="danger">Remove</rbs.Button>
                 </div>
             );
         case "remove":
             return (
-                <Button onClick={() => this.removeAll()} bsStyle="danger">Remove All</Button>
+                <rbs.Button onClick={() => this.removeAll()} bsStyle="danger">Remove All</rbs.Button>
             );
         }
     }
@@ -153,80 +153,80 @@ export default class extends React.Component {
         };
 
         return (
-            <Modal show={this.props.visible} onHide={() => this.close()}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Edit Namespaces</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Tabs activeKey={this.state.activeTab} onSelect={key => this.handleTabChange(key)} id="method">
-                        <Tab eventKey="add" title="Add" style={style}>
+            <rbs.Modal show={this.props.visible} onHide={() => this.close()}>
+                <rbs.Modal.Header closeButton>
+                    <rbs.Modal.Title>Edit Namespaces</rbs.Modal.Title>
+                </rbs.Modal.Header>
+                <rbs.Modal.Body>
+                    <rbs.Tabs activeKey={this.state.activeTab} onSelect={key => this.handleTabChange(key)} id="method">
+                        <rbs.Tab eventKey="add" title="Add" style={style}>
                             <form>
-                                <FormGroup controlId="prefixToAdd">
-                                    <ControlLabel>Prefix:</ControlLabel>
-                                    <FormControl
+                                <rbs.FormGroup controlId="prefixToAdd">
+                                    <rbs.ControlLabel>Prefix:</rbs.ControlLabel>
+                                    <rbs.FormControl
                                         type="text"
                                         value={this.state.prefixtoAdd}
                                         placeholder="Enter a string..."
                                         onChange={e => this.handleInputChange(e)}
                                     />
-                                </FormGroup>
-                                <FormGroup controlId="iriToAdd" validationState={getValidationState(this.iriToAddIsValid())}>
-                                    <ControlLabel>IRI:</ControlLabel>
-                                    <FormControl
+                                </rbs.FormGroup>
+                                <rbs.FormGroup controlId="iriToAdd" validationState={getValidationState(this.iriToAddIsValid())}>
+                                    <rbs.ControlLabel>IRI:</rbs.ControlLabel>
+                                    <rbs.FormControl
                                         type="text"
                                         value={this.state.iriToAdd}
                                         placeholder="Enter a string..."
                                         onChange={e => this.handleInputChange(e)}
                                     />
-                                    <FormControl.Feedback />
-                                </FormGroup>
+                                    <rbs.FormControl.Feedback />
+                                </rbs.FormGroup>
                             </form>
-                        </Tab>
-                        <Tab eventKey="update" title="Update/Remove" style={style}>
+                        </rbs.Tab>
+                        <rbs.Tab eventKey="update" title="Update/Remove" style={style}>
                             <form>
-                                <FormGroup controlId="selected">
-                                    <ControlLabel>Selection:</ControlLabel>
-                                    <FormControl
+                                <rbs.FormGroup controlId="selected">
+                                    <rbs.ControlLabel>Selection:</rbs.ControlLabel>
+                                    <rbs.FormControl
                                         componentClass="select"
                                         value={this.state.selected}
                                         onChange={e => this.handleSelectionChange(e)}>
                                         {this.options()}
-                                    </FormControl>
-                                </FormGroup>
+                                    </rbs.FormControl>
+                                </rbs.FormGroup>
                                 { this.state.selected === undefined ? null :
                                     <div>
-                                        <FormGroup controlId="prefixToEdit">
-                                            <ControlLabel>Prefix</ControlLabel>
-                                            <FormControl
+                                        <rbs.FormGroup controlId="prefixToEdit">
+                                            <rbs.ControlLabel>Prefix</rbs.ControlLabel>
+                                            <rbs.FormControl
                                                 type="text"
                                                 value={this.state.prefixToEdit}
                                                 placeholder="Enter a string..."
                                                 onChange={e => this.handleInputChange(e)}
                                             />
-                                        </FormGroup>
-                                        <FormGroup controlId="iriToEdit" validationState={getValidationState(this.iriToEditIsValid())}>
-                                            <ControlLabel>IRI</ControlLabel>
-                                            <FormControl
+                                        </rbs.FormGroup>
+                                        <rbs.FormGroup controlId="iriToEdit" validationState={getValidationState(this.iriToEditIsValid())}>
+                                            <rbs.ControlLabel>IRI</rbs.ControlLabel>
+                                            <rbs.FormControl
                                                 type="text"
                                                 value={this.state.iriToEdit}
                                                 placeholder="Enter a string..."
                                                 onChange={e => this.handleInputChange(e)}
                                             />
-                                            <FormControl.Feedback />
-                                        </FormGroup>
+                                            <rbs.FormControl.Feedback />
+                                        </rbs.FormGroup>
                                     </div>
                                 }
                             </form>
-                        </Tab>
-                        <Tab eventKey="remove" title="Remove All">
+                        </rbs.Tab>
+                        <rbs.Tab eventKey="remove" title="Remove All">
 
-                        </Tab>
-                    </Tabs>
-                </Modal.Body>
-                <Modal.Footer>
+                        </rbs.Tab>
+                    </rbs.Tabs>
+                </rbs.Modal.Body>
+                <rbs.Modal.Footer>
                     {this.footer()}
-                </Modal.Footer>
-            </Modal>
+                </rbs.Modal.Footer>
+            </rbs.Modal>
         );
     }
 }

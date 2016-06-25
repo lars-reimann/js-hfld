@@ -90,7 +90,7 @@ export default class extends React.Component {
      *
      * @private
      */
-    cancel() {
+    close() {
         actions.setDialogVisibility("rotate", false);
     }
 
@@ -108,7 +108,7 @@ export default class extends React.Component {
      */
     render() {
         return (
-            <rbs.Modal show={this.props.visible} onHide={() => this.cancel()}>
+            <rbs.Modal show={this.props.visible} onHide={() => this.close()}>
                 <rbs.Modal.Header closeButton>
                     <rbs.Modal.Title>Rotate</rbs.Modal.Title>
                 </rbs.Modal.Header>
@@ -163,7 +163,7 @@ export default class extends React.Component {
                 </rbs.Modal.Body>
                 <rbs.Modal.Footer>
                     <rbs.Button onClick={() => this.ok()} disabled={!this.isValid()} bsStyle="primary">OK</rbs.Button>
-                    <rbs.Button onClick={() => this.cancel()}>Cancel</rbs.Button>
+                    <rbs.Button onClick={() => this.close()}>Cancel</rbs.Button>
                     <rbs.Button onClick={() => this.reset()} bsStyle="warning">Reset Form</rbs.Button>
                 </rbs.Modal.Footer>
             </rbs.Modal>

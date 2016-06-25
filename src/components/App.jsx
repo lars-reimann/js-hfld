@@ -96,7 +96,7 @@ export default class extends React.Component {
                     filter={this.props.selection.getTripleFilter()}
                     visible={this.props.dialogs.showFilterTriplesDialog}
                 />
-                <dialogs.FruchtermannLayoutDialog visible={this.props.dialogs.showFruchtermannLayoutDialog} />
+                <dialogs.FruchtermanLayoutDialog visible={this.props.dialogs.showFruchtermanLayoutDialog} />
                 <dialogs.OpenDialog
                     name="openConfig"
                     openDirect={actions.openConfigDirect}

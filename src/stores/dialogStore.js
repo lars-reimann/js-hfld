@@ -24,24 +24,24 @@ class DialogStore extends ReduceStore {
      */
     getInitialState() {
         return Immutable.Map({
-            showCloseDialog:              false,
-            showEadesLayoutDialog:        false,
-            showEditNamespacesDialog:     false,
-            showEditNodesDialog:          false,
-            showEditTriplesDialog:        false,
-            showFilterTriplesDialog:      false,
-            showFruchtermannLayoutDialog: false,
-            showOpenConfigDialog:         false,
-            showOpenLayoutDialog:         false,
-            showOpenStyleDialog:          false,
-            showOpenTurtleDialog:         false,
-            showRandomLayoutDialog:       false,
-            showRotateDialog:             false,
-            showSaveTurtleDialog:         false,
-            showScaleDialog:              false,
-            showSidebarDialog:            false,
-            showTableDialog:              false,
-            showTranslateDialog:          false,
+            showCloseDialog:             false,
+            showEadesLayoutDialog:       false,
+            showEditNamespacesDialog:    false,
+            showEditNodesDialog:         false,
+            showEditTriplesDialog:       false,
+            showFilterTriplesDialog:     false,
+            showFruchtermanLayoutDialog: false,
+            showOpenConfigDialog:        false,
+            showOpenLayoutDialog:        false,
+            showOpenStyleDialog:         false,
+            showOpenTurtleDialog:        false,
+            showRandomLayoutDialog:      false,
+            showRotateDialog:            false,
+            showSaveTurtleDialog:        false,
+            showScaleDialog:             false,
+            showSidebarDialog:           false,
+            showTableDialog:             false,
+            showTranslateDialog:         false,
         });
     }
 
@@ -81,8 +81,8 @@ class DialogStore extends ReduceStore {
             return state.set("showEditTriplesDialog", show);
         case "filterTriples":
             return state.set("showFilterTriplesDialog", show);
-        case "fruchtermannLayout":
-            return state.set("showFruchtermannLayoutDialog", show);
+        case "fruchtermanLayout":
+            return state.set("showFruchtermanLayoutDialog", show);
         case "openConfig":
             return state.set("showOpenConfigDialog", show);
         case "openLayout":

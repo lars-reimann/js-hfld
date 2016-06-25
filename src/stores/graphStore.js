@@ -207,12 +207,20 @@ class GraphStore extends Store {
     }
 
     randomLayout(conf) {
-        this.state.layout = earl.randomLayout(this.state.graph, conf);
+        const random = new earl.RandomLayout(conf);
+        this.state.layout = random.layout(this.state.graph);
         this.state.draph.setLayout(this.state.layout);
     }
 
     eadesLayout(conf) {
-        this.state.layout = earl.eadesLayout(this.state.graph, conf);
+        const eades = new earl.EadesLayout(conf);
+        this.state.layout = eades.layout(this.state.graph, conf);
+        this.state.draph.setLayout(this.state.layout);
+    }
+
+    fruchtermanLayout(conf) {
+        const fruchterman = new earl.FruchtermanLayout(conf);
+        this.state.layout = fruchterman.layout(this.state.graph, conf);
         this.state.draph.setLayout(this.state.layout);
     }
 
@@ -222,7 +230,7 @@ class GraphStore extends Store {
     }
 
     translateLayout(vec) {
-        this.state.layout.moveAll(vec);
+        this.state.layout.moveAllBy(vec);
         this.state.draph.setLayout(this.state.layout);
     }
 
@@ -284,6 +292,8 @@ class GraphStore extends Store {
                 return this.randomLayout(action.conf);
             case "EADES_LAYOUT":
                 return this.eadesLayout(action.conf);
+            case "FRUCHTERMAN_LAYOUT":
+                return this.fruchtermanLayout(action.conf);
             case "SCALE":
                 return this.scaleLayout(action.factorX, action.factorY, action.center);
             case "ROTATE":

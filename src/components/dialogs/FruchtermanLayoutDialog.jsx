@@ -120,14 +120,14 @@ export default class extends React.Component {
             forceToDistanceCoef,
             nSteps
         });
-        actions.setDialogVisibility("fruchtermannLayout", false);
+        actions.setDialogVisibility("fruchtermanLayout", false);
     }
 
     /**
      * Closes the dialog.
      */
     cancel() {
-        actions.setDialogVisibility("fruchtermannLayout", false);
+        actions.setDialogVisibility("fruchtermanLayout", false);
     }
 
     /**
@@ -137,7 +137,7 @@ export default class extends React.Component {
         return (
             <Modal show={this.props.visible} onHide={() => this.cancel()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Fruchtermann-Layout</Modal.Title>
+                    <Modal.Title>Fruchterman-Layout</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form>

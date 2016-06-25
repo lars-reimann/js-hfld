@@ -12,7 +12,7 @@ export default class extends React.Component {
      * @param {Object} props
      * The props to use.
      *
-     * @param {Boolean} props.visible
+     * @param {boolean} props.visible
      * Whether to show the dialog.
      */
     constructor(props) {

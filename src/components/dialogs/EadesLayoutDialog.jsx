@@ -5,6 +5,24 @@ import * as actions                     from "../../actions/actions.js";
 import {validators, getValidationState} from "../../utils/utils.js";
 
 /**
+ * The initial state of the dialog.
+ *
+ * @type {Object}
+ * @ignore
+ */
+const initialState = {
+    randomX:             "0",
+    randomY:             "0",
+    randomWidth:         "1920",
+    randomHeight:        "1080",
+    springForceCoef:     "2",
+    idealDistance:       "200",
+    repulsiveForceCoef:  "1",
+    forceToDistanceCoef: "0.1",
+    nSteps:              "100",
+};
+
+/**
  * The dialog shown to the user when he wants to create an Eades-Layout.
  */
 export default class extends React.Component {
@@ -13,23 +31,13 @@ export default class extends React.Component {
      * @param {Object} props
      * The props to use.
      *
-     * @param {Boolean} props.visible
+     * @param {boolean} props.visible
      * Whether to show the dialog.
      */
     constructor(props) {
         super(props);
 
-        this.state = {
-            randomX:             "0",
-            randomY:             "0",
-            randomWidth:         "1920",
-            randomHeight:        "1080",
-            springForceCoef:     "2",
-            idealDistance:       "200",
-            repulsiveForceCoef:  "1",
-            forceToDistanceCoef: "0.1",
-            nSteps:              "100",
-        };
+        this.state = initialState;
     }
 
     /**
@@ -101,6 +109,15 @@ export default class extends React.Component {
      */
     cancel() {
         actions.setDialogVisibility("eadesLayout", false);
+    }
+
+    /**
+     * Resets the dialog.
+     *
+     * @private
+     */
+    reset() {
+        this.setState(initialState);
     }
 
     /**
@@ -253,8 +270,9 @@ export default class extends React.Component {
                     </form>
                 </rbs.Modal.Body>
                 <rbs.Modal.Footer>
-                    <rbs.Button onClick={() => this.ok()} disabled={!this.isValid()}>OK</rbs.Button>
+                    <rbs.Button onClick={() => this.ok()} disabled={!this.isValid()} bsStyle="primary">OK</rbs.Button>
                     <rbs.Button onClick={() => this.cancel()}>Cancel</rbs.Button>
+                    <rbs.Button onClick={() => this.reset()} bsStyle="warning">Reset Form</rbs.Button>
                 </rbs.Modal.Footer>
             </rbs.Modal>
         );

@@ -1,11 +1,27 @@
-import React                                                                          from "react";
-import {Modal, FormGroup, ControlLabel, FormControl, Button, Tooltip, OverlayTrigger} from "react-bootstrap";
+import React    from "react";
+import * as rbs from "react-bootstrap";
 
 import * as actions                     from "../../actions/actions.js";
 import {validators, getValidationState} from "../../utils/utils.js";
 
 /**
- * The dialog shown to the user when he wants to scale the layout.
+ * The initial state of the dialog.
+ *
+ * @type {Object}
+ * @ignore
+ */
+const initialState = {
+    x:                      "0",
+    y:                      "0",
+    width:                  "1920",
+    height:                 "1080",
+    idealDistanceCoef:      "1",
+    initialMaxDisplacement: "192",
+    nSteps:                 "50",
+};
+
+/**
+ * The dialog shown to the user when he wants to create a Fruchterman-Reingold-Layout.
  */
 export default class extends React.Component {
 
@@ -13,19 +29,13 @@ export default class extends React.Component {
      * @param {Object} props
      * The props to use.
      *
-     * @param {Boolean} props.visible
+     * @param {boolean} props.visible
      * Whether to show the dialog.
      */
     constructor(props) {
         super(props);
 
-        this.state = {
-            springForceCoef:     "2",
-            repulsiveForceCoef:  "1",
-            idealDistance:       "0.1",
-            forceToDistanceCoef: "0.1",
-            nSteps:              "100",
-        };
+        this.state = initialState;
     }
 
     /**
@@ -41,71 +51,29 @@ export default class extends React.Component {
     }
 
     /**
-     * Checks if the entered spring force coefficient is valid.
+     * Validated the input. If a key is given, only this input is checked,
+     * otherwise the complete input is tested.
      *
-     * @return {Boolean}
-     * Whether the spring force coefficient is valid.
-     */
-    springForceCoefIsValid() {
-        return validators.isNumber(this.state.springForceCoef);
-    }
-
-    /**
-     * Checks if the entered repulsive force coefficent is valid.
+     * @param {string} [key]
+     * The part of the input to test.
      *
-     * @return {Boolean}
-     * Whether the repulsive force coefficent is valid.
-     */
-    repulsiveForceCoefIsValid() {
-        return validators.isNumber(this.state.repulsiveForceCoef);
-    }
-
-    /**
-     * Checks if the entered ideal distance is valid.
+     * @return {boolean}
+     * Whether the input is valid.
      *
-     * @return {Boolean}
-     * Whether the ideal distance is valid.
+     * @private
      */
-    idealDistanceIsValid() {
-        return validators.isNumber(this.state.idealDistance);
-    }
-
-    /**
-     * Checks if the entered force-to-distance coefficient is valid.
-     *
-     * @return {Boolean}
-     * Whether the force-to-distance coefficient is valid.
-     */
-    forceToDistanceCoefIsValid() {
-        return validators.isNumber(this.state.forceToDistanceCoef);
-    }
-
-    /**
-     * Checks if the entered number of simulation steps is valid.
-     *
-     * @return {Boolean}
-     * Whether the number of simulation steps is valid.
-     */
-    nStepsIsValid() {
-        return validators.isNumber(this.state.nSteps);
-    }
-
-    /**
-     * Checks if all entered values are valid.
-     *
-     * @return {Boolean}
-     * Whether all values are valid.
-     */
-    isValid() {
-        return this.springForceCoefIsValid()     &&
-               this.repulsiveForceCoefIsValid()  &&
-               this.idealDistanceIsValid()       &&
-               this.forceToDistanceCoefIsValid() &&
-               this.nStepsIsValid();
+    isValid(key) {
+        if (key) {
+            return validators.isNumber(this.state[key]);
+        } else {
+            return validators.isValidState(k => this.isValid(k), this.state);
+        }
     }
 
     /**
      * Submits the dialog.
+     *
+     * @private
      */
     ok() {
         const springForceCoef     = Number(this.state.springForceCoef);
@@ -125,9 +93,20 @@ export default class extends React.Component {
 
     /**
      * Closes the dialog.
+     *
+     * @private
      */
     cancel() {
         actions.setDialogVisibility("fruchtermanLayout", false);
+    }
+
+    /**
+     * Resets the dialog.
+     *
+     * @private
+     */
+    reset() {
+        this.setState(initialState);
     }
 
     /**
@@ -135,89 +114,120 @@ export default class extends React.Component {
      */
     render() {
         return (
-            <Modal show={this.props.visible} onHide={() => this.cancel()}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Fruchterman-Reingold-Layout</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+            <rbs.Modal show={this.props.visible} onHide={() => this.cancel()}>
+                <rbs.Modal.Header closeButton>
+                    <rbs.Modal.Title>Fruchterman-Reingold-Layout</rbs.Modal.Title>
+                </rbs.Modal.Header>
+                <rbs.Modal.Body>
                     <form>
-                        <FormGroup controlId="springForceCoef" validationState={getValidationState(this.springForceCoefIsValid())}>
-                            <ControlLabel>
-                                <OverlayTrigger placement="right" overlay={
-                                    <Tooltip id="springForceCoef-tooltip">The spring force between two adjacent nodes scales linearly with this parameter.</Tooltip>}>
-                                    <span>Spring Force Coefficient:</span>
-                                </OverlayTrigger>
-                            </ControlLabel>
-                            <FormControl
+                        <rbs.FormGroup controlId="x" validationState={getValidationState(this.isValid("x"))}>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="x-tooltip">The x-coordinate of the top left corner of the bounding rectangle.</rbs.Tooltip>}>
+                                    <span>x-Coordinate:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
+                            <rbs.FormControl
                                 type="number"
-                                value={this.state.springForceCoef}
+                                value={this.state.x}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />
-                            <FormControl.Feedback />
-                        </FormGroup>
-                        <FormGroup controlId="repulsiveForceCoef" validationState={getValidationState(this.repulsiveForceCoefIsValid())}>
-                            <ControlLabel>
-                                <OverlayTrigger placement="right" overlay={
-                                    <Tooltip id="repulsiveForceCoef-tooltip">The repulsive force between two non-adjacent nodes scales linearly with this parameter.</Tooltip>}>
-                                    <span>Repulsive Force Coefficient:</span>
-                                </OverlayTrigger>
-                            </ControlLabel>
-                            <FormControl
+                            <rbs.FormControl.Feedback />
+                        </rbs.FormGroup>
+                        <rbs.FormGroup controlId="y" validationState={getValidationState(this.isValid("y"))}>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="y-tooltip">The y-coordinate of the top left corner of the bounding rectangle.</rbs.Tooltip>}>
+                                    <span>y-Coordinate:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
+                            <rbs.FormControl
                                 type="number"
-                                value={this.state.repulsiveForceCoef}
+                                value={this.state.y}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />
-                            <FormControl.Feedback />
-                        </FormGroup>
-                        <FormGroup controlId="idealDistance" validationState={getValidationState(this.idealDistanceIsValid())}>
-                            <ControlLabel>
-                                <OverlayTrigger placement="right" overlay={
-                                    <Tooltip id="idealDistance-tooltip">If the distance between two adjacent nodes equals this value, the force is 0.</Tooltip>}>
-                                    <span>Ideal Distance:</span>
-                                </OverlayTrigger>
-                            </ControlLabel>
-                            <FormControl
+                            <rbs.FormControl.Feedback />
+                        </rbs.FormGroup>
+                        <rbs.FormGroup controlId="width" validationState={getValidationState(this.isValid("width"))}>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="width-tooltip">The width of the bounding rectangle.</rbs.Tooltip>}>
+                                    <span>Width:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
+                            <rbs.FormControl
                                 type="number"
-                                value={this.state.idealDistance}
+                                value={this.state.width}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />
-                            <FormControl.Feedback />
-                        </FormGroup>
-                        <FormGroup controlId="forceToDistanceCoef" validationState={getValidationState(this.forceToDistanceCoefIsValid())}>
-                            <ControlLabel>
-                                <OverlayTrigger placement="right" overlay={
-                                    <Tooltip id="forceToDistance-tooltip">The conversion from a force to a translation scales linearly with this value.</Tooltip>}>
-                                    <span>Force-to-distance Coefficient:</span>
-                                </OverlayTrigger>
-                            </ControlLabel>
-                            <FormControl
+                            <rbs.FormControl.Feedback />
+                        </rbs.FormGroup>
+                        <rbs.FormGroup controlId="height" validationState={getValidationState(this.isValid("height"))}>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="height-tooltip">The height of the bounding rectangle.</rbs.Tooltip>}>
+                                    <span>Height:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
+                            <rbs.FormControl
                                 type="number"
-                                value={this.state.forceToDistanceCoef}
+                                value={this.state.height}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />
-                            <FormControl.Feedback />
-                        </FormGroup>
-                        <FormGroup controlId="nSteps" validationState={getValidationState(this.nStepsIsValid())}>
-                            <ControlLabel>Number of Simulation Steps:</ControlLabel>
-                            <FormControl
+                            <rbs.FormControl.Feedback />
+                        </rbs.FormGroup>
+                        <rbs.FormGroup controlId="idealDistanceCoef" validationState={getValidationState(this.isValid("idealDistanceCoef"))}>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="idealDistanceCoef-tooltip">The ideal distance between nodes scales linearly with this value.</rbs.Tooltip>}>
+                                    <span>Ideal Distance Coefficient:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
+                            <rbs.FormControl
+                                type="number"
+                                value={this.state.idealDistanceCoef}
+                                placeholder="Enter a number..."
+                                onChange={e => this.handleChange(e)}
+                            />
+                            <rbs.FormControl.Feedback />
+                        </rbs.FormGroup>
+                        <rbs.FormGroup controlId="initialMaxDisplacement" validationState={getValidationState(this.isValid("initialMaxDisplacement"))}>
+                            <rbs.ControlLabel>
+                                <rbs.OverlayTrigger placement="right" overlay={
+                                    <rbs.Tooltip id="initialMaxDisplacement-tooltip">The maximum distance nodes should be moved during the first simulation step. This value gets reduced during later steps.</rbs.Tooltip>}>
+                                    <span>Initial Maximum Displacement:</span>
+                                </rbs.OverlayTrigger>
+                            </rbs.ControlLabel>
+                            <rbs.FormControl
+                                type="number"
+                                value={this.state.initialMaxDisplacement}
+                                placeholder="Enter a number..."
+                                onChange={e => this.handleChange(e)}
+                            />
+                            <rbs.FormControl.Feedback />
+                        </rbs.FormGroup>
+                        <rbs.FormGroup controlId="nSteps" validationState={getValidationState(this.isValid("nSteps"))}>
+                            <rbs.ControlLabel>Number of Simulation Steps:</rbs.ControlLabel>
+                            <rbs.FormControl
                                 type="number"
                                 value={this.state.nSteps}
                                 placeholder="Enter a number..."
                                 onChange={e => this.handleChange(e)}
                             />
-                            <FormControl.Feedback />
-                        </FormGroup>
+                            <rbs.FormControl.Feedback />
+                        </rbs.FormGroup>
                     </form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={() => this.ok()} disabled={!this.isValid()}>OK</Button>
-                    <Button onClick={() => this.cancel()}>Cancel</Button>
-                </Modal.Footer>
-            </Modal>
+                </rbs.Modal.Body>
+                <rbs.Modal.Footer>
+                    <rbs.Button onClick={() => this.ok()} bsStyle="primary" disabled={!this.isValid()}>OK</rbs.Button>
+                    <rbs.Button onClick={() => this.cancel()}>Cancel</rbs.Button>
+                    <rbs.Button onClick={() => this.reset()} bsStyle="warning">Reset Form</rbs.Button>
+                </rbs.Modal.Footer>
+            </rbs.Modal>
         );
     }
 }

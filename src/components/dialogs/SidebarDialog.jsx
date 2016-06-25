@@ -1,39 +1,97 @@
-import React                                                 from "react";
-import {Modal, Checkbox, FormGroup, ControlLabel, FormControl, Button} from "react-bootstrap";
+import React    from "react";
+import * as rbs from "react-bootstrap";
 
 import * as actions from "../../actions/actions.js";
 
 /**
- * Closes the dialog.
+ * Toggles the visibility of the left sidebar.
+ *
+ * @param {Object} props
+ * The current props of this element.
+ *
+ * @ignore
  */
-function hide() {
-    actions.setDialogVisibility("sidebar", false);
-}
-
-function showTabInLeftSidebar(props, tab) {
-    return props.config.leftSidebarTabs.has(tab);
-}
-
-function showTabInRightSidebar(props, tab) {
-    return props.config.rightSidebarTabs.has(tab);
-}
-
 function toggleLeftSidebar(props) {
     actions.setLeftSidebarVisibility(!props.config.showLeftSidebar);
 }
 
+/**
+ * Toggles the visibility of the right sidebar.
+ *
+ * @param {Object} props
+ * The current props of this element.
+ *
+ * @ignore
+ */
 function toggleRightSidebar(props) {
     actions.setRightSidebarVisibility(!props.config.showRightSidebar);
 }
 
+/**
+ * Sets the width of the left sidebar.
+ *
+ * @param {Event} e
+ * The change event.
+ *
+ * @ignore
+ */
 function setLeftSidebarWidth(e) {
     const width = Number(e.target.value);
     actions.setLeftSidebarWidth(width);
 }
 
+/**
+ * Sets the width of the right sidebar.
+ *
+ * @param {Event} e
+ * The change event.
+ *
+ * @ignore
+ */
 function setRightSidebarWidth(e) {
     const width = Number(e.target.value);
     actions.setRightSidebarWidth(width);
+}
+
+/**
+ * Tests whether the given tab is currently displayed in the left sidebar.
+ *
+ * @param {Object} props
+ * The received props.
+ *
+ * @param {string} tab
+ * The tab to test.
+ *
+ * @return {boolean}
+ * Whether the tab is visible.
+ */
+function showTabInLeftSidebar(props, tab) {
+    return props.config.leftSidebarTabs.has(tab);
+}
+
+/**
+ * Tests whether the given tab is currently displayed in the right sidebar.
+ *
+ * @param {Object} props
+ * The received props.
+ *
+ * @param {string} tab
+ * The tab to test.
+ *
+ * @return {boolean}
+ * Whether the tab is visible.
+ */
+function showTabInRightSidebar(props, tab) {
+    return props.config.rightSidebarTabs.has(tab);
+}
+
+/**
+ * Closes the dialog.
+ *
+ * @ignore
+ */
+function close() {
+    actions.setDialogVisibility("sidebar", false);
 }
 
 /**
@@ -41,90 +99,90 @@ function setRightSidebarWidth(e) {
  */
 export default function (props) {
     return (
-        <Modal show={props.visible} onHide={hide}>
-            <Modal.Header closeButton>
-                <Modal.Title>Configure Sidebars</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
+        <rbs.Modal show={props.visible} onHide={close}>
+            <rbs.Modal.Header closeButton>
+                <rbs.Modal.Title>Configure Sidebars</rbs.Modal.Title>
+            </rbs.Modal.Header>
+            <rbs.Modal.Body>
                 <form>
                     <fieldset>
                         <legend>Left Sidebar</legend>
-                        <FormGroup controlId="left-sidebar-visibility">
-                            <ControlLabel>Visibility</ControlLabel>
-                            <Checkbox
+                        <rbs.FormGroup controlId="left-sidebar-visibility">
+                            <rbs.ControlLabel>Visibility:</rbs.ControlLabel>
+                            <rbs.Checkbox
                                 checked={props.config.showLeftSidebar}
                                 onChange={() => toggleLeftSidebar(props)}>
                                 Show Sidebar
-                            </Checkbox>
-                            <Checkbox
+                            </rbs.Checkbox>
+                            <rbs.Checkbox
                                 checked={showTabInLeftSidebar(props, "literals")}
                                 onChange={() => actions.toggleLeftSidebarTab("literals")}>
                                 Show Literals Tab
-                            </Checkbox>
-                            <Checkbox
+                            </rbs.Checkbox>
+                            <rbs.Checkbox
                                 checked={showTabInLeftSidebar(props, "earlData")}
                                 onChange={() => actions.toggleLeftSidebarTab("earlData")}>
                                 Show Earl Data Tab
-                            </Checkbox>
-                            <Checkbox
+                            </rbs.Checkbox>
+                            <rbs.Checkbox
                                 checked={showTabInLeftSidebar(props, "rdfData")}
                                 onChange={() => actions.toggleLeftSidebarTab("rdfData")}>
                                 Show RDF Data Tab
-                            </Checkbox>
-                        </FormGroup>
-                        <FormGroup controlId="left-sidebar-width">
-                            <ControlLabel>Width</ControlLabel>
-                            <FormControl
+                            </rbs.Checkbox>
+                        </rbs.FormGroup>
+                        <rbs.FormGroup controlId="left-sidebar-width">
+                            <rbs.ControlLabel>Width:</rbs.ControlLabel>
+                            <rbs.FormControl
                                 componentClass="select"
                                 value={props.config.leftSidebarWidth}
-                                onChange={e => setLeftSidebarWidth(e)}>
+                                onChange={setLeftSidebarWidth}>
                                 <option value="1">1 column</option>
                                 <option value="2">2 columns</option>
                                 <option value="3">3 columns</option>
                                 <option value="4">4 columns</option>
-                            </FormControl>
-                        </FormGroup>
+                            </rbs.FormControl>
+                        </rbs.FormGroup>
                     </fieldset>
                     <fieldset>
                         <legend>Right Sidebar</legend>
-                        <FormGroup controlId="left-sidebar-visibility">
-                            <ControlLabel>Visibility</ControlLabel>
-                            <Checkbox
+                        <rbs.FormGroup controlId="left-sidebar-visibility">
+                            <rbs.ControlLabel>Visibility:</rbs.ControlLabel>
+                            <rbs.Checkbox
                                 checked={props.config.showRightSidebar}
                                 onChange={() => toggleRightSidebar(props)}>
                                 Show Sidebar
-                            </Checkbox>
-                            <Checkbox
+                            </rbs.Checkbox>
+                            <rbs.Checkbox
                                 checked={showTabInRightSidebar(props, "literals")}
                                 onChange={() => actions.toggleRightSidebarTab("literals")}>
                                 Show Literals Tab
-                            </Checkbox>
-                            <Checkbox
+                            </rbs.Checkbox>
+                            <rbs.Checkbox
                                 checked={showTabInRightSidebar(props, "earlData")}
                                 onChange={() => actions.toggleRightSidebarTab("earlData")}>
                                 Show Earl Data Tab
-                            </Checkbox>
-                            <Checkbox
+                            </rbs.Checkbox>
+                            <rbs.Checkbox
                                 checked={showTabInRightSidebar(props, "rdfData")}
                                 onChange={() => actions.toggleRightSidebarTab("rdfData")}>
                                 Show RDF Data Tab
-                            </Checkbox>
-                        </FormGroup>
-                        <FormGroup controlId="left-sidebar-width">
-                            <ControlLabel>Width</ControlLabel>
-                            <FormControl
+                            </rbs.Checkbox>
+                        </rbs.FormGroup>
+                        <rbs.FormGroup controlId="left-sidebar-width">
+                            <rbs.ControlLabel>Width:</rbs.ControlLabel>
+                            <rbs.FormControl
                                 componentClass="select"
                                 value={props.config.rightSidebarWidth}
-                                onChange={e => setRightSidebarWidth(e)}>
+                                onChange={setRightSidebarWidth}>
                                 <option value="1">1 column</option>
                                 <option value="2">2 columns</option>
                                 <option value="3">3 columns</option>
                                 <option value="4">4 columns</option>
-                            </FormControl>
-                        </FormGroup>
+                            </rbs.FormControl>
+                        </rbs.FormGroup>
                     </fieldset>
                 </form>
-            </Modal.Body>
-        </Modal>
+            </rbs.Modal.Body>
+        </rbs.Modal>
     );
 }

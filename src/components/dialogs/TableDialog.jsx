@@ -27,6 +27,15 @@ function close() {
 
 /**
  * Renders this component.
+ *
+ * @param {Object} props
+ * The props to use.
+ *
+ * @param {Object} props.visible
+ * Whether to show the dialog.
+ *
+ * @param {Object} props.config
+ * The configuration of the application.
  */
 export default function render (props) {
     return (

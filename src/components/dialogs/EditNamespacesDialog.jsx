@@ -21,6 +21,13 @@ export default class extends React.Component {
 
         const selected = ([...props.prefixes][0] || [])[0];
         const prefix   = selected === undefined ? "" : selected;
+
+        /**
+         * The state of the dialog.
+         *
+         * @type {Object}
+         * @private
+         */
         this.state = {
             selected,
             activeTab: "add",

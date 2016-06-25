@@ -131,12 +131,28 @@ export default class extends React.Component {
                 />
                 <dialogs.RandomLayoutDialog visible={this.props.dialogs.showRandomLayoutDialog} />
                 <dialogs.RotateDialog visible={this.props.dialogs.showRotateDialog} />
-                <dialogs.SaveConfigDialog
-                    config={this.props.config}
+                <dialogs.SaveDialog
+                    data={this.props.config}
+                    filename="config.json"
+                    name="saveConfig"
+                    save={actions.saveConfig}
+                    title="Save Configuration"
                     visible={this.props.dialogs.showSaveConfigDialog}
                 />
-                <dialogs.SaveTurtleDialog
-                    rdf={this.props.rdf}
+                <dialogs.SaveDialog
+                    data={this.props.layout}
+                    filename="layout.json"
+                    name="saveLayout"
+                    save={actions.saveLayout}
+                    title="Save Layout"
+                    visible={this.props.dialogs.showSaveLayoutDialog}
+                />
+                <dialogs.SaveDialog
+                    data={this.props.rdf}
+                    filename="turtle.ttl"
+                    name="saveTurtle"
+                    save={actions.saveConfig}
+                    title="Save Turtle"
                     visible={this.props.dialogs.showSaveTurtleDialog}
                 />
                 <dialogs.ScaleDialog visible={this.props.dialogs.showScaleDialog} />

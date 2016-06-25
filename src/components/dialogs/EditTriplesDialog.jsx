@@ -29,6 +29,12 @@ export default class extends React.Component {
 
         const selected = this.props.triples[0]; // TODO: initially nothing is selected and the input fields are not shown
 
+        /**
+         * The state of the dialog.
+         *
+         * @type {Object}
+         * @private
+         */
         this.state = {
             activeTab:                "add",
 

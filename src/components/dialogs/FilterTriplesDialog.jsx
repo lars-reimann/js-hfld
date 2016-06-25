@@ -27,6 +27,12 @@ export default class extends React.Component {
     constructor(props) {
         super(props);
 
+        /**
+         * The state of the dialog.
+         *
+         * @type {Object}
+         * @private
+         */
         this.state = this.initialState(props);
 
         // TODO receive current filter as props

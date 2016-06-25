@@ -4,7 +4,7 @@ import * as rbs from "react-bootstrap";
 import * as actions from "../../actions/actions.js";
 
 /**
- * The dialog shown to the user when he wants close the graph.
+ * The dialog shown to the user when he wants to close the graph.
  */
 export default class extends React.Component {
 

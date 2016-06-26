@@ -91,14 +91,26 @@ export function toggleTripleSelection(ids) {
      return dispatcher.dispatch({ type: "TOGGLE_TRIPLE_SELECTION", ids });
 }
 
-export function filterTriples(filter) {console.log(filter)
+/**
+ * Sets the triple filter to the given one.
+ *
+ * @param {Object} filter
+ * Describes the triples to keep.
+ */
+export function filterTriples(filter) {
     return dispatcher.dispatch({ type: "FILTER_TRIPLES", filter });
 }
 
+/**
+ * Disables the current triple filter.
+ */
 export function clearTripleFilter() {
     return dispatcher.dispatch({ type: "CLEAR_TRIPLE_FILTER" });
 }
 
+/**
+ * Selects all triples that are passing the current filter.
+ */
 export function selectAllMatchingTriples() {
     return dispatcher.dispatch({ type: "SELECT_ALL_MATCHING_TRIPLES" });
 }

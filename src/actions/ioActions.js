@@ -189,12 +189,21 @@ export function openStyleURL(url) {
     openURL(url, parseStyle);
 }
 
+/**
+ * Signals that the stylesheet has loaded all external resources.
+ */
 export function loadedStyle() {
     dispatcher.dispatch({ type: "LOADED_STYLE" });
 }
 
 // Turtle ---------------------------------------------------------------------
 
+/**
+ * Parses turtle files.
+ *
+ * @type {TurtleReader}
+ * @ignore
+ */
 let parser = new TurtleReader();
 
 /**

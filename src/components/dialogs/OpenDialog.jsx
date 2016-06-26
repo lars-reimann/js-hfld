@@ -120,7 +120,7 @@ export default class extends React.Component {
      * @private
      */
     ok() {
-        switch (this.state.activerbs.Tab) {
+        switch (this.state.activeTab) {
         case "direct":
             this.props.openDirect(this.state.direct); break;
         case "file":

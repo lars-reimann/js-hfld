@@ -12,7 +12,7 @@ import dispatcher from "../dispatcher/dispatcher.js";
 import rdfStore from "./rdfStore.js";
 import selectionStore from "./selectionStore.js";
 
-const rdfToken = rdfStore.getDispatchToken();
+const rdfToken  = rdfStore.getDispatchToken();
 const selectionToken = selectionStore.getDispatchToken();
 
 class GraphStore extends Store {
@@ -39,10 +39,6 @@ class GraphStore extends Store {
         return this.state.graph;
     }
 
-    getLayout() {
-        return this.state.layout;
-    }
-
     getDraph() {
         return this.state.draph;
     }
@@ -67,25 +63,6 @@ class GraphStore extends Store {
         return this.state;
     }
 
-    importRDFNode(rdfNode) {
-        if (!rdfNode.isLiteral()) {
-            const hash = rdfNode.toNT();
-            if (!this.state.graph.getNodeById(hash)) {
-                const node = new earl.Node(hash);
-                this.state.graph.addNodes(node);
-            }
-        }
-    }
-
-    importTriple({subject, predicate, object, id}) {
-        if (!object.isLiteral()) {
-            const subjectHash = subject.toNT();
-            const objectHash  = object.toNT();
-            const edge        = new earl.Edge(subjectHash, objectHash, id);
-            this.state.graph.addEdges(edge);
-        }
-    }
-
     importRDFGraph() {
         this.initState();
 
@@ -102,10 +79,24 @@ class GraphStore extends Store {
         );
     }
 
+    addNode(id) {
+        if (!this.state.graph.getNodeById(id)) {
+            const node = new earl.Node(id);
+            this.state.graph.addNodes(node);
+        }
+    }
+
     addTriple(triple) {
-        this.importRDFNode(triple.subject);
-        this.importRDFNode(triple.object);
-        this.importTriple(triple);
+        const subjectHash = subject.toNT();
+        this.addNode(subjectHash);
+
+        if (!triple.object.isLiteral()) {
+            const objectHash = object.toNT();
+            this.addNode(objectHash);
+
+            const edge = new earl.Edge(subjectHash, objectHash, id);
+            this.state.graph.addEdges(edge);
+        }
     }
 
     removeNode(rdfNode) {

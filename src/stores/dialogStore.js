@@ -66,6 +66,8 @@ class DialogStore extends ReduceStore {
      *
      * @return {Object}
      * The new state.
+     *
+     * @private
      */
     setDialogVisibility(state, {dialog, show}) {
         switch (dialog) {

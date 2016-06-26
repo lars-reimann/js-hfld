@@ -50,36 +50,100 @@ class ConfigStore extends ReduceStore {
         return super.getState().toObject();
     }
 
+    /**
+     * Closes the tab in the left sidebar.
+     *
+     * @param {Object} state
+     * The current state.
+     *
+     * @param {string} tab
+     * The tab to close.
+     *
+     * @return {Object}
+     * The new state.
+     *
+     * @private
+     */
     closeLeftSidebarTab(state, tab) {
         const currentTabs = state.get("leftSidebarTabs");
         const newTabs     = currentTabs.delete(tab);
         return state.set("leftSidebarTabs", newTabs);
     }
 
+    /**
+     * Closes the tab in the right sidebar.
+     *
+     * @param {Object} state
+     * The current state.
+     *
+     * @param {string} tab
+     * The tab to close.
+     *
+     * @return {Object}
+     * The new state.
+     *
+     * @private
+     */
     closeRightSidebarTab(state, tab) {
         const currentTabs = state.get("rightSidebarTabs");
         const newTabs     = currentTabs.delete(tab);
         return state.set("rightSidebarTabs", newTabs);
     }
 
+    /**
+     * Opens the tab in the left sidebar.
+     *
+     * @param {Object} state
+     * The current state.
+     *
+     * @param {string} tab
+     * The tab to open.
+     *
+     * @return {Object}
+     * The new state.
+     *
+     * @private
+     */
     openLeftSidebarTab(state, tab) {
         const currentTabs = state.get("leftSidebarTabs");
         const newTabs     = currentTabs.add(tab);
         return state.set("leftSidebarTabs", newTabs);
     }
 
+    /**
+     * Opens the tab in the right sidebar.
+     *
+     * @param {Object} state
+     * The current state.
+     *
+     * @param {string} tab
+     * The tab to open.
+     *
+     * @return {Object}
+     * The new state.
+     *
+     * @private
+     */
     openRightSidebarTab(state, tab) {
         const currentTabs = state.get("rightSidebarTabs");
         const newTabs     = currentTabs.add(tab);
         return state.set("rightSidebarTabs", newTabs);
     }
 
-    openConfig(config) {
-        return Immutable.Map(config)
-            .set("leftSidebarTabs",  Immutable.Set(config.leftSidebarTabs))
-            .set("rightSidebarTabs", Immutable.Set(config.rightSidebarTabs));
-    }
-
+    /**
+     * Toggles the tab in the left sidebar.
+     *
+     * @param {Object} state
+     * The current state.
+     *
+     * @param {string} tab
+     * The tab to toggle.
+     *
+     * @return {Object}
+     * The new state.
+     *
+     * @private
+     */
     toggleLeftSidebarTab(state, tab) {
         const currentTabs = state.get("leftSidebarTabs");
         if (currentTabs.has(tab)) {
@@ -89,6 +153,20 @@ class ConfigStore extends ReduceStore {
         }
     }
 
+    /**
+     * Toggles the tab in the right sidebar.
+     *
+     * @param {Object} state
+     * The current state.
+     *
+     * @param {string} tab
+     * The tab to toggle.
+     *
+     * @return {Object}
+     * The new state.
+     *
+     * @private
+     */
     toggleRightSidebarTab(state, tab) {
         const currentTabs = state.get("rightSidebarTabs");
         if (currentTabs.has(tab)) {
@@ -96,6 +174,23 @@ class ConfigStore extends ReduceStore {
         } else {
             return this.openRightSidebarTab(state, tab);
         }
+    }
+
+    /**
+     * Opens the given config.
+     *
+     * @param {Object} config
+     * The config to open.
+     *
+     * @return {Object}
+     * The new state.
+     *
+     * @private
+     */
+    openConfig(config) {
+        return Immutable.Map(config)
+            .set("leftSidebarTabs",  Immutable.Set(config.leftSidebarTabs))
+            .set("rightSidebarTabs", Immutable.Set(config.rightSidebarTabs));
     }
 
     /**

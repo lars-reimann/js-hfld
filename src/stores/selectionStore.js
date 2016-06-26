@@ -345,6 +345,18 @@ class SelectionStore extends ReduceStore {
         }
     }
 
+    /**
+     * Handles the SET_TABLE_ROWS_PER_PAGE action.
+     *
+     * @param {Object} state
+     * The current state.
+     *
+     * @param {number} rowsPerPage
+     * The new of table rows per page.
+     *
+     * @return {Object}
+     * The new state.
+     */
     setTableRowsPerPage(state, rowsPerPage) {
         const tablePage = Math.min(
             state.get("tablePage"),
@@ -356,6 +368,18 @@ class SelectionStore extends ReduceStore {
         return state.set("tablePage", tablePage);
     }
 
+    /**
+     * Handles the REMOVE_TRIPLES action. All removed triples get deselected.
+     *
+     * @param {Object} state
+     * The current state.
+     *
+     * @param {number} triple
+     * The triples to remove.
+     *
+     * @return {Object}
+     * The new state.
+     */
     removeTriples(state, triples) {
         const ids = triples.map(triple => triple.id);
         return this.deselectTriples(state, ids)

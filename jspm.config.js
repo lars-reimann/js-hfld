@@ -265,7 +265,7 @@ SystemJS.config({
         "@ignavia/draph": "npm:@ignavia/draph@1.0.5",
         "@ignavia/earl": "npm:@ignavia/earl@1.3.4",
         "@ignavia/ella": "npm:@ignavia/ella@1.0.15",
-        "@ignavia/rdf": "npm:@ignavia/rdf@2.1.0",
+        "@ignavia/rdf": "npm:@ignavia/rdf@2.2.0",
         "@ignavia/util": "npm:@ignavia/util@1.4.0",
         "assert": "github:jspm/nodelibs-assert@0.2.0-alpha",
         "bootstrap": "github:twbs/bootstrap@3.3.6",
@@ -847,7 +847,7 @@ SystemJS.config({
                 "base64-js": "npm:base64-js@1.1.2"
             }
         },
-        "npm:@ignavia/rdf@2.1.0": {
+        "npm:@ignavia/rdf@2.2.0": {
             "map": {
                 "@ignavia/util": "npm:@ignavia/util@1.4.0"
             }

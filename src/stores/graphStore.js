@@ -25,7 +25,6 @@ class GraphStore extends Store {
         const graph      = new earl.Graph();
         const stylesheet = new Stylesheet();
         this.state = {
-            imported:   new Map(),
             graph:      graph,
             draph:      new GraphView(graph, stylesheet.computeAllStyles(
                 rdfStore.getGraph(),
@@ -69,26 +68,20 @@ class GraphStore extends Store {
     }
 
     importRDFNode(rdfNode) {
-        const imported = this.state.imported; // remove
-        const graph = this.state.graph;
-        if (rdfNode.interfaceName !== "Literal") {
+        if (!rdfNode.isLiteral()) {
             const hash = rdfNode.toNT();
-            if (!imported.has(hash)) {
+            if (!this.state.graph.getNodeById(hash)) {
                 const node = new earl.Node(hash);
                 this.state.graph.addNodes(node);
-                imported.set(hash, node.id);
             }
         }
     }
 
     importTriple({subject, predicate, object, id}) {
-        const imported    = this.state.imported;
-        const subjectHash = subject.toNT();
-        const objectHash  = object.toNT();
-        const sourceId    = imported.get(subjectHash);
-        const targetId    = imported.get(objectHash);
-        if (sourceId && targetId) {
-            const edge = new earl.Edge(sourceId, targetId, id);
+        if (!object.isLiteral()) {
+            const subjectHash = subject.toNT();
+            const objectHash  = object.toNT();
+            const edge        = new earl.Edge(subjectHash, objectHash, id);
             this.state.graph.addEdges(edge);
         }
     }

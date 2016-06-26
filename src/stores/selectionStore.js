@@ -10,8 +10,6 @@ import rdfStore from "./rdfStore.js";
 const rdfToken = rdfStore.getDispatchToken();
 
 // TODO disallow selection of literals
-// Store node hashes
-// Nodes are selected if their hash is selected
 
 /**
  * Stores the state of the selection.
@@ -50,34 +48,34 @@ class SelectionStore extends ReduceStore {
         return this.selectTriples(state, triples);
     }
 
+    /**
+     * Returns the triple filter.
+     *
+     * @return {Object}
+     * The triple filter.
+     */
     getTripleFilter() {
         return this.getState().get("tripleFilter");
     }
 
+    /**
+     * Computes the graph only consisting of triples matching the filter.
+     *
+     * @return {Graph}
+     * The filtered graph.
+     */
     getFilteredGraph() {
-        return rdfStore.getGraph().match(this.getState().get("tripleFilter"));
+        return rdfStore.getGraph().match(this.getTripleFilter());
     }
 
+    /**
+     * Returns the selected table page.
+     *
+     * @return {number}
+     * The selected table page.
+     */
     getTablePage() {
         return this.getState().get("tablePage");
-    }
-
-    normalizeNodeId(id) {
-        const regex = /^(BlankNode|NamedNode)#(.*)$/;
-
-        if (regex.test(id)) {
-            const [, interfaceName, nominalValue] = regex.exec(id);
-            switch (interfaceName) {
-            case "BlankNode":
-                const blankNode = new rdf.BlankNode(nominalValue);
-                return [...rdfStore.getGraph().iterEquivalentNodes(blankNode)][0].id;
-            case "NamedNode":
-                const namedNode = new rdf.NamedNode(nominalValue);
-                return [...rdfStore.getGraph().iterEquivalentNodes(namedNode)][0].id;
-            }
-        } else {
-            return id;
-        }
     }
 
     /**
@@ -291,7 +289,6 @@ class SelectionStore extends ReduceStore {
         const oldSelection = state.get("nodes");
         let   newSelection = oldSelection;
         for (let id of ids) {
-            id = this.normalizeNodeId(id);
             if (this.isSelectedNode(id, oldSelection)) {
                 newSelection = this.deselectNode(newSelection, id);
             } else {
@@ -356,6 +353,8 @@ class SelectionStore extends ReduceStore {
      *
      * @return {Object}
      * The new state.
+     *
+     * @private
      */
     setTableRowsPerPage(state, rowsPerPage) {
         const tablePage = Math.min(
@@ -379,6 +378,8 @@ class SelectionStore extends ReduceStore {
      *
      * @return {Object}
      * The new state.
+     *
+     * @private
      */
     removeTriples(state, triples) {
         const ids = triples.map(triple => triple.id);

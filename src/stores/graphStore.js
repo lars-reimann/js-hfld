@@ -31,10 +31,6 @@ class GraphStore extends Store {
                 rdfStore.getGraph(),
                 rdfStore.getProfile()
             )),
-            earlToRDF: {
-                nodes:  new Tolkien1ToNMap(),
-                edges:  new Tolkien1To1Map(),
-            },
             layout:     new earl.Layout(), // todo : generate random layout
             stylesheet: stylesheet,
         };
@@ -53,11 +49,11 @@ class GraphStore extends Store {
     }
 
     convertEarlNodeToRDFNode(earlNode) {
-        return this.unhashEarlNodeId(earlNode.id);
+        return rdf.RDFNode.fromNT(earlNode.id);
     }
 
     convertRDFNodeToEarlNode(rdfNode) {
-        return this.state.graph.getNodeById(this.hashRDFNode(rdfNode));
+        return this.state.graph.getNodeById(rdfNode.toNT());
     }
 
     convertEarlEdgeToRDFTriple(earlEdge) {
@@ -72,49 +68,28 @@ class GraphStore extends Store {
         return this.state;
     }
 
-    hashRDFNode(rdfNode) {
-        return `${rdfNode.interfaceName}#${rdfNode.nominalValue}`;
-    }
-
-    unhashEarlNodeId(earlNodeId) {
-        const regex = /^(BlankNode|NamedNode)#(.*)$/;
-        const [, interfaceName, nominalValue] = regex.exec(earlNodeId);
-        switch (interfaceName) {
-        case "BlankNode":
-            return new rdf.BlankNode(nominalValue);
-        case "NamedNode":
-            return new rdf.NamedNode(nominalValue);
-        default:
-            throw new Error(`Could not unhash ${earlNodeId}.`);
-        }
-    }
-
     importRDFNode(rdfNode) {
-        const imported = this.state.imported;
+        const imported = this.state.imported; // remove
+        const graph = this.state.graph;
         if (rdfNode.interfaceName !== "Literal") {
-            const hash = this.hashRDFNode(rdfNode);
+            const hash = rdfNode.toNT();
             if (!imported.has(hash)) {
                 const node = new earl.Node(hash);
                 this.state.graph.addNodes(node);
-                this.state.earlToRDF.nodes.add(node.id, rdfNode.id);
                 imported.set(hash, node.id);
-            } else {
-                const nodeId = imported.get(hash);
-                this.state.earlToRDF.nodes.add(nodeId, rdfNode.id);
             }
         }
     }
 
     importTriple({subject, predicate, object, id}) {
         const imported    = this.state.imported;
-        const subjectHash = this.hashRDFNode(subject);
-        const objectHash  = this.hashRDFNode(object);
+        const subjectHash = subject.toNT();
+        const objectHash  = object.toNT();
         const sourceId    = imported.get(subjectHash);
         const targetId    = imported.get(objectHash);
         if (sourceId && targetId) {
             const edge = new earl.Edge(sourceId, targetId, id);
             this.state.graph.addEdges(edge);
-            this.state.earlToRDF.edges.add(edge.id, id);
         }
     }
 
@@ -144,7 +119,6 @@ class GraphStore extends Store {
         const node = this.convertRDFNodeToEarlNode(rdfNode);
         if (node && node.getNumberOfIncidentEdges() === 0) {
             this.state.graph.removeNodes(node);
-            this.state.earlToRDF.nodes.deleteX(node.id);
             this.state.layout.delete(node.id);
         }
     }
@@ -153,7 +127,6 @@ class GraphStore extends Store {
         const edge = this.convertRDFTripleToEarlEdge(rdfTriple);
         if (edge) {
             this.state.graph.removeEdges(edge);
-            this.state.earlToRDF.edges.deleteX(edge.id);
             this.removeNode(rdfTriple.subject);
             this.removeNode(rdfTriple.object);
         }

@@ -41,7 +41,7 @@ const defaultConf = {
             }
         },
         {
-            selector: ".blank",
+            selector: "_:*",
             properties: {
                 style: {
                     conf: {

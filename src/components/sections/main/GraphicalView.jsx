@@ -12,7 +12,7 @@ export default class extends React.Component {
             draph.offsetWidth,
             draph.offsetHeight
         );
-        this.props.graphView.startRenderLoop();
+        this.props.graphView.startRenderLoop(); // call in constructor
     }
 
     componentDidUpdate() {

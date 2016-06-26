@@ -16,8 +16,8 @@ export default class NodeSelector {
      */
     static makeSelector(s) {
         const anyRegex        = /^\*$/;
-        const anyBlankRegex   = /^\.blank$/;
-        const anyNamedRegex   = /^\.named$/;
+        const anyBlankRegex   = /^_:*$/;
+        const anyNamedRegex   = /^<*>$/;
         const valueRegex      = /^"(.*)"$/;
         const exactBlankRegex = /^_:(.*)$/;
         const exactNamedRegex = /^<(.*)>$/;

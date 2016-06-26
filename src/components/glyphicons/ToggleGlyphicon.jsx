@@ -9,9 +9,9 @@ import BlankGlyphicon from "./BlankGlyphicon.jsx";
  * @param {Object} props
  * The props to use.
  *
- * @param {Boolean} props.enabled
+ * @param {boolean} props.enabled
  * Whether the option is switched on.
  */
-export default function ({enabled}) {
+export default function render({enabled}) {
     return enabled ? <Glyphicon glyph="ok" /> : <BlankGlyphicon />;
 };

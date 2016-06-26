@@ -3,10 +3,10 @@ import dispatcher from "../dispatcher/dispatcher.js";
 /**
  * Sets the visibility of the given dialog.
  *
- * @param {String} dialog
+ * @param {string} dialog
  * The dialog to set the visibility for.
  *
- * @param {Boolean} show
+ * @param {boolean} show
  * Whether to show the dialog.
  */
 export function setDialogVisibility(dialog, show) {

@@ -9,10 +9,10 @@ import BlankGlyphicon from "./BlankGlyphicon.jsx";
  * @param {Object} props
  * The props to use.
  *
- * @param {String} props.order
+ * @param {string} props.order
  * The order used for sorting. This can be one of "asc" or "desc".
  */
-export default function ({order}) {
+export default function render({order}) {
     if (order === "asc") {
         return <Glyphicon glyph="triangle-top" />;
     } else if (order === "desc") {

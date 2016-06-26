@@ -34,7 +34,7 @@ export function selectNodes(ids) {
 /**
  * Selects the given table page.
  *
- * @param {Number} tablePage
+ * @param {number} tablePage
  * The table page to select.
  */
 export function selectTablePage(tablePage) {

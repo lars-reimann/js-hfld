@@ -5,7 +5,7 @@ import dispatcher from "../dispatcher/dispatcher.js";
 /**
  * Removes the given tab from the left sidebar.
  *
- * @param {String} tab
+ * @param {string} tab
  * The tab to close.
  */
 export function closeLeftSidebarTab(tab) {
@@ -15,7 +15,7 @@ export function closeLeftSidebarTab(tab) {
 /**
  * Removes the given tab from the right sidebar.
  *
- * @param {String} tab
+ * @param {string} tab
  * The tab to close.
  */
 export function closeRightSidebarTab(tab) {
@@ -25,7 +25,7 @@ export function closeRightSidebarTab(tab) {
 /**
  * Adds the given tab to the left sidebar.
  *
- * @param {String} tab
+ * @param {string} tab
  * The tab to open.
  */
 export function openLeftSidebarTab(tab) {
@@ -35,7 +35,7 @@ export function openLeftSidebarTab(tab) {
 /**
  * Adds the given tab to the right sidebar.
  *
- * @param {String} tab
+ * @param {string} tab
  * The tab to open.
  */
 export function openRightSidebarTab(tab) {
@@ -45,7 +45,7 @@ export function openRightSidebarTab(tab) {
 /**
  * Sets the tab that is currently displayed in the left sidebar.
  *
- * @param {String} activeTab
+ * @param {string} activeTab
  * The tab to display.
  */
 export function setLeftSidebarActiveTab(activeTab) {
@@ -55,7 +55,7 @@ export function setLeftSidebarActiveTab(activeTab) {
 /**
  * Sets the tab that is currently displayed in the right sidebar.
  *
- * @param {String} activeTab
+ * @param {string} activeTab
  * The tab to display.
  */
 export function setRightSidebarActiveTab(activeTab) {
@@ -65,7 +65,7 @@ export function setRightSidebarActiveTab(activeTab) {
 /**
  * Sets the available tabs in the left sidebar.
  *
- * @param {Array<String>} tabs
+ * @param {Array<string>} tabs
  * The available tabs.
  */
 export function setLeftSidebarTabs(tabs) {
@@ -75,7 +75,7 @@ export function setLeftSidebarTabs(tabs) {
 /**
  * Sets the available tabs in the right sidebar.
  *
- * @param {Array<String>} tabs
+ * @param {Array<string>} tabs
  * The available tabs.
  */
 export function setRightSidebarTabs(tabs) {
@@ -85,7 +85,7 @@ export function setRightSidebarTabs(tabs) {
 /**
  * Sets whether the left sidebar is visible.
  *
- * @param {Boolean} show
+ * @param {boolean} show
  * Whether to show a sidebar on the left side of the screen.
  */
 export function setLeftSidebarVisibility(show) {
@@ -95,7 +95,7 @@ export function setLeftSidebarVisibility(show) {
 /**
  * Sets whether the right sidebar is visible.
  *
- * @param {Boolean} show
+ * @param {boolean} show
  * Whether to show a sidebar on the right side of the screen.
  */
 export function setRightSidebarVisibility(show) {
@@ -106,7 +106,7 @@ export function setRightSidebarVisibility(show) {
  * Sets how many columns the left sidebar should span. This should be an
  * integer between 1 and 4.
  *
- * @param {Number} width
+ * @param {number} width
  * The width of the left sidebar.
  */
 export function setLeftSidebarWidth(width) {
@@ -117,7 +117,7 @@ export function setLeftSidebarWidth(width) {
  * Sets how many columns the right sidebar should span. This should be an
  * integer between 1 and 4.
  *
- * @param {Number} width
+ * @param {number} width
  * The width of the right sidebar.
  */
 export function setRightSidebarWidth(width) {
@@ -127,7 +127,7 @@ export function setRightSidebarWidth(width) {
 /**
  * Toggles whether the left sidebar has the given tab.
  *
- * @param {String} tab
+ * @param {string} tab
  * The tab to toggle.
  */
 export function toggleLeftSidebarTab(tab) {
@@ -137,7 +137,7 @@ export function toggleLeftSidebarTab(tab) {
 /**
  * Toggles whether the right sidebar has the given tab.
  *
- * @param {String} tab
+ * @param {string} tab
  * The tab to toggle.
  */
 export function toggleRightSidebarTab(tab) {
@@ -149,7 +149,7 @@ export function toggleRightSidebarTab(tab) {
 /**
  * Sets how many rows each page of the table should contain.
  *
- * @param {Number} rowsPerPage
+ * @param {number} rowsPerPage
  * The number of rows per page of the table.
  */
 export function setTableRowsPerPage(rowsPerPage) {
@@ -162,11 +162,11 @@ export function setTableRowsPerPage(rowsPerPage) {
  * @param {Object} sorting
  * How to sort the table.
  *
- * @param {String} sorting.column
+ * @param {string} sorting.column
  * The column to use for sorting. This is one of "subject", "predicate" or
  * "object".
  *
- * @param {String} sorting.order
+ * @param {string} sorting.order
  * The order in which to sort the rows. This is either ascending ("asc") or
  * descending ("desc").
  */
@@ -180,7 +180,7 @@ export function setTableSorting(sorting) {
  * Sets whether the menubar should be shown all the time. Alternatively it is hidden
  * until the user move the mousepointer there.
  *
- * @param {Boolean} enabled
+ * @param {boolean} enabled
  * Whether it should be always visible.
  */
 export function setPermanentMenubar(enabled) {
@@ -190,7 +190,7 @@ export function setPermanentMenubar(enabled) {
 /**
  * Sets whether to use the profile to turn IRIs into CURIEs.
  *
- * @param {Boolean} enable.
+ * @param {boolean} enable.
  * If this feature is active.
  */
 export function setShrinkNodeValues(enabled) {
@@ -200,7 +200,7 @@ export function setShrinkNodeValues(enabled) {
 /**
  * Sets what is displayed in the viewport.
  *
- * @param {String} viewport
+ * @param {string} viewport
  * What should be displayed in the viewport.
  */
 export function setViewport(viewport) {

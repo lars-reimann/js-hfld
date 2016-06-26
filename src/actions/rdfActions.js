@@ -5,10 +5,10 @@ import {selectTriples} from "./selectionActions.js";
 /**
  * Adds a new namespace to the profile.
  *
- * @param {String} prefix
+ * @param {string} prefix
  * The prefix to use.
  *
- * @param {String} iri
+ * @param {string} iri
  * The IRI to use.
  */
 export function addNamespace(prefix, iri) {
@@ -18,13 +18,13 @@ export function addNamespace(prefix, iri) {
 /**
  * Removes the old association between prefix and IRI and adds a new one.
  *
- * @param {String} oldPrefix
+ * @param {string} oldPrefix
  * The old prefix of the namespace.
  *
- * @param {String} newPrefix
+ * @param {string} newPrefix
  * The new prefix to use.
  *
- * @param {String} newIRI
+ * @param {string} newIRI
  * The new IRI to use.
  */
 export function updateNamespace(oldPrefix, newPrefix, newIRI) {
@@ -35,7 +35,7 @@ export function updateNamespace(oldPrefix, newPrefix, newIRI) {
 /**
  * Removes the namespace associated with the given prefix.
  *
- * @param {String} prefix
+ * @param {string} prefix
  * The prefix of the namespace.
  */
 export function removeNamespace(prefix) {
@@ -55,13 +55,13 @@ export function addTriple(triple) {
 /**
  * Replaces the old triple with the new one.
  *
- * @param {Triple|String} oldTriple
+ * @param {Triple|string} oldTriple
  * The triple to remove. Providing its ID is enough.
  *
  * @param {Triple} newTriple
  * The triple to add instead.
  *
- * @param {Boolean} [selectNewTriple=false]
+ * @param {boolean} [selectNewTriple=false]
  * Whether to select the new triple.
  */
 export function updateTriple(oldTriple, newTriple, selectNewTriple = false) {
@@ -76,7 +76,7 @@ export function updateTriple(oldTriple, newTriple, selectNewTriple = false) {
 /**
  * Removes the given triples.
  *
- * @param {Array<Triple|String>} triples
+ * @param {Array<Triple|string>} triples
  * The triples to remove. Their IDs are enough.
  */
 export function removeTriples(triples) {

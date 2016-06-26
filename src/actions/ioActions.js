@@ -30,7 +30,7 @@ function openFile(file, resolve) {
  * Loads data from the given URL and calls the resolve function on success. If
  * there is an error, an alert message is shown.
  *
- * @param {String} url
+ * @param {string} url
  * The URL to open.
  *
  * @param {Function} resolve
@@ -49,10 +49,10 @@ function openURL(url, resolve) {
 /**
  * Offers the user to download the given text as a file with the given name.
  *
- * @param {String} content
+ * @param {string} content
  * The content of the file.
  *
- * @param {String} filename
+ * @param {string} filename
  * The name the file should have.
  */
 function download(content, filename) {
@@ -72,7 +72,7 @@ function download(content, filename) {
 /**
  * Parses the configuration and dispatches the appropriate action.
  *
- * @param {String} s
+ * @param {string} s
  * The stringified configuration.
  */
 function parseConfig(s) {
@@ -98,7 +98,7 @@ function writeConfig(config) {
 /**
  * Sets the given string as new configuration.
  *
- * @param {String} s
+ * @param {string} s
  * The stringified configuration.
  */
 export function openConfigDirect(s) {
@@ -118,7 +118,7 @@ export function openConfigFile(file) {
 /**
  * Sets the content of the response from the given URL as new configuration.
  *
- * @param {String} url
+ * @param {string} url
  * The URL to open.
  */
 export function openConfigURL(url) {
@@ -131,7 +131,7 @@ export function openConfigURL(url) {
  * @param {Object} config
  * The configuration to save.
  *
- * @param {String} filename
+ * @param {string} filename
  * The name of the file.
  */
 export function saveConfig(config, filename) {
@@ -146,7 +146,7 @@ export function saveConfig(config, filename) {
 /**
  * Parses the stylesheet and dispatches the appropriate action.
  *
- * @param {String} s
+ * @param {string} s
  * The stringified style.
  */
 function parseStyle(s) {
@@ -162,7 +162,7 @@ function parseStyle(s) {
 /**
  * Sets the given string as new style.
  *
- * @param {String} s
+ * @param {string} s
  * The stringified style.
  */
 export function openStyleDirect(s) {
@@ -182,7 +182,7 @@ export function openStyleFile(file) {
 /**
  * Sets the content of the response from the given URL as new style.
  *
- * @param {String} url
+ * @param {string} url
  * The URL to open.
  */
 export function openStyleURL(url) {
@@ -209,7 +209,7 @@ let parser = new TurtleReader();
 /**
  * Parses the given Turtle data and dispatches the appropriate action.
  *
- * @param {String} s
+ * @param {string} s
  * The Turtle data.
  */
 export function parseTurtle(s) {
@@ -225,7 +225,7 @@ export function parseTurtle(s) {
 /**
  * Sets the graph and profile to the result of parsing the given string.
  *
- * @param {String} s
+ * @param {string} s
  * The string to parse.
  */
 export function openTurtleDirect(s) {
@@ -247,7 +247,7 @@ export function openTurtleFile(file) {
  * Sets the graph and profile to the result of parsing the content of the
  * response from the given URL.
  *
- * @param {String} url
+ * @param {string} url
  * The URL to get data from.
  */
 export function openTurtleURL(url) {
@@ -260,7 +260,7 @@ export function openTurtleURL(url) {
  * @param {*} rdf
  * The RDF store.
  *
- * @param {String} filename
+ * @param {string} filename
  * The name of the file.
  */
 export function saveTurtle(rdf, filename) {

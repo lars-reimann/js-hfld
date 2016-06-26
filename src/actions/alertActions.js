@@ -8,11 +8,11 @@ import dispatcher from "../dispatcher/dispatcher.js";
 class AlertMessage {
 
     /**
-     * @param {String} type
+     * @param {string} type
      * The type of the alert. This is one of "info", "success", "warning" or
      * "danger".
      *
-     * @param {String} message
+     * @param {string} message
      * The message to display.
      */
     constructor(type, message) {
@@ -20,21 +20,21 @@ class AlertMessage {
         /**
          * The type of the alert.
          *
-         * @type {String}
+         * @type {string}
          */
         this.type = type;
 
         /**
          * The message to display.
          *
-         * @type {String}
+         * @type {string}
          */
         this.message = message;
 
         /**
          * The ID of the alert.
          *
-         * @type {String}
+         * @type {string}
          */
         this.id = AlertMessage.idGenerator.next();
     }
@@ -44,11 +44,11 @@ AlertMessage.idGenerator = new IDGenerator("a");
 /**
  * Adds an entry to the alert queue.
  *
- * @param {String} type
+ * @param {string} type
  * The type of the alert. This is one of "info", "success", "warning" or
  * "error".
  *
- * @param {String} message
+ * @param {string} message
  * The message to display.
  */
 export function enqueueAlert(type, message) {

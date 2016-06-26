@@ -3,7 +3,7 @@ import dispatcher from "../dispatcher/dispatcher.js";
 // Layout ---------------------------------------------------------------------
 
 /**
- * Uses the Eades-Layout-Algorithm to position the nodes of the graph.
+ * Uses the Eades layout algorithm to position the nodes of the graph.
  *
  * @param {Object} conf
  * The configuration of the algorithm.
@@ -13,13 +13,14 @@ export function eadesLayout(conf) {
 }
 
 /**
- * Uses the Fruchtermann-Layout-Algorithm to position the nodes of the graph.
+ * Uses the Fruchterman-Reingold layout algorithm to position the nodes of the
+ * graph.
  *
  * @param {Object} conf
  * The configuration of the algorithm.
  */
-export function fruchtermannLayout(conf) {
-    dispatcher.dispatch({ type: "FRUCHTERMANN_LAYOUT", conf});
+export function fruchtermanLayout(conf) {
+    dispatcher.dispatch({ type: "FRUCHTERMAN_LAYOUT", conf});
 }
 
 /**
@@ -35,7 +36,7 @@ export function randomLayout(conf) {
 /**
  * Rotates the layout aorund the given point by the angle.
  *
- * @param {Number} angle
+ * @param {number} angle
  * How far to rotate.
  *
  * @param {Vec2} center
@@ -48,10 +49,10 @@ export function rotateLayout(angle, center) {
 /**
  * Scales the layout from the given center by the factor.
  *
- * @param {Number} factorX
+ * @param {number} factorX
  * The scalar to multiply the x-component of the vector by.
  *
- * @param {Number} factorY
+ * @param {number} factorY
  * The scalar to multiply the y-component of the vector by.
  *
  * @param {Vec2} center

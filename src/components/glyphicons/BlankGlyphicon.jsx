@@ -4,6 +4,6 @@ import {Glyphicon} from "react-bootstrap";
 /**
  * An invisible element that takes up as much space as a normal glyphicon.
  */
-export default function () {
+export default function render () {
     return <Glyphicon glyph="ok" style={{visibility: "hidden"}} />;
 }

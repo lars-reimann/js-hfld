@@ -83,12 +83,7 @@ class SelectionStore extends ReduceStore {
      * The ID of the node to test.
      */
     isSelectedNode(idToCheck, selection = this.getNodeSelection()) {
-        for (let id of this.iterEquivalentIds(idToCheck)) {
-            if (selection.has(id)) {
-                return true;
-            }
-        }
-        return false;
+        return selection.has(idToCheck);
     }
 
     /**
@@ -241,11 +236,7 @@ class SelectionStore extends ReduceStore {
      * @private
      */
     deselectNode(selection, idToDeselect) {
-        let result = selection;
-        for (let id of this.iterEquivalentIds(idToDeselect)) {
-            result = result.delete(id);
-        }
-        return result;
+        return selection.delete(idToDeselect);
     }
 
     /**
@@ -334,7 +325,7 @@ class SelectionStore extends ReduceStore {
      */
     * iterEquivalentIds(id) {
         const graph       = rdfStore.getGraph();
-        const nodeToMatch = graph.getNodeById(id);
+        const nodeToMatch = rdf.RDFNode.fromNT(id);
         for (let node of graph.iterEquivalentNodes(nodeToMatch)) {
             yield node.id;
         }

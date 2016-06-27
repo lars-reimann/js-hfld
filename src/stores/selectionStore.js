@@ -77,13 +77,13 @@ class SelectionStore extends ReduceStore {
     }
 
     /**
-     * Tests if the given node (or an equivalent one) is selected.
+     * Tests if the given node is selected.
      *
-     * @param {String} idToCheck
+     * @param {String} id
      * The ID of the node to test.
      */
-    isSelectedNode(idToCheck, selection = this.getNodeSelection()) {
-        return selection.has(idToCheck);
+    isSelectedNode(id, selection = this.getNodeSelection()) {
+        return selection.has(id);
     }
 
     /**
@@ -116,6 +116,21 @@ class SelectionStore extends ReduceStore {
     getSelectedTriples(selection = this.getTripleSelection()) {
         const graph = rdfStore.getGraph();
         return [...selection.values()].map(id => graph.getTripleById(id));
+    }
+
+    /**
+     * Retrieves the selection from the current state.
+     *
+     * @param {string}
+     * Whether to get the node or triple selection.
+     *
+     * @return {Immutable.Set}
+     * The selection.
+     *
+     * @private
+     */
+    getSelection(field) {
+        return this.getState().get(field);
     }
 
     /**
@@ -157,29 +172,9 @@ class SelectionStore extends ReduceStore {
      * @private
      */
     selectNodes(state, ids) {
-        let selection = state.get("nodes");
-        for (let id of ids) {
-            selection = this.selectNode(id);
-        }
-        return state.set("nodes", selection);
-    }
-
-    /**
-     * Selects the given node.
-     *
-     * @param {Immutable.Set} selection
-     * The currently selected nodes.
-     *
-     * @param {String} id
-     * The ID of the node to select.
-     *
-     * @private
-     */
-    selectNode(selection, id) {
-        if (this.isSelectedNode(id, selection)) {
-            return selection;
-        }
-        return selection.add(id);
+        const oldSelection = state.get("nodes");
+        const newSelection = selection.union(ids);
+        return state.set("nodes", newSelection);
     }
 
     /**
@@ -217,26 +212,9 @@ class SelectionStore extends ReduceStore {
      * @private
      */
     deselectNodes(state, ids) {
-        let selection = state.get("nodes");
-        for (let id of ids) {
-            selection = this.deselectNode(selection, id);
-        }
-        return state.set("nodes", selection);
-    }
-
-    /**
-     * Deselects the given node.
-     *
-     * @param {Immutable.Set} selection
-     * The currently selected nodes.
-     *
-     * @param {String} idToDeselect
-     * The ID of the node to deselect.
-     *
-     * @private
-     */
-    deselectNode(selection, idToDeselect) {
-        return selection.delete(idToDeselect);
+        const oldSelection = state.get("nodes");
+        const newSelection = oldSelection.subtract(ids);
+        return state.set("nodes", newSelection);
     }
 
     /**
@@ -279,9 +257,9 @@ class SelectionStore extends ReduceStore {
         let   newSelection = oldSelection;
         for (let id of ids) {
             if (this.isSelectedNode(id, oldSelection)) {
-                newSelection = this.deselectNode(newSelection, id);
+                newSelection = newSelection.delete(id);
             } else {
-                newSelection = this.selectNode(newSelection, id);
+                newSelection = newSelection.add(id);
             }
         }
         return state.set("nodes", newSelection);
@@ -313,22 +291,6 @@ class SelectionStore extends ReduceStore {
             }
         }
         return state.set("triples", newSelection);
-    }
-
-    /**
-     * Yields the IDs of equivalent nodes.
-     *
-     * @param {String} id
-     * The ID of the node to match.
-     *
-     * @private
-     */
-    * iterEquivalentIds(id) {
-        const graph       = rdfStore.getGraph();
-        const nodeToMatch = rdf.RDFNode.fromNT(id);
-        for (let node of graph.iterEquivalentNodes(nodeToMatch)) {
-            yield node.id;
-        }
     }
 
     /**

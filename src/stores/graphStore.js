@@ -86,11 +86,11 @@ class GraphStore extends Store {
         }
     }
 
-    addTriple(triple) {
+    addTriple({subject, object, id}) {
         const subjectHash = subject.toNT();
         this.addNode(subjectHash);
 
-        if (!triple.object.isLiteral()) {
+        if (!object.isLiteral()) {
             const objectHash = object.toNT();
             this.addNode(objectHash);
 
@@ -148,7 +148,7 @@ class GraphStore extends Store {
         const result = new Set();
         for (let node of selectedNodes) {
             if (node.interfaceName === "BlankNode" || node.interfaceName === "NamedNode") {
-                result.add(`${node.interfaceName}#${node.nominalValue}`);
+                result.add(node.toNT());
             }
         }
         this.state.draph.selectNodes(result);

@@ -92,8 +92,8 @@ class AnyNodeSelector extends NodeSelector {
     getAffectedNodes(rdfGraph) {
         const result = new Set();
         for (let node of rdfGraph.iterNodes()) {
-            if (node.interfaceName !== "Literal") {
-                result.add(hashNode(node));
+            if (!node.isLiteral()) {
+                result.add(node.toNT());
             }
         }
         return result;
@@ -131,7 +131,7 @@ class InterfaceNodeSelector extends NodeSelector {
         const result = new Set();
         for (let node of rdfGraph.iterNodes()) {
             if (node.interfaceName === this.interfaceName) {
-                result.add(hashNode(result));
+                result.add(node.toNT());
             }
         }
         return result;
@@ -173,10 +173,10 @@ class ValueNodeSelector extends NodeSelector {
     getAffectedNodes(rdfGraph) {
         const result = new Set();
         if (rdfGraph.hasNode(this.blank)) {
-            result.add(hashNode(this.blank));
+            result.add(this.blank.toNT());
         }
         if (rdfGraph.hasNode(this.named)) {
-            result.add(hashNode(this.named));
+            result.add(this.named.toNT());
         }
         return result;
     }
@@ -212,7 +212,7 @@ class ExactNodeSelector extends NodeSelector {
     getAffectedNodes(rdfGraph) {
         const result = new Set();
         if (rdfGraph.hasNode(this.node)) {
-            result.add(hashNode(this.node));
+            result.add(this.node.toNT());
         }
         return result;
     }
@@ -239,17 +239,4 @@ function makeRDFNode(interfaceName, nominalValue) {
     default:
         throw new Error(`Invalid interface name: ${interfaceName}`);
     }
-}
-
-/**
- * Hashes the given RDFNode to a string.
- *
- * @param {RDFNode} rdfNode
- * The node to hash.
- *
- * @return {String}
- * The created hash.
- */
-function hashNode(rdfNode) {
-    return `${rdfNode.interfaceName}#${rdfNode.nominalValue}`;
 }

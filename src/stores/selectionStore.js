@@ -9,8 +9,6 @@ import rdfStore from "./rdfStore.js";
 
 const rdfToken = rdfStore.getDispatchToken();
 
-// TODO disallow selection of literals
-
 /**
  * Stores the state of the selection.
  */
@@ -111,7 +109,7 @@ class SelectionStore extends ReduceStore {
      */
     getSelectedNodes(selection = this.getNodeSelection()) {
         const graph = rdfStore.getGraph();
-        return [...selection.values()].map(id => graph.getNodeById(id));
+        return [...selection.values()].map(id => rdf.RDFNode.fromNT(id));
     }
 
     /**

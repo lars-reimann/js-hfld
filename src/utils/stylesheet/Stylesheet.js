@@ -580,7 +580,7 @@ const nodeToNTReplacement = _.curry(function (id, s) {
     const toNTRegex = /\$toNT/g;
 
     if (toNTRegex.test(s)) {
-        const rdfNode = makeRDFNode(id);
+        const rdfNode = rdf.RDFNode.fromNT(id);
         return s.replace(toNTRegex, rdfNode.toNT());
     }
     return s;
@@ -601,7 +601,7 @@ const nodeToNTReplacement = _.curry(function (id, s) {
 const nodeToStringReplacement = _.curry(function (id, s) {
     const toStringRegex = /\$toString/g;
     if (toStringRegex.test(s)) {
-        const rdfNode = makeRDFNode(id);
+        const rdfNode = rdf.RDFNode.fromNT(id);
         return s.replace(toStringRegex, rdfNode.toString());
     }
     return s;
@@ -625,7 +625,7 @@ const nodeToStringReplacement = _.curry(function (id, s) {
 const nodeToShortStringReplacement = _.curry(function (profile, id, s) {
     const toShortStringRegex = /\$toShortString/g;
     if (toShortStringRegex.test(s)) {
-        const rdfNode = makeRDFNode(id);
+        const rdfNode = rdf.RDFNode.fromNT(id);
         return s.replace(toShortStringRegex, profile.nodeToString(rdfNode));
     }
     return s;
@@ -706,28 +706,6 @@ const edgeToShortStringReplacement = _.curry(function (rdfGraph, profile, id, s)
     }
     return s;
 });
-
-/**
- * Creates an RDFNode from the given hash.
- *
- * @param {String} hash
- * The hashed node.
- *
- * @return {RDFNode}
- * The created RDFNode.
- */
-function makeRDFNode(hash) {
-    const regex = /^(BlankNode|NamedNode)#(.*)$/;
-    const [, interfaceName, nominalValue] = regex.exec(hash);
-    switch (interfaceName) {
-    case "BlankNode":
-        return new rdf.BlankNode(nominalValue);
-    case "NamedNode":
-        return new rdf.NamedNode(nominalValue);
-    default:
-        throw new Error(`Could not unhash ${earlNodeId}.`);
-    }
-}
 
 /**
  * Traverses the given value and calls the given function on any string it

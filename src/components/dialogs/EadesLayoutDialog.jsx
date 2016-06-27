@@ -1,6 +1,8 @@
 import React    from "react";
 import * as rbs from "react-bootstrap";
 
+import {Vec2} from "@ignavia/ella";
+
 import * as actions                     from "../../actions/actions.js";
 import {validators, getValidationState} from "../../utils/utils.js";
 

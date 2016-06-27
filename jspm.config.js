@@ -8,7 +8,7 @@ SystemJS.config({
             "babel-plugin-transform-export-extensions": "npm:babel-plugin-transform-export-extensions@6.8.0",
             "babel-plugin-transform-function-bind": "npm:babel-plugin-transform-function-bind@6.8.0",
             "babel-plugin-transform-object-rest-spread": "npm:babel-plugin-transform-object-rest-spread@6.8.0",
-            "babel-preset-react": "npm:babel-preset-react@6.5.0",
+            "babel-preset-react": "npm:babel-preset-react@6.11.0",
             "css": "github:systemjs/plugin-css@0.1.23",
             "plugin-babel": "npm:systemjs-plugin-babel@0.0.2",
             "systemjs-hot-reloader": "github:capaj/systemjs-hot-reloader@0.5.9"
@@ -19,14 +19,6 @@ SystemJS.config({
                     "debug": "npm:debug@2.2.0",
                     "socket.io-client": "github:socketio/socket.io-client@1.4.8",
                     "weakee": "npm:weakee@1.0.0"
-                }
-            },
-            "npm:babel-code-frame@6.8.0": {
-                "map": {
-                    "babel-runtime": "npm:babel-runtime@6.9.2",
-                    "chalk": "npm:chalk@1.1.3",
-                    "esutils": "npm:esutils@2.0.2",
-                    "js-tokens": "npm:js-tokens@1.0.3"
                 }
             },
             "npm:babel-helper-builder-react-jsx@6.9.0": {
@@ -145,16 +137,6 @@ SystemJS.config({
                     "babel-runtime": "npm:babel-runtime@6.9.2"
                 }
             },
-            "npm:babel-preset-react@6.5.0": {
-                "map": {
-                    "babel-plugin-syntax-flow": "npm:babel-plugin-syntax-flow@6.8.0",
-                    "babel-plugin-syntax-jsx": "npm:babel-plugin-syntax-jsx@6.8.0",
-                    "babel-plugin-transform-flow-strip-types": "npm:babel-plugin-transform-flow-strip-types@6.8.0",
-                    "babel-plugin-transform-react-display-name": "npm:babel-plugin-transform-react-display-name@6.8.0",
-                    "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@6.8.0",
-                    "babel-plugin-transform-react-jsx-source": "npm:babel-plugin-transform-react-jsx-source@6.9.0"
-                }
-            },
             "npm:babel-template@6.9.0": {
                 "map": {
                     "babel-runtime": "npm:babel-runtime@6.9.2",
@@ -212,13 +194,38 @@ SystemJS.config({
                     "lodash": "npm:lodash@4.13.1",
                     "babel-messages": "npm:babel-messages@6.8.0",
                     "globals": "npm:globals@8.18.0",
-                    "babel-code-frame": "npm:babel-code-frame@6.8.0",
+                    "babel-code-frame": "npm:babel-code-frame@6.11.0",
                     "babylon": "npm:babylon@6.8.2"
                 }
             },
             "npm:babylon@6.8.2": {
                 "map": {
                     "babel-runtime": "npm:babel-runtime@6.9.2"
+                }
+            },
+            "npm:babel-preset-react@6.11.0": {
+                "map": {
+                    "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@6.8.0",
+                    "babel-plugin-transform-flow-strip-types": "npm:babel-plugin-transform-flow-strip-types@6.8.0",
+                    "babel-plugin-syntax-jsx": "npm:babel-plugin-syntax-jsx@6.8.0",
+                    "babel-plugin-transform-react-jsx-source": "npm:babel-plugin-transform-react-jsx-source@6.9.0",
+                    "babel-plugin-transform-react-display-name": "npm:babel-plugin-transform-react-display-name@6.8.0",
+                    "babel-plugin-syntax-flow": "npm:babel-plugin-syntax-flow@6.8.0",
+                    "babel-plugin-transform-react-jsx-self": "npm:babel-plugin-transform-react-jsx-self@6.11.0"
+                }
+            },
+            "npm:babel-plugin-transform-react-jsx-self@6.11.0": {
+                "map": {
+                    "babel-plugin-syntax-jsx": "npm:babel-plugin-syntax-jsx@6.8.0",
+                    "babel-runtime": "npm:babel-runtime@6.9.2"
+                }
+            },
+            "npm:babel-code-frame@6.11.0": {
+                "map": {
+                    "js-tokens": "npm:js-tokens@2.0.0",
+                    "esutils": "npm:esutils@2.0.2",
+                    "babel-runtime": "npm:babel-runtime@6.9.2",
+                    "chalk": "npm:chalk@1.1.3"
                 }
             }
         }

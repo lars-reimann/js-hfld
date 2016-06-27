@@ -154,6 +154,12 @@
       "npm:jquery@2.2.4": {
         "format": "amd"
       },
+      "npm:lodash@4.13.1": {
+        "map": {
+          "buffer": "@empty",
+          "process": "@empty"
+        }
+      },
       "npm:ms@0.7.1": {
         "jspmNodeConversion": false,
         "format": "cjs"

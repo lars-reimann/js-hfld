@@ -91,7 +91,7 @@ export default class extends React.Component {
         const repulsiveForceCoef  = Number(this.state.repulsiveForceCoef);
         const forceToDistanceCoef = Number(this.state.forceToDistanceCoef);
         const nSteps              = Number(this.state.nSteps);
-        actions.randomLayout({
+        actions.eadesLayout({
             springForceCoef,
             idealDistance,
             repulsiveForceCoef,

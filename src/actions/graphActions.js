@@ -34,7 +34,7 @@ export function randomLayout(conf) {
 }
 
 /**
- * Rotates the layout aorund the given point by the angle.
+ * Rotates the layout around the given point by the angle.
  *
  * @param {number} angle
  * How far to rotate.

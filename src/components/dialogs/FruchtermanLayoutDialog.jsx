@@ -93,7 +93,7 @@ export default class extends React.Component {
         const idealDistanceCoef      = Number(this.state.idealDistanceCoef);
         const initialMaxDisplacement = Number(this.state.initialMaxDisplacement);
         const nSteps                 = Number(this.state.nSteps);
-        actions.randomLayout({
+        actions.fruchtermanLayout({
             pos,
             width,
             height,

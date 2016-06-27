@@ -41,8 +41,6 @@ class GraphStore extends Store {
         };
     }
 
-
-
     getGraph() {
         return this.state.graph;
     }
@@ -171,13 +169,13 @@ class GraphStore extends Store {
         this.state.draph.selectEdges(result);
     }
 
-    randomLayout(conf) {
+    randomLayout(conf) {console.log("random")
         const random = new earl.RandomLayout(conf);
         this.state.layout = random.layout(this.state.graph);
         this.state.draph.setLayout(this.state.layout);
     }
 
-    eadesLayout(conf) {
+    eadesLayout(conf) {console.log("eades")
         const eades = new earl.EadesLayout(conf);
         this.state.layout = eades.layout(this.state.graph, this.state.layout);
         this.state.draph.setLayout(this.state.layout);
@@ -189,16 +187,49 @@ class GraphStore extends Store {
         this.state.draph.setLayout(this.state.layout);
     }
 
+    /**
+     * Handles the SCALE action.
+     *
+     * @param {number} factorX
+     * The scalar to multiply the x-component of the vector by.
+     *
+     * @param {number} factorY
+     * The scalar to multiply the y-component of the vector by.
+     *
+     * @param {Vec2} center
+     * Where to start the scaling.
+     *
+     * @private
+     */
     scaleLayout(factorX, factorY, center) {
         this.state.layout.scaleAll(factorX, factorY, center);
         this.state.draph.setLayout(this.state.layout);
     }
 
+    /**
+     * Handles the TRANSLATE action.
+     *
+     * @param {Vec2} vec
+     * The vector to add to the current positions.
+     *
+     * @private
+     */
     translateLayout(vec) {
         this.state.layout.moveAllBy(vec);
         this.state.draph.setLayout(this.state.layout);
     }
 
+    /**
+     * Handles the ROTATE action.
+     *
+     * @param {number} angle
+     * How far to rotate.
+     *
+     * @param {Vec2} center
+     * The point to rotate around.
+     *
+     * @private
+     */
     rotateLayout(angle, center) {
         this.state.layout.rotateAll(angle, center);
         this.state.draph.setLayout(this.state.layout);

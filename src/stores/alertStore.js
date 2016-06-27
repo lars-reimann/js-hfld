@@ -62,4 +62,9 @@ class AlertStore extends ReduceStore {
     }
 }
 
+/**
+ * The sole instance of the alert store.
+ *
+ * @type {AlertStore}
+ */
 export default new AlertStore(dispatcher);

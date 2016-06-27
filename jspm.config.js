@@ -761,7 +761,7 @@ SystemJS.config({
         "npm:@ignavia/earl@1.3.4": {
             "map": {
                 "@ignavia/ella": "npm:@ignavia/ella@1.0.15",
-                "@ignavia/util": "npm:@ignavia/util@1.4.0",
+                "@ignavia/util": "npm:@ignavia/util@2.0.0",
                 "lodash": "npm:lodash@4.13.1"
             }
         },
@@ -857,6 +857,11 @@ SystemJS.config({
         "npm:@ignavia/rdf@2.2.0": {
             "map": {
                 "@ignavia/util": "npm:@ignavia/util@1.4.0"
+            }
+        },
+        "npm:@ignavia/util@2.0.0": {
+            "map": {
+                "lodash": "npm:lodash@4.13.1"
             }
         }
     }

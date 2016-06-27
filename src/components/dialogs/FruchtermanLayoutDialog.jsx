@@ -1,6 +1,8 @@
 import React    from "react";
 import * as rbs from "react-bootstrap";
 
+import {Vec2} from "@ignavia/ella";
+
 import * as actions                     from "../../actions/actions.js";
 import {validators, getValidationState} from "../../utils/utils.js";
 
@@ -82,16 +84,21 @@ export default class extends React.Component {
      * @private
      */
     ok() {
-        const springForceCoef     = Number(this.state.springForceCoef);
-        const repulsiveForceCoef  = Number(this.state.repulsiveForceCoef);
-        const idealDistance       = Number(this.state.idealDistance);
-        const forceToDistanceCoef = Number(this.state.forceToDistanceCoef);
-        const nSteps              = Number(this.state.nSteps);
+        const pos = new Vec2(
+            Number(this.state.x),
+            Number(this.state.y)
+        );
+        const width                  = Number(this.state.width);
+        const height                 = Number(this.state.height);
+        const idealDistanceCoef      = Number(this.state.idealDistanceCoef);
+        const initialMaxDisplacement = Number(this.state.initialMaxDisplacement);
+        const nSteps                 = Number(this.state.nSteps);
         actions.randomLayout({
-            springForceCoef,
-            repulsiveForceCoef,
-            idealDistance,
-            forceToDistanceCoef,
+            pos,
+            width,
+            height,
+            idealDistanceCoef,
+            initialMaxDisplacement,
             nSteps
         });
         actions.setDialogVisibility("fruchtermanLayout", false);

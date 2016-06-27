@@ -24,16 +24,24 @@ class GraphStore extends Store {
     initState() {
         const graph      = new earl.Graph();
         const stylesheet = new Stylesheet();
+        const draph      = new GraphView(graph, stylesheet.computeAllStyles(
+            rdfStore.getGraph(),
+            rdfStore.getProfile()
+        ));
+        const layouter = new earl.RandomLayout({
+            width: draph.getWidth(),
+            height: draph.getHeight(),
+        });
+        const layout = layouter.layout(graph);
         this.state = {
-            graph:      graph,
-            draph:      new GraphView(graph, stylesheet.computeAllStyles(
-                rdfStore.getGraph(),
-                rdfStore.getProfile()
-            )),
-            layout:     new earl.Layout(), // todo : generate random layout
-            stylesheet: stylesheet,
+            graph,
+            draph,
+            layout,
+            stylesheet
         };
     }
+
+
 
     getGraph() {
         return this.state.graph;
@@ -171,13 +179,13 @@ class GraphStore extends Store {
 
     eadesLayout(conf) {
         const eades = new earl.EadesLayout(conf);
-        this.state.layout = eades.layout(this.state.graph, conf);
+        this.state.layout = eades.layout(this.state.graph, this.state.layout);
         this.state.draph.setLayout(this.state.layout);
     }
 
     fruchtermanLayout(conf) {
         const fruchterman = new earl.FruchtermanLayout(conf);
-        this.state.layout = fruchterman.layout(this.state.graph, conf);
+        this.state.layout = fruchterman.layout(this.state.graph, this.state.layout);
         this.state.draph.setLayout(this.state.layout);
     }
 

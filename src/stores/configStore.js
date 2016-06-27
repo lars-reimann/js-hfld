@@ -253,4 +253,9 @@ class ConfigStore extends ReduceStore {
     }
 }
 
+/**
+ * The sole instance of the config store.
+ *
+ * @type {ConfigStore}
+ */
 export default new ConfigStore(dispatcher);

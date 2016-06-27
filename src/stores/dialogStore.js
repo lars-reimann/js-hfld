@@ -138,4 +138,9 @@ class DialogStore extends ReduceStore {
     }
 }
 
+/**
+ * The sole instance of the dialog store.
+ *
+ * @type {DialogStore}
+ */
 export default new DialogStore(dispatcher);

@@ -41,11 +41,6 @@ class SelectionStore extends ReduceStore {
         });
     }
 
-    selectAllMatchingTriples(state) {
-        const triples = [...this.getFilteredGraph()].map(triple => triple.id);
-        return this.select(state, triples, "triples");
-    }
-
     /**
      * Returns the triple filter.
      *
@@ -255,6 +250,23 @@ class SelectionStore extends ReduceStore {
     }
 
     /**
+     * Handles the SELECT_ALL_MATCHING_TRIPLES action. It selects all triples
+     * that pass the filter.
+     *
+     * @param {Object} state
+     * The current state.
+     *
+     * @return {Object}
+     * The new state.
+     *
+     * @private
+     */
+    selectAllMatchingTriples(state) {
+        const triples = [...this.getFilteredGraph()].map(triple => triple.id);
+        return this.select(state, triples, "triples");
+    }
+
+    /**
      * Transforms the state given an action.
      *
      * @param {Object} state
@@ -311,4 +323,9 @@ class SelectionStore extends ReduceStore {
     }
 }
 
+/**
+ * The sole instance of the selection store.
+ *
+ * @type {SelectionStore}
+ */
 export default new SelectionStore(dispatcher);

@@ -24,7 +24,7 @@ function graphData(props) {
 
 function nodeData(props) {
     const selectedNodes = props.selection.getSelectedNodes()
-        .map(node  => ({
+        .map(node => ({
             rdfNode: node,
             earlNode: props.graph.convertRDFNodeToEarlNode(node)
         }))

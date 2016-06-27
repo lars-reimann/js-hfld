@@ -15,7 +15,7 @@ import {validators, getValidationState} from "../../utils/utils.js";
 const initialState = {
     springForceCoef:     "2",
     idealDistance:       "500",
-    repulsiveForceCoef:  "1",
+    repulsiveForceCoef:  "30000",
     forceToDistanceCoef: "1",
     nSteps:              "100",
 };

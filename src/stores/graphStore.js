@@ -169,13 +169,13 @@ class GraphStore extends Store {
         this.state.draph.selectEdges(result);
     }
 
-    randomLayout(conf) {console.log("random")
+    randomLayout(conf) {
         const random = new earl.RandomLayout(conf);
         this.state.layout = random.layout(this.state.graph);
         this.state.draph.setLayout(this.state.layout);
     }
 
-    eadesLayout(conf) {console.log("eades")
+    eadesLayout(conf) {
         const eades = new earl.EadesLayout(conf);
         this.state.layout = eades.layout(this.state.graph, this.state.layout);
         this.state.draph.setLayout(this.state.layout);

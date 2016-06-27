@@ -13,14 +13,10 @@ import {validators, getValidationState} from "../../utils/utils.js";
  * @ignore
  */
 const initialState = {
-    randomX:             "0",
-    randomY:             "0",
-    randomWidth:         "1920",
-    randomHeight:        "1080",
     springForceCoef:     "2",
-    idealDistance:       "200",
+    idealDistance:       "500",
     repulsiveForceCoef:  "1",
-    forceToDistanceCoef: "0.1",
+    forceToDistanceCoef: "1",
     nSteps:              "100",
 };
 

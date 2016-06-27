@@ -15,10 +15,10 @@ import {validators, getValidationState} from "../../utils/utils.js";
 const initialState = {
     x:                      "0",
     y:                      "0",
-    width:                  "1920",
-    height:                 "1080",
+    width:                  `${screen.width}`,
+    height:                 `${screen.height}`,
     idealDistanceCoef:      "1",
-    initialMaxDisplacement: "192",
+    initialMaxDisplacement: `${screen.width / 10}`,
     nSteps:                 "50",
 };
 

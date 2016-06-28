@@ -1,7 +1,6 @@
 export CloseDialog             from "./CloseDialog.jsx";
 export EadesLayoutDialog       from "./EadesLayoutDialog.jsx";
 export EditNamespacesDialog    from "./EditNamespacesDialog.jsx";
-export EditNodesDialog         from "./EditNodesDialog.jsx";
 export EditTriplesDialog       from "./EditTriplesDialog.jsx";
 export FilterTriplesDialog     from "./FilterTriplesDialog.jsx";
 export FruchtermanLayoutDialog from "./FruchtermanLayoutDialog.jsx";

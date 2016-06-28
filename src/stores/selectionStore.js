@@ -146,7 +146,7 @@ class SelectionStore extends ReduceStore {
      */
     select(state, ids, field) {
         const oldSelection = state.get(field);
-        const newSelection = selection.union(ids);
+        const newSelection = oldSelection.union(ids);
         return state.set(field, newSelection);
     }
 

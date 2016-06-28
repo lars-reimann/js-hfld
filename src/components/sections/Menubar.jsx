@@ -117,9 +117,6 @@ export default class extends React.Component {
                             <MenuItem eventKey="SHOW_EDIT_NAMESPACES_DIALOG">
                                 Edit Namespaces...
                             </MenuItem>
-                            <MenuItem eventKey="SHOW_EDIT_NODES_DIALOG">
-                                Edit Nodes...
-                            </MenuItem>
                             <MenuItem eventKey="SHOW_EDIT_TRIPLES_DIALOG">
                                 Edit Triples...
                             </MenuItem>

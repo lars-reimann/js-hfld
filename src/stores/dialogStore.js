@@ -27,7 +27,6 @@ class DialogStore extends ReduceStore {
             showCloseDialog:             false,
             showEadesLayoutDialog:       false,
             showEditNamespacesDialog:    false,
-            showEditNodesDialog:         false,
             showEditTriplesDialog:       false,
             showFilterTriplesDialog:     false,
             showFruchtermanLayoutDialog: false,
@@ -77,8 +76,6 @@ class DialogStore extends ReduceStore {
             return state.set("showEadesLayoutDialog", show);
         case "editNamespaces":
             return state.set("showEditNamespacesDialog", show);
-        case "editNodes":
-            return state.set("showEditNodesDialog", show);
         case "editTriples":
             return state.set("showEditTriplesDialog", show);
         case "filterTriples":

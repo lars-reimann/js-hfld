@@ -270,8 +270,8 @@ SystemJS.config({
     ],
     map: {
         "@ignavia/draph": "npm:@ignavia/draph@1.0.5",
-        "@ignavia/earl": "npm:@ignavia/earl@1.3.4",
-        "@ignavia/ella": "npm:@ignavia/ella@1.0.15",
+        "@ignavia/earl": "npm:@ignavia/earl@1.4.0",
+        "@ignavia/ella": "npm:@ignavia/ella@1.1.0",
         "@ignavia/rdf": "npm:@ignavia/rdf@2.2.0",
         "@ignavia/util": "npm:@ignavia/util@2.0.0",
         "assert": "github:jspm/nodelibs-assert@0.2.0-alpha",
@@ -591,7 +591,7 @@ SystemJS.config({
                 "lodash": "npm:lodash@4.13.1",
                 "@ignavia/earl": "npm:@ignavia/earl@1.3.4",
                 "@ignavia/util": "npm:@ignavia/util@2.0.0",
-                "@ignavia/ella": "npm:@ignavia/ella@1.0.15"
+                "@ignavia/ella": "npm:@ignavia/ella@1.1.0"
             }
         },
         "npm:pixi.js@3.0.11": {
@@ -760,7 +760,7 @@ SystemJS.config({
         },
         "npm:@ignavia/earl@1.3.4": {
             "map": {
-                "@ignavia/ella": "npm:@ignavia/ella@1.0.15",
+                "@ignavia/ella": "npm:@ignavia/ella@1.1.0",
                 "@ignavia/util": "npm:@ignavia/util@2.0.0",
                 "lodash": "npm:lodash@4.13.1"
             }
@@ -862,6 +862,13 @@ SystemJS.config({
         "npm:@ignavia/util@2.0.0": {
             "map": {
                 "lodash": "npm:lodash@4.13.1"
+            }
+        },
+        "npm:@ignavia/earl@1.4.0": {
+            "map": {
+                "lodash": "npm:lodash@4.13.1",
+                "@ignavia/util": "npm:@ignavia/util@2.0.0",
+                "@ignavia/ella": "npm:@ignavia/ella@1.1.0"
             }
         }
     }

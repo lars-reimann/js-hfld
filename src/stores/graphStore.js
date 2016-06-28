@@ -28,7 +28,7 @@ class GraphStore extends Store {
             rdfStore.getGraph(),
             rdfStore.getProfile()
         ));
-        const layouter = new earl.RandomLayout({
+        const layouter = new earl.RandomLayouter({
             width: draph.getWidth(),
             height: draph.getHeight(),
         });
@@ -170,19 +170,19 @@ class GraphStore extends Store {
     }
 
     randomLayout(conf) {
-        const random = new earl.RandomLayout(conf);
+        const random = new earl.RandomLayouter(conf);
         this.state.layout = random.layout(this.state.graph);
         this.state.draph.setLayout(this.state.layout);
     }
 
     eadesLayout(conf) {
-        const eades = new earl.EadesLayout(conf);
+        const eades = new earl.EadesLayouter(conf);
         this.state.layout = eades.layout(this.state.graph, this.state.layout);
         this.state.draph.setLayout(this.state.layout);
     }
 
     fruchtermanLayout(conf) {
-        const fruchterman = new earl.FruchtermanLayout(conf);
+        const fruchterman = new earl.FruchtermanLayouter(conf);
         this.state.layout = fruchterman.layout(this.state.graph, this.state.layout);
         this.state.draph.setLayout(this.state.layout);
     }

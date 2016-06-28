@@ -15,6 +15,11 @@ export default class extends React.Component {
         this.props.graphView.startRenderLoop(); // call in constructor
     }
 
+    componentWillUpdate() {
+        this.props.graphView.stopRenderLoop();
+        document.getElementById("draph").innerHTML = "";
+    }
+
     componentDidUpdate() {
         const draph = document.getElementById("draph");
         draph.innerHTML = "";

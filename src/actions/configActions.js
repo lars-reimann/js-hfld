@@ -177,17 +177,6 @@ export function setTableSorting(sorting) {
 // Other ----------------------------------------------------------------------
 
 /**
- * Sets whether the menubar should be shown all the time. Alternatively it is hidden
- * until the user move the mousepointer there.
- *
- * @param {boolean} enabled
- * Whether it should be always visible.
- */
-export function setPermanentMenubar(enabled) {
-    dispatcher.dispatch({ type: "SET_PERMANENT_MENUBAR", enabled });
-}
-
-/**
  * Sets whether to use the profile to turn IRIs into CURIEs.
  *
  * @param {boolean} enable.

@@ -27,7 +27,6 @@ class ConfigStore extends ReduceStore {
             leftSidebarActiveTab:  "literals",
             leftSidebarTabs:       ["literals"],
             leftSidebarWidth:      2,
-            permanentMenubar:      true,
             rightSidebarActiveTab: "literals",
             rightSidebarTabs:      ["literals", "earlData", "rdfData"],
             rightSidebarWidth:     3,
@@ -227,8 +226,6 @@ class ConfigStore extends ReduceStore {
             return state.set("leftSidebarWidth", action.width);
         case "SET_RIGHT_SIDEBAR_ACTIVE_TAB":
             return state.set("rightSidebarActiveTab", action.activeTab);
-        case "SET_PERMANENT_MENUBAR":
-            return state.set("permanentMenubar", action.enabled);
         case "SET_RIGHT_SIDEBAR_VISIBILITY":
             return state.set("showRightSidebar", action.show);
         case "SET_RIGHT_SIDEBAR_TABS":

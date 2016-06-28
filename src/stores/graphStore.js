@@ -235,6 +235,10 @@ class GraphStore extends Store {
         this.state.draph.setLayout(this.state.layout);
     }
 
+    center() {
+        this.state.draph.center();
+    }
+
     __onDispatch(action) {
         switch (action.type) {
             case "ADD_TRIPLE":
@@ -296,6 +300,8 @@ class GraphStore extends Store {
                 return this.rotateLayout(action.angle, action.center);
             case "TRANSLATE":
                 return this.translateLayout(action.vec);
+            case "CENTER":
+                return this.center();
             case "FILTER_TRIPLES":
             case "CLEAR_TRIPLE_FILTER":
         }

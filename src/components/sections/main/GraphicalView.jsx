@@ -1,39 +1,47 @@
 import React from "react";
+import $     from "jquery";
 
 export default class extends React.Component {
     constructor(props) {
         super(props);
     }
 
-    componentDidMount() {
-        const draph = document.getElementById("draph");
-        draph.appendChild(this.props.graphView.renderer.view);
+    resize() {
         this.props.graphView.resize(
-            draph.offsetWidth,
-            draph.offsetHeight
+            this.$draph[0].offsetWidth,
+            innerHeight - 71
         );
-        this.props.graphView.startRenderLoop(); // call in constructor
     }
 
-    componentWillUpdate() {
-        this.props.graphView.stopRenderLoop();
-        document.getElementById("draph").innerHTML = "";
+    componentDidMount() {
+        this.$draph = $("#draph");
+        $(window).on("resize", () => this.resize());
+
+        this.updateRendererView();
     }
 
     componentDidUpdate() {
-        const draph = document.getElementById("draph");
-        draph.innerHTML = "";
-        draph.appendChild(this.props.graphView.renderer.view);
-        this.props.graphView.resize(
-            draph.offsetWidth,
-            draph.offsetHeight
-        );
+        this.updateRendererView();
+    }
+
+    updateRendererView() {
+        this.resize();
+        this.$draph.append(this.props.graphView.getView());
         this.props.graphView.startRenderLoop();
     }
 
+    componentWillUpdate() {
+        this.reset();
+    }
+
     componentWillUnmount() {
+        $(window).off("resize");
+        this.reset();
+    }
+
+    reset() {
         this.props.graphView.stopRenderLoop();
-        document.getElementById("draph").innerHTML = "";
+        this.$draph.html("");
     }
 
     render() {

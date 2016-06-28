@@ -1,5 +1,5 @@
 import React from "react";
-import {Navbar, Nav, NavItem, NavDropdown, MenuItem, Glyphicon} from "react-bootstrap";
+import * as rbs from "react-bootstrap";
 
 import * as actions from "../../actions/actions.js";
 
@@ -60,8 +60,6 @@ export default class extends React.Component {
             return actions.setViewport("table");
         case "GRAPHICAL_VIEW":
             return actions.setViewport("graphical");
-        case "TOGGLE_PERMANENT_MENUBAR":
-            return actions.setPermanentMenubar(!this.props.permanentMenubar);
         case "TOGGLE_LEFT_SIDEBAR_VISIBILITY":
             return actions.setLeftSidebarVisibility(!this.props.showLeftSidebar);
         case "TOGGLE_RIGHT_SIDEBAR_VISIBILITY":
@@ -74,129 +72,132 @@ export default class extends React.Component {
             return actions.setShrinkNodeValues(!this.props.shrinkNodeValues);
         case "SELECT_ALL_MATCHING_TRIPLES":
             return actions.selectAllMatchingTriples();
+        case "CENTER":
+            return actions.center();
         }
     }
 
     render() {
         return (
-            <Navbar fluid inverse staticTop>
-                <Navbar.Header>
-                    <Navbar.Toggle />
-                </Navbar.Header>
-                <Navbar.Collapse>
-                    <Nav onSelect={(key) => this.handleSelect(key)}>
-                        <NavDropdown title="File" id="menubar-file">
-                            <MenuItem eventKey="SHOW_OPEN_TURTLE_DIALOG">
+            <rbs.Navbar fluid inverse staticTop>
+                <rbs.Navbar.Header>
+                    <rbs.Navbar.Toggle />
+                </rbs.Navbar.Header>
+                <rbs.Navbar.Collapse>
+                    <rbs.Nav onSelect={(key) => this.handleSelect(key)}>
+                        <rbs.NavDropdown title="File" id="menubar-file">
+                            <rbs.MenuItem eventKey="SHOW_OPEN_TURTLE_DIALOG">
                                 Open Turtle...
-                            </MenuItem>
-                            <MenuItem eventKey="SHOW_OPEN_STYLE_DIALOG">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="SHOW_OPEN_STYLE_DIALOG">
                                 Open Style...
-                            </MenuItem>
-                            <MenuItem eventKey="SHOW_OPEN_LAYOUT_DIALOG">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="SHOW_OPEN_LAYOUT_DIALOG">
                                 Open Layout...
-                            </MenuItem>
-                            <MenuItem eventKey="SHOW_OPEN_CONFIG_DIALOG">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="SHOW_OPEN_CONFIG_DIALOG">
                                 Open Configuration...
-                            </MenuItem>
-                            <MenuItem divider />
-                            <MenuItem eventKey="SHOW_SAVE_TURTLE_DIALOG">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem divider />
+                            <rbs.MenuItem eventKey="SHOW_SAVE_TURTLE_DIALOG">
                                 Save Turtle...
-                            </MenuItem>
-                            <MenuItem eventKey="SHOW_SAVE_LAYOUT_DIALOG">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="SHOW_SAVE_LAYOUT_DIALOG">
                                 Save Layout...
-                            </MenuItem>
-                            <MenuItem eventKey="SHOW_SAVE_CONFIG_DIALOG">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="SHOW_SAVE_CONFIG_DIALOG">
                                 Save Configuration...
-                            </MenuItem>
-                            <MenuItem divider />
-                            <MenuItem eventKey="SHOW_CLOSE_DIALOG">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem divider />
+                            <rbs.MenuItem eventKey="SHOW_CLOSE_DIALOG">
                                 Close...
-                            </MenuItem>
-                        </NavDropdown>
-                        <NavDropdown title="Edit" id="menubar-edit">
-                            <MenuItem eventKey="SHOW_EDIT_NAMESPACES_DIALOG">
+                            </rbs.MenuItem>
+                        </rbs.NavDropdown>
+                        <rbs.NavDropdown title="Edit" id="menubar-edit">
+                            <rbs.MenuItem eventKey="SHOW_EDIT_NAMESPACES_DIALOG">
                                 Edit Namespaces...
-                            </MenuItem>
-                            <MenuItem eventKey="SHOW_EDIT_TRIPLES_DIALOG">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="SHOW_EDIT_TRIPLES_DIALOG">
                                 Edit Triples...
-                            </MenuItem>
-                            <MenuItem divider />
-                            <MenuItem eventKey="SHOW_FILTER_TRIPLES_DIALOG">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem divider />
+                            <rbs.MenuItem eventKey="SHOW_FILTER_TRIPLES_DIALOG">
                                 Filter Triples...
-                            </MenuItem>
-                            <MenuItem eventKey="CLEAR_TRIPLE_FILTER">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="CLEAR_TRIPLE_FILTER">
                                 Clear Triple Filter
-                            </MenuItem>
-                            <MenuItem eventKey="SELECT_ALL_MATCHING_TRIPLES">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="SELECT_ALL_MATCHING_TRIPLES">
                                 Select All Matching Triples
-                            </MenuItem>
-                            <MenuItem divider />
-                            <MenuItem eventKey="CLEAR_TRIPLE_SELECTION">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem divider />
+                            <rbs.MenuItem eventKey="CLEAR_TRIPLE_SELECTION">
                                 Clear Triple Selection
-                            </MenuItem>
-                            <MenuItem eventKey="CLEAR_NODE_SELECTION">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="CLEAR_NODE_SELECTION">
                                 Clear Node Selection
-                            </MenuItem>
-                            <MenuItem eventKey="CLEAR_SELECTION">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="CLEAR_SELECTION">
                                 Clear Selection
-                            </MenuItem>
-                        </NavDropdown>
-                        <NavDropdown title="Layout" id="menubar-layout">
-                            <MenuItem eventKey="SHOW_RANDOM_LAYOUT_DIALOG">
+                            </rbs.MenuItem>
+                        </rbs.NavDropdown>
+                        <rbs.NavDropdown title="Layout" id="menubar-layout">
+                            <rbs.MenuItem eventKey="SHOW_RANDOM_LAYOUT_DIALOG">
                                 Random Layout...
-                            </MenuItem>
-                            <MenuItem eventKey="SHOW_EADES_LAYOUT_DIALOG">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="SHOW_EADES_LAYOUT_DIALOG">
                                 Eades-Layout...
-                            </MenuItem>
-                            <MenuItem eventKey="SHOW_FRUCHTERMAN_LAYOUT_DIALOG">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="SHOW_FRUCHTERMAN_LAYOUT_DIALOG">
                                 Fruchterman-Layout...
-                            </MenuItem>
-                            <MenuItem divider />
-                            <MenuItem eventKey="SHOW_TRANSLATE_DIALOG">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem divider />
+                            <rbs.MenuItem eventKey="SHOW_TRANSLATE_DIALOG">
                                 Translate...
-                            </MenuItem>
-                            <MenuItem eventKey="SHOW_SCALE_DIALOG">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="SHOW_SCALE_DIALOG">
                                 Scale...
-                            </MenuItem>
-                            <MenuItem eventKey="SHOW_ROTATE_DIALOG">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="SHOW_ROTATE_DIALOG">
                                 Rotate...
-                            </MenuItem>
-                        </NavDropdown>
-                        <NavDropdown title="View" id="menubar-view">
-                            <MenuItem eventKey="SOURCE_VIEW">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem divider />
+                            <rbs.MenuItem eventKey="CENTER">
+                                Center
+                            </rbs.MenuItem>
+                        </rbs.NavDropdown>
+                        <rbs.NavDropdown title="View" id="menubar-view">
+                            <rbs.MenuItem eventKey="SOURCE_VIEW">
                                 <ToggleGlyphicon enabled={this.props.viewport === "source"} /> Source
-                            </MenuItem>
-                            <MenuItem eventKey="TABLE_VIEW">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="TABLE_VIEW">
                                 <ToggleGlyphicon enabled={this.props.viewport === "table"} /> Table
-                            </MenuItem>
-                            <MenuItem eventKey="GRAPHICAL_VIEW">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="GRAPHICAL_VIEW">
                                 <ToggleGlyphicon enabled={this.props.viewport === "graphical"} /> Graphical
-                            </MenuItem>
-                            <MenuItem divider />
-                            <MenuItem eventKey="TOGGLE_PERMANENT_MENUBAR" disabled>
-                                <ToggleGlyphicon enabled={this.props.permanentMenubar} /> Permanent Menubar
-                            </MenuItem>
-                            <MenuItem eventKey="TOGGLE_LEFT_SIDEBAR_VISIBILITY">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem divider />
+                            <rbs.MenuItem eventKey="TOGGLE_LEFT_SIDEBAR_VISIBILITY">
                                 <ToggleGlyphicon enabled={this.props.showLeftSidebar} /> Show Left Sidebar
-                            </MenuItem>
-                            <MenuItem eventKey="TOGGLE_RIGHT_SIDEBAR_VISIBILITY">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="TOGGLE_RIGHT_SIDEBAR_VISIBILITY">
                                 <ToggleGlyphicon enabled={this.props.showRightSidebar} /> Show Right Sidebar
-                            </MenuItem>
-                            <MenuItem divider />
-                            <MenuItem eventKey="SHOW_TABLE_DIALOG">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem divider />
+                            <rbs.MenuItem eventKey="SHOW_TABLE_DIALOG">
                                 <BlankGlyphicon /> Configure Table...
-                            </MenuItem>
-                            <MenuItem eventKey="SHOW_SIDEBAR_DIALOG">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem eventKey="SHOW_SIDEBAR_DIALOG">
                                 <BlankGlyphicon /> Configure Sidebars...
-                            </MenuItem>
-                            <MenuItem divider />
-                            <MenuItem eventKey="TOGGLE_SHRINK_NODE_VALUES">
+                            </rbs.MenuItem>
+                            <rbs.MenuItem divider />
+                            <rbs.MenuItem eventKey="TOGGLE_SHRINK_NODE_VALUES">
                                 <ToggleGlyphicon enabled={this.props.shrinkNodeValues} /> Shrink Node Values
-                            </MenuItem>
-                        </NavDropdown>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
+                            </rbs.MenuItem>
+                        </rbs.NavDropdown>
+                    </rbs.Nav>
+                </rbs.Navbar.Collapse>
+            </rbs.Navbar>
         );
     }
 }

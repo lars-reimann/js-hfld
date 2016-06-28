@@ -19,3 +19,10 @@ export function moveNodeToTop(nodeId) {
 export function moveEdgeToTop(edgeId) {
     dispatcher.dispatch({ type: "MOVE_EDGE_TO_TOP", edgeId });
 }
+
+/**
+ * Moves the stage so the nodes are centered.
+ */
+export function center() {
+    dispatcher.dispatch({ type: "CENTER" });
+}

@@ -3,7 +3,6 @@ import React from "react";
 export default class extends React.Component {
     constructor(props) {
         super(props);
-        this.props.graphView.startRenderLoop();
     }
 
     componentDidMount() {
@@ -24,6 +23,7 @@ export default class extends React.Component {
             draph.offsetWidth,
             draph.offsetHeight
         );
+        this.props.graphView.startRenderLoop();
     }
 
     componentWillUnmount() {

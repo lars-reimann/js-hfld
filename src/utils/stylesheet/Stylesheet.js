@@ -15,6 +15,18 @@ import NodeSelector from "./NodeSelector.js";
  * @ignore
  */
 const defaultConf = {
+    graph: {
+        behaviors: [{
+            type: "zoom",
+            conf: {
+                minScaleX: 0.01,
+                minScaleY: 0.01
+            }
+        }, {
+            type: "pan",
+            conf: {}
+        }]
+    },
     node: [
         {
             selector: "*",
@@ -158,7 +170,7 @@ export default class {
          * @type {Object}
          * @private
          */
-        this.graphConf = conf.graph;
+        this.graphConf = conf.graph || defaultConf.graph;
 
         /**
          * The node rules.

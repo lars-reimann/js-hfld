@@ -8,13 +8,13 @@ export default class extends React.Component {
 
     resize() {
         this.props.graphView.resize(
-            this.$draph[0].offsetWidth,
+            this.$draph.offsetWidth,
             innerHeight - 71
         );
     }
 
     componentDidMount() {
-        this.$draph = $("#draph");
+        this.$draph = document.getElementById("draph");
         $(window).on("resize", () => this.resize());
 
         this.updateRendererView();
@@ -26,7 +26,7 @@ export default class extends React.Component {
 
     updateRendererView() {
         this.resize();
-        this.$draph.append(this.props.graphView.getView());
+        this.$draph.appendChild(this.props.graphView.getView());
         this.props.graphView.startRenderLoop();
     }
 
@@ -41,7 +41,7 @@ export default class extends React.Component {
 
     reset() {
         this.props.graphView.stopRenderLoop();
-        this.$draph.html("");
+        draph.innerHTML = "";
     }
 
     render() {

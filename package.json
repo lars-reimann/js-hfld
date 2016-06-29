@@ -28,7 +28,7 @@
   "jspm": {
     "name": "@ignavia/hfld",
     "dependencies": {
-      "@ignavia/draph": "1.0.5",
+      "@ignavia/draph": "^1.1.0",
       "@ignavia/ella": "^1.0.15",
       "@ignavia/rdf": "^2.0.0",
       "@ignavia/earl": "^1.4.0",
@@ -152,9 +152,6 @@
           "test.js"
         ]
       },
-      "npm:jquery@2.2.4": {
-        "format": "amd"
-      },
       "npm:lodash@4.13.1": {
         "map": {
           "buffer": "@empty",
@@ -221,4 +218,5 @@
       }
     }
   }
-}
+}
+

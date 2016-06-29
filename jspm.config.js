@@ -44,15 +44,6 @@ SystemJS.config({
                     "babel-types": "npm:babel-types@6.11.1"
                 }
             },
-            "npm:babel-helper-remap-async-to-generator@6.8.0": {
-                "map": {
-                    "babel-helper-function-name": "npm:babel-helper-function-name@6.8.0",
-                    "babel-runtime": "npm:babel-runtime@6.9.2",
-                    "babel-template": "npm:babel-template@6.9.0",
-                    "babel-traverse": "npm:babel-traverse@6.10.4",
-                    "babel-types": "npm:babel-types@6.11.1"
-                }
-            },
             "npm:babel-messages@6.8.0": {
                 "map": {
                     "babel-runtime": "npm:babel-runtime@6.9.2"
@@ -90,7 +81,7 @@ SystemJS.config({
             },
             "npm:babel-plugin-transform-async-to-generator@6.8.0": {
                 "map": {
-                    "babel-helper-remap-async-to-generator": "npm:babel-helper-remap-async-to-generator@6.8.0",
+                    "babel-helper-remap-async-to-generator": "npm:babel-helper-remap-async-to-generator@6.11.2",
                     "babel-plugin-syntax-async-functions": "npm:babel-plugin-syntax-async-functions@6.8.0",
                     "babel-runtime": "npm:babel-runtime@6.9.2"
                 }
@@ -227,6 +218,15 @@ SystemJS.config({
                     "to-fast-properties": "npm:to-fast-properties@1.0.2",
                     "esutils": "npm:esutils@2.0.2"
                 }
+            },
+            "npm:babel-helper-remap-async-to-generator@6.11.2": {
+                "map": {
+                    "babel-runtime": "npm:babel-runtime@6.9.2",
+                    "babel-template": "npm:babel-template@6.9.0",
+                    "babel-types": "npm:babel-types@6.11.1",
+                    "babel-traverse": "npm:babel-traverse@6.10.4",
+                    "babel-helper-function-name": "npm:babel-helper-function-name@6.8.0"
+                }
             }
         }
     },
@@ -269,7 +269,7 @@ SystemJS.config({
         "github:*/*.json"
     ],
     map: {
-        "@ignavia/draph": "npm:@ignavia/draph@1.0.5",
+        "@ignavia/draph": "npm:@ignavia/draph@1.1.0",
         "@ignavia/earl": "npm:@ignavia/earl@1.4.0",
         "@ignavia/ella": "npm:@ignavia/ella@1.1.0",
         "@ignavia/rdf": "npm:@ignavia/rdf@2.2.0",
@@ -282,6 +282,7 @@ SystemJS.config({
         "core-js": "npm:core-js@1.2.6",
         "crypto": "github:jspm/nodelibs-crypto@0.2.0-alpha",
         "domain": "github:jspm/nodelibs-domain@0.2.0-alpha",
+        "draph": "npm:@ignavia/draph@1.1.0",
         "events": "github:jspm/nodelibs-events@0.2.0-alpha",
         "flux": "npm:flux@2.1.1",
         "fs": "github:jspm/nodelibs-fs@0.2.0-alpha",
@@ -584,17 +585,6 @@ SystemJS.config({
                 "inherits": "npm:inherits@2.0.1"
             }
         },
-        "npm:@ignavia/draph@1.0.5": {
-            "map": {
-                "pixi.js": "npm:pixi.js@3.0.11",
-                "jquery-mousewheel": "npm:jquery-mousewheel@3.1.13",
-                "jquery": "npm:jquery@2.2.4",
-                "lodash": "npm:lodash@4.13.1",
-                "@ignavia/earl": "npm:@ignavia/earl@1.3.4",
-                "@ignavia/util": "npm:@ignavia/util@2.0.0",
-                "@ignavia/ella": "npm:@ignavia/ella@1.1.0"
-            }
-        },
         "npm:pixi.js@3.0.11": {
             "map": {
                 "async": "npm:async@1.5.2",
@@ -759,13 +749,6 @@ SystemJS.config({
                 "readable-stream": "npm:readable-stream@1.1.14"
             }
         },
-        "npm:@ignavia/earl@1.3.4": {
-            "map": {
-                "@ignavia/ella": "npm:@ignavia/ella@1.1.0",
-                "@ignavia/util": "npm:@ignavia/util@2.0.0",
-                "lodash": "npm:lodash@4.13.1"
-            }
-        },
         "npm:elliptic@6.3.1": {
             "map": {
                 "bn.js": "npm:bn.js@4.11.4",
@@ -870,6 +853,16 @@ SystemJS.config({
                 "lodash": "npm:lodash@4.13.1",
                 "@ignavia/util": "npm:@ignavia/util@2.0.0",
                 "@ignavia/ella": "npm:@ignavia/ella@1.1.0"
+            }
+        },
+        "npm:@ignavia/draph@1.1.0": {
+            "map": {
+                "lodash": "npm:lodash@4.13.1",
+                "jquery-mousewheel": "npm:jquery-mousewheel@3.1.13",
+                "jquery": "npm:jquery@3.0.0",
+                "@ignavia/util": "npm:@ignavia/util@2.0.0",
+                "@ignavia/ella": "npm:@ignavia/ella@1.1.0",
+                "@ignavia/earl": "npm:@ignavia/earl@1.4.0"
             }
         }
     }

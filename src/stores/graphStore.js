@@ -85,14 +85,28 @@ class GraphStore extends Store {
         );
     }
 
-    addNode(id) {
+    addNode(id, addToDraph = false) {
         if (!this.state.graph.getNodeById(id)) {
             const node = new earl.Node(id);
             this.state.graph.addNodes(node);
+            if (addToDraph) {
+                this.addNodeToDraph(node);
+            }
         }
     }
 
-    addTriple({subject, object, id}) {
+    addNodeToDraph(nodeObj) {
+        const conf = this.state.stylesheet.computeNodeStyle(
+            rdfStore.getGraph(),
+            rdfStore.getProfile(),
+            nodeObj.id
+        );
+        this.state.draph.addNode(nodeObj, conf);
+        const nodeG = this.state.draph.getNodeDisplayObjectById(nodeObj.id);
+        this.state.layout.moveNodeTo(nodeObj, new Vec2(nodeG.x, nodeG.y));
+    }
+
+    addTriple({subject, object, id}, addToDraph = false) {
         const subjectHash = subject.toNT();
         this.addNode(subjectHash);
 
@@ -109,7 +123,7 @@ class GraphStore extends Store {
         const node = this.convertRDFNodeToEarlNode(rdfNode);
         if (node && node.getNumberOfIncidentEdges() === 0) {
             this.state.graph.removeNodes(node);
-            this.state.layout.delete(node.id);
+            this.state.draph.removeNode(node.id);
         }
     }
 
@@ -119,6 +133,7 @@ class GraphStore extends Store {
             this.state.graph.removeEdges(edge);
             this.removeNode(rdfTriple.subject);
             this.removeNode(rdfTriple.object);
+            this.state.draph.removeEdge(edge.id);
         }
     }
 
@@ -243,7 +258,7 @@ class GraphStore extends Store {
         switch (action.type) {
             case "ADD_TRIPLE":
                 dispatcher.waitFor([rdfToken]);
-                this.addTriple(action.triple);
+                this.addTriple(action.triple, true);
                 this.__emitChange();
                 break;
             case "REMOVE_TRIPLES":

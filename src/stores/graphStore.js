@@ -19,21 +19,23 @@ const selectionToken = selectionStore.getDispatchToken();
 class GraphStore extends Store {
     constructor(dispatcher) {
         super(dispatcher);
+        this.initialLayouter = new earl.RandomLayouter({
+            width:  screen.width,
+            height: screen.height
+        });
         this.initState();
     }
 
     initState() {
         const graph      = new earl.Graph();
         const stylesheet = new Stylesheet();
-        const draph      = new GraphView(graph, stylesheet.computeAllStyles(
+        const layout     = this.initialLayouter.layout(graph);
+        const conf       = stylesheet.computeAllStyles(
             rdfStore.getGraph(),
             rdfStore.getProfile()
-        ));
-        const layouter = new earl.RandomLayouter({
-            width: draph.getWidth(),
-            height: draph.getHeight(),
-        });
-        const layout = layouter.layout(graph);
+        );
+        conf.layout = layout;
+        const draph = new GraphView(graph, conf);
         this.state = {
             graph,
             draph,
@@ -77,13 +79,14 @@ class GraphStore extends Store {
             this.addTriple(triple);
         }
 
-        this.state.draph = new GraphView(
-            this.state.graph,
-            this.state.stylesheet.computeAllStyles(
-                rdfStore.getGraph(),
-                rdfStore.getProfile()
-            )
+        this.state.layout = this.initialLayouter.layout(this.state.graph);
+        const conf = this.state.stylesheet.computeAllStyles(
+            rdfStore.getGraph(),
+            rdfStore.getProfile()
         );
+        conf.layout = this.state.layout;
+        console.log(conf)
+        this.state.draph  = new GraphView(this.state.graph, conf);
     }
 
     addNode(id, addToDraph = false) {
@@ -167,13 +170,12 @@ class GraphStore extends Store {
     loadedStyle() {
         dispatcher.waitFor([rdfToken]);
         this.state.draph.stopRenderLoop();
-        this.state.draph = new GraphView(
-            this.state.graph,
-            this.state.stylesheet.computeAllStyles(
-                rdfStore.getGraph(),
-                rdfStore.getProfile()
-            )
+        const conf = this.state.stylesheet.computeAllStyles(
+            rdfStore.getGraph(),
+            rdfStore.getProfile()
         );
+        conf.layout = this.state.layout;
+        this.state.draph = new GraphView(this.state.graph, conf);
         this.__emitChange();
     }
 

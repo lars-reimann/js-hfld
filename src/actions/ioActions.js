@@ -1,3 +1,4 @@
+import {Layout}       from "@ignavia/earl";
 import {TurtleReader} from "@ignavia/rdf";
 
 import {enqueueAlert} from "./alertActions.js";
@@ -141,6 +142,76 @@ export function saveConfig(config, filename) {
 
 // Layout ---------------------------------------------------------------------
 
+/**
+ * Parses the layout and dispatches the appropriate action.
+ *
+ * @param {string} s
+ * The stringified layout.
+ */
+function parseLayout(s) {
+    try {
+        const layout = Layout.fromJSON(JSON.parse(s));
+        dispatcher.dispatch({ type: "OPEN_LAYOUT", layout });
+    } catch (err) {
+        console.error(err);
+        enqueueAlert("danger", err.message);
+    }
+}
+
+/**
+ * Stringifies the given layout.
+ *
+ * @param {Object} layout
+ * The layout to stringify.
+ */
+function writeLayout(layout) {
+    return JSON.stringify(layout);
+}
+
+/**
+ * Sets the given string as new layout.
+ *
+ * @param {string} s
+ * The stringified layout.
+ */
+export function openLayoutDirect(s) {
+    parseLayout(s);
+}
+
+/**
+ * Sets the content of the given file as new layout.
+ *
+ * @param {File} file
+ * The file containing the layout.
+ */
+export function openLayoutFile(file) {
+    openFile(file, parseLayout);
+}
+
+/**
+ * Sets the content of the response from the given URL as new layout.
+ *
+ * @param {string} url
+ * The URL to open.
+ */
+export function openLayoutURL(url) {
+    openURL(url, parseLayout);
+}
+
+/**
+ * Saves the given layout to a file with the given name.
+ *
+ * @param {Object} layout
+ * The layout to save.
+ *
+ * @param {string} filename
+ * The name of the file.
+ */
+export function saveLayout(layout, filename) {
+    const text = writeLayout(layout);
+    download(text, filename);
+}
+
 // Style ----------------------------------------------------------------------
 
 /**
@@ -151,8 +222,8 @@ export function saveConfig(config, filename) {
  */
 function parseStyle(s) {
     try {
-        const style = JSON.parse(s);
-        dispatcher.dispatch({ type: "OPEN_STYLE", stylesheet: new Stylesheet(style) });
+        const stylesheet = new Stylesheet(JSON.parse(s));
+        dispatcher.dispatch({ type: "OPEN_STYLE", stylesheet });
     } catch (err) {
         console.error(err);
         enqueueAlert("danger", err.message);

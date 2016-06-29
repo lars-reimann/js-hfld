@@ -140,7 +140,7 @@ export default class extends React.Component {
                     visible={this.props.dialogs.showSaveConfigDialog}
                 />
                 <dialogs.SaveDialog
-                    data={this.props.layout}
+                    data={this.props.graph.getLayout()}
                     filename="layout.json"
                     name="saveLayout"
                     save={actions.saveLayout}

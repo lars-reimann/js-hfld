@@ -52,6 +52,10 @@ class GraphStore extends Store {
         return this.state.draph;
     }
 
+    getLayout() {
+        return this.state.layout;
+    }
+
     convertEarlNodeToRDFNode(earlNode) {
         return rdf.RDFNode.fromNT(earlNode.id);
     }
@@ -85,7 +89,6 @@ class GraphStore extends Store {
             rdfStore.getProfile()
         );
         conf.layout = this.state.layout;
-        console.log(conf)
         this.state.draph  = new GraphView(this.state.graph, conf);
     }
 
@@ -282,6 +285,12 @@ class GraphStore extends Store {
         this.__emitChange();
     }
 
+    openLayout(layout) {
+        this.state.layout = layout;
+        this.state.draph.setLayout(layout);
+        this.__emitChange();
+    }
+
     __onDispatch(action) {
         switch (action.type) {
             case "ADD_TRIPLE":
@@ -348,6 +357,8 @@ class GraphStore extends Store {
             case "FILTER_TRIPLES":
             case "CLEAR_TRIPLE_FILTER":
                 return this.filterTriples();
+            case "OPEN_LAYOUT":
+                return this.openLayout(action.layout);
         }
     }
 }

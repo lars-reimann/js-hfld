@@ -31,8 +31,9 @@
       "@ignavia/draph": "^1.1.0",
       "@ignavia/ella": "^1.0.15",
       "@ignavia/rdf": "^2.0.0",
-      "@ignavia/earl": "^1.4.0",
+      "@ignavia/earl": "1.4.0",
       "@ignavia/util": "^2.0.0",
+      "draph": "@ignavia/draph@1.1.0",
       "immutable": "^3.7.6",
       "jquery": "^3.0.0",
       "lodash": "^4.13.1",
@@ -218,5 +219,4 @@
       }
     }
   }
-}
-
+}

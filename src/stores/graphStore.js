@@ -3,6 +3,7 @@ import {Store} from "flux/utils";
 import * as earl                        from "@ignavia/earl";
 import {Tolkien1To1Map, Tolkien1ToNMap} from "@ignavia/util";
 import * as rdf                         from "@ignavia/rdf";
+import {Vec2}                           from "@ignavia/ella";
 import {GraphView} from "@ignavia/draph";
 
 import {Stylesheet} from "../utils/stylesheet/index.js";
@@ -108,15 +109,27 @@ class GraphStore extends Store {
 
     addTriple({subject, object, id}, addToDraph = false) {
         const subjectHash = subject.toNT();
-        this.addNode(subjectHash);
+        this.addNode(subjectHash, addToDraph);
 
         if (!object.isLiteral()) {
             const objectHash = object.toNT();
-            this.addNode(objectHash);
+            this.addNode(objectHash, addToDraph);
 
             const edge = new earl.Edge(subjectHash, objectHash, id);
             this.state.graph.addEdges(edge);
+            if (addToDraph) {
+                this.addEdgeToDraph(edge);
+            }
         }
+    }
+
+    addEdgeToDraph(edgeObj) {
+        const conf = this.state.stylesheet.computeEdgeStyle(
+            rdfStore.getGraph(),
+            rdfStore.getProfile(),
+            edgeObj.id
+        );
+        this.state.draph.addEdge(edgeObj, conf);
     }
 
     removeNode(rdfNode) {
@@ -254,6 +267,19 @@ class GraphStore extends Store {
         this.state.draph.center();
     }
 
+    filterTriples() {
+        dispatcher.waitFor([selectionToken]);
+        const nodesToKeep = new Set();
+        const edgesToKeep = new Set();
+        for (let triple of selectionStore.getFilteredGraph()) {
+            nodesToKeep.add(triple.subject.toNT());
+            nodesToKeep.add(triple.object.toNT());
+            edgesToKeep.add(triple.id);
+        }
+        this.state.draph.filterGraph(nodesToKeep, edgesToKeep);
+        this.__emitChange();
+    }
+
     __onDispatch(action) {
         switch (action.type) {
             case "ADD_TRIPLE":
@@ -319,6 +345,7 @@ class GraphStore extends Store {
                 return this.center();
             case "FILTER_TRIPLES":
             case "CLEAR_TRIPLE_FILTER":
+                return this.filterTriples();
         }
     }
 }

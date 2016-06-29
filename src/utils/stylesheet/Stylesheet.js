@@ -347,7 +347,7 @@ export default class {
      */
     computeNodeStyle(rdfGraph, profile, nodeId) {
         let result = {};
-        for (let {selector, properties} of this.nodeConfs) {
+        for (let {selector, properties} of this.nodeRules) {
             if (selector.isAffectedNode(rdfGraph, nodeId)) {
                 result = _.merge(result, properties);
             }
@@ -373,7 +373,7 @@ export default class {
      */
     computeEdgeStyle(rdfGraph, profile, edgeId) {
         let result = {};
-        for (let {selector, properties} of this.edgeConfs) {
+        for (let {selector, properties} of this.edgeRules) {
             if (selector.isAffectedEdge(rdfGraph, edgeId)) {
                 result = _.merge(result, properties);
             }

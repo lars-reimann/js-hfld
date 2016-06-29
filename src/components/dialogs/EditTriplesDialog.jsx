@@ -27,7 +27,7 @@ export default class extends React.Component {
     constructor(props) {
         super(props);
 
-        const selected = this.props.triples[0]; // TODO: initially nothing is selected and the input fields are not shown
+        const selected = this.props.triples[0];
 
         /**
          * The state of the dialog.
@@ -53,6 +53,29 @@ export default class extends React.Component {
             objectToUpdate:           selected ? selected.object : "",
             objectToUpdateIsValid:    selected ? true : false,
         };
+    }
+
+    componentWillReceiveProps() {
+        const selected = this.props.triples[0];
+
+        this.setState({
+            activeTab:                "add",
+
+            subjectToAdd:             defaultNamedNode,
+            subjectToAddIsValid:      false,
+            predicateToAdd:           defaultNamedNode,
+            predicateToAddIsValid:    false,
+            objectToAdd:              defaultNamedNode,
+            objectToAddIsValid:       false,
+
+            tripleToUpdate:           selected ? selected.id : undefined,
+            subjectToUpdate:          selected ? selected.subject : "",
+            subjectToUpdateIsValid:   selected ? true : false,
+            predicateToUpdate:        selected ? selected.predicate : "",
+            predicateToUpdateIsValid: selected ? true : false,
+            objectToUpdate:           selected ? selected.object : "",
+            objectToUpdateIsValid:    selected ? true : false,
+        });
     }
 
     getInitialToAddState() {

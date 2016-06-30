@@ -848,13 +848,6 @@ SystemJS.config({
                 "lodash": "npm:lodash@4.13.1"
             }
         },
-        "npm:@ignavia/earl@1.4.0": {
-            "map": {
-                "lodash": "npm:lodash@4.13.1",
-                "@ignavia/util": "npm:@ignavia/util@2.0.0",
-                "@ignavia/ella": "npm:@ignavia/ella@1.2.0"
-            }
-        },
         "npm:@ignavia/draph@1.1.0": {
             "map": {
                 "lodash": "npm:lodash@4.13.1",
@@ -862,7 +855,7 @@ SystemJS.config({
                 "jquery": "npm:jquery@3.0.0",
                 "@ignavia/util": "npm:@ignavia/util@2.0.0",
                 "@ignavia/ella": "npm:@ignavia/ella@1.2.0",
-                "@ignavia/earl": "npm:@ignavia/earl@1.4.0"
+                "@ignavia/earl": "npm:@ignavia/earl@1.5.0"
             }
         },
         "npm:@ignavia/earl@1.5.0": {

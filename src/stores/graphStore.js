@@ -10,10 +10,12 @@ import {Stylesheet} from "../utils/stylesheet/index.js";
 
 import dispatcher from "../dispatcher/dispatcher.js";
 
-import rdfStore from "./rdfStore.js";
+import configStore    from "./configStore.js";
+import rdfStore       from "./rdfStore.js";
 import selectionStore from "./selectionStore.js";
 
-const rdfToken  = rdfStore.getDispatchToken();
+const configToken    = configStore.getDispatchToken();
+const rdfToken       = rdfStore.getDispatchToken();
 const selectionToken = selectionStore.getDispatchToken();
 
 class GraphStore extends Store {
@@ -36,6 +38,7 @@ class GraphStore extends Store {
         );
         conf.layout = layout;
         const draph = new GraphView(graph, conf);
+        draph.configureFilters(configStore.getState());
         this.state = {
             graph,
             draph,
@@ -89,7 +92,8 @@ class GraphStore extends Store {
             rdfStore.getProfile()
         );
         conf.layout = this.state.layout;
-        this.state.draph  = new GraphView(this.state.graph, conf);
+        this.state.draph = new GraphView(this.state.graph, conf);
+        this.state.draph.configureFilters(configStore.getState());
     }
 
     addNode(id, addToDraph = false) {
@@ -179,6 +183,7 @@ class GraphStore extends Store {
         );
         conf.layout = this.state.layout;
         this.state.draph = new GraphView(this.state.graph, conf);
+        this.state.draph.configureFilters(configStore.getState());
         this.__emitChange();
     }
 
@@ -291,6 +296,12 @@ class GraphStore extends Store {
         this.__emitChange();
     }
 
+    configureFilters() {
+        dispatcher.waitFor([configToken]);
+        this.state.draph.configureFilters(configStore.getState());
+        this.__emitChange();
+    }
+
     __onDispatch(action) {
         switch (action.type) {
             case "ADD_TRIPLE":
@@ -359,6 +370,14 @@ class GraphStore extends Store {
                 return this.filterTriples();
             case "OPEN_LAYOUT":
                 return this.openLayout(action.layout);
+            case "SET_CARTESIAN_FISHEYE_STRENGTH_X":
+            case "SET_CARTESIAN_FISHEYE_STRENGTH_Y":
+            case "SET_POLAR_FISHEYE_STRENGTH":
+            case "SET_SCALE_EDGE_ARROWS":
+            case "SET_SCALE_EDGE_DECALS":
+            case "SET_SCALE_NODES":
+            case "OPEN_CONFIG":
+                return this.configureFilters();
         }
     }
 }

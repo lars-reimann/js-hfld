@@ -25,6 +25,7 @@ class DialogStore extends ReduceStore {
     getInitialState() {
         return Immutable.Map({
             showCloseDialog:             false,
+            showDraphDialog:             false,
             showEadesLayoutDialog:       false,
             showEditNamespacesDialog:    false,
             showEditTriplesDialog:       false,
@@ -72,6 +73,8 @@ class DialogStore extends ReduceStore {
         switch (dialog) {
         case "close":
             return state.set("showCloseDialog", show);
+        case "draph":
+            return state.set("showDraphDialog", show);
         case "eadesLayout":
             return state.set("showEadesLayoutDialog", show);
         case "editNamespaces":

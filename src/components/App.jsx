@@ -82,6 +82,10 @@ export default class extends React.Component {
                 <AlertQueue alertMessages={this.props.alerts} />
 
                 <dialogs.CloseDialog visible={this.props.dialogs.showCloseDialog} />
+                <dialogs.DraphDialog
+                    config={this.props.config}
+                    visible={this.props.dialogs.showDraphDialog}
+                />
                 <dialogs.EadesLayoutDialog visible={this.props.dialogs.showEadesLayoutDialog} />
                 <dialogs.EditNamespacesDialog
                     visible={this.props.dialogs.showEditNamespacesDialog}

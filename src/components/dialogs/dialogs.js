@@ -1,4 +1,5 @@
 export CloseDialog             from "./CloseDialog.jsx";
+export DraphDialog             from "./DraphDialog.jsx";
 export EadesLayoutDialog       from "./EadesLayoutDialog.jsx";
 export EditNamespacesDialog    from "./EditNamespacesDialog.jsx";
 export EditTriplesDialog       from "./EditTriplesDialog.jsx";

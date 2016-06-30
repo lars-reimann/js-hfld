@@ -12,20 +12,34 @@ export default class extends React.Component {
 
     handleSelect(eventKey) {
         switch (eventKey) {
+        case "CENTER":
+            return actions.center();
+        case "CLEAR_NODE_SELECTION":
+            return actions.clearNodeSelection();
+        case "CLEAR_SELECTION":
+            return actions.clearSelection();
+        case "CLEAR_TRIPLE_FILTER":
+            return actions.clearTripleFilter();
+        case "CLEAR_TRIPLE_SELECTION":
+            return actions.clearTripleSelection();
+        case "GRAPHICAL_VIEW":
+            return actions.setViewport("graphical");
+        case "SELECT_ALL_MATCHING_TRIPLES":
+            return actions.selectAllMatchingTriples();
+        case "SHOW_CLOSE_DIALOG":
+            return actions.setDialogVisibility("close", true);
+        case "SHOW_DRAPH_DIALOG":
+            return actions.setDialogVisibility("draph", true);
+        case "SHOW_EADES_LAYOUT_DIALOG":
+            return actions.setDialogVisibility("eadesLayout", true);
         case "SHOW_EDIT_NAMESPACES_DIALOG":
             return actions.setDialogVisibility("editNamespaces", true);
         case "SHOW_EDIT_TRIPLES_DIALOG":
             return actions.setDialogVisibility("editTriples", true);
         case "SHOW_FILTER_TRIPLES_DIALOG":
             return actions.setDialogVisibility("filterTriples", true);
-        case "CLEAR_NODE_SELECTION":
-            return actions.clearNodeSelection();
-        case "CLEAR_SELECTION":
-            return actions.clearSelection();
-        case "CLEAR_TRIPLE_SELECTION":
-            return actions.clearTripleSelection();
-        case "CLEAR_TRIPLE_FILTER":
-            return actions.clearTripleFilter();
+        case "SHOW_FRUCHTERMAN_LAYOUT_DIALOG":
+            return actions.setDialogVisibility("fruchtermanLayout", true);
         case "SHOW_OPEN_CONFIG_DIALOG":
             return actions.setDialogVisibility("openConfig", true);
         case "SHOW_OPEN_LAYOUT_DIALOG":
@@ -34,46 +48,34 @@ export default class extends React.Component {
             return actions.setDialogVisibility("openStyle", true);
         case "SHOW_OPEN_TURTLE_DIALOG":
             return actions.setDialogVisibility("openTurtle", true);
+        case "SHOW_RANDOM_LAYOUT_DIALOG":
+            return actions.setDialogVisibility("randomLayout", true);
+        case "SHOW_ROTATE_DIALOG":
+            return actions.setDialogVisibility("rotate", true);
         case "SHOW_SAVE_CONFIG_DIALOG":
             return actions.setDialogVisibility("saveConfig", true);
         case "SHOW_SAVE_LAYOUT_DIALOG":
             return actions.setDialogVisibility("saveLayout", true);
         case "SHOW_SAVE_TURTLE_DIALOG":
             return actions.setDialogVisibility("saveTurtle", true);
-        case "SHOW_CLOSE_DIALOG":
-            return actions.setDialogVisibility("close", true);
-        case "SHOW_RANDOM_LAYOUT_DIALOG":
-            return actions.setDialogVisibility("randomLayout", true);
-        case "SHOW_EADES_LAYOUT_DIALOG":
-            return actions.setDialogVisibility("eadesLayout", true);
-        case "SHOW_FRUCHTERMAN_LAYOUT_DIALOG":
-            return actions.setDialogVisibility("fruchtermanLayout", true);
-        case "SHOW_TRANSLATE_DIALOG":
-            return actions.setDialogVisibility("translate", true);
         case "SHOW_SCALE_DIALOG":
             return actions.setDialogVisibility("scale", true);
-        case "SHOW_ROTATE_DIALOG":
-            return actions.setDialogVisibility("rotate", true);
+        case "SHOW_SIDEBAR_DIALOG":
+            return actions.setDialogVisibility("sidebar", true);
+        case "SHOW_TABLE_DIALOG":
+            return actions.setDialogVisibility("table", true);
+        case "SHOW_TRANSLATE_DIALOG":
+            return actions.setDialogVisibility("translate", true);
         case "SOURCE_VIEW":
             return actions.setViewport("source");
         case "TABLE_VIEW":
             return actions.setViewport("table");
-        case "GRAPHICAL_VIEW":
-            return actions.setViewport("graphical");
         case "TOGGLE_LEFT_SIDEBAR_VISIBILITY":
             return actions.setLeftSidebarVisibility(!this.props.showLeftSidebar);
         case "TOGGLE_RIGHT_SIDEBAR_VISIBILITY":
             return actions.setRightSidebarVisibility(!this.props.showRightSidebar);
-        case "SHOW_TABLE_DIALOG":
-            return actions.setDialogVisibility("table", true);
-        case "SHOW_SIDEBAR_DIALOG":
-            return actions.setDialogVisibility("sidebar", true);
         case "TOGGLE_SHRINK_NODE_VALUES":
             return actions.setShrinkNodeValues(!this.props.shrinkNodeValues);
-        case "SELECT_ALL_MATCHING_TRIPLES":
-            return actions.selectAllMatchingTriples();
-        case "CENTER":
-            return actions.center();
         }
     }
 
@@ -184,8 +186,11 @@ export default class extends React.Component {
                                 <ToggleGlyphicon enabled={this.props.showRightSidebar} /> Show Right Sidebar
                             </rbs.MenuItem>
                             <rbs.MenuItem divider />
+                            <rbs.MenuItem eventKey="SHOW_DRAPH_DIALOG">
+                                <BlankGlyphicon /> Configure Graphical View...
+                            </rbs.MenuItem>
                             <rbs.MenuItem eventKey="SHOW_TABLE_DIALOG">
-                                <BlankGlyphicon /> Configure Table...
+                                <BlankGlyphicon /> Configure Table View...
                             </rbs.MenuItem>
                             <rbs.MenuItem eventKey="SHOW_SIDEBAR_DIALOG">
                                 <BlankGlyphicon /> Configure Sidebars...

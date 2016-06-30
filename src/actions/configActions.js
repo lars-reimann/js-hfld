@@ -1,5 +1,67 @@
 import dispatcher from "../dispatcher/dispatcher.js";
 
+// Graphical View -------------------------------------------------------------
+
+/**
+ * Sets the strength of the cartesian fisheye distortion in the x-direction.
+ *
+ * @param {number} strength
+ * The strength of the distortion.
+ */
+export function setCartesianFisheyeStrengthX(strength) {
+    dispatcher.dispatch({ type: "SET_CARTESIAN_FISHEYE_STRENGTH_X", strength });
+}
+
+/**
+ * Sets the strength of the cartesian fisheye distortion in the y-direction.
+ *
+ * @param {number} strength
+ * The strength of the distortion.
+ */
+export function setCartesianFisheyeStrengthY(strength) {
+    dispatcher.dispatch({ type: "SET_CARTESIAN_FISHEYE_STRENGTH_Y", strength });
+}
+
+/**
+ * Sets the strength of the polar fisheye distortion.
+ *
+ * @param {number} strength
+ * The strength of the distortion.
+ */
+export function setPolarFisheyeStrength(strength) {
+    dispatcher.dispatch({ type: "SET_POLAR_FISHEYE_STRENGTH", strength });
+}
+
+/**
+ * Sets whether the scaling of edge arrows is enabled.
+ *
+ * @param {boolean} enabled
+ * If this feature is active.
+ */
+export function setScaleEdgeArrows(enabled) {
+    dispatcher.dispatch({ type: "SET_SCALE_EDGE_ARROWS", enabled });
+}
+
+/**
+ * Sets whether the scaling of edge decals is enabled.
+ *
+ * @param {boolean} enabled
+ * If this feature is active.
+ */
+export function setScaleEdgeDecals(enabled) {
+    dispatcher.dispatch({ type: "SET_SCALE_EDGE_DECALS", enabled });
+}
+
+/**
+ * Sets whether the scaling of nodes is enabled.
+ *
+ * @param {boolean} enabled
+ * If this feature is active.
+ */
+export function setScaleNodes(enabled) {
+    dispatcher.dispatch({ type: "SET_SCALE_NODES", enabled });
+}
+
 // Sidebars -------------------------------------------------------------------
 
 /**
@@ -144,7 +206,7 @@ export function toggleRightSidebarTab(tab) {
     dispatcher.dispatch({ type: "TOGGLE_RIGHT_SIDEBAR_TAB", tab });
 }
 
-// Table ----------------------------------------------------------------------
+// Table View -----------------------------------------------------------------
 
 /**
  * Sets how many rows each page of the table should contain.

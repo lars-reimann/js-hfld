@@ -24,18 +24,24 @@ class ConfigStore extends ReduceStore {
      */
     getInitialState() {
         return this.openConfig({
-            leftSidebarActiveTab:  "literals",
-            leftSidebarTabs:       ["literals"],
-            leftSidebarWidth:      2,
-            rightSidebarActiveTab: "literals",
-            rightSidebarTabs:      ["literals", "earlData", "rdfData"],
-            rightSidebarWidth:     3,
-            showLeftSidebar:       false,
-            showRightSidebar:      true,
-            shrinkNodeValues:      true,
-            tableRowsPerPage:      20,
-            tableSorting:          {column: "subject", order: "asc"},
-            viewport:              "graphical",
+            cartesianFisheyeStrengthX: 0,
+            cartesianFisheyeStrengthY: 0,
+            leftSidebarActiveTab:      "literals",
+            leftSidebarTabs:           ["literals"],
+            leftSidebarWidth:          2,
+            polarFisheyeStrength:      0,
+            rightSidebarActiveTab:     "literals",
+            rightSidebarTabs:          ["literals", "earlData", "rdfData"],
+            rightSidebarWidth:         3,
+            scaleEdgeArrows:           false,
+            scaleEdgeDecals:           false,
+            scaleNodes:                false,
+            showLeftSidebar:           false,
+            showRightSidebar:          true,
+            shrinkNodeValues:          true,
+            tableRowsPerPage:          20,
+            tableSorting:              {column: "subject", order: "asc"},
+            viewport:                  "graphical",
         });
     }
 
@@ -216,6 +222,10 @@ class ConfigStore extends ReduceStore {
             return this.openLeftSidebarTab(state, action.tab);
         case "OPEN_RIGHT_SIDEBAR_TAB":
             return this.openRightSidebarTab(state, action.tab);
+        case "SET_CARTESIAN_FISHEYE_STRENGTH_X":
+            return state.set("cartesianFisheyeStrengthX", action.strength);
+        case "SET_CARTESIAN_FISHEYE_STRENGTH_Y":
+            return state.set("cartesianFisheyeStrengthY", action.strength);
         case "SET_LEFT_SIDEBAR_ACTIVE_TAB":
             return state.set("leftSidebarActiveTab", action.activeTab);
         case "SET_LEFT_SIDEBAR_TABS":
@@ -224,6 +234,8 @@ class ConfigStore extends ReduceStore {
             return state.set("showLeftSidebar", action.show);
         case "SET_LEFT_SIDEBAR_WIDTH":
             return state.set("leftSidebarWidth", action.width);
+        case "SET_POLAR_FISHEYE_STRENGTH":
+            return state.set("polarFisheyeStrength", action.strength);
         case "SET_RIGHT_SIDEBAR_ACTIVE_TAB":
             return state.set("rightSidebarActiveTab", action.activeTab);
         case "SET_RIGHT_SIDEBAR_VISIBILITY":
@@ -232,6 +244,12 @@ class ConfigStore extends ReduceStore {
             return state.set("rightSidebarTabs", Immutable.Set(action.tabs));
         case "SET_RIGHT_SIDEBAR_WIDTH":
             return state.set("rightSidebarWidth", action.width);
+        case "SET_SCALE_EDGE_ARROWS":
+            return state.set("scaleEdgeArrows", action.enabled);
+        case "SET_SCALE_EDGE_DECALS":
+            return state.set("scaleEdgeDecals", action.enabled);
+        case "SET_SCALE_NODES":
+            return state.set("scaleNodes", action.enabled);
         case "SET_SHRINK_NODE_VALUES":
             return state.set("shrinkNodeValues", action.enabled);
         case "SET_TABLE_ROWS_PER_PAGE":

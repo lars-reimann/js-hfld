@@ -29,13 +29,11 @@ class ConfigStore extends ReduceStore {
             leftSidebarActiveTab:      "literals",
             leftSidebarTabs:           ["literals"],
             leftSidebarWidth:          2,
-            polarFisheyeStrength:      0,
             rightSidebarActiveTab:     "literals",
             rightSidebarTabs:          ["literals", "earlData", "rdfData"],
             rightSidebarWidth:         3,
-            scaleEdgeArrows:           false,
-            scaleEdgeDecals:           false,
-            scaleNodes:                false,
+            sizeScalingMidpoint:       0.5,
+            sizeScalingSteepness:      0,
             showLeftSidebar:           false,
             showRightSidebar:          true,
             shrinkNodeValues:          true,
@@ -234,8 +232,6 @@ class ConfigStore extends ReduceStore {
             return state.set("showLeftSidebar", action.show);
         case "SET_LEFT_SIDEBAR_WIDTH":
             return state.set("leftSidebarWidth", action.width);
-        case "SET_POLAR_FISHEYE_STRENGTH":
-            return state.set("polarFisheyeStrength", action.strength);
         case "SET_RIGHT_SIDEBAR_ACTIVE_TAB":
             return state.set("rightSidebarActiveTab", action.activeTab);
         case "SET_RIGHT_SIDEBAR_VISIBILITY":
@@ -244,12 +240,10 @@ class ConfigStore extends ReduceStore {
             return state.set("rightSidebarTabs", Immutable.Set(action.tabs));
         case "SET_RIGHT_SIDEBAR_WIDTH":
             return state.set("rightSidebarWidth", action.width);
-        case "SET_SCALE_EDGE_ARROWS":
-            return state.set("scaleEdgeArrows", action.enabled);
-        case "SET_SCALE_EDGE_DECALS":
-            return state.set("scaleEdgeDecals", action.enabled);
-        case "SET_SCALE_NODES":
-            return state.set("scaleNodes", action.enabled);
+        case "SET_SIZE_SCALING_MIDPOINT":
+            return state.set("sizeScalingMidpoint", action.midpoint);
+        case "SET_SIZE_SCALING_STEEPNESS":
+            return state.set("sizeScalingSteepness", action.steepness);
         case "SET_SHRINK_NODE_VALUES":
             return state.set("shrinkNodeValues", action.enabled);
         case "SET_TABLE_ROWS_PER_PAGE":

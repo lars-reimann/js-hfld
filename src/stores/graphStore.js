@@ -372,10 +372,8 @@ class GraphStore extends Store {
                 return this.openLayout(action.layout);
             case "SET_CARTESIAN_FISHEYE_STRENGTH_X":
             case "SET_CARTESIAN_FISHEYE_STRENGTH_Y":
-            case "SET_POLAR_FISHEYE_STRENGTH":
-            case "SET_SCALE_EDGE_ARROWS":
-            case "SET_SCALE_EDGE_DECALS":
-            case "SET_SCALE_NODES":
+            case "SET_SIZE_SCALING_MIDPOINT":
+            case "SET_SIZE_SCALING_STEEPNESS":
             case "OPEN_CONFIG":
                 return this.configureFilters();
         }

@@ -94,38 +94,28 @@ export default function (props) {
                         </rbs.FormGroup>
                     </fieldset>
                     <fieldset>
-                        <legend>Polar Fisheye</legend>
-                        <rbs.FormGroup controlId="polar-p">
-                            <rbs.ControlLabel>Strength of Distortion:</rbs.ControlLabel>
+                        <legend>Size-Scaling</legend>
+                        <rbs.FormGroup controlId="size-scaling-midpoint">
+                            <rbs.ControlLabel>Size-Scaling Midpoint:</rbs.ControlLabel>
                             <rbs.FormControl
                                 type="range"
                                 min="0"
-                                max="0.9"
+                                max="1"
                                 step="0.01"
-                                value={props.config.polarFisheyeStrength}
-                                onChange={e => actions.setPolarFisheyeStrength(Number(e.target.value))}
+                                value={props.config.sizeScalingMidpoint}
+                                onChange={e => actions.setSizeScalingMidpoint(Number(e.target.value))}
                             />
                         </rbs.FormGroup>
-                    </fieldset>
-                    <fieldset>
-                        <legend>Scaling</legend>
-                        <rbs.FormGroup controlId="scaling">
-                            <rbs.ControlLabel>Enable Scaling:</rbs.ControlLabel>
-                            <rbs.Checkbox
-                                checked={props.config.scaleNodes}
-                                onChange={() => toggleScaleNodes(props)}>
-                                Scale Nodes
-                            </rbs.Checkbox>
-                            <rbs.Checkbox
-                                checked={props.config.scaleEdgeDecals}
-                                onChange={() => toggleScaleEdgeDecals(props)}>
-                                Scale Edge Decals
-                            </rbs.Checkbox>
-                            <rbs.Checkbox
-                                checked={props.config.scaleEdgeArrows}
-                                onChange={() => toggleScaleEdgeArrows(props)}>
-                                Scale Edge Labels
-                            </rbs.Checkbox>
+                        <rbs.FormGroup controlId="size-scaling-steepness">
+                            <rbs.ControlLabel>Size-Scaling Steepness:</rbs.ControlLabel>
+                            <rbs.FormControl
+                                type="range"
+                                min="0"
+                                max="10"
+                                step="0.1"
+                                value={props.config.sizeScalingSteepness}
+                                onChange={e => actions.setSizeScalingSteepness(Number(e.target.value))}
+                            />
                         </rbs.FormGroup>
                     </fieldset>
                 </form>

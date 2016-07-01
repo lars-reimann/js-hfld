@@ -23,43 +23,24 @@ export function setCartesianFisheyeStrengthY(strength) {
 }
 
 /**
- * Sets the strength of the polar fisheye distortion.
+ * Sets the midpoint of the size scaling.
  *
- * @param {number} strength
- * The strength of the distortion.
+ * @param {boolean} midpoint
+ * The midpoint of the size scaling.
  */
-export function setPolarFisheyeStrength(strength) {
-    dispatcher.dispatch({ type: "SET_POLAR_FISHEYE_STRENGTH", strength });
+export function setSizeScalingMidpoint(midpoint) {
+    dispatcher.dispatch({ type: "SET_SIZE_SCALING_MIDPOINT", midpoint });
 }
 
 /**
- * Sets whether the scaling of edge arrows is enabled.
+ * Sets the steepness of the size scaling curve. Set this to 0 to disable the
+ * feature.
  *
- * @param {boolean} enabled
- * If this feature is active.
+ * @param {boolean} steepness
+ * The steepness of the size scaling curve.
  */
-export function setScaleEdgeArrows(enabled) {
-    dispatcher.dispatch({ type: "SET_SCALE_EDGE_ARROWS", enabled });
-}
-
-/**
- * Sets whether the scaling of edge decals is enabled.
- *
- * @param {boolean} enabled
- * If this feature is active.
- */
-export function setScaleEdgeDecals(enabled) {
-    dispatcher.dispatch({ type: "SET_SCALE_EDGE_DECALS", enabled });
-}
-
-/**
- * Sets whether the scaling of nodes is enabled.
- *
- * @param {boolean} enabled
- * If this feature is active.
- */
-export function setScaleNodes(enabled) {
-    dispatcher.dispatch({ type: "SET_SCALE_NODES", enabled });
+export function setSizeScalingSteepness(steepness) {
+    dispatcher.dispatch({ type: "SET_SIZE_SCALING_STEEPNESS", steepness });
 }
 
 // Sidebars -------------------------------------------------------------------

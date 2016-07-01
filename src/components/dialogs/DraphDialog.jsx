@@ -75,10 +75,10 @@ export default function (props) {
                             <rbs.FormControl
                                 type="range"
                                 min="0"
-                                max="1"
+                                max="0.9"
                                 step="0.01"
                                 value={props.config.cartesianFisheyeStrengthX}
-                                onChange={e => actions.setCartesianFisheyeStrengthX(e.target.value)}
+                                onChange={e => actions.setCartesianFisheyeStrengthX(Number(e.target.value))}
                             />
                         </rbs.FormGroup>
                         <rbs.FormGroup controlId="cartesian-py">
@@ -86,10 +86,10 @@ export default function (props) {
                             <rbs.FormControl
                                 type="range"
                                 min="0"
-                                max="1"
+                                max="0.9"
                                 step="0.01"
                                 value={props.config.cartesianFisheyeStrengthY}
-                                onChange={e => actions.setCartesianFisheyeStrengthY(e.target.value)}
+                                onChange={e => actions.setCartesianFisheyeStrengthY(Number(e.target.value))}
                             />
                         </rbs.FormGroup>
                     </fieldset>
@@ -100,10 +100,10 @@ export default function (props) {
                             <rbs.FormControl
                                 type="range"
                                 min="0"
-                                max="1"
+                                max="0.9"
                                 step="0.01"
                                 value={props.config.polarFisheyeStrength}
-                                onChange={e => actions.setPolarFisheyeStrength(e.target.value)}
+                                onChange={e => actions.setPolarFisheyeStrength(Number(e.target.value))}
                             />
                         </rbs.FormGroup>
                     </fieldset>

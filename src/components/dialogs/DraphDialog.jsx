@@ -4,42 +4,6 @@ import * as rbs from "react-bootstrap";
 import * as actions from "../../actions/actions.js";
 
 /**
- * Toggles whether edge arrows should be scaled.
- *
- * @param {Object} props
- * The current props.
- *
- * @ignore
- */
-function toggleScaleEdgeArrows(props) {
-    actions.setScaleEdgeArrows(!props.config.scaleEdgeArrows);
-}
-
-/**
- * Toggles whether edge decals should be scaled.
- *
- * @param {Object} props
- * The current props.
- *
- * @ignore
- */
-function toggleScaleEdgeDecals(props) {
-    actions.setScaleEdgeDecals(!props.config.scaleEdgeDecals);
-}
-
-/**
- * Toggles whether nodes should be scaled.
- *
- * @param {Object} props
- * The current props.
- *
- * @ignore
- */
-function toggleScaleNodes(props) {
-    actions.setScaleNodes(!props.config.scaleNodes);
-}
-
-/**
  * Closes the dialog.
  *
  * @ignore
@@ -70,33 +34,47 @@ export default function (props) {
                 <form>
                     <fieldset>
                         <legend>Cartesian Fisheye</legend>
-                        <rbs.FormGroup controlId="cartesian-px">
-                            <rbs.ControlLabel>Strength of x-Distortion:</rbs.ControlLabel>
+                        <rbs.FormGroup controlId="cartesian-fisheye-center-height">
+                            <rbs.ControlLabel>Center Height:</rbs.ControlLabel>
                             <rbs.FormControl
                                 type="range"
-                                min="0"
-                                max="0.9"
-                                step="0.01"
-                                value={props.config.cartesianFisheyeStrengthX}
-                                onChange={e => actions.setCartesianFisheyeStrengthX(Number(e.target.value))}
+                                min="0.001"
+                                max="0.499"
+                                step="0.001"
+                                value={props.config.cartesianFisheyeCenterHeight}
+                                onChange={e => actions.setCartesianFisheyeCenterHeight(Number(e.target.value))}
                             />
                         </rbs.FormGroup>
-                        <rbs.FormGroup controlId="cartesian-py">
-                            <rbs.ControlLabel>Strength of y-Distortion:</rbs.ControlLabel>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Polar Fisheye</legend>
+                        <rbs.FormGroup controlId="polar-fisheye-center-height">
+                            <rbs.ControlLabel>Center Height:</rbs.ControlLabel>
+                            <rbs.FormControl
+                                type="range"
+                                min="0.001"
+                                max="0.499"
+                                step="0.001"
+                                value={props.config.polarFisheyeCenterHeight}
+                                onChange={e => actions.setPolarFisheyeCenterHeight(Number(e.target.value))}
+                            />
+                        </rbs.FormGroup>
+                        <rbs.FormGroup controlId="polar-fisheye-radius">
+                            <rbs.ControlLabel>Radius:</rbs.ControlLabel>
                             <rbs.FormControl
                                 type="range"
                                 min="0"
-                                max="0.9"
+                                max="5"
                                 step="0.01"
-                                value={props.config.cartesianFisheyeStrengthY}
-                                onChange={e => actions.setCartesianFisheyeStrengthY(Number(e.target.value))}
+                                value={props.config.polarFisheyeRadius}
+                                onChange={e => actions.setPolarFisheyeRadius(Number(e.target.value))}
                             />
                         </rbs.FormGroup>
                     </fieldset>
                     <fieldset>
                         <legend>Size-Scaling</legend>
                         <rbs.FormGroup controlId="size-scaling-midpoint">
-                            <rbs.ControlLabel>Size-Scaling Midpoint:</rbs.ControlLabel>
+                            <rbs.ControlLabel>Midpoint:</rbs.ControlLabel>
                             <rbs.FormControl
                                 type="range"
                                 min="0"
@@ -107,11 +85,11 @@ export default function (props) {
                             />
                         </rbs.FormGroup>
                         <rbs.FormGroup controlId="size-scaling-steepness">
-                            <rbs.ControlLabel>Size-Scaling Steepness:</rbs.ControlLabel>
+                            <rbs.ControlLabel>Steepness:</rbs.ControlLabel>
                             <rbs.FormControl
                                 type="range"
                                 min="0"
-                                max="10"
+                                max="50"
                                 step="0.1"
                                 value={props.config.sizeScalingSteepness}
                                 onChange={e => actions.setSizeScalingSteepness(Number(e.target.value))}

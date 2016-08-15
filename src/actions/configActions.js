@@ -3,23 +3,44 @@ import dispatcher from "../dispatcher/dispatcher.js";
 // Graphical View -------------------------------------------------------------
 
 /**
- * Sets the strength of the cartesian fisheye distortion in the x-direction.
+ * Sets the value of the distortion function at x = 0.5. This is the
+ * place halfway between the focus point and the border.
  *
- * @param {number} strength
- * The strength of the distortion.
+ * @param {number} centerHeight
+ * The center height of the distortion function.
  */
-export function setCartesianFisheyeStrengthX(strength) {
-    dispatcher.dispatch({ type: "SET_CARTESIAN_FISHEYE_STRENGTH_X", strength });
+export function setCartesianFisheyeCenterHeight(centerHeight) {
+    dispatcher.dispatch({
+        type: "SET_CARTESIAN_FISHEYE_CENTER_HEIGHT",
+        centerHeight
+    });
 }
 
 /**
- * Sets the strength of the cartesian fisheye distortion in the y-direction.
+ * Sets the value of the distortion function at x = 0.5. This is the
+ * place halfway between the focus point and the border.
  *
- * @param {number} strength
- * The strength of the distortion.
+ * @param {number} centerHeight
+ * The center height of the distortion function.
  */
-export function setCartesianFisheyeStrengthY(strength) {
-    dispatcher.dispatch({ type: "SET_CARTESIAN_FISHEYE_STRENGTH_Y", strength });
+export function setPolarFisheyeCenterHeight(centerHeight) {
+    dispatcher.dispatch({
+        type: "SET_POLAR_FISHEYE_CENTER_HEIGHT",
+        centerHeight
+    });
+}
+
+/**
+ * Sets the radius of the distortion.
+ *
+ * @param {number} radius
+ * The center height of the distortion function.
+ */
+export function setPolarFisheyeRadius(radius) {
+    dispatcher.dispatch({
+        type: "SET_POLAR_FISHEYE_RADIUS",
+        radius
+    });
 }
 
 /**

@@ -11,7 +11,7 @@ import React from "react";
  */
 export default function render (props) {
     return (
-        <pre>
+        <pre style={{height: "80vh"}}>
             <code>{props.rdf.toString()}</code>
         </pre>
     );

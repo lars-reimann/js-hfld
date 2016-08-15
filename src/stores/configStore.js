@@ -24,22 +24,23 @@ class ConfigStore extends ReduceStore {
      */
     getInitialState() {
         return this.openConfig({
-            cartesianFisheyeStrengthX: 0,
-            cartesianFisheyeStrengthY: 0,
-            leftSidebarActiveTab:      "literals",
-            leftSidebarTabs:           ["literals"],
-            leftSidebarWidth:          2,
-            rightSidebarActiveTab:     "literals",
-            rightSidebarTabs:          ["literals", "earlData", "rdfData"],
-            rightSidebarWidth:         3,
-            sizeScalingMidpoint:       0.5,
-            sizeScalingSteepness:      0,
-            showLeftSidebar:           false,
-            showRightSidebar:          true,
-            shrinkNodeValues:          true,
-            tableRowsPerPage:          20,
-            tableSorting:              {column: "subject", order: "asc"},
-            viewport:                  "graphical",
+            cartesianFisheyeCenterHeight: 0.499,
+            leftSidebarActiveTab:         "literals",
+            leftSidebarTabs:              ["literals"],
+            leftSidebarWidth:             2,
+            polarFisheyeCenterHeight:     0.499,
+            polarFisheyeRadius:           1,
+            rightSidebarActiveTab:        "literals",
+            rightSidebarTabs:             ["literals", "earlData", "rdfData"],
+            rightSidebarWidth:            3,
+            sizeScalingMidpoint:          0.5,
+            sizeScalingSteepness:         0,
+            showLeftSidebar:              false,
+            showRightSidebar:             true,
+            shrinkNodeValues:             true,
+            tableRowsPerPage:             20,
+            tableSorting:                 {column: "subject", order: "asc"},
+            viewport:                     "graphical",
         });
     }
 
@@ -220,10 +221,10 @@ class ConfigStore extends ReduceStore {
             return this.openLeftSidebarTab(state, action.tab);
         case "OPEN_RIGHT_SIDEBAR_TAB":
             return this.openRightSidebarTab(state, action.tab);
-        case "SET_CARTESIAN_FISHEYE_STRENGTH_X":
-            return state.set("cartesianFisheyeStrengthX", action.strength);
-        case "SET_CARTESIAN_FISHEYE_STRENGTH_Y":
-            return state.set("cartesianFisheyeStrengthY", action.strength);
+        case "SET_CARTESIAN_FISHEYE_CENTER_HEIGHT":
+            return state.set("cartesianFisheyeCenterHeight", action.centerHeight);
+        case "SET_FISHEYE_STEEPNESS":
+            return state.set("fisheyeSteepness", action.steepness);
         case "SET_LEFT_SIDEBAR_ACTIVE_TAB":
             return state.set("leftSidebarActiveTab", action.activeTab);
         case "SET_LEFT_SIDEBAR_TABS":
@@ -232,6 +233,10 @@ class ConfigStore extends ReduceStore {
             return state.set("showLeftSidebar", action.show);
         case "SET_LEFT_SIDEBAR_WIDTH":
             return state.set("leftSidebarWidth", action.width);
+        case "SET_POLAR_FISHEYE_CENTER_HEIGHT":
+            return state.set("polarFisheyeCenterHeight", action.centerHeight);
+        case "SET_POLAR_FISHEYE_RADIUS":
+            return state.set("polarFisheyeRadius", action.radius);
         case "SET_RIGHT_SIDEBAR_ACTIVE_TAB":
             return state.set("rightSidebarActiveTab", action.activeTab);
         case "SET_RIGHT_SIDEBAR_VISIBILITY":

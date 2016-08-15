@@ -4,6 +4,7 @@ import * as earl                        from "@ignavia/earl";
 import {Tolkien1To1Map, Tolkien1ToNMap} from "@ignavia/util";
 import * as rdf                         from "@ignavia/rdf";
 import {Vec2}                           from "@ignavia/ella";
+import {Vec2Builder} from "@ignavia/ella"; // TODO: remove
 import {GraphView} from "@ignavia/draph";
 
 import {Stylesheet} from "../utils/stylesheet/index.js";
@@ -208,20 +209,26 @@ class GraphStore extends Store {
     }
 
     randomLayout(conf) {
+        console.log("before random", Vec2.counter, Vec2Builder.counter, performance.now())
         const random = new earl.RandomLayouter(conf);
         this.state.layout = random.layout(this.state.graph);
+        console.log("after random", Vec2.counter, Vec2Builder.counter, performance.now())
         this.state.draph.setLayout(this.state.layout);
     }
 
     eadesLayout(conf) {
+        console.log("before eades", Vec2.counter, Vec2Builder.counter, performance.now())
         const eades = new earl.EadesLayouter(conf);
         this.state.layout = eades.layout(this.state.graph, this.state.layout);
+        console.log("after eades", Vec2.counter, Vec2Builder.counter, performance.now())
         this.state.draph.setLayout(this.state.layout);
     }
 
     fruchtermanLayout(conf) {
+        console.log("before fruchterman", Vec2.counter, Vec2Builder.counter, performance.now())
         const fruchterman = new earl.FruchtermanLayouter(conf);
         this.state.layout = fruchterman.layout(this.state.graph, this.state.layout);
+        console.log("after fruchterman", Vec2.counter, Vec2Builder.counter, performance.now())
         this.state.draph.setLayout(this.state.layout);
     }
 
@@ -370,8 +377,9 @@ class GraphStore extends Store {
                 return this.filterTriples();
             case "OPEN_LAYOUT":
                 return this.openLayout(action.layout);
-            case "SET_CARTESIAN_FISHEYE_STRENGTH_X":
-            case "SET_CARTESIAN_FISHEYE_STRENGTH_Y":
+            case "SET_CARTESIAN_FISHEYE_CENTER_HEIGHT":
+            case "SET_POLAR_FISHEYE_CENTER_HEIGHT":
+            case "SET_POLAR_FISHEYE_RADIUS":
             case "SET_SIZE_SCALING_MIDPOINT":
             case "SET_SIZE_SCALING_STEEPNESS":
             case "OPEN_CONFIG":

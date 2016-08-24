@@ -1,4 +1,4 @@
-import 'systemjs-hot-reloader/default-listener.js';
+// import 'systemjs-hot-reloader/default-listener.js';
 
 // export function __reload(m) {
 //   if (m.component.state)

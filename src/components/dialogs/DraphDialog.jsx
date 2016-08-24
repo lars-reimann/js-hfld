@@ -37,6 +37,7 @@ export default function (props) {
                         <rbs.FormGroup controlId="cartesian-fisheye-center-height">
                             <rbs.ControlLabel>Center Height:</rbs.ControlLabel>
                             <rbs.FormControl
+                                disabled
                                 type="range"
                                 min="0.001"
                                 max="0.499"

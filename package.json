@@ -16,7 +16,8 @@
     "url": "https://github.com/Ignavia/js-hfld.git"
   },
   "scripts": {
-    "build": "jspm build ./src/hfld.js ./dist/hfld.js --format cjs --skip-source-maps --minify",
+    "build": "jspm build ./src/app.jsx ./dist/hfld.js --format umd --skip-source-maps --minify",
+    "bundle": "jspm bundle ./src/app.jsx ./dist/app-bundle.js",
     "doc": "esdoc -c esdoc.json",
     "test": "mocha --compilers js:babel-register"
   },
@@ -28,12 +29,11 @@
   "jspm": {
     "name": "@ignavia/hfld",
     "dependencies": {
-      "@ignavia/draph": "^1.1.0",
-      "@ignavia/ella": "1.2.0",
+      "@ignavia/draph": "^1.2.0",
+      "@ignavia/ella": "^2.0.0",
       "@ignavia/rdf": "^2.0.0",
-      "@ignavia/earl": "1.5.0",
+      "@ignavia/earl": "^1.5.1",
       "@ignavia/util": "^2.0.0",
-      "draph": "@ignavia/draph@1.1.0",
       "immutable": "^3.7.6",
       "jquery": "^3.0.0",
       "lodash": "^4.13.1",
@@ -69,6 +69,8 @@
       "path": "github:jspm/nodelibs-path@^0.2.0-alpha",
       "pixi.js": "^3.0.11",
       "process": "github:jspm/nodelibs-process@^0.2.0-alpha",
+      "punycode": "github:jspm/nodelibs-punycode@^0.2.0-alpha",
+      "querystring": "github:jspm/nodelibs-querystring@^0.2.0-alpha",
       "react": "^0.14.8",
       "react-dom": "^0.14.7",
       "source-map": "~0.1.33",
@@ -153,7 +155,7 @@
           "test.js"
         ]
       },
-      "npm:lodash@4.13.1": {
+      "npm:lodash@4.15.0": {
         "map": {
           "buffer": "@empty",
           "process": "@empty"

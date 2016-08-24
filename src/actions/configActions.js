@@ -243,7 +243,7 @@ export function setTableSorting(sorting) {
 /**
  * Sets whether to use the profile to turn IRIs into CURIEs.
  *
- * @param {boolean} enable.
+ * @param {boolean} enabled
  * If this feature is active.
  */
 export function setShrinkNodeValues(enabled) {

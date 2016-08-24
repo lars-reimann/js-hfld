@@ -1,4 +1,4 @@
-export Stylesheet      from "./stylesheet/index.js";
+export {Stylesheet}    from "./stylesheet/index.js";
 export * as validators from "./validators.js";
 
 /**
